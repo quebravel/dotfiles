@@ -1,0 +1,216 @@
+! Font config
+
+#define myfont0  misc termsyn
+#define mysize 9
+
+! Xresources colors solarized
+
+! Common
+
+#define S_yellow        #b58900
+#define S_orange        #a64dff
+#define S_red           #dc322f
+#define S_magenta       #d33682
+#define S_violet        #6c71c4
+#define S_blue          #00adee
+#define S_cyan          #00afaf
+#define S_green         #859900
+
+
+! Dark
+
+#define S_base03        #002b36
+#define S_base02        #073642
+#define S_base01        #0066ff
+#define S_base00        #657b83
+#define S_base0         #839496
+#define S_base1         #93a1a1
+#define S_base2         #eee8d5
+#define S_base3         #fdf6e3
+
+
+! Light
+
+! #define S_base03        #fdf6e3
+! #define S_base02        #eee8d5
+! #define S_base01        #93a1a1
+! #define S_base00        #839496
+! #define S_base0         #657b83
+! #define S_base1         #586e75
+! #define S_base2         #073642
+! #define S_base3         #002b36
+
+
+! To only apply colors to your terminal, for example, prefix
+! the color assignment statement with its name. Example:
+!
+
+
+*color0:                  S_base02
+*color1:                  S_red
+*color2:                  S_green
+*color3:                  S_yellow
+*color4:                  S_blue
+*color5:                  S_magenta
+*color6:                  S_cyan
+*color7:                  S_base2
+*color9:                  S_orange
+*color8:                  S_base03
+*color10:                 S_base01
+*color11:                 S_base00
+*color12:                 S_base0
+*color13:                 S_violet
+*color14:                 S_base1
+*color15:                 S_base3
+
+URxvt*background:           [75]S_base03
+
+! Common parameters
+
+*background:              S_base03
+*foreground:              S_base0
+*fading:                  40
+*fadeColor:               S_base03
+*cursorColor:             S_base1
+*cursorColor2:            S_base03
+*pointerColorBackground:  S_base01
+*pointerColorForeground:  S_base1
+
+
+!*transparent:                      true ! Usando transparencia do compton
+*lineSpace:                        0
+! *letterSpace:                      -1
+*cursorBlink:                      true
+*cursorUnderline:                  false
+*saveLines:                        4096
+*colorUL:                          S_cyan
+*shading:                          25
+*mouseWheelScrollPage:             false
+*pointerBlank:                     true
+*pointerColor:                     S_base01
+*imLocale:                         pt_BR.utf8
+*imFont:                           xft:ProFont:size=12:antialias=false:hinting=true
+*utf8Title:                        true
+
+Xcursor.theme:                     Adwaita
+
+Xmessage*defaultButton:            okay
+Xmessage*form.message.Scroll:      WhenNeeded
+
+! XTerm parameters
+
+*xterm*termName:                   xterm-256color
+*xterm*locale:                     true
+*xterm*utf8:                       2
+*xterm*metaSendsEscape:            true
+*xterm*renderFont:                 true
+*xterm*faceName:                   xft:myfont0:size=mysize:antialias=true
+*xterm*bellIsUrgent:               true
+*xterm*scaleHeight:                1.01
+*xterm*borderWidth:                0
+*xterm*selectToClipboard:          true
+*xterm*allowSendEvents:            false
+*xterm*sessionMgt:                 false
+*xterm*VT100*colorULMode:          on
+*xterm*VT100*colorBDMode:          off
+*xterm*VT100.titeInhibit:          off
+*xterm*VT100.translations:         #override \n Shift <Key>Home: scroll-back(4096) \n Shift <Key>End: scroll-forw(4096)
+*xterm*VT100.geometry:             80x32
+*xterm*SimpleMenu*background:      #353535
+*xterm*SimpleMenu*foreground:      #AAA
+*xterm*dynamicColors:              true
+*xterm*eightBitInput:              true
+*xterm*eightBitControl:            false
+*xterm*eightBitOutput:             true
+*xterm*trimSelection:              true
+*xterm*charClass:                  33:48,37-38:48,45-47:48,64:48,58:48,126:48,61:48,63:48,43:48,35:48
+*xterm*background:                 S_base03
+
+! URxvt parameters
+
+URxvt*font:                        xft:myfont0:size=mysize
+URxvt*scrollBar:                   false
+URxvt*internalBorder:              5
+URxvt*depth:                       32
+URxvt*skipBuiltinGlyphs:           true
+URxvt*perl-ext-common:             default,clipboard,matcher,url-select,font-size,keyboard-select
+URxvt*iso14755:                    false
+URxvt*iso14755_52:                 false
+URxvt*geometry:                    124x44
+URxvt*scrollWithBuffer:            true
+URxvt*scrollTtyOutput:             false
+
+! URxvt keys M = Alt | C = Ctrl | Slash = /
+
+!URxvt*keysym.Shift-Home:          command:\033]720;4096\007
+!URxvt*keysym.Shift-End:           command:\033]721;4096\007
+! M = Alt
+URxvt.keysym.M-c:                  perl:clipboard:copy
+URxvt.keysym.M-v:                  perl:clipboard:paste
+!URxvt*keysym.C-Delete:            perl:matcher:last
+!URxvt*keysym.M-Delete:            perl:matcher:list
+
+!! url-select
+
+! Vim mode alt + esc [paste = shift + insert]
+URxvt.keysym.M-Escape:             perl:keyboard-select:activate
+
+! Select url = alt + u [move =  h j k l ]
+URxvt.keysym.M-u:                  perl:url-select:select_next
+URxvt.url-select.launcher:         /usr/bin/xdg-open
+URxvt.url-select.underline:        true
+
+!URxvt.keysym.C-Up:
+!URxvt.keysym.C-Down:
+!URxvt.keysym.C-S-Up:
+!URxvt.keysym.C-S-Down:
+URxvt.keysym.C-slash:              perl:font-size:show
+URxvt.keysym.C-minus:              perl:font-size:decrease
+URxvt.keysym.C-equal:              perl:font-size:increase
+URxvt.keysym.C-0:                  perl:font-size:reset
+!URxvt.keysym.C-1:
+!URxvt.keysym.C-2:
+!URxvt.keysym.C-3:
+!URxvt.keysym.C-4:
+!URxvt.keysym.C-5:
+!URxvt.keysym.C-6:
+!URxvt.keysym.C-7:
+!URxvt.keysym.C-8:
+!URxvt.keysym.C-9:
+
+URxvt*matcher.pattern.0:           (?:https?:\\/\\/|ftp:\\/\\/|rsync:\\/\\/|news:\\/\\/|mailto:|file:\\/\\/|\\bwww\\.)\n\[a-zA-Z0-9\\x{0410}-\\x{044F}\\-\\@;\\/?:&=%\\$_.+!*\\x27,~#]*\n\(\n\\\([a-zA-Z0-9\\x{0410}-\\x{044F}\\-\\@;\\/?:&=%\\$_.+!*\\x27,~#]*\\)| # Allow a pair of matched parentheses\n\[a-zA-Z0-9\\x{0410}-\\x{044F}\\-\\@;\\/?:&=%\\$_+*~]  # exclude some trailing characters (heuristic)\n\)+
+URxvt*matcher.button:              1
+URxvt*underlineURLs:               true
+URxvt*tabbed.new-button:           no
+URxvt*tabbed.tabbar-fg:            12
+URxvt*tabbed.tabbar-bg:            8
+URxvt*tabbed.tab-fg:               8
+URxvt*tabbed.tab-bg:               12
+URxvt*tabbed.title-fg:             12
+URxvt*tabbed.title-bg:             8
+URxvt*tabbed.autohide:             true
+URxvt*tabbed.reopen-on-close:      yes
+URxvt*urgentOnBell:                true
+URxvt*resize-font.smaller:         C-Down
+URxvt*resize-font.bigger:          C-Up
+
+! XClock parameters
+
+XClock*width:                      540
+XClock*height:                     540
+XClock*update:                     1
+XClock*hourColor:                  cyan
+XClock*minuteColor:                cyan
+XClock*secondColor:                red
+XClock*majorColor:                 red
+XClock*minorColor:                 cyan
+
+! Font config
+
+Xft.autohint: 0
+Xft.lcdfilter: lcddefault
+Xft.hintstyle: hintslight
+Xft.hinting: 1
+Xft.antialias: 1
+Xft.rgba: rgb
+

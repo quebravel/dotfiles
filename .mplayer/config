@@ -1,0 +1,40 @@
+# Write your default config options here!
+# Specify your preferred skin here (skins are searched for in
+
+# legenda tamanho
+subfont-text-scale=2
+
+# texto do mplayer
+subfont-osd-scale=1
+
+# Fonts
+#font="DejaVu Sans:style=Bold"
+font="Eurostar Black Extended:style=Regular"
+#font="Roboto Mono Medium for Powerline"
+
+# audio não distorcer quando em velocidade alterada
+af=scaletempo
+
+# janela por cima das outras
+ontop=yes
+
+# aceleração de vídeo X11
+vo=xv
+# aceleração opengl
+#vo=gl
+# opengl sem aceleração hardware
+#vo=gl_nosw
+#vo=x11
+
+# posição da barra de progresso [em baixo]
+progbar-align=90
+
+# usar nome do arquivo como nome do titulo na janela
+use-filename-title=yes
+
+# remover bordas
+#border=no
+
+# configuracao do arquivo de legenda encoding.
+unicode=yes
+utf8=yes

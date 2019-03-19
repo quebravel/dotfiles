@@ -1,0 +1,14 @@
+confKeyboardVideo/
+proFont/
+wallpapers/
+MonacoPowerline/
+Eurostar/
+.themes/
+11-media-by-label-auto-mount.rules
+config.fish
+config.py
+docker.zsh-theme
+init.vim
+neomuttrc
+quegit.zsh-theme
+quegitw.zsh-theme
