@@ -1,0 +1,13 @@
+# YOUTUBE-DL
+# CONFIG
+
+# baixar playlist se houver
+--yes-playlist
+# continuar download onde parou
+--continue
+# ignorar erros
+--ignore-errors
+# não sobreescrever
+--no-overwrites
+# formato do video 1280
+--format 22
