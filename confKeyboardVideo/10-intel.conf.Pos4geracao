@@ -1,0 +1,9 @@
+Section "Device"
+         Identifier "Intel Graphics"
+        # Driver "intel"
+         Driver      "modesetting"
+         #Option "AccelMethod" "sna"
+         Option "AccelMethod" "glamor"
+         Option "TearFree" "on"
+         Option "DRI" "3"
+EndSection
