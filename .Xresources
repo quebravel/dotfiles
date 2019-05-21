@@ -1,7 +1,7 @@
 ! Font config
 
-#define myfont0  misc termsyn
-#define mysize 9
+#define font0 xft:termsyn:pixelsize=11:antialias=false
+#define font1 xft:tamzenforpowerline:pixelsize=11:antialias=true
 
 ! Xresources colors solarized
 
@@ -128,7 +128,7 @@ Xmessage*form.message.Scroll:      WhenNeeded
 
 ! URxvt parameters
 
-URxvt*font:                        xft:myfont0:size=mysize
+URxvt*font:                        font0,font1
 URxvt*scrollBar:                   false
 URxvt*internalBorder:              5
 URxvt*depth:                       32
@@ -139,6 +139,7 @@ URxvt*iso14755_52:                 false
 URxvt*geometry:                    124x44
 URxvt*scrollWithBuffer:            true
 URxvt*scrollTtyOutput:             false
+URxvt*termName:                    rxvt-unicode-256color
 
 ! URxvt keys M = Alt | C = Ctrl | Slash = /
 
