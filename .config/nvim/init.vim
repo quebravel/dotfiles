@@ -613,4 +613,9 @@ let g:airline_symbols.linenr = 'Ξ '
 let g:airline_powerline_fonts=1
 let g:airline_theme='kolor'
 
-set background=dark " light/dark
+" grovebox config
+let g:gruvbox_termcolors = 256
+let g:gruvbox_italic = 1
+
+" light/dark
+set background=dark
