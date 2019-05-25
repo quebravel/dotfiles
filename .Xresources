@@ -16,7 +16,6 @@
 #define S_cyan          #00afaf
 #define S_green         #859900
 
-
 ! Dark
 
 #define S_base03        #002b36
@@ -28,23 +27,32 @@
 #define S_base2         #eee8d5
 #define S_base3         #fdf6e3
 
+!! Gruvbox ---------------------
 
-! Light
+! Common 
 
-! #define S_base03        #fdf6e3
-! #define S_base02        #eee8d5
-! #define S_base01        #93a1a1
-! #define S_base00        #839496
-! #define S_base0         #657b83
-! #define S_base1         #586e75
-! #define S_base2         #073642
-! #define S_base3         #002b36
+!#define S_yellow        #d79921
+!#define S_orange        #d65d0e
+!#define S_red           #cc241d
+!#define S_magenta       #b16286
+!#define S_violet        #689d6a
+!#define S_blue          #83a598
+!#define S_cyan          #fe8019
+!#define S_green         #98971a
 
+! Dark
 
-! To only apply colors to your terminal, for example, prefix
-! the color assignment statement with its name. Example:
-!
+!#define S_base03        #458588
+!#define S_base02        #073642
+!#define S_base01        #928374
+!#define S_base00        #a89984
+!#define S_base0         #d5c4a1
+!#define S_base1         #bdae93
+!#define S_base2         #fbf1c7
+!#define S_base3         #fdf6e3
+!#define S_baseBG        #282828
 
+!! ------------------------------
 
 *color0:                  S_base02
 *color1:                  S_red
