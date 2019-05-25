@@ -31,7 +31,7 @@
 
 ! Common 
 
-!#define S_yellow        #002b36
+!#define S_yellow        #d79921
 !#define S_orange        #d65d0e
 !#define S_red           #cc241d
 !#define S_magenta       #b16286
@@ -42,7 +42,7 @@
 
 ! Dark
 
-!#define S_base03        #458588
+!#define S_base03        #076678
 !#define S_base02        #073642
 !#define S_base01        #928374
 !#define S_base00        #a89984
