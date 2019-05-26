@@ -182,7 +182,7 @@ format-prefix = "cpu "
 format-prefix-foreground = ${colors.foreground-alt}
 
 ;label = %percentage-core2:3%%
-label = %percentage-sum:3%%
+label = %percentage:3%%
 format-foreground = ${colors.foreground}
 
 [module/memory]
@@ -315,7 +315,7 @@ format = <ramp> <label>
 hwmon-path = /sys/devices/platform/coretemp.0/hwmon/hwmon1/temp2_input
 
 label = %temperature-c%
-label-foreground = ${colors.foreground}
+label-foreground = ${colors.datek}
 
 ramp-0 = temp
 ramp-1 = temp
