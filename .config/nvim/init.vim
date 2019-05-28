@@ -455,9 +455,7 @@ if has('autocmd')
 endif
 
 "" Copy/Paste/Cut
-"if has('unnamedplus')
-  set clipboard+=unnamedplus
-"endif
+set clipboard+=unnamedplus
 
 if has('macunix')
   " pbcopy for OSX copy/paste
