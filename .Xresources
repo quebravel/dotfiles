@@ -7,50 +7,50 @@
 
 ! Common
 
-#define S_yellow        #b58900
-#define S_orange        #a64dff
-#define S_red           #dc322f
-#define S_magenta       #d33682
-#define S_violet        #6c71c4
-#define S_blue          #00adee
-#define S_cyan          #00afaf
-#define S_green         #859900
+!#define S_yellow        #b58900
+!#define S_orange        #a64dff
+!#define S_red           #dc322f
+!#define S_magenta       #d33682
+!#define S_violet        #6c71c4
+!#define S_blue          #00adee
+!#define S_cyan          #00afaf
+!#define S_green         #859900
 
 ! Dark
 
-#define S_base03        #002b36
-#define S_base02        #073642
-#define S_base01        #0066ff
-#define S_base00        #657b83
-#define S_base0         #839496
-#define S_base1         #93a1a1
-#define S_base2         #eee8d5
-#define S_base3         #fdf6e3
+!#define S_base03        #002b36
+!#define S_base02        #073642
+!#define S_base01        #0066ff
+!#define S_base00        #657b83
+!#define S_base0         #839496
+!#define S_base1         #93a1a1
+!#define S_base2         #eee8d5
+!#define S_base3         #fdf6e3
 
 !! Gruvbox ---------------------
 
 ! Common 
 
-!#define S_yellow        #d79921
-!#define S_orange        #d65d0e
-!#define S_red           #cc241d
-!#define S_magenta       #b16286
-!#define S_violet        #689d6a
-!#define S_blue          #83a598
-!#define S_cyan          #fe8019
-!#define S_green         #98971a
+#define S_yellow        #d79921
+#define S_orange        #d65d0e
+#define S_red           #cc241d
+#define S_magenta       #b16286
+#define S_violet        #689d6a
+#define S_blue          #83a598
+#define S_cyan          #fe8019
+#define S_green         #98971a
 
 ! Dark
 
-!#define S_base03        #076678
-!#define S_base02        #073642
-!#define S_base01        #928374
-!#define S_base00        #a89984
-!#define S_base0         #d5c4a1
-!#define S_base1         #bdae93
-!#define S_base2         #fbf1c7
-!#define S_base3         #fdf6e3
-!#define S_baseBG        #282828
+#define S_base03        #076678
+#define S_base02        #073642
+#define S_base01        #928374
+#define S_base00        #a89984
+#define S_base0         #d5c4a1
+#define S_base1         #bdae93
+#define S_base2         #fbf1c7
+#define S_base3         #fdf6e3
+#define S_baseBG        #282828
 
 !! ------------------------------
 
@@ -141,7 +141,8 @@ URxvt*scrollBar:                   false
 URxvt*internalBorder:              5
 URxvt*depth:                       32
 URxvt*skipBuiltinGlyphs:           true
-URxvt*perl-ext-common:             default,clipboard,matcher,url-select,font-size,keyboard-select
+! desabilitei font-size
+URxvt*perl-ext-common:             default,clipboard,matcher,url-select,keyboard-select
 URxvt*iso14755:                    false
 URxvt*iso14755_52:                 false
 URxvt*geometry:                    124x44
@@ -173,10 +174,11 @@ URxvt.url-select.underline:        true
 !URxvt.keysym.C-Down:
 !URxvt.keysym.C-S-Up:
 !URxvt.keysym.C-S-Down:
-URxvt.keysym.C-slash:              perl:font-size:show
-URxvt.keysym.C-minus:              perl:font-size:decrease
-URxvt.keysym.C-equal:              perl:font-size:increase
-URxvt.keysym.C-0:                  perl:font-size:reset
+! desabilitei font-size
+!URxvt.keysym.C-slash:              perl:font-size:show
+!URxvt.keysym.C-minus:              perl:font-size:decrease
+!URxvt.keysym.C-equal:              perl:font-size:increase
+!URxvt.keysym.C-0:                  perl:font-size:reset
 !URxvt.keysym.C-1:
 !URxvt.keysym.C-2:
 !URxvt.keysym.C-3:
