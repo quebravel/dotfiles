@@ -244,6 +244,11 @@ label-font = 6
 [module/pulseaudio]
 type = internal/pulseaudio
 
+; Mostra o controle de volume do monitor
+; Sink e usando, se existir (use para procurar `pacmd list-sinks`, name field)
+; Se nao, use o padrao sink
+; sink = alsa_output.pci-0000_01_00.1.hdmi-stereo-extra3
+
 format-volume = <label-volume> <bar-volume>
 label-volume = %percentage%%
 label-volume-foreground = ${root.foreground}
