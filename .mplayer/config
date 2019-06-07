@@ -26,6 +26,10 @@ vo=xv
 #vo=gl_nosw
 #vo=x11
 
+# saida de audio 
+# use o comando "mplayer -ao help" p/ mostrar saidas de audios disponiveis
+ao=pulse
+
 # posição da barra de progresso [em baixo]
 progbar-align=90
 
