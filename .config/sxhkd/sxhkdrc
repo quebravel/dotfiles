@@ -176,6 +176,8 @@ XF86AudioLowerVolume
     amixer set Master 5%-
 XF86AudioMute
     amixer set Master toggle
+XF86AudioPlay
+    echo "pause" > /tmp/mplayer-control
 
 # BRILHO NOTEBOOK
 
