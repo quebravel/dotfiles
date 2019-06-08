@@ -36,6 +36,11 @@ progbar-align=90
 # usar nome do arquivo como nome do titulo na janela
 use-filename-title=yes
 
+# controlar play/pause por teclado c/ janela nao selecionada
+# mkfifo /tmp/mplayer-control
+slave=yes
+input:file=/tmp/mplayer-control
+
 # remover bordas
 #border=no
 
