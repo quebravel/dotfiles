@@ -71,7 +71,7 @@
 *color14:                 S_base1
 *color15:                 S_base3
 
-URxvt*background:           [75]#282828
+URxvt*background:           [86]#282828
 
 ! Common parameters
 
