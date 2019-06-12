@@ -166,9 +166,9 @@ alt + Up
 alt + Down
     amixer set Master 5%-
 alt + super + Up
-    pactl set-sink-volume 0 +10%
+    pactl set-sink-volume 0 +5%
 alt + super + Down
-    pactl set-sink-volume 0 -10%
+    pactl set-sink-volume 0 -5%
 
 XF86AudioRaiseVolume
     amixer set Master 5%+
