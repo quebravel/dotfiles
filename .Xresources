@@ -131,10 +131,10 @@ Xmessage*form.message.Scroll:      WhenNeeded
 
 ! URxvt parameters
 
-URxvt*font:                        xft:envypn  :regular        :pixelsize=11
-URxvt*boldFont:                    xft:envypn  :bold           :pixelsize=11
-URxvt*italicFont:                  xft:envypn  :italic         :pixelsize=11
-URxvt*boldItalicFont:              xft:envypn  :bold  :italic  :pixelsize=11
+URxvt*font:                        xft:envypn:regular:pixelsize=11
+URxvt*boldFont:                    xft:envypn:bold:pixelsize=11
+URxvt*italicFont:                  xft:envypn:italic:pixelsize=11
+URxvt*boldItalicFont:              xft:envypn:bold:italic:pixelsize=11
 
 URxvt*scrollBar:                   false
 URxvt*internalBorder:              5
@@ -216,10 +216,10 @@ XClock*minorColor:                 cyan
 
 ! Font config
 
-!Xft.autohint: 0
-!Xft.lcdfilter: lcddefault
-!Xft.hintstyle: hintslight
-!Xft.hinting: 1
-!Xft.antialias: 1
-!Xft.rgba: rgb
+Xft.autohint: 0
+Xft.lcdfilter: lcddefault
+Xft.hintstyle: hintslight
+Xft.hinting: 1
+Xft.antialias: 1
+Xft.rgba: rgb
 
