@@ -1,8 +1,3 @@
-! Font config
-
-#define font0 xft:termsyn:pixelsize=11:antialias=false
-#define font1 xft:tamzenforpowerline:pixelsize=11:antialias=true
-
 ! Xresources colors solarized
 
 ! Common
@@ -112,7 +107,7 @@ Xmessage*form.message.Scroll:      WhenNeeded
 *xterm*utf8:                       2
 *xterm*metaSendsEscape:            true
 *xterm*renderFont:                 true
-*xterm*faceName:                   xft:myfont0:size=mysize:antialias=true
+*xterm*faceName:                   xft:envypn:size=mysize:antialias=true
 *xterm*bellIsUrgent:               true
 *xterm*scaleHeight:                1.01
 *xterm*borderWidth:                0
@@ -136,12 +131,15 @@ Xmessage*form.message.Scroll:      WhenNeeded
 
 ! URxvt parameters
 
-URxvt*font:                        font0,font1
+URxvt*font:                        xft:envypn  :regular        :pixelsize=11
+URxvt*boldFont:                    xft:envypn  :bold           :pixelsize=11
+URxvt*italicFont:                  xft:envypn  :italic         :pixelsize=11
+URxvt*boldItalicFont:              xft:envypn  :bold  :italic  :pixelsize=11
+
 URxvt*scrollBar:                   false
 URxvt*internalBorder:              5
 URxvt*depth:                       32
 URxvt*skipBuiltinGlyphs:           true
-! desabilitei font-size
 URxvt*perl-ext-common:             default,clipboard,matcher,url-select,keyboard-select
 URxvt*iso14755:                    false
 URxvt*iso14755_52:                 false
