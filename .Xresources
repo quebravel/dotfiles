@@ -66,7 +66,7 @@
 *color14:                 S_base1
 *color15:                 S_base3
 
-URxvt*background:           [86]#282828
+URxvt*background:           [96]#282828
 
 ! Common parameters
 
@@ -132,9 +132,9 @@ Xmessage*form.message.Scroll:      WhenNeeded
 ! URxvt parameters
 
 URxvt*font:                        xft:envypn:regular:pixelsize=11
-URxvt*boldFont:                    xft:envypn:bold:pixelsize=11
-URxvt*italicFont:                  xft:envypn:italic:pixelsize=11
-URxvt*boldItalicFont:              xft:envypn:bold:italic:pixelsize=11
+URxvt*boldFont:                    xft:monospace:bold:pixelsize=11
+URxvt*italicFont:                  xft:monospace:italic:pixelsize=11
+URxvt*boldItalicFont:              xft:monospace:bold:italic:pixelsize=11
 
 URxvt*scrollBar:                   false
 URxvt*internalBorder:              5
