@@ -1,4 +1,5 @@
-xrdb -merge ~/.Xresources
+[[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
+
 xsetroot -cursor_name left_ptr &
 #feh --bg-scale ~/Imagens/wallpaper.png
 $HOME/.fehbg
