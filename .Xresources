@@ -132,9 +132,9 @@ Xmessage*form.message.Scroll:      WhenNeeded
 ! URxvt parameters
 
 URxvt*font:                        xft:envypn:regular:pixelsize=11
-URxvt*boldFont:                    xft:envypn:bold:pixelsize=11
+!URxvt*boldFont:                    xft:envypn:bold:pixelsize=11
 URxvt*italicFont:                  xft:monospace:italic:pixelsize=11
-URxvt*boldItalicFont:              xft:envypn:bold:italic:pixelsize=11
+!URxvt*boldItalicFont:              xft:envypn:bold:italic:pixelsize=11
 
 URxvt*scrollBar:                   false
 URxvt*internalBorder:              5
