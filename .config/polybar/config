@@ -102,7 +102,7 @@ format = <label-indicator>
 label-layout = %layout%
 label-indicator-padding = 1
 label-indicator-margin = 1
-label-indicator-background = ${colors.background-alt}
+label-indicator-background = ${colors.background}
 
 [module/filesystem]
 type = internal/fs
