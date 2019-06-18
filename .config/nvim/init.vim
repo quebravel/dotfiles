@@ -34,8 +34,7 @@ call plug#begin(expand('~/.config/nvim/plugged'))
 "*****************************************************************************
 Plug 'scrooloose/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-fugitive'
+Plug 'scrooloose/nerdcommenter'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'airblade/vim-gitgutter'
@@ -248,10 +247,6 @@ set titlestring=%F
 nnoremap n nzzzv
 nnoremap N Nzzzv
 
-if exists("*fugitive#statusline")
-  set statusline+=%{fugitive#statusline()}
-endif
-
 " vim-airline
 "let g:airline_theme = 'solarized'
 "let g:airline#extensions#syntastic#enabled = 1
@@ -354,16 +349,6 @@ set autoread
 "" Split
 noremap <Leader>h :<C-u>split<CR>
 noremap <Leader>v :<C-u>vsplit<CR>
-
-"" Git
-noremap <Leader>ga :Gwrite<CR>
-noremap <Leader>gc :Gcommit<CR>
-noremap <Leader>gsh :Gpush<CR>
-noremap <Leader>gll :Gpull<CR>
-noremap <Leader>gs :Gstatus<CR>
-noremap <Leader>gb :Gblame<CR>
-noremap <Leader>gd :Gvdiff<CR>
-noremap <Leader>gr :Gremove<CR>
 
 "" windo set scrollbind
 nmap <leader><F11> :windo set scrollbind<CR>
@@ -491,6 +476,28 @@ vnoremap K :m '<-2<CR>gv=gv
 
 "" Open current line on GitHub
 nnoremap <Leader>o :.Gbrowse<CR>
+
+"" NERD Commenter
+" Use uma sintaxe compacta para comentários de várias linhas pretéritos
+let g:NERDSpaceDelims = 1
+"Alinhar os delimitadores de comentários alinhados à linha à esquerda, em vez de seguir a indentação de código
+let g:NERDCompactSexyComs = 1
+"Permitir comentar e inverter linhas vazias (útil ao comentar uma região)
+let g:NERDCommentEmptyLines = 1
+"Ativar o recorte de espaços em branco à direita ao descomentar
+let g:NERDTrimTrailingWhitespace = 1
+"Ativar NERDCommenterToggle para verificar todas as linhas selecionadas é comentada ou não
+let g:NERDToggleCheckAllLines = 1
+
+nmap <leader>nc <Plug>NERDCommenterComment
+nmap <Leader>nn <Plug>NERDCommenterNested
+nmap <Leader>n<space> <plug>NERDCommenterToggle
+nmap <Leader>nm <Plug>NERDCommenterMinimal
+nmap <Leader>ni <Plug>NERDCommenterInvert
+nmap <Leader>ns <Plug>NERDCommenterSexy
+nmap <Leader>ny <Plug>NERDCommenterYank
+nmap <Leader>n$ <Plug>NERDCommenterToEOL
+nmap <Leader>nA <Plug>NERDCommenterAppend
 
 "*****************************************************************************
 "" Custom configs
