@@ -37,7 +37,7 @@
 
 ! Dark
 
-#define S_base03        #076678
+#define S_base03        #222
 #define S_base02        #073642
 #define S_base01        #928374
 #define S_base00        #a89984
