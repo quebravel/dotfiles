@@ -45,6 +45,7 @@ bspc rule -a Firefox desktop='^2' follow=on
 bspc rule -a Steam desktop='^8' follow=on
 bspc rule -a Mplayer state=floating
 bspc rule -a Mousepad state=floating
+bspc rule -a mpv state=floating
 
 #polybar example &
 $HOME/.config/polybar/launch.sh
