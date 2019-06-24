@@ -37,7 +37,7 @@ datek = #0087ff
 ;secondary = ${xrdb:color5:#e60053}
 ;alert = ${xrdb:color6:#bd2c40}
 ;tiler = ${xrdb:color7:#fba922}
-;datek = ${xrdb:color8:#0087ff}
+;datek = ${xrdb:color9:#0087ff}
 
 [bar/bspoly]
 ;monitor = ${env:MONITOR:HDMI-1}
