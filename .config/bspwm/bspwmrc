@@ -51,5 +51,5 @@ bspc rule -a feh state=floating
 #polybar example &
 $HOME/.config/polybar/launch.sh
 #compton &
-#redshift -t 5100:3900 -l -1.396142:-48.386560
+#redshift; redshift -t 5100:3900 -l -1.396142:-48.386560
 #feh --bg-scale "$(< "${HOME}/.cache/wal/wal")"
