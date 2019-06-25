@@ -206,6 +206,27 @@ label-connected-foreground = ${colors.foreground}
 format-disconnected = "net off"
 label-disconnected-foreground = ${colors.connected-foreground}
 
+;[module/wireless-network]
+;type = internal/network
+;interface = wlp3s0
+;interval = 1.0
+
+;format-connected =  <ramp-signal> <label-connected>
+;format-connected-prefix = "wifi "
+;format-connected-prefix-foreground = ${colors.foreground-alt}
+;label-connected = %ifname% %essid%
+;label-connected-foreground = ${colors.foreground}
+
+;ramp-signal-0 = 
+;ramp-signal-1 = 
+;ramp-signal-2 = 
+;ramp-signal-3 = 
+;ramp-signal-4 = 
+;ramp-signal-5 = 
+
+;format-disconnected = "wifi off"
+;label-disconnected-foreground = ${colors.connected-foreground}
+
 [module/networkspeeddown]
 type = internal/network
 interface = enp2s0
