@@ -164,16 +164,16 @@ label-private-foreground = ${colors.tiler}
 
 fuzzy-match = false
 
-ws-icon-0 = TER-1;TER
-ws-icon-1 = WEB-2;WEB
-ws-icon-2 = GRAPH-3;GRAPH
-ws-icon-3 = MAIL-4;MAIL
-ws-icon-4 = OFFICE-5;OFFICE
-ws-icon-5 = RANGER-6;RANGER
-ws-icon-6 = MOUSEPAD-7;MOUSEPAD
-ws-icon-7 = STEAM-8;STEAM
-ws-icon-8 = CODE-9;CODE
-ws-icon-9 = MUSIC-10;MUSIC
+ws-icon-0 = TER-1;TER-1
+ws-icon-1 = WEB-2;WEB-2
+ws-icon-2 = MPV-3;MPV-3
+ws-icon-3 = CODE-4;CODE-4
+ws-icon-4 = WORK-5;WORK-5
+ws-icon-5 = FILE-6;FILE-6
+ws-icon-6 = EDIT-7;EDIT-7
+ws-icon-7 = GAME-8;GAME-8
+ws-icon-8 = MAIL-9;MAIL-9
+ws-icon-9 = MPD-10;MPD-10
 
 [module/cpu]
 type = internal/cpu
