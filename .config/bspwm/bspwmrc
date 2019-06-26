@@ -12,7 +12,7 @@
   
  
 #bspc monitor -d 1 2 3 4 5 6 7 8 9 10
-bspc monitor -d TER-1 WEB-2 GRAP-3 MAIL-4 WORK-5 FILE-6 EDIT-7 GAME-8 CODE-9 MPD-10
+bspc monitor -d TER-1 WEB-2 MPV-3 CODE-4 WORK-5 FILE-6 EDIT-7 GAME-8 MAIL-9 MPD-10
 
 bspc config border_width         2
 
