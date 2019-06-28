@@ -47,6 +47,7 @@ Plug 'scrooloose/syntastic'
 Plug 'Yggdroot/indentLine'
 Plug 'avelino/vim-bootstrap-updater'
 Plug 'sheerun/vim-polyglot'
+Plug 'junegunn/gv.vim'
 
 "Plug 'ap/vim-css-color'
 
