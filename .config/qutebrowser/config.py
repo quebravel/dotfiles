@@ -17,12 +17,16 @@ c.fonts.messages.warning = c.fonts.messages.info
 c.fonts.messages.error = c.fonts.messages.info
 c.fonts.completion.entry = "10pt monospace"
 c.fonts.completion.category = c.fonts.statusbar
-c.fonts.hints = "13px Noto Sans Mono"
+c.fonts.hints = "13px monospace"
 
 # searches
 c.url.searchengines['DEFAULT'] = 'https://www.google.com/search?q={}'
 c.url.searchengines['d'] = 'https://www.duckduckgo.com/?q={}'
 c.url.searchengines['w'] = 'http://pt.wikipedia.org/w/index.php?search={}&title=Special:Search'
+c.url.searchengines['y'] = 'https://www.youtube.com/results?search_query={}'
+c.url.searchengines['a'] = 'https://wiki.archlinux.org/?search={}'
+c.url.searchengines['v'] = 'https://wiki.voidlinux.org/?search={}'
+c.url.searchengines['g'] = 'https://wiki.gentoo.org/wiki/?search={}'
 
 # aliases
 c.aliases['gh'] = 'open -t http://github.com/quebravel'
