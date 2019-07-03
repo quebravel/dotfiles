@@ -17,7 +17,7 @@ c.fonts.messages.warning = c.fonts.messages.info
 c.fonts.messages.error = c.fonts.messages.info
 c.fonts.completion.entry = "10pt monospace"
 c.fonts.completion.category = c.fonts.statusbar
-c.fonts.hints = "13px monospace"
+#c.fonts.hints = "12px monospace"
 
 # searches
 c.url.searchengines['DEFAULT'] = 'https://www.google.com/search?q={}'
