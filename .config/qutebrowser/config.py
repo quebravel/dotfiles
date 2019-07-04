@@ -6,7 +6,6 @@
 # Uncomment this to still load settings configured via autoconfig.yml
 # config.load_autoconfig()
 
-# fonts
 c.fonts.tabs = "10pt monospace"
 c.fonts.statusbar = "10pt monospace"
 c.fonts.messages.info = "10pt monospace"
@@ -17,7 +16,7 @@ c.fonts.messages.warning = c.fonts.messages.info
 c.fonts.messages.error = c.fonts.messages.info
 c.fonts.completion.entry = "10pt monospace"
 c.fonts.completion.category = c.fonts.statusbar
-#c.fonts.hints = "12px monospace"
+#c.fonts.hints = "13px monospace"
 
 # searches
 c.url.searchengines['DEFAULT'] = 'https://www.google.com/search?q={}'
@@ -27,12 +26,17 @@ c.url.searchengines['y'] = 'https://www.youtube.com/results?search_query={}'
 c.url.searchengines['a'] = 'https://wiki.archlinux.org/?search={}'
 c.url.searchengines['v'] = 'https://wiki.voidlinux.org/?search={}'
 c.url.searchengines['g'] = 'https://wiki.gentoo.org/wiki/?search={}'
+c.url.searchengines['t'] = 'https://translate.google.com/#view=home&op=translate&sl=en&tl=pt&text={}'
 
 # aliases
 c.aliases['gh'] = 'open -t http://github.com/quebravel'
+c.aliases['yt'] = 'open -t http://youtube.com'
+c.aliases['rd'] = 'open -t http://reddit.com'
 
 # geral
 c.new_instance_open_target = "tab-bg"
 c.tabs.background = True
 c.downloads.location.directory = '/home/jonatas/Downloads'
-c.hints.border = "1px solid #CCCCCC"
+#  c.hints.border = '1px solid #363636'
+c.spellcheck.languages = ["pt-BR"]
+c.content.headers.accept_language = 'pt-BR,pt'
