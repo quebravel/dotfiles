@@ -7,8 +7,8 @@ $HOME/.fehbg
 #wal -R
 
 #mpd --kill; mpd &
-
 #dunst &
+#unclutter &
 
 #if [ -e /tmp/mplayer-control ] ; then
 #    echo 'ok fifo for mplayer'
