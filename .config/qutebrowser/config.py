@@ -40,7 +40,7 @@ c.tabs.background = False
 c.downloads.location.directory = '/home/jonatas/Downloads'
 c.spellcheck.languages = ["pt-BR"]
 c.content.headers.accept_language = 'pt-BR,pt'
-c.tabs.show = 'switching' #multiple,never,always,switching
+c.tabs.show = 'multiple' #multiple,never,always,switching
 
 # keys
 config.bind(';d', 'set downloads.location.directory ~/Downloads ;; hint links download')
