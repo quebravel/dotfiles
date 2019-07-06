@@ -146,7 +146,7 @@ URxvt*italicFont:                  xft:envypn:italic:pixelsize=11:antialias=true
 URxvt*boldItalicFont:              xft:envypn:bold:italic:pixelsize=11:antialias=true
 
 URxvt*scrollBar:                   false
-URxvt*internalBorder:              5
+!URxvt*internalBorder:              5
 URxvt*depth:                       32
 URxvt*skipBuiltinGlyphs:           true
 URxvt*perl-ext-common:             default,clipboard,matcher,url-select,keyboard-select
