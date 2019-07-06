@@ -6,15 +6,15 @@
 # Uncomment this to still load settings configured via autoconfig.yml
 # config.load_autoconfig()
 
-c.fonts.tabs = "10pt monospace"
-c.fonts.statusbar = "10pt monospace"
-c.fonts.messages.info = "10pt monospace"
+c.fonts.tabs = "10pt ctrld"
+c.fonts.statusbar = "10pt ctrld"
+c.fonts.messages.info = "10pt ctrld"
 c.fonts.downloads = c.fonts.statusbar
-c.fonts.prompts = "10pt monospace"
+c.fonts.prompts = "10pt ctrld"
 c.fonts.keyhint = c.fonts.messages.info
 c.fonts.messages.warning = c.fonts.messages.info
 c.fonts.messages.error = c.fonts.messages.info
-c.fonts.completion.entry = "10pt monospace"
+c.fonts.completion.entry = "10pt ctrld"
 c.fonts.completion.category = c.fonts.statusbar
 #c.fonts.hints = "13px monospace"
 
