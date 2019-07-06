@@ -42,7 +42,7 @@ secondary = ${xrdb:color1:#e60053}
 ;monitor = ${env:MONITOR:VGA-1}
 ;monitor = ${env:MONITOR:DVI-D-0}
 width = 100%
-height = 25
+height = 20
 offset-x = 0.0%
 offset-y = 0.0%
 radius = 0.0
@@ -130,7 +130,7 @@ label-focused-foreground = ${colors.background}
 label-focused-background = ${colors.foreground}
 label-focused-padding = 2
 ;label-focused-overline = ${colors.secondary}
-label-focused-font = 6
+;label-focused-font = 5
 
 label-occupied = %name%
 label-occupied-padding = 2
