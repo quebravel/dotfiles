@@ -161,21 +161,35 @@ super + shift + r
    shutdown -r now
 
 # VOLUME
-alt + Up
-    amixer set Master 5%+
-alt + Down
-    amixer set Master 5%-
-alt + super + Up
-    pactl set-sink-volume 0 +5%
-alt + super + Down
-    pactl set-sink-volume 0 -5%
+alt + equal
+    pulsemixer --change-volume +5
+alt + minus
+    pulsemixer --change-volume -5
+alt + 0
+    pulsemixer --toggle-mute
 
 XF86AudioRaiseVolume
-    amixer set Master 5%+
+    pulsemixer --change-volume +5
 XF86AudioLowerVolume
-    amixer set Master 5%-
+    pulsemixer --change-volume -5
 XF86AudioMute
-    amixer set Master toggle
+    pulsemixer --toggle-mute
+
+#alt + super + plus
+alt + super + equal
+    pactl set-sink-volume 0 +5%
+alt + super + minus
+    pactl set-sink-volume 0 -5%
+alt + super + 0
+    pactl set-sink-mute 0 toggle
+
+ctrl + XF86AudioRaiseVolume
+    pactl set-sink-volume 0 +5%
+ctrl + XF86AudioLowerVolume
+    pactl set-sink-volume 0 -5%
+ctrl + XF86AudioMute
+    pactl set-sink-mute 0 toggle
+
 XF86AudioPlay
     echo "pause" > /tmp/mplayer-control
 
