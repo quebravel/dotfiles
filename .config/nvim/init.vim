@@ -490,15 +490,15 @@ let g:NERDTrimTrailingWhitespace = 1
 "Ativar NERDCommenterToggle para verificar todas as linhas selecionadas é comentada ou não
 let g:NERDToggleCheckAllLines = 1
 
-nmap <leader>cc <Plug>NERDCommenterComment
-nmap <Leader>cn <Plug>NERDCommenterNested
-nmap <Leader>c <space> <plug>NERDCommenterToggle
-nmap <Leader>cm <Plug>NERDCommenterMinimal
-nmap <Leader>ci <Plug>NERDCommenterInvert
-nmap <Leader>cs <Plug>NERDCommenterSexy
-nmap <Leader>cy <Plug>NERDCommenterYank
-nmap <Leader>c$ <Plug>NERDCommenterToEOL
-nmap <Leader>cA <Plug>NERDCommenterAppend
+nmap <leader>nc <Plug>NERDCommenterComment
+nmap <Leader>nn <Plug>NERDCommenterNested
+nmap <Leader>n <space> <plug>NERDCommenterToggle
+nmap <Leader>nm <Plug>NERDCommenterMinimal
+nmap <Leader>ni <Plug>NERDCommenterInvert
+nmap <Leader>ns <Plug>NERDCommenterSexy
+nmap <Leader>ny <Plug>NERDCommenterYank
+nmap <Leader>n$ <Plug>NERDCommenterToEOL
+nmap <Leader>nA <Plug>NERDCommenterAppend
 
 "*****************************************************************************
 "" Custom configs
