@@ -30,9 +30,10 @@ c.url.searchengines['t'] = 'https://translate.google.com/#view=home&op=translate
 c.url.searchengines['r'] = 'https://reddit.com/r/{}'
 
 # aliases
-c.aliases['gh'] = 'open -t http://github.com/quebravel'
-c.aliases['yt'] = 'open -t http://youtube.com'
-c.aliases['rd'] = 'open -t http://reddit.com'
+c.aliases['gh'] = 'open -t https://github.com/quebravel'
+c.aliases['yt'] = 'open -t https://youtube.com'
+c.aliases['rd'] = 'open -t https://reddit.com'
+c.aliases['kp'] = 'open -t https://keep.google.com'
 
 # geral
 #c.new_instance_open_target = "tab-bg"
