@@ -18,24 +18,24 @@
 
 [colors]
 background = #222
-background-alt = #363636
+;background-alt = #363636
 ;foreground = #00afaf
 foreground-alt = #888
 ;primary = #ffffd7
 ;secondary = #e60053
-alert = #bd2c40
-tiler = #fba922
+;alert = #bd2c40
+;tiler = #fba922
 
 ;cores para pywal
 ;[colors]
-;background = ${xrdb:color5:#222}
+background = ${xrdb:color0:#222}
 ;background-alt = ${xrdb:color2:#363636}
-foreground = ${xrdb:color4:#00afaf}
+foreground = ${xrdb:color7:#00afaf}
 ;foreground-alt = ${xrdb:color3:#888}
-primary = ${xrdb:color0:#ffffd7
-secondary = ${xrdb:color1:#e60053}
+;primary = ${xrdb:color5:#ffffd7
+;secondary = ${xrdb:color1:#e60053}
 ;alert = ${xrdb:color6:#bd2c40}
-;tiler = ${xrdb:color7:#fba922}
+;tiler = ${xrdb:color4:#fba922}
 
 [bar/bspoly]
 ;monitor = ${env:MONITOR:HDMI-1}
