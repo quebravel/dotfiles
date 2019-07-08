@@ -35,9 +35,9 @@ c.aliases['yt'] = 'open -t http://youtube.com'
 c.aliases['rd'] = 'open -t http://reddit.com'
 
 # geral
-c.new_instance_open_target = "tab-bg"
-c.tabs.background = False
-c.downloads.location.directory = '/home/jonatas/Downloads'
+#c.new_instance_open_target = "tab-bg"
+#c.tabs.background = False
+c.downloads.location.directory = '$HOME/Downloads'
 c.spellcheck.languages = ["pt-BR"]
 c.content.headers.accept_language = 'pt-BR,pt'
 c.tabs.show = 'multiple' #multiple,never,always,switching
