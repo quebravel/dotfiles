@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Este script necessita do pacote <xdo> para funcionar
+
 size=${2:-'10'}
 dir=$1
 
