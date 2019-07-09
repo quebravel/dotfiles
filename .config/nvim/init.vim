@@ -499,6 +499,7 @@ map <Leader>ns <Plug>NERDCommenterSexy
 map <Leader>ny <Plug>NERDCommenterYank
 map <Leader>n$ <Plug>NERDCommenterToEOL
 map <Leader>nA <Plug>NERDCommenterAppend
+map <Leader>nu <Plug>NERDCommenterUncomment
 
 "*****************************************************************************
 "" Custom configs
