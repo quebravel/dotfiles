@@ -125,7 +125,7 @@ type = internal/bspwm
 
 format = <label-state> <label-mode>
 
-label-focused =  %icon%
+label-focused =  %name%
 label-focused-foreground = ${colors.background}
 label-focused-background = ${colors.foreground}
 label-focused-padding = 2
@@ -137,7 +137,7 @@ label-occupied-padding = 2
 label-occupied-foreground = ${colors.foreground}
 label-occupied-background = ${colors.background-alt}
 
-label-urgent = %icon%!
+label-urgent = %name%!
 label-urgent-background = ${colors.alert}
 label-urgent-padding = 2
 
