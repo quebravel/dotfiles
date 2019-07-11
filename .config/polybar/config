@@ -137,11 +137,11 @@ label-occupied-padding = 2
 label-occupied-foreground = ${colors.foreground}
 label-occupied-background = ${colors.background-alt}
 
-label-urgent = %index%!
+label-urgent = %icon%!
 label-urgent-background = ${colors.alert}
 label-urgent-padding = 2
 
-label-empty = %index%
+label-empty = %icon%
 label-empty-foreground = ${colors.foreground-alt}
 label-empty-padding = 2
 
