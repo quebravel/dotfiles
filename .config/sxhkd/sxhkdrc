@@ -39,7 +39,7 @@ super + i
 
 # make sxhkd reload its configuration files:
 super + Escape
-	pkill -USR1 -x sxhkd
+     pkill -USR1 -x sxhkd
 
 #
 # bspwm hotkeys
@@ -194,7 +194,6 @@ XF86AudioPlay
     echo "pause" > /tmp/mplayer-control
 
 # BRILHO NOTEBOOK
-
 #XF86MonBrightnessUp
 #    xbacklight -inc 6
 #XF86MonBrightnessDown
@@ -216,7 +215,7 @@ super + alt + Print
 
 
 # MUDAR ESPAÇOS DA JANELA [gap]
-alt + {minus,equal}
+alt + shift + {minus,equal}
     bspc config -d focused window_gap $((`bspc config -d focused window_gap` {+,-} 2 ))
 
 super + alt + g
@@ -226,9 +225,8 @@ super + alt + g
 super + ctrl + r
     bspc node @parent -R 270
 
-
 super + apostrophe
-	bspc node -s last
+    bspc node -s last
 
 super + alt + r
     ~/.config/bspwm/bspwmrc
