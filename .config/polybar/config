@@ -111,7 +111,7 @@ spacing = 2
 
 mount-0 = /
 format-mounted = <label-mounted>
-format-mounted-prefix = "hdd "
+format-mounted-prefix = " hdd "
 format-mounted-foreground = ${colors.foreground-alt}
 
 label-mounted = %percentage_used%%
@@ -176,7 +176,7 @@ ws-icon-9 = MPD-10;MPD-10
 [module/cpu]
 type = internal/cpu
 interval = 2
-format-prefix = "cpu "
+format-prefix = " cpu "
 format-prefix-foreground = ${colors.foreground-alt}
 
 ;label = %percentage-core2:3%%
@@ -186,7 +186,7 @@ format-foreground = ${colors.foreground}
 [module/memory]
 type = internal/memory
 interval = 2
-format-prefix = "ram "
+format-prefix = " ram "
 format-prefix-foreground = ${colors.foreground-alt}
 format-foreground = ${colors.foreground}
 label = %percentage_used:2%%
@@ -196,12 +196,12 @@ type = internal/network
 interface = enp2s0
 interval = 1.0
 
-format-connected-prefix = "net "
+format-connected-prefix = " net "
 format-connected-prefix-foreground = ${colors.foreground-alt}
 label-connected = %ifname%
 label-connected-foreground = ${colors.foreground}
 
-format-disconnected = "net off"
+format-disconnected = " net off"
 label-disconnected-foreground = ${colors.connected-foreground}
 
 ;[module/wireless-network]
@@ -253,7 +253,7 @@ date-alt = " %A %d-%m-%Y"
 time-alt = %H:%M:%S
 time = %H:%M
 
-format-prefix = "hora"
+format-prefix = " hora"
 format-prefix-foreground = ${colors.foreground-alt}
 format-foreground = ${colors.foreground}
 
@@ -272,11 +272,11 @@ format-volume = <label-volume> <bar-volume>
 label-volume = %percentage%%
 label-volume-foreground = ${root.foreground}
 
-format-volume-prefix = "vol "
+format-volume-prefix = " vol "
 format-volume-foreground = ${colors.foreground-alt}
 format-muted-prefix = ""
 format-muted-foreground = ${colors.alert}
-label-muted = VOL MUDO ──────────
+label-muted = vol -M-U-D-O-
 
 bar-volume-width = 10
 bar-volume-foreground-0 = #55aa55
@@ -306,11 +306,11 @@ bar-volume-empty-foreground = ${colors.foreground-alt}
 ;label-volume = %percentage%%
 ;label-volume-foreground = ${root.foreground}
 ;
-;format-volume-prefix = "VOL "
+;format-volume-prefix = " VOL "
 ;format-volume-foreground = ${colors.foreground-alt}
 ;format-muted-prefix = ""
 ;format-muted-foreground = ${colors.alert}
-;label-muted = VOL MUDO ─────────
+;label-muted = vol -M-U-D-O-
 ;
 ;bar-volume-width = 10
 ;bar-volume-foreground-0 = #55aa55
@@ -342,7 +342,7 @@ hwmon-path = /sys/devices/platform/coretemp.0/hwmon/hwmon1/temp2_input
 label = %temperature-c:6:6%
 label-foreground = ${colors.foreground}
 
-ramp-0 = temp
+ramp-0 =  temp
 ramp-foreground = ${colors.foreground-alt}
 
 ;[module/battery]
