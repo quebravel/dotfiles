@@ -1,0 +1,20 @@
+defaults.pcm.!card 1
+defaults.pcm.!device 5
+defaults.pcm.!ctl 1
+defaults.pcm.rate_converter "speexrate_best"
+
+# comando para saber o nomes
+# pacmd list-sinks
+# cat /proc/asound/card1/codec\#0 | grep -i name
+#->alsa.name = "HDMI 5
+#->alsa.id = "HDMI 5"
+
+# defaults.pcm.dmix.rate 96000
+# defaults.pcm.card <number of your default sound card>
+# defaults.ctl.card <default sound card>
+
+# pcm.!default {
+# type plug slave.pcm {
+# type hw card1 device 5
+# }
+# }
