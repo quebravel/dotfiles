@@ -2,6 +2,7 @@ defaults.pcm.!card 1
 defaults.pcm.!device 5
 defaults.pcm.!ctl 1
 defaults.pcm.rate_converter "speexrate_best"
+#defaults.pcm.rate_converter "speexrate_medium"
 
 # comando para saber o nomes
 # pacmd list-sinks
