@@ -155,6 +155,8 @@ URxvt*iso14755_52:                 false
 URxvt*geometry:                    124x44
 URxvt*scrollWithBuffer:            true
 URxvt*scrollTtyOutput:             true
+URxvt.keysym.Control-Shift-K:      command:\033]720;1\007
+URxvt.keysym.Control-Shift-J:      command:\033]721;1\007
 URxvt*termName:                    rxvt-unicode-256color
 
 ! URxvt keys M = Alt | C = Ctrl | Slash = /
