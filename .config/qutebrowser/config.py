@@ -37,7 +37,7 @@ c.aliases['kp'] = 'open -t https://keep.google.com'
 
 # geral
 #c.new_instance_open_target = "tab-bg"
-c.tabs.background = true
+c.tabs.background = True
 c.downloads.location.directory = '$HOME/Downloads'
 c.spellcheck.languages = ["pt-BR"]
 c.content.headers.accept_language = 'pt-BR,pt'
