@@ -162,8 +162,9 @@ URxvt*termName:                    rxvt-unicode-256color
 !URxvt*keysym.Shift-Home:          command:\033]720;4096\007
 !URxvt*keysym.Shift-End:           command:\033]721;4096\007
 ! M = Alt
-URxvt.keysym.Shift-Control-C:      perl:clipboard:copy
-URxvt.keysym.Shift-Control-V:      perl:clipboard:paste
+URxvt.keysym.Control-Shift-C:      perl:clipboard:copy
+URxvt.keysym.Control-Shift-V:      perl:clipboard:paste
+
 !URxvt*keysym.C-Delete:            perl:matcher:last
 !URxvt*keysym.M-Delete:            perl:matcher:list
 
