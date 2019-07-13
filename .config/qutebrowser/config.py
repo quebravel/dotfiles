@@ -41,7 +41,7 @@ c.tabs.background = True
 c.downloads.location.directory = '$HOME/Downloads'
 c.spellcheck.languages = ["pt-BR"]
 c.content.headers.accept_language = 'pt-BR,pt'
-c.tabs.show = 'multiple' #multiple,never,always,switching
+c.tabs.show = 'always' #multiple,never,always,switching
 
 # keys
 config.bind(';d', 'set downloads.location.directory ~/Downloads ;; hint links download')
