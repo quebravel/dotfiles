@@ -42,6 +42,9 @@ c.downloads.location.directory = '$HOME/Downloads'
 c.spellcheck.languages = ["pt-BR"]
 c.content.headers.accept_language = 'pt-BR,pt'
 c.tabs.show = 'always' #multiple,never,always,switching
+c.url.default_page = "https://start.duckduckgo.com/"
+c.url.start_pages = "https://start.duckduckgo.com/"
+c.hints.chars = "asdfgruhjkl"  
 
 # keys
 config.bind(';d', 'set downloads.location.directory ~/Downloads ;; hint links download')
