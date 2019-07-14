@@ -161,37 +161,32 @@ super + shift + r
    shutdown -r now
 
 # VOLUME
-alt + equal
-    pulsemixer --change-volume +5
-alt + minus
-    pulsemixer --change-volume -5
-alt + 0
-    pulsemixer --toggle-mute
-
+# pulseaudio | selecione o número do drive correto Ex: 4 da placa de vídeo
 XF86AudioRaiseVolume
-    pulsemixer --change-volume +5
+    pactl set-sink-volume 4 +5%
 XF86AudioLowerVolume
-    pulsemixer --change-volume -5
+    pactl set-sink-volume 4 -5%
 XF86AudioMute
-    pulsemixer --toggle-mute
+    pactl set-sink-mute 4 toggle
 
-#alt + super + plus
-alt + super + equal
-    pactl set-sink-volume 0 +5%
-alt + super + minus
-    pactl set-sink-volume 0 -5%
-alt + super + 0
-    pactl set-sink-mute 0 toggle
+super + equal
+    pactl set-sink-volume 4 +5%
+super + minus
+    pactl set-sink-volume 4 -5%
+super + 0
+    pactl set-sink-mute 4 toggle
 
-ctrl + XF86AudioRaiseVolume
-    pactl set-sink-volume 0 +5%
-ctrl + XF86AudioLowerVolume
-    pactl set-sink-volume 0 -5%
-ctrl + XF86AudioMute
-    pactl set-sink-mute 0 toggle
+# amixer
+#alt + equal
+#    amixer set 'Master' 5%+
+#alt + minus
+#    amixer set 'Master' 5%-
+#alt + 0
+#    amixer set 'Master' toggle
 
-XF86AudioPlay
-    echo "pause" > /tmp/mplayer-control
+# control mpv pause
+#XF86AudioPlay
+#    echo "pause" > /tmp/mplayer-control
 
 # BRILHO NOTEBOOK
 #XF86MonBrightnessUp
