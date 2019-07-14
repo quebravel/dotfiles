@@ -59,7 +59,7 @@ super + m
 
 # if the current node is automatic, send it to the last manual, otherwise pull the last leaf
 super + y
-	bspc query -N -n focused.automatic && bspc node -n last.!automatic || bspc node last.leaf -n focused
+	bspc query -N -n focused.automatic.local && bspc node -n last.!automatic.local || bspc node last.leaf.local -n focused.local
 
 # swap the current node and the biggest node
 super + g
