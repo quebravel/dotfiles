@@ -161,7 +161,7 @@ super + shift + r
    shutdown -r now
 
 # VOLUME
-# pulseaudio | selecione o número do drive correto Ex: 4 da placa de vídeo
+# pulseaudio | selecione o número corrento com "pacmd list-sinks | grep 'index:' | cut -b12-"
 XF86AudioRaiseVolume
     pactl set-sink-volume 4 +5%
 XF86AudioLowerVolume
