@@ -41,6 +41,8 @@ foreground = ${xrdb:color7:#00afaf}
 ;monitor = ${env:MONITOR:HDMI-1}
 ;monitor = ${env:MONITOR:VGA-1}
 ;monitor = ${env:MONITOR:DVI-D-0}
+;monitor = ${env:MONITOR:DisplayPort-1}
+
 width = 100%
 height = 20
 offset-x = 0.0%
