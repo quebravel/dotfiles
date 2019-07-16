@@ -111,14 +111,34 @@ spacing = 2
 
 mount-0 = /
 format-mounted = <label-mounted>
+;format-mounted = <label-mounted> <bar-used>
 format-mounted-prefix = " hdd "
 format-mounted-foreground = ${colors.foreground-alt}
 
 label-mounted = %percentage_used%%
 label-mounted-foreground = ${colors.foreground}
 
-;ramp-capacity-0 = HD
-;ramp-capacity-foreground = ${colors.foreground-alt}
+; bar-used-width = 10
+; bar-used-foreground-0 = #55aa55
+; bar-used-foreground-1 = #55aa55
+; bar-used-foreground-2 = #55aa55
+; bar-used-foreground-3 = #55aa55
+; bar-used-foreground-4 = #55aa55
+; bar-used-foreground-5 = #f5a70a
+; bar-used-foreground-6 = #f5a70a
+; bar-used-foreground-7 = #f5a70a
+; bar-used-foreground-8 = #f5a70a
+; bar-used-foreground-9 = #ff5555
+; bar-used-gradient = false
+; bar-used-indicator =
+; bar-used-indicator-font = 4
+; bar-used-indicator-foreground = ${colors.foreground}
+; bar-used-fill = |
+; bar-used-fill-font = 4
+; bar-used-empty = |
+; bar-used-empty-font = 4
+; bar-used-empty-foreground = ${colors.foreground-alt}
+
 
 [module/bspwm]
 type = internal/bspwm
@@ -190,6 +210,28 @@ format-prefix = " ram "
 format-prefix-foreground = ${colors.foreground-alt}
 format-foreground = ${colors.foreground}
 label = %percentage_used:2%%
+;format = <label> <bar-used>
+
+;bar-used-width = 10
+;bar-used-foreground-0 = #55aa55
+;bar-used-foreground-1 = #55aa55
+;bar-used-foreground-2 = #55aa55
+;bar-used-foreground-3 = #55aa55
+;bar-used-foreground-4 = #55aa55
+;bar-used-foreground-5 = #f5a70a
+;bar-used-foreground-6 = #f5a70a
+;bar-used-foreground-7 = #f5a70a
+;bar-used-foreground-8 = #f5a70a
+;bar-used-foreground-9 = #ff5555
+;bar-used-gradient = false
+;bar-used-indicator =
+;bar-used-indicator-font = 4
+;bar-used-indicator-foreground = ${colors.foreground}
+;bar-used-fill = |
+;bar-used-fill-font = 4
+;bar-used-empty = |
+;bar-used-empty-font = 4
+;bar-used-empty-foreground = ${colors.foreground-alt}
 
 [module/wired-network]
 type = internal/network
