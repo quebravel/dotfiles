@@ -169,11 +169,11 @@ XF86AudioLowerVolume
 XF86AudioMute
     pactl set-sink-mute 4 toggle
 
-super + equal
+alt + equal
     pactl set-sink-volume 4 +5%
-super + minus
+alt + minus
     pactl set-sink-volume 4 -5%
-super + 0
+alt + 0
     pactl set-sink-mute 4 toggle
 
 # amixer
