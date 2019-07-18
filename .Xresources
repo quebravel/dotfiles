@@ -203,7 +203,7 @@ URxvt*matcher.pattern.0:           (?:https?:\\/\\/|ftp:\\/\\/|rsync:\\/\\/|news
 URxvt*matcher.button:              1
 URxvt*underlineURLs:               true
 
-# add tabbed em "URxvt*perl-ext-common:" para ligar
+! add tabbed em "URxvt*perl-ext-common:" para ligar
 URxvt*tabbed.new-button:           no
 URxvt*tabbed.tabbar-fg:            12
 URxvt*tabbed.tabbar-bg:            8
