@@ -163,18 +163,18 @@ super + shift + r
 # VOLUME
 # pulseaudio | selecione o número corrento com "pacmd list-sinks | grep 'index:' | cut -b12-"
 XF86AudioRaiseVolume
-    pactl set-sink-volume 4 +5%
+    pamixer -i 5
 XF86AudioLowerVolume
-    pactl set-sink-volume 4 -5%
+    pamixer -d 5
 XF86AudioMute
-    pactl set-sink-mute 4 toggle
+    pamixer -t
 
 alt + equal
-    pactl set-sink-volume 4 +5%
+    pamixer -i 5
 alt + minus
-    pactl set-sink-volume 4 -5%
+    pamixer -d 5
 alt + 0
-    pactl set-sink-mute 4 toggle
+    pamixer -t
 
 # amixer
 #alt + equal
