@@ -162,6 +162,8 @@ super + shift + r
 
 # VOLUME
 # pulseaudio | selecione o número corrento com "pacmd list-sinks | grep 'index:' | cut -b12-"
+
+# pamixer
 XF86AudioRaiseVolume
     pamixer -i 5
 XF86AudioLowerVolume
@@ -173,12 +175,8 @@ alt + {equal,minus,0}
     pamixer {-i 5,-d 5,-t}
 
 # amixer
-#alt + equal
-#    amixer set 'Master' 5%+
-#alt + minus
-#    amixer set 'Master' 5%-
-#alt + 0
-#    amixer set 'Master' toggle
+# alt + {equal,minus,0}
+#     amixer set 'Master' {5%+,5%-,toggle}
 
 # control mpv pause
 #XF86AudioPlay
