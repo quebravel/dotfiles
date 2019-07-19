@@ -169,12 +169,8 @@ XF86AudioLowerVolume
 XF86AudioMute
     pamixer -t
 
-alt + equal
-    pamixer -i 5
-alt + minus
-    pamixer -d 5
-alt + 0
-    pamixer -t
+alt + {equal,minus,0}
+    pamixer {-i 5,-d 5,-t}
 
 # amixer
 #alt + equal
