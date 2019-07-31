@@ -47,6 +47,7 @@ c.url.start_pages = "https://start.duckduckgo.com/"
 #c.hints.chars = "asdfgruhjkl"
 c.tabs.select_on_remove = "prev"
 c.content.notifications = False
+c.content.autoplay = False
 
 # keys
 config.bind(';d', 'set downloads.location.directory ~/Downloads ;; hint links download')
