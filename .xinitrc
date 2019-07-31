@@ -6,6 +6,7 @@ xsetroot -cursor_name left_ptr &
 $HOME/.fehbg
 #wal -R
 
+#export MPD_HOST=$HOME/.config/mpd/socket               
 #mpd --kill; mpd &
 #dunst &
 #unclutter &
