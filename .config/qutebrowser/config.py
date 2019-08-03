@@ -54,3 +54,6 @@ config.bind(';d', 'set downloads.location.directory ~/Downloads ;; hint links do
 config.bind('xx', 'config-cycle statusbar.hide ;; config-cycle tabs.show always switching')
 config.bind('xt', 'config-cycle tabs.show always switching')
 config.bind('xb', 'config-cycle statusbar.hide')
+#config.bind(',n', 'user_stylesheets = ~/.config/qutebrowser/solarized-everything-css/css/solarized-dark/solarized-dark-all-sites.css')
+config.bind('gD', 'spawn urxvt -e ranger /home/jonatas/Downloads')
+
