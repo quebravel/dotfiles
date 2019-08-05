@@ -49,7 +49,7 @@ c.tabs.select_on_remove = "prev"
 c.content.notifications = False
 c.content.autoplay = False
 # https://github.com/alphapapa/solarized-everything-css.git
-#config.bind(',n', 'user_stylesheets = ~/.config/qutebrowser/solarized-everything-css/css/solarized-dark/solarized-dark-all-sites.css')
+#c.content.user_stylesheets = "~/.config/qutebrowser/solarized-everything-css/css/solarized-dark/solarized-dark-all-sites.css"
 
 # keys
 config.bind(';d', 'set downloads.location.directory ~/Downloads ;; hint links download')
