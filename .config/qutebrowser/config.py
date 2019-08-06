@@ -44,7 +44,7 @@ c.content.headers.accept_language = 'pt-BR,pt'
 c.tabs.show = 'always' #multiple,never,always,switching
 c.url.default_page = "https://start.duckduckgo.com/"
 c.url.start_pages = "https://start.duckduckgo.com/"
-#c.hints.chars = "asdfgruhjkl"
+c.hints.chars = "asdfghjklç"
 c.tabs.select_on_remove = "prev"
 c.content.notifications = False
 c.content.autoplay = False
@@ -58,3 +58,10 @@ config.bind('xt', 'config-cycle tabs.show always switching')
 config.bind('xb', 'config-cycle statusbar.hide')
 config.bind('gD', 'spawn urxvt -e ranger /home/jonatas/Downloads')
 
+c.bindings.commands = {
+        'normal': {
+            '<tab>': 'nop',
+            'gR': 'spawn urxvt -e ranger /home/jonatas/Downloads',
+            ',n': 'config-cycle content.user_stylesheets  ~/.config/qutebrowser/solarized-everything-css/css/solarized-dark/solarized-dark-all-sites.css "" ;; reload',
+            }
+        }
