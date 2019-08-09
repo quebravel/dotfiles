@@ -1,3 +1,4 @@
+# xbps-install -S neomutt cyrus-sasl cyrus-sasl-modules cyrus-sasl-modules-gssapi
 # mkdir -p ~/.config/neomutt/cache/headers
 # mkdir ~/.config/neomutt/cache/bodies
 # mkdir ~/.config/neomutt/attachments
@@ -7,17 +8,17 @@
 # mudar mailbox "c" digite =nome do box
 # Permitir aplicativos menos seguros: ATIVADA em https://myaccount.google.com/lesssecureapps
 
-# altere onde tem letras maisculas
+# altere onde tem letras <maisculas>
 
 # --------------------------------------------------------------
 
 set ssl_starttls=yes
 set ssl_force_tls=yes
 
-set imap_user = 'EMAIL@gmail.com'
-set imap_pass = 'SENHA'
+set imap_user = '<EMAIL>@gmail.com'
+set imap_pass = '<SENHA>'
 
-set from='EMAIL@gmail.com'
+set from='<EMAIL>@gmail.com'
 set realname='Jonatas'
 
 set folder = imaps://imap.gmail.com/
@@ -28,7 +29,7 @@ set header_cache = "~/.neomutt/cache/headers"
 set message_cachedir = "~/.neomutt/cache/bodies"
 set certificate_file = "~/.neomutt/certificates"
 
-set smtp_url = 'smtps://EMAIL@gmail.com:SENHA@smtp.gmail.com:465/'
+set smtp_url = 'smtps://<EMAIL>@gmail.com:<SENHA>@smtp.gmail.com:465/'
 
 set move = no
 set imap_keepalive = 900
