@@ -59,6 +59,13 @@ set mark_old=no
 # --------------------------------------------------------------------------
 # VARIABLES - shown with their default values
 # --------------------------------------------------------------------------
+
+# conjunto de caracteres em mensagens enviadas
+set send_charset="utf-8"
+
+# se não houver nenhum conjunto de caracteres fornecido nas mensagens recebidas, é provavelmente o Windows
+set assumed_charset="iso-8859-1"
+
 # Should the Sidebar be shown?
 set sidebar_visible = yes
 # How wide should the Sidebar be in screen columns?
