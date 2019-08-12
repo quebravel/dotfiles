@@ -66,6 +66,10 @@ set mark_old=no
 # VARIABLES - shown with their default values
 # --------------------------------------------------------------------------
 
+set mailcap_path =   "~/.config/neomutt/mailcap"
+auto_view =          "yes"
+alternative_order =  "no"
+
 # conjunto de caracteres em mensagens enviadas
 set send_charset="utf-8"
 
