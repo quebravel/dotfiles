@@ -36,8 +36,6 @@ set header_cache = "~/.neomutt/cache/headers"
 set message_cachedir = "~/.neomutt/cache/bodies"
 set certificate_file = "~/.neomutt/certificates"
 
-set smtp_url = 'smtps://<EMAIL>@gmail.com:<SENHA>@smtp.gmail.com:465/'
-
 set move = no
 set imap_keepalive = 900
 set imap_check_subscribed
