@@ -94,6 +94,7 @@ Plug 'honza/vim-snippets'
 
 "" Color
 Plug 'morhetz/gruvbox'
+Plug 'altercation/vim-colors-solarized'
 
 "*****************************************************************************
 "" Custom bundles
@@ -173,6 +174,7 @@ set number
 let no_buffers_menu=1
 if !exists('g:not_finish_vimplug')
   colorscheme gruvbox
+"  colorscheme solarized
 endif
 
 set mousemodel=popup
@@ -623,6 +625,16 @@ let g:airline_theme='kolor'
 " grovebox config
 let g:gruvbox_termcolors = 256
 let g:gruvbox_italic = 1
+
+" solarized config
+let g:solarized_termcolors=256
+let g:solarized_termtrans=0
+let g:solarized_degrade=0
+let g:solarized_bold=1
+let g:solarized_underline=1
+let g:solarized_italic=1
+let g:solarized_contrast="normal"
+let g:solarized_visibility="normal"
 
 " light/dark
 set background=dark
