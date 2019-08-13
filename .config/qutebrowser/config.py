@@ -31,8 +31,8 @@ c.url.searchengines['r'] = 'https://reddit.com/r/{}'
 
 # aliases
 c.aliases['gh'] = 'open -t https://github.com/quebravel'
-c.aliases['yt'] = 'open -t https://youtube.com'
-c.aliases['rd'] = 'open -t https://reddit.com'
+c.aliases['yt'] = 'open -r https://youtube.com'
+c.aliases['rd'] = 'open -r https://reddit.com'
 c.aliases['kp'] = 'open -t https://keep.google.com'
 
 # geral
