@@ -65,3 +65,9 @@ c.bindings.commands = {
             ',n': 'config-cycle content.user_stylesheets  ~/.config/qutebrowser/solarized-everything-css/css/solarized-dark/solarized-dark-all-sites.css "" ;; reload',
             }
         }
+
+# plugins
+# https://gitlab.com/jgkamat/jblock
+#  import sys, os
+#  sys.path.append(os.path.join(sys.path[0], 'jblock'))
+#  config.source("jblock/jblock/integrations/qutebrowser.py")
