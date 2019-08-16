@@ -1,9 +1,7 @@
 # xbps-install -S neomutt cyrus-sasl cyrus-sasl-modules cyrus-sasl-modules-gssapi
-# mkdir -p ~/.config/neomutt/cache/headers
-# mkdir ~/.config/neomutt/cache/bodies
-# mkdir ~/.config/neomutt/attachments
-# touch ~/.config/neomutt/certificates
-# touch ~/.config/neomutt/neomuttrc
+# mkdir -p ~/.config/neomutt/cache/{bodies/,headers/} && touch ~/.config/neomutt/certificates
+# #mkdir ~/.config/neomutt/attachments # Salvando anexos em Downloads
+
 
 # mudar mailbox "c" digite =nome do box
 # Permitir aplicativos menos seguros: ATIVADA em https://myaccount.google.com/lesssecureapps
