@@ -201,6 +201,9 @@ alt + Print
 super + alt + Print
     sleep 0.3; scrot -b -u -e 'mv $f ~/Imagens/ 2>/dev/null'
 
+# layout teclado
+super + shift + b
+    setxkbmap -layout {br -model "",us -model ""}
 
 # MUDAR ESPAÇOS DA JANELA [gap]
 alt + shift + {parenleft,parenright}
