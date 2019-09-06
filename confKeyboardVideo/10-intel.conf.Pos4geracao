@@ -1,8 +1,0 @@
-# add em USE="glamor"
-Section "Device"
-         Identifier "Intel Graphics"
-         Driver     "modesetting"
-         Option     "AccelMethod" "glamor"
-         Option     "TearFree" "on"
-         Option     "DRI" "3"
-EndSection
