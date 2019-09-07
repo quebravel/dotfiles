@@ -221,3 +221,6 @@ super + apostrophe
 
 super + alt + r
     bspc wm -r
+
+super + shift + p
+    pkill polybar; polybar bspoly&
