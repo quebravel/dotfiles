@@ -198,7 +198,7 @@ Print
 alt + Print
     sleep 0.2; scrot -s -e 'mv $f ~/Imagens/ 2>/dev/null'
 
-super + alt + Print
+ctrl + Print
     sleep 0.3; scrot -b -u -e 'mv $f ~/Imagens/ 2>/dev/null'
 
 # layout teclado
