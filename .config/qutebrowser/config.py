@@ -28,6 +28,7 @@ c.url.searchengines['v'] = 'https://wiki.voidlinux.org/?search={}'
 c.url.searchengines['o'] = 'https://wiki.gentoo.org/wiki/?search={}'
 c.url.searchengines['t'] = 'https://translate.google.com/#view=home&op=translate&sl=en&tl=pt&text={}'
 c.url.searchengines['r'] = 'https://reddit.com/r/{}'
+c.url.searchengines['c'] = 'https://www.comandotorrents.com/?s={}'
 
 # aliases
 c.aliases['gh'] = 'open -t https://github.com/quebravel'
