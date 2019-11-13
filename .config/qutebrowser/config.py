@@ -35,6 +35,7 @@ c.aliases['gh'] = 'open -t https://github.com/quebravel'
 c.aliases['yt'] = 'open -r https://youtube.com'
 c.aliases['rd'] = 'open -r https://reddit.com'
 c.aliases['kp'] = 'open -t https://keep.google.com'
+c.aliases['gm'] = 'open -t https://mail.google.com'
 
 # geral
 #c.new_instance_open_target = "tab-bg"
