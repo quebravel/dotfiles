@@ -50,6 +50,7 @@ Plug 'sheerun/vim-polyglot'
 Plug 'junegunn/gv.vim'
 
 "Plug 'ap/vim-css-color'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 Plug 'artur-shaik/vim-javacomplete2'
 Plug 'lilydjwg/colorizer'
@@ -216,6 +217,14 @@ if &term =~ '256color'
   set t_ut=
 endif
 
+" You will have bad experience for diagnostic messages when it's default 4000.
+set updatetime=300
+
+" don't give |ins-completion-menu| messages.
+set shortmess+=c
+
+" always show signcolumns
+set signcolumn=yes
 
 "" Disable the blinking cursor.
 "set gcr=a:blinkon0
@@ -480,6 +489,19 @@ vnoremap K :m '<-2<CR>gv=gv
 "" Open current line on GitHub
 nnoremap <Leader>o :.Gbrowse<CR>
 
+" Use tab for trigger completion with characters ahead and navigate.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
 "" NERD Commenter
 " Use uma sintaxe compacta para comentários de várias linhas pretéritos
 let g:NERDSpaceDelims = 1
@@ -494,7 +516,10 @@ let g:NERDToggleCheckAllLines = 1
 
 map <leader>nc <Plug>NERDCommenterComment
 map <Leader>nn <Plug>NERDCommenterNested
-map <Leader>n <space> <plug>NERDCommenterToggle
+
+vmap ++ <plug>NERDCommenterToggle
+nmap ++ <plug>NERDCommenterToggle
+
 map <Leader>nm <Plug>NERDCommenterMinimal
 map <Leader>ni <Plug>NERDCommenterInvert
 map <Leader>ns <Plug>NERDCommenterSexy
@@ -502,6 +527,11 @@ map <Leader>ny <Plug>NERDCommenterYank
 map <Leader>n$ <Plug>NERDCommenterToEOL
 map <Leader>nA <Plug>NERDCommenterAppend
 map <Leader>nu <Plug>NERDCommenterUncomment
+
+nnoremap <leader>; A;<esc>
+
+"" coc
+inoremap <silent><expr> <c-space> coc#refresh()
 
 "*****************************************************************************
 "" Custom configs
