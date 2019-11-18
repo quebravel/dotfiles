@@ -173,9 +173,13 @@ XF86AudioMute
 alt + {equal,minus,0}
     pamixer {-i 5,-d 5,-t}
 
-# amixer
+# amixer master
 # alt + {equal,minus,0}
 #     amixer set 'Master' {5%+,5%-,toggle}
+
+# amixer headphone
+# super + alt + {equal,minus,0}
+#    amixer -c 2 sset 'Speaker' {5%+,5%-,toggle}
 
 # control mpv pause
 #XF86AudioPlay
