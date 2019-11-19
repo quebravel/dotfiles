@@ -179,7 +179,7 @@ alt + {equal,minus,0}
 
 # amixer headphone
 # super + alt + {equal,minus,0}
-#    amixer -c 2 sset 'Speaker' {5%+,5%-,toggle}
+#    amixer sset 'Speaker' {5%+,5%-,toggle}
 
 # control mpv pause
 #XF86AudioPlay
