@@ -50,7 +50,10 @@ Plug 'sheerun/vim-polyglot'
 Plug 'junegunn/gv.vim'
 
 "Plug 'ap/vim-css-color'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'salsifis/vim-transpose'
+Plug 'simnalamburt/vim-mundo'
+Plug 'mattn/emmet-vim'
 
 Plug 'artur-shaik/vim-javacomplete2'
 Plug 'lilydjwg/colorizer'
@@ -535,7 +538,10 @@ map <Leader>nu <Plug>NERDCommenterUncomment
 nnoremap <leader>; A;<esc>
 
 "" coc
-inoremap <silent><expr> <c-space> coc#refresh()
+"inoremap <silent><expr> <c-space> coc#refresh()
+
+"" mundo
+nnoremap <F5> :MundoToggle<CR>
 
 "*****************************************************************************
 "" Custom configs
