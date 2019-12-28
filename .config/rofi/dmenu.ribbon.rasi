@@ -3,9 +3,11 @@
  * User: Rokit
 */
 
-
 configuration {
-    display-drun:    "ATIVAR";
+    display-drun:    "";
+    display-run:     "";
+    display-window:  "";
+    display-combi:   "";
 }
 
 * {
