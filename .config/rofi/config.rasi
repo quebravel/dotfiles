@@ -1,17 +1,17 @@
 configuration {
-modi: "drun,run,window";
-/*	width: 50;*/
-/*	lines: 15;*/
-/*	columns: 1;*/
+modi: "drun,run";
+    /* width: 50; */
+    /* lines: 17; */
+    /* columns: 1; */
 /*  font: "misc ohsnap bold 10";*/
-font: "misc termsyn 10";
+font: "tamzenforpowerline 12";
 /*	bw: 1;*/
-/*	location: 0;*/
-/*	padding: 5;*/
-yoffset: 11;
-/*	xoffset: 0;*/
-/*	fixed-num-lines: true;*/
-show-icons: true;
+    /* padding: 5; */
+    /* yoffset: 0; */
+    /* xoffset: 0; */
+    /* location: 6; */
+    /* fixed-num-lines: true; */
+    /* show-icons: false; */
 /*	terminal: "rofi-sensible-terminal";*/
 /*	ssh-client: "ssh";*/
 /*	ssh-command: "{terminal} -e {ssh-client} {host}";*/
@@ -27,12 +27,12 @@ show-icons: true;
 /*	levenshtein-sort: false;*/
 /*	case-sensitive: false;*/
 /*	cycle: true;*/
-/*	sidebar-mode: false;*/
+    sidebar-mode: false;
 /*	eh: 1;*/
 /*	auto-select: false;*/
 /*	parse-hosts: false;*/
 /*	parse-known-hosts: true;*/
-/*	combi-modi: "window,run";*/
+    /* combi-modi: "drun,run"; */
 /*	matching: "normal";*/
 /*	tokenize: true;*/
 /*	m: "-5";*/
@@ -40,7 +40,7 @@ show-icons: true;
 /*	line-padding: 1;*/
 /*	filter: ;*/
 /*	separator-style: "dash";*/
-/*	hide-scrollbar: false;*/
+    hide-scrollbar: true;
 /*	fullscreen: false;*/
 /*	fake-transparency: false;*/
 /*	dpi: -1;*/
@@ -51,11 +51,11 @@ show-icons: true;
 /*	window-format: "{w}    {i}{c}   {t}";*/
 /*	click-to-exit: true;*/
 /*	show-match: true;*/
-theme: "sidetab.rasi";
-/*	color-normal: ;*/
-/*	color-urgent: ;*/
-/*	color-active: ;*/
-/*	color-window: ;*/
+theme: "ribbon.rasi";
+    /* color-normal: #0a81f5; */
+    /* color-urgent: #e53935; */
+    /* color-active: #363636; */
+    /* color-window: #26c6da; */
 /*	max-history-size: 25;*/
 /*	combi-hide-mode-prefix: false;*/
 /*	pid: "/home/jonatas/.cache/rofi.pid";*/

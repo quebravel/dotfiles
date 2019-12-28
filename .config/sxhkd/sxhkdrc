@@ -34,7 +34,7 @@ super + i
 
 # rofi run
 #super + d
-#    rofi -show combi
+#    rofi -show
 
 # make sxhkd reload its configuration files:
 super + Escape
