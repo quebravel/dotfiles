@@ -50,7 +50,7 @@ c.url.start_pages = "https://start.duckduckgo.com/"
 c.hints.chars = "asdfghjklç"
 c.tabs.select_on_remove = "prev"
 c.content.notifications = False
-c.content.autoplay = False
+c.content.autoplay = True
 # https://github.com/alphapapa/solarized-everything-css.git
 #c.content.user_stylesheets = "~/.config/qutebrowser/solarized-everything-css/css/solarized-dark/solarized-dark-all-sites.css"
 
