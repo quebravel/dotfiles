@@ -16,7 +16,7 @@ bspc monitor -d TER-1 WEB-2 MPV-3 CODE-4 WORK-5 FILE-6 EDIT-7 GAME-8 MAIL-9 MPD-
 
 bspc config border_width         2
 
-gap=20
+gap=5
 PANEL_HEIGHT=0
 
 # pode deixar PANEL_HEIGHT=0 se comentar [global/wm] em polybar.conf ;margin-top = 5 ;margin-bottom = 5
