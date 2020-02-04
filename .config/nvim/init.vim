@@ -537,6 +537,8 @@ map <Leader>nA <Plug>NERDCommenterAppend
 map <Leader>nu <Plug>NERDCommenterUncomment
 
 nnoremap <leader>; A;<esc>
+nnoremap <leader>g GV<esc>
+nnoremap <leader>G GV!<esc>
 
 "" coc
 "inoremap <silent><expr> <c-space> coc#refresh()
