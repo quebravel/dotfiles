@@ -47,6 +47,7 @@ Plug 'scrooloose/syntastic'
 Plug 'Yggdroot/indentLine'
 Plug 'avelino/vim-bootstrap-updater'
 Plug 'sheerun/vim-polyglot'
+Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
 
 "Plug 'ap/vim-css-color'
@@ -660,7 +661,7 @@ let g:airline_symbols.linenr = 'Ξ '
 "" endif
 
 let g:airline_powerline_fonts=1
-let g:airline_theme='kolor'
+let g:airline_theme='badwolf'
 
 " grovebox config
 let g:gruvbox_termcolors = 256
