@@ -223,8 +223,8 @@ super + ctrl + r
 super + apostrophe
     bspc node -s last
 
-super + b
-bspc node -f {next,prev}.!hidden
+#super + b
+#bspc node -f {next,prev}.!hidden
 
 super + alt + r
     bspc wm -r
