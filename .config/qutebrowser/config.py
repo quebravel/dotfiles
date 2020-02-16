@@ -25,7 +25,7 @@ c.url.searchengines['w'] = 'http://pt.wikipedia.org/w/index.php?search={}&title=
 c.url.searchengines['y'] = 'https://www.youtube.com/results?search_query={}'
 c.url.searchengines['a'] = 'https://wiki.archlinux.org/?search={}'
 c.url.searchengines['v'] = 'https://wiki.voidlinux.org/?search={}'
-c.url.searchengines['o'] = 'https://wiki.gentoo.org/wiki/?search={}'
+c.url.searchengines['ge'] = 'https://wiki.gentoo.org/wiki/?search={}'
 c.url.searchengines['t'] = 'https://translate.google.com/#view=home&op=translate&sl=en&tl=pt&text={}'
 c.url.searchengines['r'] = 'https://reddit.com/r/{}'
 c.url.searchengines['c'] = 'https://www.comandotorrents.com/?s={}'
