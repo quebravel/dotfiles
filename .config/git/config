@@ -1,0 +1,50 @@
+[user]
+	email = jonatasgb@gmail.com
+	name = quebravel
+[core]
+    editor = nvim
+    pager = bat
+[log]
+    date = human
+[format]
+    pretty = %C(auto) %ad %h%d %s [%an]
+[alias]
+    # add
+    a = add                           # add
+    chunkyadd = add --patch           # stage commits chunk by chunk
+    # commit
+    c = commit -m                     # commit with message
+    ca = commit -am                   # commit all with message
+    ci = commit                       # commit
+    amend = commit --amend            # ammend your last commit
+    ammend = commit --amend           # ammend your last commit
+
+    # checkout
+    co = checkout                     # checkout
+    nb = checkout -b                  # create and switch to a new branch (mnemonic: "git new branch branchname...")
+
+    # cherry-pick
+    cp = cherry-pick -x               # grab a change from a branch
+
+    # diff
+    d = diff                          # diff unstaged changes
+    dc = diff --cached                # diff staged changes
+    last = diff HEAD^                 # diff last committed change
+
+    # log
+    l = log --graph --date=short
+    lg = log -n 10 --date=format:%c --pretty=format:\"%C(auto) %ad %h%d %s [%an]\"
+    changes = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\" --name-status
+    short = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\"
+    simple = log --pretty=format:\" * %s\"
+    shortnocolor = log --pretty=format:\"%h %cr %cn %s\"
+
+    # pull
+    pl = pull                         # pull
+
+    # push
+    ps = push                         # push
+
+    # rebase
+    rc = rebase --continue            # continue rebase
+    rs = rebase --skip                # skip rebase
