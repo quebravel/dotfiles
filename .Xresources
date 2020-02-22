@@ -140,10 +140,11 @@ Xmessage*form.message.Scroll:      WhenNeeded
 
 ! URxvt parameters
 
-URxvt*font:                        xft:envypn:regular:pixelsize=11:antialias=true
-URxvt*boldFont:                    xft:envypn:bold:pixelsize=11:antialias=true
-URxvt*italicFont:                  xft:envypn:italic:pixelsize=11:antialias=true
-URxvt*boldItalicFont:              xft:envypn:bold:italic:pixelsize=11:antialias=true
+! URxvt*font:                        xft:envypn:regular:pixelsize=11:antialias=true
+! URxvt*boldFont:                    xft:envypn:bold:pixelsize=11:antialias=true
+! URxvt*italicFont:                  xft:envypn:italic:pixelsize=11:antialias=true
+! URxvt*boldItalicFont:              xft:envypn:bold:italic:pixelsize=11:antialias=true
+URxvt*font:                        xft:tamzenforpowerline:pixelsize=14
 
 URxvt*scrollBar:                   false
 !URxvt*internalBorder:              5
