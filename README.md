@@ -1,7 +1,7 @@
 
 # .config com configuração do `bspwm` + `sxhkd` + `polybar`.
 
-![bspwm](https://gitlab.com/quebravel/dotfiles-conf/raw/master/gitresize.png) 
+![bspwm](https://github.com/quebravel/dotfiles-conf/blob/master/gitresize.png?raw=true) 
 
 
 # Personalizando meu Linux
