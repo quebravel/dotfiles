@@ -46,9 +46,10 @@ bspc rule -a Firefox desktop='^2' follow=on
 bspc rule -a Steam desktop='^8' follow=on
 bspc rule -a Mplayer state=floating
 #bspc rule -a Mousepad state=floating
-bspc rule -a qutebrowser desktop='^2' follow=on
+bspc rule -a qutebrowser desktop='^2' follow=on border=off
 bspc rule -a mpv state=floating
 bspc rule -a feh state=floating
+bspc desktop 'WEB-2' --layout monocle
 
 #polybar example &
 $HOME/.config/polybar/launch.sh
