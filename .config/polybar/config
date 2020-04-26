@@ -100,8 +100,8 @@ blacklist-0 = num lock
 format = <label-indicator>
 
 label-layout = %layout%
-label-indicator-padding = 1
-label-indicator-margin = 1
+label-indicator-padding = 0
+label-indicator-margin = 0
 ;label-indicator-background = ${colors.background}
 
 [module/filesystem]
