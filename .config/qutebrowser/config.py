@@ -37,6 +37,7 @@ c.aliases['yt'] = 'open -r https://youtube.com'
 c.aliases['rd'] = 'open -r https://reddit.com'
 c.aliases['kp'] = 'open -t https://keep.google.com'
 c.aliases['gm'] = 'open -t https://mail.google.com'
+c.aliases['fd'] = 'open -t https://feedly.com'
 
 # geral
 #c.new_instance_open_target = "tab-bg"
@@ -51,6 +52,7 @@ c.hints.chars = "asdfghjklç"
 c.tabs.select_on_remove = "prev"
 c.content.notifications = False
 c.content.autoplay = True
+c.content.geolocation = True
 # https://github.com/alphapapa/solarized-everything-css.git
 #c.content.user_stylesheets = "~/.config/qutebrowser/solarized-everything-css/css/solarized-dark/solarized-dark-all-sites.css"
 
