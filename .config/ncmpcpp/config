@@ -73,3 +73,5 @@ statusbar_color = "blue"
 current_item_inactive_column_prefix = $(white)$r
 current_item_inactive_column_suffix = $/r$(end)
 active_window_border = "blue"
+
+execute_on_song_change = notify-send "Tocando Agora ♫" "$(mpc current)"
