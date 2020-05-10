@@ -190,6 +190,10 @@ alt + 1
 alt + 2
     ~/.config/sxhkd/toggle_switch_sound.sh -g
 
+# mpd next and prev sound
+alt + {period,comma}
+    mpc {next,prev}
+
 # amixer master
 # alt + {equal,minus,0}
 #     amixer set 'Master' {5%+,5%-,toggle}
