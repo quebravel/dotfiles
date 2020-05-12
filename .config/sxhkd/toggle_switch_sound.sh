@@ -15,6 +15,7 @@ pacmd move-sink-input `echo $line | cut -f2 -d' '` $new_sink
 
 current=`pactl list short | grep RUNNING | cut -f 2`
 
-notify-send -u normal -t 2200 "Troca Audio" "SINK: $current"
+dunstify -u normal -t 2000 "Troca Audio" "SINK: $current"
+# notify-send -u normal -t 2200 "Troca Audio" "SINK: $current"
 
 done
