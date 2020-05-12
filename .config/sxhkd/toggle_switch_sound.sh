@@ -11,4 +11,10 @@ echo $line | cut -f2 -d' ';
 echo "to sink: $new_sink";
 pacmd move-sink-input `echo $line | cut -f2 -d' '` $new_sink
 
+# notify-send -u normal -t 600 "Troca Audio" "SINK: $new_sink"
+
+current=`pactl list short | grep RUNNING | cut -f 2`
+
+notify-send -u normal -t 2200 "Troca Audio" "SINK: $current"
+
 done
