@@ -181,14 +181,9 @@ super + alt + equal
 super + alt + minus
     pactl set-sink-volume "alsa_output.usb-C-Media_Electronics_Inc._USB_PnP_Sound_Device-00.iec958-stereo" -10%
 
-# alternar entre saidas de audio | add a saida dos dispositivos no script toggle_switch_sound.sh | credit be gaco
-# get list of sinks/cards (for settings CARD1/CARD2)
-# pacmd list-sinks | awk '/name:/ {print $0};' | awk '{ print $2}' | sed 's/<//g; s/>//g'
-alt + 1
-    ~/.config/sxhkd/toggle_switch_sound.sh -s
-
-alt + 2
-    ~/.config/sxhkd/toggle_switch_sound.sh -g
+# alternar entre saidas de audio | script toggle_switch_sound.sh | credit be gaco and user512557
+super + alt + 0
+    ~/.config/sxhkd/toggle_switch_sound.sh
 
 # mpd next and prev sound
 alt + {period,comma,p,shift + s}
