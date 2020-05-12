@@ -171,7 +171,7 @@ XF86AudioMute
     pamixer -t
 
 alt + {equal,minus,0}
-    {~/.config/sxhkd/vol_key.sh -i,~/.config/sxhkd/vol_key.sh -d,~/.config/sxhkd/vol_key.sh -m}
+    ~/.config/sxhkd/vol_key.sh {-i,-d,-m}
 
 #alt + {equal,minus,0}
 #    pamixer {-i 5,-d 5,-t}
