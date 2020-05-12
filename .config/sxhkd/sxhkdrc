@@ -171,15 +171,18 @@ XF86AudioMute
     pamixer -t
 
 alt + {equal,minus,0}
-    pamixer {-i 5,-d 5,-t}
+    {~/.config/sxhkd/vol_key.sh -i,~/.config/sxhkd/vol_key.sh -d,~/.config/sxhkd/vol_key.sh -m}
+
+#alt + {equal,minus,0}
+#    pamixer {-i 5,-d 5,-t}
 
 # use o comando abaixa para desconbrir o nome do dispositivo
 # pacmd list-sinks | awk '/name:/ {print $0};' | awk '{ print $2}' | sed 's/<//g; s/>//g'
-super + alt + equal
-    pactl set-sink-volume "alsa_output.usb-C-Media_Electronics_Inc._USB_PnP_Sound_Device-00.iec958-stereo" +10%
+#super + alt + equal
+#    pactl set-sink-volume "alsa_output.usb-C-Media_Electronics_Inc._USB_PnP_Sound_Device-00.iec958-stereo" +10%
 
-super + alt + minus
-    pactl set-sink-volume "alsa_output.usb-C-Media_Electronics_Inc._USB_PnP_Sound_Device-00.iec958-stereo" -10%
+#super + alt + minus
+#    pactl set-sink-volume "alsa_output.usb-C-Media_Electronics_Inc._USB_PnP_Sound_Device-00.iec958-stereo" -10%
 
 # alternar entre saidas de audio | script toggle_switch_sound.sh | credit be gaco and user512557
 super + alt + 0
