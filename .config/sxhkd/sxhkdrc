@@ -21,7 +21,7 @@ super + Return
 
 # ranger
 super + r
-    urxvt -e ranger
+    [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh && urxvt -e ranger
 
 # program launcher
 # dmenu_run | drun.sh = dmenu2 | pwdrun.sh = dmenu2+pywal
