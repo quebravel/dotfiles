@@ -663,7 +663,7 @@ let g:airline_symbols.linenr = 'Ξ '
 "" endif
 
 let g:airline_powerline_fonts=1
-let g:airline_theme='badwolf'
+let g:airline_theme='gruvbox'
 
 " grovebox config
 let g:gruvbox_termcolors = 256
