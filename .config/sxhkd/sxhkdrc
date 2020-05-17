@@ -143,7 +143,7 @@ super + alt + {h,j,k,l}
 
 
 # MOVER UMA JANELA FLUTUANTE
-super + {Left,Down,Up,Right} 
+super + ctrl + alt {h,j,k,l} 
     bspc node -v {-20 0,0 20,0 -20,20 0} 
 
 # Mouse floating:
