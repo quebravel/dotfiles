@@ -250,3 +250,6 @@ super + alt + r
 
 super + shift + p
     pkill polybar; polybar bspoly&
+
+super + {shift + u,u}
+    {~/.config/sxhkd/rofi_mounta.sh -d, ~/.config/sxhkd/rofi_mounta.sh -m}
