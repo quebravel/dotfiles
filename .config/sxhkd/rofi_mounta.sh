@@ -1,24 +1,14 @@
 #!/bin/bash
 
-
-#variavel valor
-
-
-t1='sleep 0.5'
-
 opcao=$1
 
 mounta(){
-    select=`lsblk | grep  "─sd" | cut -c 7-10,22-29 | rofi -dmenu`
-        echo $select
-    dispositivo=`echo $select | cut -c 1-4`
-        echo $dispositivo
-
-        urxvt -e sudo mount -t auto /dev/$dispositivo /mnt
+    select=`lsblk | grep  "─sd" | cut -c 7-10,22-29 | rofi -dmenu` && dispositivo=`echo $select | cut -c 1-4` && urxvt -e sudo mount -t auto /dev/$dispositivo /mnt
+    dunstify -u normal -t 2000 "Montado" "/mnt"
 }
 
 Desmounta(){
-        urxvt -e sudo umount -Rf /mnt
+        urxvt -e sudo umount -Rf /mnt ; dunstify -u normal -t 1500 "Desmontado" "/mnt"
 }
 
 escolha(){
