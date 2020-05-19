@@ -3,8 +3,7 @@
 opcao=$1
 
 mounta(){
-    select=`lsblk | grep  "─sd" | cut -c 7-10,22-29 | rofi -dmenu` && dispositivo=`echo $select | cut -c 1-4` && urxvt -e sudo mount -t auto /dev/$dispositivo /mnt
-    dunstify -u normal -t 2000 "Montado" "/mnt"
+    select=`lsblk | grep  "─sd" | cut -c 7-10,22-29 | rofi -dmenu` && dispositivo=`echo $select | cut -c 1-4` && urxvt -e sudo mount -t auto /dev/$dispositivo /mnt && dunstify -u normal -t 2000 "Montado" "/mnt"
 }
 
 Desmounta(){
