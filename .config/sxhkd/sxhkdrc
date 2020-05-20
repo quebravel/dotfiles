@@ -170,7 +170,7 @@ XF86AudioLowerVolume
 XF86AudioMute
     pamixer -t
 
-alt + {equal,minus,0}
+alt + {equal,minus,m}
     ~/.config/sxhkd/vol_key.sh {-i,-d,-m}
 
 #alt + {equal,minus,0}
