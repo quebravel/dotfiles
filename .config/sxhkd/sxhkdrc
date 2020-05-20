@@ -26,7 +26,8 @@ super + r
 # program launcher
 # dmenu_run | drun.sh = dmenu2 | pwdrun.sh = dmenu2+pywal
 super + p
-    ~/.config/sxhkd/drun.sh
+    picom & rofi -show ; pkill picom
+#    ~/.config/sxhkd/drun.sh
 
 # browser
 super + i
