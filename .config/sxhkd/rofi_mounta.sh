@@ -3,11 +3,11 @@
 opcao=$1
 
 mounta(){
-    select=`lsblk | grep  "─sd" | cut -c 7-10,22-29 | rofi -dmenu -no-config -width 6 -hide-scrollbar -bw 0` && dispositivo=`echo $select | cut -c 1-4` && urxvt -e sudo mount -t auto /dev/$dispositivo /mnt && dunstify -u normal -t 2000 "Montado" "/mnt"
+    picom & select=`lsblk | grep  "─sd" | cut -c 7-10,22-29 | rofi -dmenu` && dispositivo=`echo $select | cut -c 1-4` && echo -e "Montar\n" | rofi -dmenu -password -p "Digite a senha" | sudo -S mount -t auto /dev/$dispositivo /mnt && dunstify -u normal -t 2000 "Montando" "/mnt" ; pkill picom
 }
 
 Desmounta(){
-        urxvt -e sudo umount -Rf /mnt ; dunstify -u normal -t 1500 "Desmontado" "/mnt"
+    picom & echo -e "Digite a senha\n" | rofi -dmenu -password -p "Desmontando" | sudo -S umount -Rf /mnt ; dunstify -u normal -t 1500 "Desmontado" "/mnt" ; pkill picom
 }
 
 escolha(){
