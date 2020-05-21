@@ -3,7 +3,8 @@
 opcao=$1
 
 mounta(){
-    picom & select=`lsblk | grep  "─sd" | cut -c 7-10,22-29 | rofi -dmenu -p "Selecionar"` && dispositivo=`echo $select | cut -c 1-4` && echo -e "Montar\n" | rofi -dmenu -password -p "Digite a senha" | sudo -S mount -t auto /dev/$dispositivo /mnt && dunstify -u normal -t 2000 "Montando" "/mnt" ; pkill picom
+    select=`lsblk | grep  "─sd" | cut -c 7-10,22-29 | rofi -dmenu -p "Selecionar"` && dispositivo=`echo $select | cut -c 1-4` && echo -e "Montar\n" | rofi -dmenu -password -p "Digite a senha" | sudo -S mount -t auto /dev/$dispositivo /mnt && dunstify -u normal -t 2000 "Montando" "/mnt"
+    # picom & select=`lsblk | grep  "─sd" | cut -c 7-10,22-29 | rofi -dmenu -p "Selecionar"` && dispositivo=`echo $select | cut -c 1-4` && echo -e "Montar\n" | rofi -dmenu -password -p "Digite a senha" | sudo -S mount -t auto /dev/$dispositivo /mnt && dunstify -u normal -t 2000 "Montando" "/mnt" ; pkill picom
 }
 
 Desmounta(){
