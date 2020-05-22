@@ -66,7 +66,7 @@
     ignore_newline = no
    
     # Hide duplicate's count and stack them
-    stack_duplicates = yes
+    stack_duplicates = no
     hide_duplicates_count = yes
     
     # The geometry of the window:
@@ -133,13 +133,13 @@
     # Draw a line of "separatpr_height" pixel height between two
     # notifications.
     # Set to 0 to disable.
-    separator_height = 2
+    separator_height = 1
     
     # Padding between text and separator.
     padding = 7
     
     # Horizontal padding.
-    horizontal_padding = 25
+    horizontal_padding = 0
     
     # Define a color for the separator.
     # possible values are:
@@ -147,7 +147,7 @@
     #  * foreground: use the same color as the foreground;
     #  * frame: use the same color as the frame;
     #  * anything else will be interpreted as a X color.
-    separator_color = auto
+    separator_color = frame
     
     # Print a notification on startup.
     # This is mainly for error detection, since dbus (re-)starts dunst
@@ -167,7 +167,7 @@
     # Paths to default icons.
 icon_path = /usr/share/icons/Paper/16x16/mimetypes/:/usr/share/icons/Paper/48x48/status/:/usr/share/icons/Paper/16x16/devices/:/usr/share/icons/Paper/48x48/notifications/:/usr/share/icons/Paper/48x48/emblems/
 
-    frame_width = 3
+    frame_width = 1
     frame_color = "#00afaf"
 
 [shortcuts]
@@ -198,8 +198,8 @@ icon_path = /usr/share/icons/Paper/16x16/mimetypes/:/usr/share/icons/Paper/48x48
 [urgency_low]
 # IMPORTANT: colors have to be defined in quotation marks.
 # Otherwise the "#" and following would be interpreted as a comment.
-frame_color = "#83a598"
-foreground = "#00afaf"
+frame_color = "#B8BB26"
+foreground = "#B8BB26"
 background = "#2B313C"
 timeout = 4
 
@@ -211,7 +211,7 @@ timeout = 6
 
 [urgency_critical]
 frame_color = "#FB4934"
-foreground = "#00afaf"
+foreground = "#FB4934"
 background = "#2B313C"
 timeout = 8
 
