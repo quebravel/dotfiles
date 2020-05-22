@@ -10,7 +10,7 @@
 
 [global]
 
-     font = tamzenforpowerline 11
+     font = tamzenforpowerline 10.5
     # font = Fantasque Sans Mono 11
     # font = misc tamsyn 12
 
