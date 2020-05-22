@@ -8,7 +8,7 @@ mounta(){
 }
 
 Desmounta(){
-    picom & echo -e "Digite a senha\n" | rofi -dmenu -password -p "Desmontando" | sudo -S umount -Rf /mnt ; dunstify -u normal -t 1500 "Desmontado" "/mnt" ; pkill picom
+    picom & echo -e "Digite a senha\n" | rofi -dmenu -password -p "Desmontando" | sudo -S umount -Rf /mnt && dunstify -u normal -t 1500 "Desmontado" "/mnt" ; pkill picom
 }
 
 escolha(){

@@ -187,11 +187,11 @@ alt + {equal,minus,m}
 #    pactl set-sink-volume "alsa_output.usb-C-Media_Electronics_Inc._USB_PnP_Sound_Device-00.iec958-stereo" -10%
 
 # alternar entre saidas de audio | script toggle_switch_sound.sh | credit be gaco and user512557
-super + alt + 0
+alt + backslash
     ~/.config/sxhkd/toggle_switch_sound.sh
 
-# mpd next and prev sound
-alt + {period,comma,p,shift + s}
+# mpc next and prev sound
+alt + {period,comma,p,s}
     mpc {next,prev,toggle,stop}
 
 # amixer master
@@ -254,4 +254,4 @@ super + shift + p
     pkill polybar; polybar bspoly&
 
 super + {shift + u,u}
-    {~/.config/sxhkd/rofi_mounta.sh -d,~/.config/sxhkd/rofi_mounta.sh -m}
+    ~/.config/sxhkd/rofi_mounta.sh {-d,-m}
