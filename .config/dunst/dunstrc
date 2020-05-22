@@ -10,7 +10,7 @@
 
 [global]
 
-     font = Monospace 8
+     font = tamzenforpowerline 11
     # font = Fantasque Sans Mono 11
     # font = misc tamsyn 12
 
@@ -35,7 +35,7 @@
     #   %I  iconname (without its path)
     #   %p  progress value if set ([  0%] to [100%]) or nothing
     # Markup is allowed
-    format = "<b>%s</b>\n<i>%b</i>"
+    format = "<b>%s</b>\n%b"
     
     # Sort messages by urgency.
     sort = no
@@ -196,25 +196,24 @@ icon_path = /usr/share/icons/Paper/16x16/mimetypes/:/usr/share/icons/Paper/48x48
     context = ctrl+shift+F9
 
 [urgency_low]
-    # IMPORTANT: colors have to be defined in quotation marks.
-    # Otherwise the '#' and following  would be interpreted as a comment.
-    frame_color = "#3B7C87"
-    background = "#657b83"
-    foreground = "#073642"
-    timeout = 5
+# IMPORTANT: colors have to be defined in quotation marks.
+# Otherwise the "#" and following would be interpreted as a comment.
+frame_color = "#83a598"
+foreground = "#00afaf"
+background = "#2B313C"
+timeout = 4
 
 [urgency_normal]
-    frame_color = "#2aa198"
-    background = "#990033"
-    foreground = "#ffffff"
-    timeout = 8
+frame_color = "#B8BB26"
+foreground = "#00afaf"
+background = "#2B313C"
+timeout = 6
 
 [urgency_critical]
-    frame_color = "#990033"
-    background = "#ff0000"
-    foreground = "#002b36"
-    timeout = 3
-
+frame_color = "#FB4934"
+foreground = "#00afaf"
+background = "#2B313C"
+timeout = 8
 
 # Every section that isn't one of the above is interpreted as a rules to
 # override settings for certain messages.
