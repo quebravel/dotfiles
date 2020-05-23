@@ -668,6 +668,7 @@ let g:airline_theme='gruvbox'
 " grovebox config
 let g:gruvbox_termcolors = 256
 let g:gruvbox_italic = 1
+let g:gruvbox_contrast_light = "hard"
 
 " solarized config
 let g:solarized_termcolors=256
