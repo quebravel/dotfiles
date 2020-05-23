@@ -255,3 +255,6 @@ super + shift + p
 
 super + {shift + u,u}
     ~/.config/sxhkd/rofi_mounta.sh {-d,-m}
+
+alt + t
+    ~/.config/sxhkd/rofi_tradu.sh
