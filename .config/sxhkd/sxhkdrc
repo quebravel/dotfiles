@@ -28,7 +28,7 @@ super + r
 super + p
     rofi -show
 #    picom & rofi -show ; pkill picom
-#    ~/.config/sxhkd/drun.sh
+#    ~/.config/sxhkd/scripts_sxhkd/drun.sh
 
 # browser
 super + i
@@ -173,7 +173,7 @@ XF86AudioMute
     pamixer -t
 
 alt + {equal,minus,m}
-    ~/.config/sxhkd/vol_key.sh {-i,-d,-m}
+    ~/.config/sxhkd/scripts_sxhkd/vol_key.sh {-i,-d,-m}
 
 #alt + {equal,minus,0}
 #    pamixer {-i 5,-d 5,-t}
@@ -188,7 +188,7 @@ alt + {equal,minus,m}
 
 # alternar entre saidas de audio | script toggle_switch_sound.sh | credit be gaco and user512557
 alt + backslash
-    ~/.config/sxhkd/toggle_switch_sound.sh
+    ~/.config/sxhkd/scripts_sxhkd/toggle_switch_sound.sh
 
 # mpc next and prev sound
 alt + {period,comma,p,s}
@@ -254,7 +254,7 @@ super + shift + p
     pkill polybar; polybar bspoly&
 
 super + {shift + u,u}
-    ~/.config/sxhkd/rofi_mounta.sh {-d,-m}
+    ~/.config/sxhkd/scripts_sxhkd/rofi_mounta.sh {-d,-m}
 
 alt + t
-    ~/.config/sxhkd/rofi_tradu.sh
+    ~/.config/sxhkd/scripts_sxhkd/rofi_tradu.sh
