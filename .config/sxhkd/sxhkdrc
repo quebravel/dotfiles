@@ -258,3 +258,6 @@ super + {shift + u,u}
 
 alt + t
     ~/.config/sxhkd/scripts_sxhkd/rofi_tradu.sh
+
+alt + r
+    ~/.config/sxhkd/scripts_sxhkd/redshift_scpt.sh
