@@ -145,7 +145,7 @@ super + alt + {h,j,k,l}
 
 
 # MOVER UMA JANELA FLUTUANTE
-super + ctrl + alt {h,j,k,l} 
+alt {h,j,k,l} 
     bspc node -v {-20 0,0 20,0 -20,20 0} 
 
 # Mouse floating:
@@ -261,3 +261,6 @@ alt + t
 
 alt + r
     ~/.config/sxhkd/scripts_sxhkd/redshift_scpt.sh
+
+alt + {a,s,w,d}
+    ~/.config/sxhkd/scripts_sxhkd/eucli_mover {west,south,north,east}
