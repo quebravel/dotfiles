@@ -21,6 +21,7 @@ c.fonts.completion.category = c.fonts.statusbar
 # searches
 c.url.searchengines['DEFAULT'] = 'https://www.duckduckgo.com/?q={}'
 c.url.searchengines['g'] = 'https://www.google.com/search?q={}'
+c.url.searchengines['m'] = 'https://www.google.com/maps?q={}'
 c.url.searchengines['w'] = 'http://pt.wikipedia.org/w/index.php?search={}&title=Special:Search'
 c.url.searchengines['y'] = 'https://www.youtube.com/results?search_query={}'
 c.url.searchengines['ar'] = 'https://wiki.archlinux.org/?search={}'
