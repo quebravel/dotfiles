@@ -66,7 +66,7 @@ c.bindings.commands = {
             ',n': 'config-cycle content.user_stylesheets  ~/.config/qutebrowser/solarized-everything-css/css/solarized-dark/solarized-dark-all-sites.css ""',
             ',d': 'config-cycle content.user_stylesheets ~/.config/qutebrowser/solarized-everything-css/css/apprentice/apprentice-all-sites.css ""',
             'xx': 'config-cycle statusbar.hide ;; config-cycle tabs.show always switching',
-            'xd': 'set downloads.location.directory ~/Downloads ;; hint links download'
+            'xd': 'set downloads.location.directory ~/Imagens ;; hint images download'
             }
         }
 
