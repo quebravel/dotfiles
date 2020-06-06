@@ -24,10 +24,10 @@ super + r
     [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh && urxvt -e ranger
 
 # program launcher
+
 # dmenu_run | drun.sh = dmenu2 | pwdrun.sh = dmenu2+pywal
 super + p
-    rofi -show
-#    picom & rofi -show ; pkill picom
+    dmenu_run -h 42 -y 20 -nb "#0087ff" -nf "#000000" -sb "#00afaf" -sf "#000000" -fn "monaco-10"
 #    ~/.config/sxhkd/scripts_sxhkd/drun.sh
 
 # browser
@@ -254,10 +254,10 @@ super + shift + p
     pkill polybar; polybar bspoly&
 
 super + {shift + u,u}
-    ~/.config/sxhkd/scripts_sxhkd/rofi_mounta.sh {-d,-m}
+    ~/.config/sxhkd/scripts_sxhkd/d2_mounta.sh {-d,-m}
 
 alt + t
-    ~/.config/sxhkd/scripts_sxhkd/rofi_tradu.sh
+    ~/.config/sxhkd/scripts_sxhkd/d2_tradu.sh
 
 alt + r
     ~/.config/sxhkd/scripts_sxhkd/redshift_scpt.sh
