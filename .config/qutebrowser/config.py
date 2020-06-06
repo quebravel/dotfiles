@@ -45,6 +45,7 @@ c.aliases['fd'] = 'open -t https://feedly.com'
 c.new_instance_open_target = "tab"
 c.tabs.background = True
 c.downloads.location.directory = '$HOME/Downloads'
+#  c.downloads.location.directory = "C:\\Users\\Jonatas\\Downloads"
 c.spellcheck.languages = ["pt-BR"]
 c.content.headers.accept_language = 'pt-BR,pt'
 c.tabs.show = 'always' #multiple,never,always,switching
