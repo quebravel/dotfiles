@@ -32,6 +32,7 @@ c.url.searchengines['r'] = 'https://reddit.com/r/{}'
 c.url.searchengines['c'] = 'https://www.comandotorrents.com/?s={}'
 c.url.searchengines['l'] = 'https://www.deepl.com/pt-BR/translator#en/pt/{}'
 c.url.searchengines['b'] = 'https://bastos.bibipecas.com.br/search/{}'
+c.url.searchengines['n'] = 'https://www.netflix.com/search?q={}'
 
 # aliases
 c.aliases['gh'] = 'open -t https://github.com/quebravel'
