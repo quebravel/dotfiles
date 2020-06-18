@@ -60,6 +60,13 @@ c.tabs.mode_on_change = "persist"
 c.tabs.title.format = "{index}: {current_title} {audio}"
 c.colors.webpage.prefers_color_scheme_dark = True
 
+# colors
+c.colors.contextmenu.disabled.fg = '#9c9c9c'
+c.colors.contextmenu.menu.bg = '#3c3c3c'
+c.colors.contextmenu.menu.fg = 'white'
+c.colors.contextmenu.selected.bg = 'black'
+c.colors.contextmenu.selected.fg = 'white'
+
 # keys
 c.bindings.commands = {
         'normal': {
