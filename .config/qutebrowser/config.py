@@ -18,10 +18,18 @@ c.fonts.completion.entry = "10.5pt tamzenforpowerline"
 c.fonts.completion.category = c.fonts.statusbar
 #c.fonts.hints = "13px tamzenforpowerline"
 
+# colors
+c.colors.contextmenu.disabled.fg = '#9c9c9c'
+c.colors.contextmenu.menu.bg = '#3c3c3c'
+c.colors.contextmenu.menu.fg = 'white'
+c.colors.contextmenu.selected.bg = 'black'
+c.colors.contextmenu.selected.fg = 'white'
+
 # searches
 c.url.searchengines['DEFAULT'] = 'https://www.duckduckgo.com/?q={}'
 c.url.searchengines['g'] = 'https://www.google.com/search?q={}'
 c.url.searchengines['m'] = 'https://www.google.com/maps?q={}'
+c.url.searchengines['k'] = 'https://keep.google.com/#search/text%253D{}'
 c.url.searchengines['w'] = 'http://pt.wikipedia.org/w/index.php?search={}&title=Special:Search'
 c.url.searchengines['y'] = 'https://www.youtube.com/results?search_query={}'
 c.url.searchengines['ar'] = 'https://wiki.archlinux.org/?search={}'
