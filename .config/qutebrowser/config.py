@@ -92,3 +92,197 @@ c.bindings.commands = {
 #  import sys, os
 #  sys.path.append(os.path.join(sys.path[0], 'jblock'))
 #  config.source("jblock/jblock/integrations/qutebrowser.py")
+
+# set qutebrowser colors
+
+# Text color of the completion widget. May be a single color to use for
+# all columns or a list of three colors, one for each column.
+c.colors.completion.fg = base0C
+
+# Background color of the completion widget for odd rows.
+c.colors.completion.odd.bg = base01
+
+# Background color of the completion widget for even rows.
+c.colors.completion.even.bg = base00
+
+# Foreground color of completion widget category headers.
+c.colors.completion.category.fg = base06
+
+# Background color of the completion widget category headers.
+c.colors.completion.category.bg = base03
+
+# Top border color of the completion widget category headers.
+c.colors.completion.category.border.top = base04
+
+# Bottom border color of the completion widget category headers.
+c.colors.completion.category.border.bottom = base00
+
+# Foreground color of the selected completion item.
+c.colors.completion.item.selected.fg = base01
+
+# Background color of the selected completion item.
+c.colors.completion.item.selected.bg = base0A
+
+# Top border color of the selected completion item.
+c.colors.completion.item.selected.border.top = base0A
+
+# Bottom border color of the selected completion item.
+c.colors.completion.item.selected.border.bottom = base0A
+
+# Foreground color of the matched text in the selected completion item.
+c.colors.completion.item.selected.match.fg = base08
+
+# Foreground color of the matched text in the completion.
+c.colors.completion.match.fg = base0B
+
+# Color of the scrollbar handle in the completion view.
+c.colors.completion.scrollbar.fg = base05
+
+# Color of the scrollbar in the completion view.
+c.colors.completion.scrollbar.bg = base00
+
+# Background color of the context menu. If set to null, the Qt default is used.
+c.colors.contextmenu.menu.bg = base00
+
+# Foreground color of the context menu. If set to null, the Qt default is used.
+c.colors.contextmenu.menu.fg =  base05
+
+# Background color of the context menu’s selected item. If set to null, the Qt default is used.
+c.colors.contextmenu.selected.bg = base0A
+
+#Foreground color of the context menu’s selected item. If set to null, the Qt default is used.
+c.colors.contextmenu.selected.fg = base01
+
+# Background color for the download bar.
+c.colors.downloads.bar.bg = base00
+
+# Color gradient start for download text.
+c.colors.downloads.start.fg = base00
+
+# Color gradient start for download backgrounds.
+c.colors.downloads.start.bg = base0D
+
+# Color gradient end for download text.
+c.colors.downloads.stop.fg = base00
+
+# Color gradient stop for download backgrounds.
+c.colors.downloads.stop.bg = base0C
+
+# Foreground color for downloads with errors.
+c.colors.downloads.error.fg = base08
+
+# Font color for hints.
+c.colors.hints.fg = base00
+
+# Font color for the matched part of hints.
+c.colors.hints.match.fg = base0G
+
+# Foreground color of an error message.
+c.colors.messages.error.fg = base00
+
+# Background color of an error message.
+c.colors.messages.error.bg = base08
+
+# Border color of an error message.
+c.colors.messages.error.border = base08
+
+# Foreground color of a warning message.
+c.colors.messages.warning.fg = base00
+
+# Background color of a warning message.
+c.colors.messages.warning.bg = base0E
+
+# Border color of a warning message.
+c.colors.messages.warning.border = base0E
+
+# Foreground color of an info message.
+c.colors.messages.info.fg = base05
+
+# Background color of an info message.
+c.colors.messages.info.bg = base00
+
+# Border color of an info message.
+c.colors.messages.info.border = base00
+
+# Foreground color for prompts.
+c.colors.prompts.fg = base05
+
+# Border used around UI elements in prompts.
+c.colors.prompts.border = base00
+
+# Background color for prompts.
+c.colors.prompts.bg = base00
+
+# Background color for the selected item in filename prompts.
+c.colors.prompts.selected.bg = base0A
+
+# Foreground color of the statusbar.
+c.colors.statusbar.normal.fg = base0B
+
+# Background color of the statusbar.
+c.colors.statusbar.normal.bg = base00
+
+# Foreground color of the statusbar in passthrough mode.
+c.colors.statusbar.passthrough.fg = base00
+
+# Background color of the statusbar in passthrough mode.
+c.colors.statusbar.passthrough.bg = base0C
+
+# Foreground color of the statusbar in private browsing mode.
+c.colors.statusbar.private.fg = base00
+
+# Background color of the statusbar in private browsing mode.
+c.colors.statusbar.private.bg = base03
+
+# Foreground color of the statusbar in command mode.
+c.colors.statusbar.command.fg = base05
+
+# Background color of the statusbar in command mode.
+c.colors.statusbar.command.bg = base00
+
+# Foreground color of the statusbar in private browsing + command mode.
+c.colors.statusbar.command.private.fg = base05
+
+# Background color of the statusbar in private browsing + command mode.
+c.colors.statusbar.command.private.bg = base00
+
+# Foreground color of the statusbar in caret mode.
+c.colors.statusbar.caret.fg = base00
+
+# Background color of the statusbar in caret mode.
+c.colors.statusbar.caret.bg = base0E
+
+# Foreground color of the statusbar in caret mode with a selection.
+c.colors.statusbar.caret.selection.fg = base00
+
+# Background color of the statusbar in caret mode with a selection.
+c.colors.statusbar.caret.selection.bg = base0D
+
+# Background color of the progress bar.
+c.colors.statusbar.progress.bg = base0C
+
+# Default foreground color of the URL in the statusbar.
+c.colors.statusbar.url.fg = base05
+
+# Foreground color of the URL in the statusbar on error.
+c.colors.statusbar.url.error.fg = base08
+
+# Foreground color of the URL in the statusbar for hovered links.
+c.colors.statusbar.url.hover.fg = base05
+
+
+# Foreground color of the URL in the statusbar when there's a warning.
+c.colors.statusbar.url.warn.fg = base0E
+
+
+# Foreground color of selected odd tabs.
+c.colors.tabs.selected.odd.fg = base0G
+
+
+# Foreground color of selected even tabs.
+c.colors.tabs.selected.even.fg = base0G
+
+
+# Background color for webpages if unset (or empty to use the theme's
+# color).
+# c.colors.webpage.bg = base00
