@@ -171,12 +171,6 @@ c.colors.downloads.stop.bg = base0C
 # Foreground color for downloads with errors.
 c.colors.downloads.error.fg = base08
 
-# Font color for hints.
-c.colors.hints.fg = base00
-
-# Font color for the matched part of hints.
-c.colors.hints.match.fg = base0G
-
 # Foreground color of an error message.
 c.colors.messages.error.fg = base00
 
@@ -270,15 +264,6 @@ c.colors.statusbar.url.hover.fg = base05
 
 # Foreground color of the URL in the statusbar when there's a warning.
 c.colors.statusbar.url.warn.fg = base0E
-
-
-# Foreground color of selected odd tabs.
-c.colors.tabs.selected.odd.fg = base0G
-
-
-# Foreground color of selected even tabs.
-c.colors.tabs.selected.even.fg = base0G
-
 
 # Background color for webpages if unset (or empty to use the theme's
 # color).
