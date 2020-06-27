@@ -219,9 +219,6 @@ c.colors.prompts.selected.bg = base0A
 # Foreground color of the statusbar.
 c.colors.statusbar.normal.fg = base0B
 
-# Background color of the statusbar.
-c.colors.statusbar.normal.bg = base00
-
 # Foreground color of the statusbar in passthrough mode.
 c.colors.statusbar.passthrough.fg = base00
 
