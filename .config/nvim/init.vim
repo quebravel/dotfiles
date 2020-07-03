@@ -47,14 +47,13 @@ Plug 'scrooloose/syntastic'
 Plug 'Yggdroot/indentLine'
 Plug 'avelino/vim-bootstrap-updater'
 Plug 'sheerun/vim-polyglot'
-Plug 'tpope/vim-fugitive'
-Plug 'junegunn/gv.vim'
+
+Plug 'w0rp/ale'
+Plug 'ycm-core/YouCompleteMe'
 
 "Plug 'ap/vim-css-color'
-"Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'salsifis/vim-transpose'
-Plug 'simnalamburt/vim-mundo'
-Plug 'mattn/emmet-vim'
+
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 Plug 'artur-shaik/vim-javacomplete2'
 Plug 'lilydjwg/colorizer'
@@ -100,7 +99,6 @@ Plug 'honza/vim-snippets'
 "" Color
 Plug 'morhetz/gruvbox'
 Plug 'altercation/vim-colors-solarized'
-
 "*****************************************************************************
 "" Custom bundles
 "*****************************************************************************
@@ -150,7 +148,6 @@ set hlsearch
 set incsearch
 set ignorecase
 set smartcase
-set inccommand=split
 
 "" Directories for swp files
 set nobackup
@@ -180,8 +177,9 @@ set number
 let no_buffers_menu=1
 if !exists('g:not_finish_vimplug')
   colorscheme gruvbox
-"  colorscheme solarized
+  " colorscheme solarized
 endif
+
 
 set mousemodel=popup
 set t_Co=256
@@ -193,28 +191,28 @@ set colorcolumn=80
 set cursorline
 
 if has("gui_running")
-    if has("gui_mac") || has("gui_macvim")
-        set guifont=Menlo:h12
-        set transparency=7
-    endif
+  if has("gui_mac") || has("gui_macvim")
+    set guifont=Menlo:h12
+    set transparency=7
+  endif
 else
-    let g:CSApprox_loaded = 1
+  let g:CSApprox_loaded = 1
 
-    " IndentLine
-    let g:indentLine_enabled = 1
-    let g:indentLine_concealcursor = 0
-    let g:indentLine_char = '┆'
-    let g:indentLine_faster = 1
+  " IndentLine
+  let g:indentLine_enabled = 1
+  let g:indentLine_concealcursor = 0
+  let g:indentLine_char = '┆'
+  let g:indentLine_faster = 1
 
-
-    if $COLORTERM == 'gnome-terminal'
-        set term=gnome-256color
-    else
-        if $TERM == 'xterm'
-            set term=xterm-256color
-        endif
+  
+  if $COLORTERM == 'gnome-terminal'
+    set term=gnome-256color
+  else
+    if $TERM == 'xterm'
+      set term=xterm-256color
     endif
-
+  endif
+  
 endif
 
 
@@ -222,14 +220,6 @@ if &term =~ '256color'
   set t_ut=
 endif
 
-" You will have bad experience for diagnostic messages when it's default 4000.
-set updatetime=300
-
-" don't give |ins-completion-menu| messages.
-set shortmess+=c
-
-" always show signcolumns
-set signcolumn=yes
 
 "" Disable the blinking cursor.
 "set gcr=a:blinkon0
@@ -494,23 +484,6 @@ vnoremap K :m '<-2<CR>gv=gv
 "" Open current line on GitHub
 nnoremap <Leader>o :.Gbrowse<CR>
 
-" Use tab for trigger completion with characters ahead and navigate.
-" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
-" Coc only does snippet and additional edit on confirm.
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-
 "" NERD Commenter
 " Use uma sintaxe compacta para comentários de várias linhas pretéritos
 let g:NERDSpaceDelims = 1
@@ -525,6 +498,7 @@ let g:NERDToggleCheckAllLines = 1
 
 map <leader>nc <Plug>NERDCommenterComment
 map <Leader>nn <Plug>NERDCommenterNested
+" map <Leader>n <space> <plug>NERDCommenterToggle
 
 vmap ++ <plug>NERDCommenterToggle
 nmap ++ <plug>NERDCommenterToggle
@@ -536,16 +510,34 @@ map <Leader>ny <Plug>NERDCommenterYank
 map <Leader>n$ <Plug>NERDCommenterToEOL
 map <Leader>nA <Plug>NERDCommenterAppend
 map <Leader>nu <Plug>NERDCommenterUncomment
-
+"" Add ; no fim da linha [, ;]
 nnoremap <leader>; A;<esc>
-nnoremap <leader>g GV<esc>
-nnoremap <leader>G GV!<esc>
 
 "" coc
-"inoremap <silent><expr> <c-space> coc#refresh()
+inoremap <silent><expr> <c-space> coc#refresh()
 
-"" mundo
-nnoremap <F5> :MundoToggle<CR>
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" You will have bad experience for diagnostic messages when it's default 4000.
+set updatetime=300
+
+" don't give |ins-completion-menu| messages.
+set shortmess+=c
+
+" always show signcolumns
+set signcolumn=yes
+
 
 "*****************************************************************************
 "" Custom configs
@@ -623,16 +615,48 @@ vmap <leader>ja <Plug>(JavaComplete-Generate-AccessorSetterGetter)
 nmap <silent> <buffer> <leader>jn <Plug>(JavaComplete-Generate-NewClass)
 nmap <silent> <buffer> <leader>jN <Plug>(JavaComplete-Generate-ClassInFile)
 
+au FileType html,xhtml setl ofu=htmlcomplete#CompleteTags
+au FileType css setl ofu=csscomplete#CompleteCSS
+
 "*****************************************************************************
 "" Convenience variables
 "*****************************************************************************
 
 " vim-airline
-if !exists('g:airline_symbols')
+"" if !exists('g:airline_symbols')
 let g:airline_symbols = {}
+"" endif
+"" 
+"" if !exists('g:airline_powerline_fonts')
+""   let g:airline#extensions#tabline#left_sep = ' '
+""   let g:airline#extensions#tabline#left_alt_sep = '|'
+""   let g:airline_left_sep          = '▶'
+""   let g:airline_left_alt_sep      = '»'
+""   let g:airline_right_sep         = '◀'
+""   let g:airline_right_alt_sep     = '«'
+""   let g:airline#extensions#branch#prefix     = '⤴' "➔, ➥, ⎇
+""   let g:airline#extensions#readonly#symbol   = '⊘'
+""   let g:airline#extensions#linecolumn#prefix = '¶'
+""   let g:airline#extensions#paste#symbol      = 'ρ'
+""   let g:airline_symbols.linenr    = '␊'
+""   let g:airline_symbols.branch    = '⎇'
+""   let g:airline_symbols.paste     = 'ρ'
+""   let g:airline_symbols.paste     = 'Þ'
+""   let g:airline_symbols.paste     = '∥'
 let g:airline_symbols.whitespace = 'Ξ'
+"" else
+""   let g:airline#extensions#tabline#left_sep = ''
+""   let g:airline#extensions#tabline#left_alt_sep = ''
+"" 
+""   " powerline symbols
+""   let g:airline_left_sep = ''
+""   let g:airline_left_alt_sep = ''
+""   let g:airline_right_sep = ''
+""   let g:airline_right_alt_sep = ''
+""   let g:airline_symbols.branch = ''
+""   let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = 'Ξ '
-endif
+"" endif
 
 let g:airline_powerline_fonts=1
 let g:airline_theme='gruvbox'
@@ -640,7 +664,6 @@ let g:airline_theme='gruvbox'
 " grovebox config
 let g:gruvbox_termcolors = 256
 let g:gruvbox_italic = 1
-let g:gruvbox_contrast_light = "hard"
 
 " solarized config
 let g:solarized_termcolors=256
@@ -650,7 +673,7 @@ let g:solarized_bold=1
 let g:solarized_underline=1
 let g:solarized_italic=1
 let g:solarized_contrast="normal"
-let g:solarized_visibility="normal"
+let g:solarized_visibility="high"
 
 " light/dark
 set background=dark
