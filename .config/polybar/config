@@ -320,7 +320,7 @@ format-volume-prefix = " vol "
 format-volume-foreground = ${colors.foreground-alt}
 format-muted-prefix = ""
 format-muted-foreground = ${colors.alert}
-label-muted = vol -M-U-D-O-
+label-muted =   " vol  00% %{T4}::::::::::%{T-}"
 
 bar-volume-width = 10
 bar-volume-foreground-0 = #55aa55
