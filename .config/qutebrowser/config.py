@@ -6,7 +6,8 @@
 # Uncomment this to still load settings configured via autoconfig.yml
 # config.load_autoconfig()
 
-c.fonts.tabs = "10.5pt tamzenforpowerline"
+c.fonts.tabs.selected = "10.5pt tamzenforpowerline"
+c.fonts.tabs.unselected = c.fonts.statusbar
 c.fonts.statusbar = "10.5pt tamzenforpowerline"
 c.fonts.messages.info = "10.5pt tamzenforpowerline"
 c.fonts.downloads = c.fonts.statusbar
@@ -17,13 +18,6 @@ c.fonts.messages.error = c.fonts.messages.info
 c.fonts.completion.entry = "10.5pt tamzenforpowerline"
 c.fonts.completion.category = c.fonts.statusbar
 #c.fonts.hints = "13px tamzenforpowerline"
-
-# colors
-c.colors.contextmenu.disabled.fg = '#9c9c9c'
-c.colors.contextmenu.menu.bg = '#3c3c3c'
-c.colors.contextmenu.menu.fg = 'white'
-c.colors.contextmenu.selected.bg = 'black'
-c.colors.contextmenu.selected.fg = 'white'
 
 # searches
 c.url.searchengines['DEFAULT'] = 'https://www.duckduckgo.com/?q={}'
@@ -67,13 +61,6 @@ c.content.geolocation = True
 c.tabs.mode_on_change = "persist"
 c.tabs.title.format = "{index}: {current_title} {audio}"
 c.colors.webpage.prefers_color_scheme_dark = True
-
-# colors
-c.colors.contextmenu.disabled.fg = '#9c9c9c'
-c.colors.contextmenu.menu.bg = '#3c3c3c'
-c.colors.contextmenu.menu.fg = 'white'
-c.colors.contextmenu.selected.bg = 'black'
-c.colors.contextmenu.selected.fg = 'white'
 
 # keys
 c.bindings.commands = {
