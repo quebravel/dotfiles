@@ -7,7 +7,7 @@
 # config.load_autoconfig()
 
 c.fonts.tabs.selected = "10.5pt tamzenforpowerline"
-c.fonts.tabs.unselected = c.fonts.statusbar
+c.fonts.tabs.unselected = "10.5pt tamzenforpowerline"
 c.fonts.statusbar = "10.5pt tamzenforpowerline"
 c.fonts.messages.info = "10.5pt tamzenforpowerline"
 c.fonts.downloads = c.fonts.statusbar
