@@ -61,6 +61,7 @@ c.content.geolocation = True
 c.tabs.mode_on_change = "persist"
 c.tabs.title.format = "{index}: {current_title} {audio}"
 c.colors.webpage.prefers_color_scheme_dark = True
+c.scrolling.bar = "never"
 
 # keys
 c.bindings.commands = {
