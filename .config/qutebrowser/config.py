@@ -81,6 +81,29 @@ c.bindings.commands = {
 #  sys.path.append(os.path.join(sys.path[0], 'jblock'))
 #  config.source("jblock/jblock/integrations/qutebrowser.py")
 
+# base16-qutebrowser (https://github.com/theova/base16-qutebrowser)
+# Base16 qutebrowser template by theova
+# Solarized Dark scheme by Ethan Schoonover (modified by aramisgithub)
+
+base00 = "#002b36"
+base01 = "#073642"
+base02 = "#586e75"
+base03 = "#657b83"
+base04 = "#839496"
+base05 = "#93a1a1"
+base06 = "#eee8d5"
+base07 = "#fdf6e3"
+base08 = "#dc322f"
+base09 = "#cb4b16"
+base0A = "#b58900"
+base0B = "#859900"
+base0C = "#2aa198"
+base0D = "#268bd2"
+base0E = "#6c71c4"
+base0F = "#d33682"
+base0G = "#00afaf"
+
+
 # set qutebrowser colors
 
 # Text color of the completion widget. May be a single color to use for
@@ -136,7 +159,7 @@ c.colors.contextmenu.menu.bg = base00
 c.colors.contextmenu.menu.fg =  base05
 
 # Background color of the context menu’s selected item. If set to null, the Qt default is used.
-c.colors.contextmenu.selected.bg = base0A
+c.colors.contextmenu.selected.bg = base0C
 
 #Foreground color of the context menu’s selected item. If set to null, the Qt default is used.
 c.colors.contextmenu.selected.fg = base01
@@ -185,12 +208,6 @@ c.colors.messages.info.bg = base00
 
 # Border color of an info message.
 c.colors.messages.info.border = base00
-
-# Foreground color for prompts.
-c.colors.prompts.fg = base05
-
-# Border used around UI elements in prompts.
-c.colors.prompts.border = base00
 
 # Background color for prompts.
 c.colors.prompts.bg = base00
