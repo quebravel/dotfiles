@@ -70,7 +70,7 @@ c.bindings.commands = {
             'gR': 'spawn urxvt -e ranger /home/jonatas/Downloads',
             ',n': 'config-cycle content.user_stylesheets  ~/.config/qutebrowser/solarized-everything-css/css/solarized-dark/solarized-dark-all-sites.css ""',
             ',d': 'config-cycle content.user_stylesheets ~/.config/qutebrowser/solarized-everything-css/css/apprentice/apprentice-all-sites.css ""',
-            'xx': 'config-cycle statusbar.hide ;; config-cycle tabs.show always switching',
+            'xx': 'config-cycle statusbar.show never always ;; config-cycle tabs.show switching always',
             'xd': 'set downloads.location.directory ~/Imagens ;; hint images download'
             }
         }
