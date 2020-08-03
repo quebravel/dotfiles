@@ -66,18 +66,18 @@
 *color5:                  S_magenta
 *color6:                  S_cyan
 *color7:                  S_base2
-*color9:                  S_orange
+*color9:                  S_red
 *color8:                  S_base03
-*color10:                 S_base01
-*color11:                 S_base00
-*color12:                 S_base0
+*color10:                 S_green
+*color11:                 S_yellow
+*color12:                 S_blue
 *color13:                 S_violet
 *color14:                 S_base1
 *color15:                 S_base3
 
-URxvt*background:           [86]#000000
-Urxvt*shading:              30
-Urxvt*transparent:          true
+URxvt*background:           [86]#151515
+URxvt*shading:              30
+URxvt*transparent:          true
 
 ! Common parameters
 
