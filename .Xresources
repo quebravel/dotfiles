@@ -149,7 +149,8 @@ Xmessage*form.message.Scroll:      WhenNeeded
 URxvt*font:                        xft:tamzenforpowerline:pixelsize=14
 
 URxvt*scrollBar:                   false
-!URxvt*internalBorder:              5
+URxvt*internalBorder:              0
+URxvt*externalBorder:              0
 URxvt*depth:                       32
 URxvt*skipBuiltinGlyphs:           true
 URxvt*perl-ext-common:             default,clipboard,matcher,url-select,keyboard-select
