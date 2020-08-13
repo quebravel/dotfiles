@@ -55,6 +55,8 @@ Plug 'salsifis/vim-transpose'
 Plug 'simnalamburt/vim-mundo'
 Plug 'mattn/emmet-vim'
 Plug 'valloric/youcompleteme'
+Plug 'machakann/vim-sandwich'
+Plug 'easymotion/vim-easymotion'
 
 Plug 'artur-shaik/vim-javacomplete2'
 Plug 'lilydjwg/colorizer'
@@ -584,6 +586,26 @@ vmap <leader>ja <Plug>(JavaComplete-Generate-AccessorSetterGetter)
 
 nmap <silent> <buffer> <leader>jn <Plug>(JavaComplete-Generate-NewClass)
 nmap <silent> <buffer> <leader>jN <Plug>(JavaComplete-Generate-ClassInFile)
+
+" EasyMotion
+let g:EasyMotion_smartcase = 1
+let g:EasyMotion_startofline = 0
+let g:EasyMotion_use_smartsign_us = 1
+" Gif config
+map  / <Plug>(easymotion-sn)
+omap / <Plug>(easymotion-tn)
+map  n <Plug>(easymotion-next)
+map  N <Plug>(easymotion-prev)
+nmap <leader><leader>f <Plug>(easymotion-s2)
+" <Leader>f{char} to move to {char}
+map  <Leader>f <Plug>(easymotion-bd-f)
+nmap <Leader>f <Plug>(easymotion-overwin-f)
+" Move to line
+map <Leader>L <Plug>(easymotion-bd-jk)
+nmap <Leader>L <Plug>(easymotion-overwin-line)
+" Move to word
+map  <Leader>w <Plug>(easymotion-bd-w)
+nmap <Leader>w <Plug>(easymotion-overwin-w)
 
 "*****************************************************************************
 "" Convenience variables
