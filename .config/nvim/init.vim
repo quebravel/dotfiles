@@ -142,6 +142,7 @@ set expandtab
 
 "" Map leader to ,
 let mapleader=','
+let maplocalleader = '\'
 
 "" Enable hidden buffers
 set hidden
@@ -514,24 +515,25 @@ let g:NERDTrimTrailingWhitespace = 1
 "Ativar NERDCommenterToggle para verificar todas as linhas selecionadas é comentada ou não
 let g:NERDToggleCheckAllLines = 1
 
-map <leader>nc <Plug>NERDCommenterComment
-map <Leader>nn <Plug>NERDCommenterNested
+map <leader>cc <Plug>NERDCommenterComment
+map <Leader>cn <Plug>NERDCommenterNested
 
 vmap ++ <plug>NERDCommenterToggle
 nmap ++ <plug>NERDCommenterToggle
 
-map <Leader>nm <Plug>NERDCommenterMinimal
-map <Leader>ni <Plug>NERDCommenterInvert
-map <Leader>ns <Plug>NERDCommenterSexy
-map <Leader>ny <Plug>NERDCommenterYank
-map <Leader>n$ <Plug>NERDCommenterToEOL
-map <Leader>nA <Plug>NERDCommenterAppend
-map <Leader>nu <Plug>NERDCommenterUncomment
+map <Leader>cm <Plug>NERDCommenterMinimal
+map <Leader>ci <Plug>NERDCommenterInvert
+map <Leader>cs <Plug>NERDCommenterSexy
+map <Leader>cy <Plug>NERDCommenterYank
+map <Leader>c$ <Plug>NERDCommenterToEOL
+map <Leader>cA <Plug>NERDCommenterAppend
+map <Leader>cu <Plug>NERDCommenterUncomment
 
 nnoremap <leader>; A;<esc>
 nnoremap <leader><F9> :AirlineTheme random<esc>
 nnoremap <leader>g :GV<esc>
 nnoremap <leader>G :GV!<esc>
+nmap <localleader>s xi
 
 "" coc
 " inoremap <silent><expr> <c-space> coc#refresh()
@@ -606,6 +608,19 @@ nmap <Leader>L <Plug>(easymotion-overwin-line)
 " Move to word
 map  <Leader>w <Plug>(easymotion-bd-w)
 nmap <Leader>w <Plug>(easymotion-overwin-w)
+
+" Sandwich
+let g:sandwich_no_default_key_mappings = 1
+let g:operator_sandwich_no_default_key_mappings = 1
+
+nmap ya <Plug>(operator-sandwich-add)
+xmap ya <Plug>(operator-sandwich-add)
+xmap yd <Plug>(operator-sandwich-delete)
+xmap yr <Plug>(operator-sandwich-replace)
+nmap <silent> yd <Plug>(operator-sandwich-delete)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-query-a)
+nmap <silent> yr <Plug>(operator-sandwich-replace)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-query-a)
+nmap <silent> ydb <Plug>(operator-sandwich-delete)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-auto-a)
+nmap <silent> yrb <Plug>(operator-sandwich-replace)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-auto-a)
 
 "*****************************************************************************
 "" Convenience variables
