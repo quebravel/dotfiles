@@ -509,7 +509,7 @@ let g:NERDSpaceDelims = 1
 "Alinhar os delimitadores de comentários alinhados à linha à esquerda, em vez de seguir a indentação de código
 let g:NERDCompactSexyComs = 1
 "Permitir comentar e inverter linhas vazias (útil ao comentar uma região)
-let g:NERDCommentEmptyLines = 1
+let g:NERDCommentEmptyLines = 0
 "Ativar o recorte de espaços em branco à direita ao descomentar
 let g:NERDTrimTrailingWhitespace = 1
 "Ativar NERDCommenterToggle para verificar todas as linhas selecionadas é comentada ou não
