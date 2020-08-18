@@ -610,17 +610,17 @@ map  <Leader>w <Plug>(easymotion-bd-w)
 nmap <Leader>w <Plug>(easymotion-overwin-w)
 
 " Sandwich
-let g:sandwich_no_default_key_mappings = 1
-let g:operator_sandwich_no_default_key_mappings = 1
+" let g:sandwich_no_default_key_mappings = 1
+" let g:operator_sandwich_no_default_key_mappings = 1
 
-nmap ya <Plug>(operator-sandwich-add)
-xmap ya <Plug>(operator-sandwich-add)
-xmap yd <Plug>(operator-sandwich-delete)
-xmap yr <Plug>(operator-sandwich-replace)
-nmap <silent> yd <Plug>(operator-sandwich-delete)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-query-a)
-nmap <silent> yr <Plug>(operator-sandwich-replace)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-query-a)
-nmap <silent> ydb <Plug>(operator-sandwich-delete)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-auto-a)
-nmap <silent> yrb <Plug>(operator-sandwich-replace)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-auto-a)
+" nmap ya <Plug>(operator-sandwich-add)
+" xmap ya <Plug>(operator-sandwich-add)
+" xmap yd <Plug>(operator-sandwich-delete)
+" xmap yr <Plug>(operator-sandwich-replace)
+" nmap <silent> yd <Plug>(operator-sandwich-delete)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-query-a)
+" nmap <silent> yr <Plug>(operator-sandwich-replace)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-query-a)
+" nmap <silent> ydb <Plug>(operator-sandwich-delete)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-auto-a)
+" nmap <silent> yrb <Plug>(operator-sandwich-replace)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-auto-a)
 
 "*****************************************************************************
 "" Convenience variables
