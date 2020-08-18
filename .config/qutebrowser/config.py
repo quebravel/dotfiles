@@ -61,6 +61,9 @@ c.content.geolocation = True
 c.tabs.mode_on_change = "persist"
 c.tabs.title.format = "{index}: {current_title} {audio}"
 c.colors.webpage.prefers_color_scheme_dark = True
+c.colors.webpage.darkmode.enabled = True
+c.colors.webpage.darkmode.grayscale.all = True
+c.colors.webpage.bg = "#262626"
 c.scrolling.bar = "never"
 
 # keys
@@ -163,6 +166,9 @@ c.colors.contextmenu.selected.bg = base0C
 
 #Foreground color of the context menu’s selected item. If set to null, the Qt default is used.
 c.colors.contextmenu.selected.fg = base01
+
+c.colors.contextmenu.disabled.bg = base01
+c.colors.contextmenu.disabled.fg = base03
 
 # Background color for the download bar.
 c.colors.downloads.bar.bg = base00
