@@ -624,6 +624,13 @@ nmap <silent> <localleader>r <Plug>(operator-sandwich-replace)<Plug>(operator-sa
 nmap <silent> <localleader>db <Plug>(operator-sandwich-delete)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-auto-a)
 nmap <silent> <localleader>rb <Plug>(operator-sandwich-replace)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-auto-a)
 
+" YouCompleteme
+" let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_key_list_select_completion = ['<TAB>', '<Down>', '<C-j>']
+let g:ycm_key_list_previous_completion = ['<S-TAB>', '<Up>', '<C-k>']
+let g:ycm_key_list_stop_completion = ['<C-y>', '<Enter>']
+
 "*****************************************************************************
 "" Convenience variables
 "*****************************************************************************
