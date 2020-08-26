@@ -159,7 +159,8 @@ set nobackup
 set noswapfile
 
 set fileformats=unix,dos,mac
-
+" set viminfo='15
+set shada='15
 
 if exists('$SHELL')
     set shell=$SHELL
@@ -533,7 +534,8 @@ nnoremap <leader>; A;<esc>
 nnoremap <leader><F9> :AirlineTheme random<esc>
 nnoremap <leader>g :GV<esc>
 nnoremap <leader>G :GV!<esc>
-nmap <localleader>s xi
+nmap <localleader>s a<backspace>
+nmap <localleader>o :bro ol<CR>
 
 "" coc
 " inoremap <silent><expr> <c-space> coc#refresh()
@@ -610,17 +612,17 @@ map  <Leader>w <Plug>(easymotion-bd-w)
 nmap <Leader>w <Plug>(easymotion-overwin-w)
 
 " Sandwich
-" let g:sandwich_no_default_key_mappings = 1
-" let g:operator_sandwich_no_default_key_mappings = 1
+let g:sandwich_no_default_key_mappings = 1
+let g:operator_sandwich_no_default_key_mappings = 1
 
-" nmap ya <Plug>(operator-sandwich-add)
-" xmap ya <Plug>(operator-sandwich-add)
-" xmap yd <Plug>(operator-sandwich-delete)
-" xmap yr <Plug>(operator-sandwich-replace)
-" nmap <silent> yd <Plug>(operator-sandwich-delete)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-query-a)
-" nmap <silent> yr <Plug>(operator-sandwich-replace)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-query-a)
-" nmap <silent> ydb <Plug>(operator-sandwich-delete)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-auto-a)
-" nmap <silent> yrb <Plug>(operator-sandwich-replace)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-auto-a)
+nmap <localleader>a <Plug>(operator-sandwich-add)
+xmap <localleader>a <Plug>(operator-sandwich-add)
+xmap <localleader>d <Plug>(operator-sandwich-delete)
+xmap <localleader>r <Plug>(operator-sandwich-replace)
+nmap <silent> <localleader>d <Plug>(operator-sandwich-delete)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-query-a)
+nmap <silent> <localleader>r <Plug>(operator-sandwich-replace)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-query-a)
+nmap <silent> <localleader>db <Plug>(operator-sandwich-delete)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-auto-a)
+nmap <silent> <localleader>rb <Plug>(operator-sandwich-replace)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-auto-a)
 
 "*****************************************************************************
 "" Convenience variables
