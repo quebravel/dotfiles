@@ -1,258 +1,174 @@
+   # Teclas do meu BSPWM
+   [![N|Solid](https://github.com/quebravel/dotfiles-conf/raw/master/gitresize.png?raw=true)](https://github.com/quebravel/dotfiles-conf)
 
-# .config com configuração do `bspwm` + `sxhkd` + `polybar`.
+- #### Controle de janelas
 
-![bspwm](https://github.com/quebravel/dotfiles-conf/blob/master/gitresize.png?raw=true) 
+  - Movimentação entre janelas.
 
+    Teclas | Função
+    -------|--------
+       **`mod`** + **`h`** | Seleciona janela a esquerda.  
+       **`mod`** + **`j`** | Seleciona janela a baixo.
+       **`mod`** + **`k`** | Seleciona janela a cima.
+       **`mod`** + **`l`** | Seleciona janela a direita.
+       **`mod`** + **`n`** | Seleciona a proxima janela.
+       **`mod`** + **`shifit`** + **`n`** | Seleciona a janela anterior.
 
-# Personalizando meu Linux
+  - Trocando lugares das janelas.
 
-# fish
-
-## Instalando e configurando fish
-```
-$ sudo emerge -aq app-shells/fish
-$ chsh -s /bin/fish
-$ git clone https://github.com/oh-my-fish/oh-my-fish
-$ cd oh-my-fish
-$ bin/install --offline
-$ omf install bobthefish
-```
-
-- Mova a config.fish para...
-
-```
-mv config.fish .config/fish/
-```
-
-# zsh
-
-## Instalando e configurando zsh
-
-```
-$ sudo emerge -aq app-shells/zsh                             $ sudo pacman -S extra/zsh
-$ sudo emerge -aq app-shells/zsh-completions                 $ sudo pacman -S community/zsh-completions
-
-$ sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
-```
-- Selecione o tema entrando no arquivo:
-```
-$ vim ~/.zshrc
-```
-- Na linha `ZSH_THEME="robbyrussell"` troque o robbyrussell por `fino-time`.
-
-> ZSH_THEME="fino-time"
-
-- Deixe o zsh como padrão com o comando:
-```
-$ chsh -s /bin/zsh
-```
-# air-line
-
-## Instalando fontes powerline
-- Clone o powerline
-```
-git clone https://github.com/powerline/fonts.git --depth=1
-```
-- Instale com os comandos:
-```
-cd fonts && ./install.sh
-```
-- Remova as pastas desnecessárias
-```
-cd .. && rm -rf fonts
-```
-
-## Colocando o tema air-line no vim
-- Clone o airline.
-```
-$ git clone https://github.com/vim-airline/vim-airline.git
-```
-- Crie e mova o conteudo da pasta airline para a pasta vim.
-```
-$ mkdir ~/.vim
-$ mv vim-airline/* ~/.vim
-```
-- Crie o arquivo `.vimrc`.
-```
-$ vim .vimrc
-```
-- Adicione no arquivo:
-> let g:airline_powerline_fonts = 1
-- Baixe o pip
-```
-$ sudo emerge -aq dev-python/pip                             $ sudo pacman -S extra/python-pip
-```
-- Baixe o powerline status e font com o pip
-```
-$ pip install --user powerline-status
-$ pip install --user git+git://github.com/powerline/powerline
-```
-- Baixe os símbolos, font, powerline e a configuração com o comando
-```
-$ wget https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf
-$ wget https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf
-$ git clone https://github.com/powerline/fonts --depth=1
-$ cd /fonts
-$ ./install.sh
-```
-- Mova e aponte os arquivos para as seguintes pastas
-```
-$ mv PowerlineSymbols.otf ~/.local/share/fonts/
-$ fc-cache -vf ~/.local/share/fonts/
-$ sudo mv 10-powerline-symbols.conf /etc/fonts/conf.d/
-```
-- para ter o tema quando usar o sudo copie as pastas e o .vimrc para pasta root
-###### Obs: Não esqueça de modificar o `nomeUsuario` pelo nome do usuário.
-```
-$ sudo su
-$ cp /home/nomeUsuario/.vimrc /root
-```
-# Xresources
-
-###### Configuração do terminal `xterm`.
-
-- Copie a configuração do arquivo [Xresources](https://github.com/Quebravel/zsh-airline-Xresources/blob/master/.Xresources) e cole na pasta do usuário.
+    Teclas | Função
+    -------|--------
+       **`mod`** + **`shifit`** + **`h`** | Troca janela atual para esquerda.  
+       **`mod`** + **`shifit`** + **`j`** | Troca janela atual para baixo
+       **`mod`** + **`shifit`** + **`k`** | Troca janela atual para cima
+       **`mod`** + **`shifit`** + **`l`** | Troca janela atual para direita
+       **`mod`** + **`g`** | Troca janela atual para a maior que existe no workspace.
+       **`mod`** + **`y`** | Rotaciona em 90° as colunas das janelas.
 
 
-# Outras configurações
+  - Selecionando multiplas janelas.
 
-### ranger
+    Teclas | Função
+    -------|--------
+       **`mod`** + **`v`** | Seleciona às Janelas em coluna.  
+       **`mod`** + **`v`** **`v`** | Seleciona às Janelas da outra coluna também.  
+       **`mod`** + **`b`** | Seleciona à janela acessada anteriormente.
 
-- Comando para o ranger copiar os arquivos de configurações e ativar os plugs.
-```
-ranger --copy-config=all
-```
-- Modifique a linha que contem `set preview_images false` de `false` para `true` no final. No seguinte arquivo:
-```
-vim .config/ranger/rc.conf
-```
+- #### Controle de espaços de trabalho (Workspaces)
+  - Com teclado de números e botões de comando.
+
+    Teclas | Função
+    -------|--------
+       **`mod`** + **`0` .. `9`** | Seleciona os workspaces de 0 até 9.  
+       **`mod`** + **`[`** | Seleciona o workspace a esquerda.
+       **`mod`** + **`]`** | Seleciona o workspace a direita.
+       **`mod`** + **`Tab`** | Seleciona o workspace acessado anteriormente até 1x.
+       **`mod`** + **`BackSpace`** | Seleciona o workspace acessado anteriormente continuamente até 4x.
+
+- #### Abilidades das janelas
+  - Modos comuns.
+
+    Teclas | Função
+    -------|--------
+       **`mod`** + **`t`** | Coloca a janela em modo tiling.
+       **`mod`** + **`s`** | Coloca a janela em modo float.
+       **`mod`** + **``shift``** + **`t`** | Coloca a janela em modo pseudotiling.
+       **`mod`** + **`f`** | Coloca a janela em modo tela cheia.
 
 
-### vim syntax
+  - Modos especiais.
 
-###### Ativando a syntax do vim no Arch Linux e ligando as cores solarized
-- Instale o `vim-syntastic`.
-```
-$ sudo pacman -S community/vim-syntastic
-```
-- Adicione as linhas em `~/.vimrc` contendo o comando abaixo para a syntax e a númeração de linha ser ativada como padrão .
-```
-" ------------------------------------------------------------------
-" Solarized Colorscheme Config
-" ------------------------------------------------------------------
-syntax enable "ativando syntax
-set laststatus=2
-set nu! "ativando númeração de linha
-colorscheme solarized "cores solarized
-set background=dark "dark/light
-" ------------------------------------------------------------------
-let g:airline_powerline_fonts = 1
-let g:solarized_bold=1            "valor padrão é 1
-let g:solarized_underline=1       "valor padrão é 1
-let g:solarized_italic=1          "valor padrão é 1
-let g:solarized_termcolors=256    "valor padrão é 16
-let g:solarized_contrast="high"   "valor padrão é normal
-let g:solarized_visibility="high" "valor padrão é normal
-let g:solarized_diffmode="high"   "valor padrão é normal
+    Teclas | Função
+    -------|--------
+       **`mod`** + **`x`** | Coloca a janela em modo locked.
+       **`mod`** + **`y`** | Coloca a janela em modo sticky.
+       **`mod`** + **`z`** | Coloca a janela em modo private.
+       **`mod`** + **`m`** | Coloca a janela em modo monocle.
 
-" ------------------------------------------------------------------
- let g:solarized_termtrans=0
- let g:solarized_degrade=1
- let g:solarized_hitrail=0
- let g:solarized_menu=1
-```
-### Vim Solarized
+ - Tamanho da janela personalizado.
 
-- [Git para adicionar a coloração](https://github.com/altercation/vim-colors-solarized)
+    - Local da janela onde será personalizado.
 
-## Configuração do teclado gentoo/arch
+   Teclas | Função
+   -------|--------
+      **`mod`** + **`ctrl`** + **`h`** | Escolhe o lado esquerdo da janela.
+      **`mod`** + **`ctrl`** + **`j`** | Escolhe o lado de baixo da janela. 
+      **`mod`** + **`ctrl`** + **`k`** | Escolhe o lado cima da janela.
+      **`mod`** + **`ctrl`** + **`l`** | Escolhe o lado da direita da janela.
+      **`mod`** + **`ctrl`** + **`1..9`** | Escolhe a área da janela.
+      **`mod`** + **`ctrl`** + **`Espaço`** | Cancela personalização.
+      **`mod`** + **`ctrl`** +  **`shift`** + **`Espaço`** | Cancela personalização na área de trabalho em foco.
 
-### gentoo
-- Instale
-```
-$ emerge -aq x11-apps/setxkbmap
-```
 
-- Crie um arquivo chamado `30-keyboard.conf` no xorg
-```
-$ sudo vim -w /etc/X11/xorg.conf.d/30-keyboard.conf
-```
-- Dentro digite:
-```
-Section "InputClass"
-	Identifier "keyboard-all"
-	Driver "evdev"
-	Option "XkbLayout" "br"
-	Option "XkbVariant" ",abnt2"
-	Option "XkbOptions" "grp:shift_toggle,grp_led:scroll"
-EndSection
-```
-- Adicione ao boot
-```
-rc-update add keymaps boot
-```
+ - Gerência o tamanho da janela.
 
-###  arch
-- Crie um arquivo chamado `00-keyboard.conf` no xorg
-```
-$ sudo nano /etc/X11/xorg.conf.d/00-keyboard.conf 
-```
-- Dentro digite:
-```
-Section "InputClass"
-	Identifier "system-keyboard"
-	MatchIsKeyboard "on"
-	Option "XkbLayout" "br"
-	Option "XkbVariant" ",abnt2"
-	Option "XkbOptions" "grp:shift_toggle,grp_led:scroll"
-EndSection
-```
 
-## Pacotes adicionais
-- extrair pacotes gentoo/arch
+   Teclas | Função
+   -------|--------
+      **`mod`** + **`alt`** + **`h`** | Tamanho da janela lado esquerdo.
+      **`mod`** + **`alt`** + **`j`** | Tamanho da janela para baixo.
+      **`mod`** + **`alt`** + **`k`** | Tamanho da janela para cima.
+      **`mod`** + **`alt`** + **`l`** | Tamanho da janela lado direito.
 
-```
-$ sudo emerge -aq app-arch/arj                              $ sudo pacman -S community/arj
-$ sudo emerge -aq app-arch/lha                              $ sudo pacman -S aur/lha
-$ sudo emerge -aq app-arch/p7zip                            $ sudo pacman -S extra/p7zip
-$ sudo emerge -aq app-arch/rar                              $ sudo pacman -S aur/rar
-$ sudo emerge -aq app-arch/file-roller                      $ sudo pacman -S extra/file-roller
-$ sudo emerge -aq app-arch/unzip                            $ sudo pacman -S extra/unzip
-$ sudo emerge -aq app-arch/zip                              $ sudo pacman -S extra/zip
-```
 
-- formartar discos gentoo/arch
-```
-$ sudo emerge -aq sys-fs/dosfstools                         $ sudo pacman -S core/dosfstools
-$ sudo emerge -aq sys-fs/ntfs3g                             $ sudo pacman -S extra/ntfs-3g
+ - Mover uma janela flutuante
 
-```
 
-## Corrigindo fonte no Java 
-- edite o arquivo `environment`
-```
-$ sudo vim /etc/environment
-```
-- adicione a linha
+   Teclas | Função
+   -------|--------
+      **`ctrl`** + **`alt`** + **`h`** | Move a janela lado esquerdo.
+      **`ctrl`** + **`alt`** + **`j`** | Move a janela para baixo.
+      **`ctrl`** + **`alt`** + **`k`** | Move a janela para cima.
+      **`ctrl`** + **`alt`** + **`l`** | Move a janela lado direita.
 
-> _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=lcd_hrgb'
 
-## eix gentoo/funtoo
-- instale o pacote:
-```
-$ sudo emerge app-portage/eix
-$ sudo eix-update
-```
-- modifique o arquivo `00-eixrc` em:
-```
-$ sudo vim /etc/eixrc/00-eixrc
-```
-- adicione na ultima linha:
-```
-TERM_ALT1_ADD=rxvt
-BG0=none
-BG1=none
-BG2=none
-BG3=none
-#SOLARIZED=true
-```
+ - Gerenciamento de Desligar/Reiniciar o computador.
+
+   Teclas | Função
+   -------|--------
+      **`mod`** + **`shift`** + **`d`** | Desliga o computador
+      **`mod`** + **`shift`** + **`r`** | Reinicia o computador
+
+ - Gereciamento de amplitude de som.
+
+   Teclas | Função
+   -------|--------
+      **`alt`** + **`=`** | Amplifica o som
+      **`alt`** + **`-`** | Diminui o som
+      **`alt`** + **`m`** | Coloca o som em estado de mudo. 
+
+ - Gereciamento de saída de audio
+
+   Teclas | Função
+   -------|--------
+      **`alt`** + **`\`** | Altera a saída de audio
+
+ - Gereciamento mpc
+
+   Teclas | Função
+   -------|--------
+      **`alt`** + **`.`** | Próxima.
+      **`alt`** + **`,`** | Anterior.
+      **`alt`** + **`p`** | Pausa
+      **`alt`** + **`s`** | Para.
+
+ - Screenshot/Printscreen
+
+   Teclas | Função
+   -------|--------
+      **`Print`** | Foto tela inteira.
+      **`alt`** + **`Print`** | Seleciona área da foto.
+      **`ctrl`** + **`Print`** | Foto tela em foco.
+
+ - Espaços entre janelas/gap
+
+   Teclas | Função
+   -------|--------
+      **`alt`** + **`shift`** + **`)`** | Aumenta. 
+      **`alt`** + **`shift`** + **`(`** | Diminui.
+      **`alt`** + **`shift`** + **`g`** | Auterna entre o padrão e 0.
+
+ - Rotaciona janelas
+
+   Teclas | Função
+   -------|--------
+      **`super`** + **`ctrl`** + **`r`** | Roda janelas. 
+
+ - Volta para ultima área de trabalho
+
+   Teclas | Função
+   -------|--------
+      **`super`** + **` ` `** | Volta. 
+
+ - Resetar polybar
+
+   Teclas | Função
+   -------|--------
+      **`super`** + **`shift`** + **`p`**| Mata e inicia polybar. 
+
+ - Gerência pendrive
+
+   Teclas | Função
+   -------|--------
+      **`super`** + **`u`**| Escolhe dispositivo.
+      **`super`** + **`shift`** + **`u`**| Remove pendrive montado.
