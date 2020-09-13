@@ -517,10 +517,12 @@ label-close-foreground = ${colors.secondary}
 label-separator = |
 label-separator-foreground = ${colors.foreground-alt}
 
-menu-0-0 = reiniciar
-menu-0-0-exec = sudo shutdown -r now
-menu-0-1 = desligar
-menu-0-1-exec = sudo shutdown -h now
+menu-0-0 = terminal
+menu-0-0-exec = urxvt&
+menu-0-1 = reiniciar
+menu-0-1-exec = sudo shutdown -r now
+menu-0-2 = desligar
+menu-0-2-exec = sudo shutdown -h now
 
 [settings]
 screenchange-reload = true
