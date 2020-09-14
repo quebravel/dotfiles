@@ -129,6 +129,67 @@ base0G = "#00afaf"
 # set qutebrowser colors
 
 # Text color of the completion widget. May be a single color to use for
+
+# Background color of the tab bar.
+c.colors.tabs.bar.bg = base00
+
+# Color gradient start for the tab indicator.
+c.colors.tabs.indicator.start = base0D
+
+# Color gradient end for the tab indicator.
+c.colors.tabs.indicator.stop = base0C
+
+# Color for the tab indicator on errors.
+c.colors.tabs.indicator.error = base08
+
+# Foreground color of unselected odd tabs.
+c.colors.tabs.odd.fg = base03
+
+# Background color of unselected odd tabs.
+c.colors.tabs.odd.bg = base04
+
+# Foreground color of unselected even tabs.
+c.colors.tabs.even.fg = base05
+
+# Background color of unselected even tabs.
+c.colors.tabs.even.bg = base03
+
+# Background color of pinned unselected even tabs.
+c.colors.tabs.pinned.even.bg = base0C
+
+# Foreground color of pinned unselected even tabs.
+c.colors.tabs.pinned.even.fg = base07
+
+# Background color of pinned unselected odd tabs.
+c.colors.tabs.pinned.odd.bg = base0B
+
+# Foreground color of pinned unselected odd tabs.
+c.colors.tabs.pinned.odd.fg = base07
+
+# Background color of pinned selected even tabs.
+c.colors.tabs.pinned.selected.even.bg = base02
+
+# Foreground color of pinned selected even tabs.
+c.colors.tabs.pinned.selected.even.fg = base05
+
+# Background color of pinned selected odd tabs.
+c.colors.tabs.pinned.selected.odd.bg = base02
+
+# Foreground color of pinned selected odd tabs.
+c.colors.tabs.pinned.selected.odd.fg = base05
+
+# Foreground color of selected odd tabs.
+c.colors.tabs.selected.odd.fg = base06
+
+# Background color of selected odd tabs.
+c.colors.tabs.selected.odd.bg = base00
+
+# Foreground color of selected even tabs.
+c.colors.tabs.selected.even.fg = base06
+
+# Background color of selected even tabs.
+c.colors.tabs.selected.even.bg = base00
+
 # all columns or a list of three colors, one for each column.
 c.colors.completion.fg = base0C
 
