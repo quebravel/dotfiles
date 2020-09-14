@@ -149,8 +149,8 @@ super + alt + {h,j,k,l}
 
 
 # MOVER UMA JANELA FLUTUANTE
-ctrl + alt {h,j,k,l} 
-    bspc node -v {-20 0,0 20,0 -20,20 0} 
+ctrl + alt {h,j,k,l}
+    bspc node -v {-20 0,0 20,0 -20,20 0}
 
 # Mouse floating:
     bspc config pointer_modifier alt
@@ -248,8 +248,8 @@ super + ctrl + r
 super + apostrophe
     bspc node -s last
 
-#super + b
-#bspc node -f {next,prev}.!hidden
+#super + {_,shift +}b
+#    bspc node -f {next,prev}.!hidden
 
 super + shift + p
     pkill polybar; polybar bspoly&
