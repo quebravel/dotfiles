@@ -63,7 +63,7 @@ c.tabs.title.format = "{index}: {current_title} {audio}"
 c.colors.webpage.prefers_color_scheme_dark = True
 c.colors.webpage.darkmode.enabled = True
 c.colors.webpage.darkmode.grayscale.all = True
-c.colors.webpage.bg = "#262626"
+#  c.colors.webpage.bg = "#262626"
 c.scrolling.bar = "never"
 
 # keys
