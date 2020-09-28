@@ -1,36 +1,32 @@
+# pcm.PCH { type hw; card PCH; }
+# ctl.PCH { type hw; card PCH; }
+# pcm.HDMI { type hw; card HDMI; }
+# ctl.HDMI { type hw; card HDMI; }
+# pcm.!default pcm.PCH
+# ctl.!default ctl.PCH
+defaults.pcm.!card HDMI
+defaults.pcm.!device 5
+defaults.pcm.!ctl HDMI
+
+
 # defaults.pcm.!card 1
-# defaults.pcm.!device 5
+# defaults.pcm.!device 11
 # defaults.pcm.!ctl 1
-# defaults.pcm.rate_converter "speexrate_best"
-# defaults.pcm.rate_converter "speexrate_medium"
 
-# comando para saber o nomes
-# pacmd list-sinks
-# cat /proc/asound/card1/codec\#0 | grep -i name
-#->alsa.name = "HDMI 5
-#->alsa.id = "HDMI 5"
-
-pcm.!default {
-    type plughw
-    card 1
-    device 5
-}
-
-ctl.!default {
-    type plughw
-    card 1
-    device 5
-}
-
-
-pcm.!usb {
-    type plughw
-    card 2
-    device 0
-}
-
-ctl.!usb {
-    type plughw
-    card 2
-    device 0
-}
+# PARA CONFIGURAR
+# 1. Para saber o número da placa.
+# pacmd list-sinks | grep alsa.name
+# 2. Para saber as nomeclaturas
+# aplay -L
+#
+# EXEMPLO
+#
+# pacmd list-sinks | grep alsa.name
+#   alsa.name = "HDMI 5"
+# aplay -L     ,___________.
+#   hdmi:CARD=HDMI,DEV=5---|--.
+#   HDA ATI HDMI, HDMI 5   |  |
+#   HDMI Audio Output      |  |
+#                          |  |
+# a. defaults.pcm.!card____|  |
+# b. defaults.pcm.!device-----´

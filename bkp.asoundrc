@@ -1,0 +1,36 @@
+# defaults.pcm.!card 1
+# defaults.pcm.!device 5
+# defaults.pcm.!ctl 1
+# defaults.pcm.rate_converter "speexrate_best"
+# defaults.pcm.rate_converter "speexrate_medium"
+
+# comando para saber o nomes
+# pacmd list-sinks
+# cat /proc/asound/card1/codec\#0 | grep -i name
+#->alsa.name = "HDMI 5
+#->alsa.id = "HDMI 5"
+
+pcm.!default {
+    type plughw
+    card 1
+    device 5
+}
+
+ctl.!default {
+    type plughw
+    card 1
+    device 5
+}
+
+
+pcm.!usb {
+    type plughw
+    card 2
+    device 0
+}
+
+ctl.!usb {
+    type plughw
+    card 2
+    device 0
+}
