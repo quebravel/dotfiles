@@ -75,7 +75,7 @@ c.bindings.commands = {
             ',d': 'config-cycle content.user_stylesheets ~/.config/qutebrowser/solarized-everything-css/css/apprentice/apprentice-all-sites.css ""',
             'xx': 'config-cycle statusbar.show never always ;; config-cycle tabs.show switching always',
             'xd': 'set downloads.location.directory ~/Imagens ;; hint images download',
-            ',m': 'hint links spawn mpv {hint-url}',
+            ',m': 'hint links spawn mpv --window-scale=0.5 {hint-url}',
             ',y': 'hint links spawn urxvt -e youtube-dl -x --audio-format mp3 {hint-url}'
             }
         }
