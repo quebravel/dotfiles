@@ -7,7 +7,7 @@ modi: "drun,run";
 font: "tamzenforpowerline 12";
 /*	bw: 1;*/
     /* padding: 5; */
-    /* yoffset: 0; */
+    yoffset: 20;
     /* xoffset: 0; */
     /* location: 6; */
     /* fixed-num-lines: true; */
