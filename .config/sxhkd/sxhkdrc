@@ -17,34 +17,31 @@
 
 # terminal emulator
 super + Return
-	urxvt
+    urxvt
 
 # ranger
 super + r
     [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh && urxvt -e ranger
 
 # program launcher
-
-# dmenu_run | drun.sh = dmenu2 | pwdrun.sh = dmenu2+pywal
 super + p
-    dmenu_run -h 42 -y 20 -nb "#0087ff" -nf "#000000" -sb "#00afaf" -sf "#000000" -fn "monaco-10"
-#    ~/.config/sxhkd/scripts_sxhkd/drun.sh
+    rofi -show
 
 # browser
 super + i
-    firefox-bin
-
-# rofi run
-#super + d
-#    rofi -show
+    qutebrowser
 
 # make sxhkd reload its configuration files:
 super + Escape
-     pkill -USR1 -x sxhkd
+	pkill -USR1 -x sxhkd
 
 # restart bspwm
 super + alt + r
     bspc wm -r
+
+# rofi-pass
+super + o
+    rofi-pass
 
 #
 # bspwm hotkeys
@@ -74,13 +71,13 @@ super + g
 # state/flags
 #
 
-# set the window state
+# tiled | pseudo_tiled | floating | fullscreen
 super + {t,shift + t,s,f}
 	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
 
-# set the node flags / locked trava janela / janela em tds os espaços de trabalho / private não se move quando abre uma janela nova
-super + ctrl + {x,y,z}
-	bspc node -g {locked,sticky,private}
+# marked | locked | follow windows all workspaces | keep local window
+super + ctrl + {m,x,y,z}
+	bspc node -g {marked,locked,sticky,private}
 
 #
 # focus/swap
@@ -132,6 +129,7 @@ super + ctrl + {1-9}
 super + ctrl + space
 	bspc node -p cancel
 
+# changer ratio window
 super + ctrl + {1-9}
 	bspc node @parent -r 0.{1-9}
 
@@ -148,7 +146,7 @@ super + alt + {h,j,k,l}
 	~/.config/bspwm/bspwm_resize.sh {west,south,north,east} 20
 
 
-# MOVER UMA JANELA FLUTUANTE
+# moving float window
 ctrl + alt {h,j,k,l}
     bspc node -v {-20 0,0 20,0 -20,20 0}
 
@@ -159,16 +157,15 @@ ctrl + alt {h,j,k,l}
 
     bspc config pointer_action2 resize_corner
 
-# DESLIGAR/REINICIAR COMPUTADOR
+# shutdown
 super + shift + d
-   shutdown -h now
+   sudo shutdown -h now
+
+# restart
 super + shift + r
-   shutdown -r now
+   sudo shutdown -r now
 
-# VOLUME
-# pulseaudio | selecione o número corrento com "pacmd list-sinks | grep 'index:' | cut -b12-"
-
-# pamixer
+# volume keyboard
 XF86AudioRaiseVolume
     pamixer -i 5
 XF86AudioLowerVolume
@@ -176,13 +173,18 @@ XF86AudioLowerVolume
 XF86AudioMute
     pamixer -t
 
+# control volume
 alt + {equal,minus,m}
     ~/.config/sxhkd/scripts_sxhkd/vol_key.sh {-i,-d,-m}
 
-#alt + {equal,minus,0}
 #    pamixer {-i 5,-d 5,-t}
 
-# use o comando abaixa para desconbrir o nome do dispositivo
+#super + alt + {equal,minus,0}
+#    amixer -c 2 sset 'Speaker' {5%+,5%-,toggle}
+
+# alt + {equal,minus,0}
+    # amixer set 'Master' {5%+,5%-,toggle}
+
 # pacmd list-sinks | awk '/name:/ {print $0};' | awk '{ print $2}' | sed 's/<//g; s/>//g'
 #super + alt + equal
 #    pactl set-sink-volume "alsa_output.usb-C-Media_Electronics_Inc._USB_PnP_Sound_Device-00.iec958-stereo" +10%
@@ -190,27 +192,22 @@ alt + {equal,minus,m}
 #super + alt + minus
 #    pactl set-sink-volume "alsa_output.usb-C-Media_Electronics_Inc._USB_PnP_Sound_Device-00.iec958-stereo" -10%
 
-# alternar entre saidas de audio | script toggle_switch_sound.sh | credit be gaco and user512557
+# changer out audio | script toggle_switch_sound.sh | credit be gaco and user512557
 alt + backslash
     ~/.config/sxhkd/scripts_sxhkd/toggle_switch_sound.sh
 
-# mpc next and prev sound
+# mpd next sound
 alt + {period,comma,p,s}
     mpc {next,prev,toggle,stop}
 
-# amixer master
-# alt + {equal,minus,0}
-#     amixer set 'Master' {5%+,5%-,toggle}
+#alt + shift + s
+#    mpc stop
 
-# amixer headphone
-# super + alt + {equal,minus,0}
-#    amixer sset 'Speaker' {5%+,5%-,toggle}
-
-# control mpv pause
 #XF86AudioPlay
 #    echo "pause" > /tmp/mplayer-control
 
 # BRILHO NOTEBOOK
+
 #XF86MonBrightnessUp
 #    xbacklight -inc 6
 #XF86MonBrightnessDown
@@ -220,45 +217,68 @@ alt + {period,comma,p,s}
 #alt + Left
 #    xbacklight -dec 6
 
-# Printscreen
+# layout teclado
+#    super + shift + b
+#    setxkbmap -layout {br -model "",us -model ""}
+
+# printscreen
 Print
     scrot -e 'mv $f ~/Imagens/ 2>/dev/null'
 
+# printscreen area
 alt + Print
     sleep 0.2; scrot -s -e 'mv $f ~/Imagens/ 2>/dev/null'
 
+# printscreen window
 ctrl + Print
     sleep 0.3; scrot -b -u -e 'mv $f ~/Imagens/ 2>/dev/null'
 
-# layout teclado
-super + shift + b
-    setxkbmap -layout {br -model "",us -model ""}
 
-# MUDAR ESPAÇOS DA JANELA [gap]
+# set changes gap
 alt + shift + {parenleft,parenright}
     bspc config -d focused window_gap $((`bspc config -d focused window_gap` {+,-} 2 ))
 
+# changes gap
 super + alt + g
     bspc config -d focused window_gap {0,7}
 
-# MUDAR LAYOUT PARA HORIZONTAL
+# spins windows
 super + ctrl + r
     bspc node @parent -R 270
 
+# move last window
 super + apostrophe
-    bspc node -s last
+	bspc node -s last
 
 #super + {_,shift +}b
 #    bspc node -f {next,prev}.!hidden
 
+# reset polybar
 super + shift + p
     pkill polybar; polybar bspoly&
 
+# reset xresources
+super + x
+    xrdb ~/.Xresources
+
+# mont/umount devices
 super + {shift + u,u}
-    ~/.config/sxhkd/scripts_sxhkd/d2_mounta.sh {-d,-m}
+    ~/.config/sxhkd/scripts_sxhkd/rofi_mounta.sh {-d,-m}
 
+# rofi translator
 alt + t
-    ~/.config/sxhkd/scripts_sxhkd/d2_tradu.sh
+    ~/.config/sxhkd/scripts_sxhkd/rofi_tradu.sh
 
+# redshift
 alt + r
     ~/.config/sxhkd/scripts_sxhkd/redshift_scpt.sh
+
+#super + shift + Return
+#     xterm -e tmux -2
+
+# Rotate tree
+super + shift + {s,a}
+    bspc node @/ -C {forward,backward}
+
+super + F1
+    ~/.config/sxhkd/scripts_sxhkd/sxhkd_help.sh
