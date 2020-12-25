@@ -7,7 +7,7 @@ mounta(){
 }
 
 Desmounta(){
-    picom & echo -e "Digite a senha\n" | rofi -dmenu -config ~/.config/rofi/device.ribbon.rasi -password -p "Desmontando" | sudo -S umount -Rf /mnt && dunstify -u normal -t 1500 "Desmontado" "/mnt" ; pkill picom
+    echo -e "Digite a senha\n" | rofi -dmenu -config ~/.config/rofi/device.ribbon.rasi -password -p "Desmontando" | sudo -S umount -Rf /mnt && dunstify -u normal -t 1500 "Desmontado" "/mnt"
 }
 
 escolha(){
