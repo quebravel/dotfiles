@@ -159,11 +159,11 @@ ctrl + alt {h,j,k,l}
 
 # shutdown
 super + shift + d
-   sudo shutdown -h now
+    ~/.config/sxhkd/scripts_sxhkd/rofi_shutdown.sh
 
 # restart
-super + shift + r
-   sudo shutdown -r now
+#super + shift + r
+#   sudo shutdown -r now
 
 # volume keyboard
 XF86AudioRaiseVolume

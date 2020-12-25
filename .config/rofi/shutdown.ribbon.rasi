@@ -1,0 +1,70 @@
+/**
+ * ROFI Color theme
+ * User: Rokit
+*/
+
+configuration {
+    display-drun:    "ATIVAR";
+    display-run:     "RUN";
+    display-window:  "";
+    display-combi:   "";
+    yoffset:         20;
+}
+
+* {
+  base-bg: #0007;
+  selected-bg: #0007;
+  base-color: #0007;
+  selected-color: #fff;
+  text-color: @base-color;
+  /* font: "tamzenforpowerline bold 12"; */
+  font: "Monaco 10";
+}
+#window {
+  anchor: north;
+  location: north;
+  width: 100%;
+  background-color: @base-bg;
+  margin: 0px 0px 0% 0px;
+  children: [ horibox ];
+}
+#horibox {
+  background-color: #cc241d;
+  orientation: horizontal;
+  children: [ prompt, textbox-prompt-colon, entry, listview ];
+}
+#prompt {
+  /* text-color: @selected-color; */
+  text-color: #000;
+  padding: 0.7em 0px 0.7em 10px;
+  background-color: #cc241d; /*mudei*/
+}
+#textbox-prompt-colon  {
+  expand: false;
+  str: ":";
+  padding: 0.7em 10px 0.7em 0px;
+  text-color: #000;
+  background-color: #cc241d; /*mudei*/
+}
+#entry {
+  padding: 0.7em;
+  text-color: #fff;
+  background-color: #cc241d;
+  expand: false;
+  width: 10em;
+}
+#listview {
+  background-color: #cc241d; /*mudei*/
+  layout: horizontal;
+  spacing: 0px;
+  lines: 100;
+}
+#element {
+  background-color: #cc241d; /*mudei*/
+  padding: 0.7em;
+}
+#element selected {
+  border: 0px 0px; /*leve salto quando selecionado*/
+  text-color: @selected-color;
+  background-color: @selected-bg;
+}
