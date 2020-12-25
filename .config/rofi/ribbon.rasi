@@ -11,15 +11,15 @@ configuration {
 }
 
 * {
-  base-bg: #222;
-  selected-bg: #00afaf;
-  base-color: #000000aa;
-  selected-color: #222;
+  base-bg: #0007;
+  selected-bg: #0007;
+  base-color: #0007;
+  selected-color: #fff;
   /* border-color: #00000066; */
   /* transparent: #00000000; */
   text-color: @base-color;
-  font: "tamzenforpowerline bold 12";
-  /* font: "monospace 10"; */
+  /* font: "tamzenforpowerline bold 12"; */
+  font: "Monaco 10";
 }
 #window {
   anchor: north;
@@ -44,7 +44,7 @@ configuration {
   expand: false;
   str: ":";
   padding: 0.7em 10px 0.7em 0px;
-  text-color: @selected-color;
+  text-color: #000;
   background-color: #0087ff; /*mudei*/
 }
 #entry {
