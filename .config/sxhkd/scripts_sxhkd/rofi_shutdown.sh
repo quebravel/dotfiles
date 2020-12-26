@@ -6,7 +6,7 @@
 
 
 
-MENU="$(rofi -config ~/.config/rofi/shutdown.ribbon.rasi -sep "|" -dmenu -i -p 'System' <<< "Logout|Reboot|Shutdown")"
+MENU="$(rofi -config ~/.config/rofi/shutdown.ribbon.rasi -selected-row '2' -sep "|" -dmenu -i -p 'System' <<< "Logout|Reboot|Shutdown")"
 
             case "$MENU" in
 
