@@ -221,18 +221,21 @@ alt + {period,comma,p,s}
 #    super + shift + b
 #    setxkbmap -layout {br -model "",us -model ""}
 
-# printscreen
+# tira o print de toda a tela e salva na pasta Imagens.
 Print
-    scrot -e 'mv $f ~/Imagens/ 2>/dev/null'
+    maim -uo ~/Imagens/$(date +%d-%m-%y-%H:%M:%S)-maim.png
 
-# printscreen area
+# selecionar ou tirar print da janela com um clique salvando na pasta Imagens.
 alt + Print
-    sleep 0.2; scrot -s -e 'mv $f ~/Imagens/ 2>/dev/null'
+    maim -os ~/Imagens/$(date +%d-%m-%y-%H:%M:%S)-maim.png
 
-# printscreen window
+# tira print da janela e copia para a aréa de transferência
 ctrl + Print
-    sleep 0.3; scrot -b -u -e 'mv $f ~/Imagens/ 2>/dev/null'
+    maim -i $(xdotool getactivewindow) | xclip -selection clipboard -t image/png
 
+# seleciona ou tira print da tela e copia para a aréa de transferência.
+shift + Print
+    maim -s -u -o | xclip -selection clipboard -t image/png -i
 
 # set changes gap
 alt + shift + {parenleft,parenright}
