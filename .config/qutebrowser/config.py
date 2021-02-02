@@ -6,6 +6,8 @@
 # Uncomment this to still load settings configured via autoconfig.yml
 # config.load_autoconfig()
 
+config.load_autoconfig()
+
 c.fonts.tabs.selected = "10.5pt tamzenforpowerline"
 c.fonts.tabs.unselected = "10.5pt tamzenforpowerline"
 c.fonts.statusbar = "10.5pt tamzenforpowerline"
@@ -65,6 +67,7 @@ c.colors.webpage.darkmode.enabled = True
 c.colors.webpage.darkmode.grayscale.all = True
 #  c.colors.webpage.bg = "#262626"
 c.scrolling.bar = "never"
+#  c.content.blocking.hosts.lists.append( str(config.configdir) + "/blockedHosts")
 
 # keys
 c.bindings.commands = {
