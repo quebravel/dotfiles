@@ -68,6 +68,8 @@ c.colors.webpage.darkmode.grayscale.all = True
 #  c.colors.webpage.bg = "#262626"
 c.scrolling.bar = "never"
 #  c.content.blocking.hosts.lists.append( str(config.configdir) + "/blockedHosts")
+# instalar adblock com o comando pip install adblock
+#  c.content.blocking.method = "adblock"
 
 # keys
 c.bindings.commands = {
