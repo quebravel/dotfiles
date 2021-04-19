@@ -1,0 +1,132 @@
+{
+    // "layer": "top", // Waybar at top layer
+    // "position": "bottom", // Waybar position (top|bottom|left|right)
+    "height": 23, // Waybar height (to be removed for auto height)
+    //"width": 90, // Waybar width
+    // Choose the order of the modules
+    "modules-left": ["custom/weather", "sway/mode", "custom/media", "sway/window"],
+    "modules-center": ["sway/workspaces"],
+    "modules-right": ["idle_inhibitor", "disk", "custom/temp_bsd", "pulseaudio", "network", "memory", "temperature", "backlight", "sway/language", "battery", "clock", "tray"],
+    // Modules configuration
+     "sway/workspaces": {
+         "persistant_workspaces": {
+            "2": [],
+            "3": [],
+            "4": [],
+            "5": []
+            },
+         "disable-scroll": true,
+         "all-outputs": true,
+         "format": "{name}: {icon}",
+         "format-icons": {
+             "1": "",
+             "2": "",
+             "3": "",
+             "4": "",
+             "5": "",
+             "urgent": "",
+             "focused": "",
+             "default": ""
+         }
+     },
+    "sway/mode": {
+        "format": "<span style=\"italic\">{}</span>"
+    },
+    "mpd": {
+        "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ ",
+        "format-disconnected": "Disconnected ",
+        "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped ",
+        "unknown-tag": "N/A",
+        "interval": 2,
+        "consume-icons": {
+            "on": " "
+        },
+        "random-icons": {
+            "off": "<span color=\"#f53c3c\"></span> ",
+            "on": " "
+        },
+        "repeat-icons": {
+            "on": " "
+        },
+        "single-icons": {
+            "on": "1 "
+        },
+        "state-icons": {
+            "paused": "",
+            "playing": ""
+        },
+        "tooltip-format": "MPD (connected)",
+        "tooltip-format-disconnected": "MPD (disconnected)"
+    },
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        }
+    },
+    "tray": {
+        // "icon-size": 21,
+        "spacing": 10
+    },
+    "clock": {
+        // "timezone": "America/New_York",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format-alt": "{:%d-%m-%Y}",
+	"format": "{:%H:%M}"
+    },
+    //"cpu": {
+    //    "format": "{usage}% ",
+    //    "tooltip": false
+    //},
+    "memory": {
+        "format": "{}% "
+    },
+    "network": {
+	"interface": "re0", // (Optional) To force the use of this interface
+        //"format-wifi": "{essid} ({signalStrength}%) ",
+        "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
+        "format-linked": "{ifname} (No IP) ",
+        "format-disconnected": "Disconnected ⚠",
+        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+    },
+    "pulseaudio": {
+        // "scroll-step": 1, // %, can be a float
+        "format": "{volume}% {icon} {format_source}",
+        "format-bluetooth": "{volume}% {icon} {format_source}",
+        "format-bluetooth-muted": " {icon} {format_source}",
+        "format-muted": " {format_source}",
+        "format-source": "{volume}% ",
+        "format-source-muted": "",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol"
+    },
+
+    "custom/temp_bsd" : {
+        "exec": "sysctl -a | grep tz1.temperature | cut -b 34-38",
+        "interval": 3600,
+        "format": "Temp {} "
+    },
+
+    "custom/weather": {
+         "exec": "curl 'https://wttr.in/?format=1'",
+         "interval": 3600,
+         //"format": "Clima {}°C ",
+         "format": "Clima {}",
+    },
+
+    "disk": {
+    "interval": 3000,
+    "format": "SSD {used}/{total}",
+    "path": "/"
+}
+
+}
