@@ -38,7 +38,7 @@ set $browser qutebrowser
 set $vol_inc pactl set-sink-volume @DEFAULT_SINK@ +5%
 set $vol_dec pactl set-sink-volume @DEFAULT_SINK@ -5%
 set $vol_togg pactl set-sink-mute @DEFAULT_SINK@ toggle
-set $move_cmd $HOME/sway-move.sh
+set $move_cmd $HOME/.config/sway/bin/sway-move.sh
 
 # on the original workspace that the command was run on.
 set $menu dmenu_path | wofi --show drun -i | xargs swaymsg exec --
