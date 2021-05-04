@@ -38,7 +38,10 @@ set $browser qutebrowser
 set $vol_inc pactl set-sink-volume @DEFAULT_SINK@ +5%
 set $vol_dec pactl set-sink-volume @DEFAULT_SINK@ -5%
 set $vol_togg pactl set-sink-mute @DEFAULT_SINK@ toggle
+set $vol_inc_dev mixer -s vol +5
+set $vol_dec_dev mixer -s vol -5
 set $move_cmd $HOME/.config/sway/bin/sway-move.sh
+set $switch_device $HOME/.config/sway/bin/switch-audio.sh
 
 # on the original workspace that the command was run on.
 set $menu dmenu_path | wofi --show drun -i | xargs swaymsg exec --
@@ -47,7 +50,7 @@ set $menu dmenu_path | wofi --show drun -i | xargs swaymsg exec --
 #
 # Default wallpaper (more resolutions are available in /usr/local/share/backgrounds/sway/)
 # output * bg /usr/local/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
-output * bg ~/Imagens/anime-girl-gas-mask-sf.jpg fill
+output * bg ~/Imagens/abstract4k.jpg fill
 #
 
 ### Key bindings
@@ -56,6 +59,7 @@ output * bg ~/Imagens/anime-girl-gas-mask-sf.jpg fill
 #
     # Start a terminal
     bindsym $mod+Return exec $term
+    bindsym $mod+Shift+Return exec $term --class=floating
 
     # Kill focused window
     bindsym $mod+c kill
@@ -172,6 +176,14 @@ output * bg ~/Imagens/anime-girl-gas-mask-sf.jpg fill
     bindsym $mod1+equal exec $vol_inc
     bindsym $mod1+minus exec $vol_dec
     bindsym $mod1+0 exec $vol_togg
+    bindsym $mod1+Up exec $vol_inc_dev
+    bindsym $mod1+Down exec $vol_dec_dev
+
+
+#
+# toogle sound
+#
+    bindsym $mod1+backslash exec $switch_device
 
 #
 # Resizing containers:
@@ -220,5 +232,10 @@ bar {
 	swaybar_command waybar
 
 }
+
+#
+# Auto floating for windows like Terminals started with Mod+Shift+Return
+#
+# for_window [app_id="floating"] floating enable
 
 include /usr/local/etc/sway/config.d/*
