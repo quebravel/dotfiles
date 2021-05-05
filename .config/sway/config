@@ -21,16 +21,24 @@ input * {
 
 seat seat0 xcursor_theme Adwaita 24
 
+# Start programs
+
+exec dbus-daemon --session --address=unix:path=$XDG_RUNTIME_DIR/bus
+
+exec mako
+
 ### Variables
 #
 # Logo key. Use Mod1 for Alt.
 set $mod Mod4
 set $mod1 Mod1
+
 # Home row direction keys, like vim
 set $left h
 set $down j
 set $up k
 set $right l
+
 # Your preferred programs
 set $term xfce4-terminal
 set $printscreen grim -g "$(slurp)" $(xdg-user-dir PICTURES)/$(date +'%s_grim.png')
@@ -82,6 +90,7 @@ output * bg ~/Imagens/abstract4k.jpg fill
     # Exit sway (logs you out of your Wayland session)
     bindsym $mod+Shift+e exec swaynag -t warning -m 'Sair do sway? Vai sair da sessão Wayland.' -b 'Sim, sair sway' 'swaymsg exit'
     bindsym $mod+Shift+d exec swaynag -t error -m 'Voce quer desligar ou reiniciar?' -B 'Desligar o computador?'  'sudo shutdown -p now' -z 'Reiniciar o computador?'  'sudo shutdown -r now'
+
 #
 # Moving around:
 #
