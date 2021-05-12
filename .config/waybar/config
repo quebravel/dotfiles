@@ -1,38 +1,48 @@
 {
     //"layer": "top", // Waybar at top layer
     "position": "top", // Waybar position (top|bottom|left|right)
-    "height": 23, // Waybar height (to be removed for auto height)
+    "height": 15, // Waybar height (to be removed for auto height)
     //"width": 90, // Waybar width
     "margin-right": 0,
     "margin-left": 0,
     "margin-top": 0,
     "margin-bottom": 0,
     // Choose the order of the modules
-    "modules-left": ["custom/weather", "disk", "sway/mode", "custom/media", "sway/window"],
+    "modules-left": ["custom/onoffi", "custom/weather", "disk", "sway/mode", "custom/media", "sway/window"],
     "modules-center": ["sway/workspaces"],
     "modules-right": ["idle_inhibitor", "custom/temp_bsd", "pulseaudio", "network", "memory", "temperature", "backlight", "sway/language", "clock", "tray"],
     // Modules configuration
      "sway/workspaces": {
+         "all-outputs": false,
+         "disable-scroll": true,
+         "format": "{icon}", //: {name}
+         "format-icons": {
+             "1": "",
+             "2": "",
+             "3": "",
+             "4": "",
+             "5": "",
+             "6": "",
+             "7": "",
+             "8": "",
+             "9": "",
+             "10": "",
+             "urgent": "",
+             "focused": "",
+             "default": ""
+         },
          "persistant_workspaces": {
+            "1": [],
             "2": [],
             "3": [],
             "4": [],
             "5": [],
-            "6": []
-            },
-         "all-outputs": true,
-         "disable-scroll": true,
-         "format": "{name}: {icon}",
-         "format-icons": {
-             "1": "",
-             "2": "",
-             "3": "",
-             "4": "",
-             "5": "",
-             "urgent": "",
-             "focused": "",
-             "default": ""
-         }
+            "6": [],
+            "7": [],
+            "8": [],
+            "9": [],
+            "10": []
+            }
      },
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"
@@ -81,7 +91,7 @@
         "format": "{:%a %d %b %Y %H:%M} "
     },
     "memory": {
-        "format": "{}% "
+        "format": "{}% "
     },
     "network": {
         "interface": "re0", // (Optional) To force the use of this interface
@@ -119,16 +129,22 @@
     },
 
     "custom/weather": {
-         "exec":  "curl http://wttr.in | head -n 4 | grep °C | cut -b 43-45",
+         "exec":  "curl http://wttr.in/?format=1 | head -n 4 | grep °C | cut -b 8-15",
          "interval": 3600,
-         "format": "clima {}°C ",
+         "format": "clima {} ",
+         //"format": "clima {}°C ",
          //"format": "clima {}",
     },
 
     "disk": {
     "interval": 3000,
-    "format": "ssd {used}/{total}",
+    "format": "ssd {used}/{total} ",
     "path": "/"
-    }
+    },
+
+    "custom/onoffi": {
+        "format": "freebsd ",
+        "on-click": "swaynag -t error -m 'Voce quer desligar ou reiniciar?' -B 'Desligar o computador?'  'sudo shutdown -p now' -z 'Reiniciar o computador?'  'sudo shutdown -r now'",
+    },
 
 }
