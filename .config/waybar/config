@@ -128,14 +128,6 @@
        "format": "temp {} "
     },
 
-    "custom/weather": {
-         "exec":  "curl http://wttr.in/?format=1 | head -n 4 | grep °C | cut -b 8-15",
-         "interval": 3600,
-         "format": "clima {} ",
-         //"format": "clima {}°C ",
-         //"format": "clima {}",
-    },
-
     "disk": {
     "interval": 3000,
     "format": "ssd {used}/{total} ",
@@ -145,6 +137,14 @@
     "custom/onoffi": {
         "format": "freebsd ",
         "on-click": "swaynag -t error -m 'Voce quer desligar ou reiniciar?' -B 'Desligar o computador?'  'sudo shutdown -p now' -z 'Reiniciar o computador?'  'sudo shutdown -r now'",
+    },
+
+    "custom/weather": {
+    "format": "clima {}",
+    "tooltip": true,
+    "interval": 3600,
+    "exec": "~/.config/waybar/bin/waybar-wttr.py",
+    "return-type": "json"
     },
 
 }
