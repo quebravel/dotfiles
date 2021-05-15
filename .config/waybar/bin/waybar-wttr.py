@@ -106,7 +106,7 @@ for i, day in enumerate(weather['weather']):
     data['tooltip'] += f" {day['astronomy'][0]['sunrise']}  {day['astronomy'][0]['sunset']}\n"
     for hour in day['hourly']:
         if i == 0:
-            if int(format_time(hour['time'])) < datetime.now().hour-2:
+            if int(format_time(hour['time'])) < datetime.now().hour-3:
                 continue
         data['tooltip'] += f"{format_time(hour['time'])} {WEATHER_CODES[hour['weatherCode']]} {format_temp(hour['FeelsLikeC'])} {hour['weatherDesc'][0]['value']}, {format_chances(hour)}\n"
 
