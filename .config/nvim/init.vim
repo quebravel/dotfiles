@@ -139,6 +139,7 @@ set tabstop=4
 set softtabstop=0
 set shiftwidth=4
 set expandtab
+set splitbelow splitright
 
 "" Map leader to ,
 let mapleader=','
@@ -623,6 +624,23 @@ nmap <silent> <localleader>d <Plug>(operator-sandwich-delete)<Plug>(operator-san
 nmap <silent> <localleader>r <Plug>(operator-sandwich-replace)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-query-a)
 nmap <silent> <localleader>db <Plug>(operator-sandwich-delete)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-auto-a)
 nmap <silent> <localleader>rb <Plug>(operator-sandwich-replace)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-auto-a)
+
+" Execute code in neovim
+augroup exe_code
+    autocmd!
+
+    " execute python code
+    autocmd FileType python nnoremap <buffer> <localleader>r
+                \ :sp<CR> :term python3 %<CR> :startinsert<CR>
+
+    " execute javascript code
+    autocmd FileType javascript nnoremap <buffer> <localleader>r
+                \ :sp<CR> :term nodejs %<CR> :startinsert<CR>
+
+    " execute bash script
+    autocmd FileType bash,sh nnoremap <buffer> <localleader>r
+                \ :sp<CR> :term bash %<CR> :startinsert<CR>
+augroup End
 
 " YouCompleteme
 " let g:ycm_autoclose_preview_window_after_completion = 1
