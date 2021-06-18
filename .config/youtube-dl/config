@@ -20,7 +20,7 @@
 # não sobreescrever
 --no-overwrites
 # formato do video 1280
---format 22
+# --format 22
 # nomeclatura da saida
---output "%(epoch)s - %(title)s"
+--output "%(epoch)s - %(title)s.%(ext)s"
 
