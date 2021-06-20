@@ -25,7 +25,8 @@ super + r
 
 # program launcher
 super + p
-    rofi -show drun -drun-display-format \{name\}
+    dmenu_run -h 18 -nf "#fbf1c7" -nb "#3c3836" -sf "#1d2021" -sb "#bdae93" -fn "Source Code Pro-8:normal" -p "dmenu2"
+    # rofi -show drun -drun-display-format \{name\}
 
 # browser
 super + i
@@ -266,7 +267,7 @@ super + x
 
 # mont/umount devices
 super + {shift + u,u}
-    ~/.config/sxhkd/scripts_sxhkd/rofi_mounta.sh {-d,-m}
+    ~/.config/sxhkd/scripts_sxhkd/d2_mounta.sh {-d,-m}
 
 # rofi translator
 alt + t
