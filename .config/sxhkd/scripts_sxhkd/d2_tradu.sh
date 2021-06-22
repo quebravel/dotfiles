@@ -1,13 +1,13 @@
 #!/bin/bash
 
-um=`echo -e "" | dmenu -noinput -h 45 -y 20 -nb "#0087ff" -nf "#ffffff" -sb "#d5c4a1" -sf "#000000" -fn "monaco-10" -p "Traduzir"`
+um=`dmenu -noinput -h 18 -nf "#fbf1c7" -nb "#3c3836" -sf "#1d2021" -sb "#bdae93" -fn "Source Code Pro-8:normal" -p "translate"`
 
-palavra=`trans -no-ansi -no-bidi -no-warn "$um" | sed -n 3,4p`
+palavra=`trans -no-ansi -no-bidi -no-warn -brief "$um" # | sed -n 3,4p`
 
 if [ -z $um ]
 then
     exit 1
 else
-    dunstify -u normal -t 12000 "Tradução" "$palavra"
+    echo -e $palavra | dmenu -l 1 -h 18 -nf "#fbf1c7" -nb "#3c3836" -sf "#1d2021" -sb "#bdae93" -fn "Source Code Pro-8:normal"
 fi
 
