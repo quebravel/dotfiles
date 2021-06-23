@@ -7,7 +7,7 @@ mounta(){
 }
 
 Desmounta(){
-    echo -e "Digite a senha\n" | dmenu -mask -noinput -h 18 -nb "#3c3836" -nf "#fbf1c7" -sb "#bdae93" -sf "#1d2021" -fn "Source Code Pro-8" -p "Desmontando | Senha" | sudo -S umount -Rf /mnt && dunstify -u normal -t 1500 "Desmontado" "/mnt"
+    echo -e "Digite a senha\n" | dmenu -mask -noinput -h 18 -nb "#3c3836" -nf "#fbf1c7" -sb "#bdae93" -sf "#1d2021" -fn "Source Code Pro-8" -p "Desmontando | Senha" | sudo -S umount -Rlf /mnt && dunstify -u normal -t 1500 "Desmontado" "/mnt"
 }
 
 escolha(){
