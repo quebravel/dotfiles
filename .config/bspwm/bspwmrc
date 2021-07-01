@@ -57,6 +57,8 @@ bspc rule -a qutebrowser desktop='^2' follow=on
 bspc rule -a Chromium desktop='^3' follow=on border=on
 bspc rule -a mpv state=floating
 bspc rule -a feh state=floating
+bspc rule -a TelegramDesktop state=floating rectangle=400x625+1512+18
+bspc rule -a Pavucontrol state=floating rectangle=800x625+1110+18
 bspc rule -a "Code - OSS" desktop='^4' follow=on
 # bspc desktop 'WEB-2' --layout monocle
 
