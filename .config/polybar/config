@@ -18,19 +18,19 @@
 
 [colors]
 background = #222
-;background-alt = #363636
-;foreground = #00afaf
+background-alt = #363636
+foreground = #00afaf
 foreground-alt = #888
-;primary = #ffffd7
-;secondary = #e60053
-;alert = #bd2c40
-;tiler = #fba922
+primary = #ffffd7
+secondary = #e60053
+alert = #bd2c40
+tiler = #fba922
 
 ;cores para pywal
 ;[colors]
-background = ${xrdb:color0:#222}
+;background = ${xrdb:color0:#222}
 ;background-alt = ${xrdb:color8:#363636}
-foreground = ${xrdb:color7:#00afaf}
+;foreground = ${xrdb:color7:#00afaf}
 ;foreground-alt = ${xrdb:color4:#888}
 ;primary = ${xrdb:color5:#ffffd7
 ;secondary = ${xrdb:color1:#e60053}
@@ -73,12 +73,10 @@ tray-detached = false
 pseudo-transparency = true
 
 ; instalar essas fontes
-;font-0 = ohsnap:pixelsize=10;0
-font-0 = misc ohsnap:size=12;2
+font-0 = tamzen:size=12;2
 font-1 = Font Awesome 5 Free:pixelsize=9;1
-font-2 = Wuncon siji:pixelsize=14;2
+font-2 = siji:pixelsize=14;2
 font-3 = unifont:fontformat=truetype:size=8:antialias=false;1
-font-4 = misc ohsnap:bold:size=12;3
 
 modules-left = bspwm xwindow
 ;modules-center = mpd
@@ -112,35 +110,12 @@ interval = 60
 spacing = 2
 
 mount-0 = /
-;format-mounted = <label-mounted>
-format-mounted = <label-mounted> <bar-used>
+format-mounted = <label-mounted>
 format-mounted-prefix = " hdd "
 format-mounted-foreground = ${colors.foreground-alt}
 
 label-mounted = %percentage_used%%
 label-mounted-foreground = ${colors.foreground}
-
-bar-used-width = 10
-bar-used-foreground-0 = #55aa55
-bar-used-foreground-1 = #55aa55
-bar-used-foreground-2 = #55aa55
-bar-used-foreground-3 = #55aa55
-bar-used-foreground-4 = #55aa55
-bar-used-foreground-5 = #f5a70a
-bar-used-foreground-6 = #f5a70a
-bar-used-foreground-7 = #f5a70a
-bar-used-foreground-8 = #f5a70a
-bar-used-foreground-9 = #ff5555
-bar-used-gradient = false
-bar-used-indicator =
-bar-used-indicator-font = 4
-bar-used-indicator-foreground = ${colors.foreground}
-bar-used-fill = :
-bar-used-fill-font = 4
-bar-used-empty = :
-bar-used-empty-font = 4
-bar-used-empty-foreground = ${colors.foreground-alt}
-
 
 [module/bspwm]
 type = internal/bspwm
@@ -212,28 +187,7 @@ format-prefix = " ram "
 format-prefix-foreground = ${colors.foreground-alt}
 format-foreground = ${colors.foreground}
 label = %percentage_used:2%%
-format = <label> <bar-used>
-
-bar-used-width = 10
-bar-used-foreground-0 = #55aa55
-bar-used-foreground-1 = #55aa55
-bar-used-foreground-2 = #55aa55
-bar-used-foreground-3 = #55aa55
-bar-used-foreground-4 = #55aa55
-bar-used-foreground-5 = #f5a70a
-bar-used-foreground-6 = #f5a70a
-bar-used-foreground-7 = #f5a70a
-bar-used-foreground-8 = #f5a70a
-bar-used-foreground-9 = #ff5555
-bar-used-gradient = false
-bar-used-indicator =
-bar-used-indicator-font = 4
-bar-used-indicator-foreground = ${colors.foreground}
-bar-used-fill = :
-bar-used-fill-font = 4
-bar-used-empty = :
-bar-used-empty-font = 4
-bar-used-empty-foreground = ${colors.foreground-alt}
+format = <label>
 
 [module/wired-network]
 type = internal/network
@@ -506,12 +460,12 @@ ramp-foreground = ${colors.foreground-alt}
 [module/powermenu]
 type = custom/menu
 
-expand-right = true
+expand-right = false
 
 format-spacing = 1
 
 label-open = 
-label-open-foreground = ${colors.foreground-alt}
+label-open-foreground = ${colors.tiler}
 label-close =  cancelar
 label-close-foreground = ${colors.secondary}
 label-separator = |
