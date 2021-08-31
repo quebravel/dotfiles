@@ -195,6 +195,7 @@ set noshowmode
 set mouse=a
 set colorcolumn=80
 set cursorline
+set cursorcolumn
 " set termguicolors
 
 " VERIFICAR AQUI
