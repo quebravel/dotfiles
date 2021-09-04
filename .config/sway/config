@@ -40,7 +40,7 @@ set $up k
 set $right l
 
 # Your preferred programs
-set $term xfce4-terminal
+set $term kitty
 set $printscreen grim -g "$(slurp)" $(xdg-user-dir PICTURES)/$(date +'%s_grim.png')
 set $browser qutebrowser
 set $vol_inc pactl set-sink-volume @DEFAULT_SINK@ +5%
