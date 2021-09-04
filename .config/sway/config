@@ -52,7 +52,8 @@ set $move_cmd $HOME/.config/sway/bin/sway-move.sh
 set $switch_device $HOME/.config/sway/bin/switch-audio.sh
 
 # on the original workspace that the command was run on.
-set $menu dmenu_path | wofi --show drun -i | xargs swaymsg exec --
+#set $menu dmenu_path | wofi --show drun -i | xargs swaymsg exec --
+set $menu dmenu_path | dmenu-wl_run | xargs swaymsg exec --
 
 ### Output configuration
 #
