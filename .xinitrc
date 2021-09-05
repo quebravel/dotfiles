@@ -16,7 +16,7 @@ fi
 xsetroot -cursor_name left_ptr &
 
 # feh --bg-scale ~/Imagens/wallpaper.png
-$HOME/.fehbg
+# $HOME/.fehbg
 # $HOME/trigger_custom_refresh.sh &
 # wal -R
 
@@ -41,6 +41,7 @@ fi
 pulseaudio --start &
 
 sxhkd &
-exec dbus-launch --exit-with-session bspwm
+exec bspwm
+#exec dbus-launch --exit-with-session bspwm
 
 # vim:ft=sh
