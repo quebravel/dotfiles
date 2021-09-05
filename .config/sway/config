@@ -14,9 +14,9 @@ focus_follows_mouse no
 # app_id border none
 # for_window [class="mpv"] floating enable
 
-input * {
-    xkb_layout "us"
-    xkb_variant "intl"
+input type:keyboard {
+    xkb_layout us
+    xkb_variant intl
 }
 
 seat seat0 xcursor_theme Adwaita 24
