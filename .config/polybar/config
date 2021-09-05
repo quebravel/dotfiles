@@ -44,7 +44,7 @@ tiler = #fba922
 ;monitor = ${env:MONITOR:DisplayPort-1}
 
 width = 100%
-height = 20
+height = 18
 offset-x = 0.0%
 offset-y = 0.0%
 radius = 0.0
