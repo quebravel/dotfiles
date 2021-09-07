@@ -41,8 +41,8 @@ super + alt + r
     bspc wm -r
 
 # rofi-pass
-super + o
-    rofi-pass
+#super + o
+#    rofi-pass
 
 #
 # bspwm hotkeys
@@ -160,7 +160,7 @@ ctrl + alt {h,j,k,l}
 
 # shutdown
 super + shift + d
-    ~/.config/sxhkd/scripts_sxhkd/rofi_shutdown.sh
+    ~/.config/sxhkd/scripts_sxhkd/d2_power.sh
 
 # restart
 #super + shift + r
@@ -269,9 +269,9 @@ super + x
 super + {shift + u,u}
     ~/.config/sxhkd/scripts_sxhkd/d2_mounta.sh {-d,-m}
 
-# rofi translator
+# dmenu2 translator
 alt + t
-    ~/.config/sxhkd/scripts_sxhkd/rofi_tradu.sh
+    ~/.config/sxhkd/scripts_sxhkd/d2_tradu.sh
 
 # redshift
 alt + r
