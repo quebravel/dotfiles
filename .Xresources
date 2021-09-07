@@ -241,3 +241,5 @@ Xft.hinting: 1
 Xft.antialias: 1
 Xft.rgba: rgb
 
+Sxiv*background:                   S_base03
+Sxiv*foreground:                   S_yellow
