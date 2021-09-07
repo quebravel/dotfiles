@@ -454,17 +454,9 @@ endif
 "" Copy/Paste/Cut
 set clipboard+=unnamedplus
 
-if has('macunix')
-    " pbcopy for OSX copy/paste
-    vmap <C-x> :!pbcopy<CR>
-    vmap <C-c> :w !pbcopy<CR><CR>
-endif
-
 "" Buffer nav
-noremap <leader>z :bp<CR>
-noremap <leader>Z :bp<CR>
-noremap <leader>x :bn<CR>
-noremap <leader>X :bn<CR>
+noremap <S-Tab> :bp<CR>
+noremap <Tab> :bn<CR>
 
 "" Close buffer
 noremap <leader>c :bd<CR>
