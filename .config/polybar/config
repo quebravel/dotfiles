@@ -294,38 +294,37 @@ bar-volume-empty = :
 bar-volume-empty-font = 4
 bar-volume-empty-foreground = ${colors.foreground-alt}
 
-;[module/alsa]
-;type = internal/alsa
-;
-;master-mixer = Master
-;
-;
-;format-volume = <label-volume> <bar-volume>
-;label-volume = %percentage:3:3%%
-;label-volume-foreground = ${root.foreground}
-;
-;format-volume-prefix = " VOL "
-;format-volume-foreground = ${colors.foreground-alt}
-;format-muted-prefix = ""
-;format-muted-foreground = ${colors.alert}
-;label-muted = vol -M-U-D-O-
-;
-;bar-volume-width = 10
-;bar-volume-foreground-0 = #55aa55
-;bar-volume-foreground-1 = #55aa55
-;bar-volume-foreground-2 = #55aa55
-;bar-volume-foreground-3 = #55aa55
-;bar-volume-foreground-4 = #55aa55
-;bar-volume-foreground-5 = #f5a70a
-;bar-volume-foreground-6 = #ff5555
-;bar-volume-gradient = false
-;bar-volume-indicator = |
-;bar-volume-indicator-font = 2
-;bar-volume-fill = :
-;bar-volume-fill-font = 2
-;bar-volume-empty = :
-;bar-volume-empty-font = 2
-;bar-volume-empty-foreground = ${colors.foreground-alt}
+; [module/alsa]
+; type = internal/alsa
+
+; master-mixer = Master
+
+; format-volume = <label-volume> <bar-volume>
+; label-volume = %percentage:3:3%%
+; label-volume-foreground = ${root.foreground}
+
+; format-volume-prefix = " vol "
+; format-volume-foreground = ${colors.foreground-alt}
+; format-muted-prefix = ""
+; format-muted-foreground = ${colors.alert}
+; label-muted =   " vol   0% %{T4}::::::::::%{T-}"
+
+; bar-volume-width = 10
+; bar-volume-foreground-0 = #55aa55
+; bar-volume-foreground-1 = #55aa55
+; bar-volume-foreground-2 = #55aa55
+; bar-volume-foreground-3 = #55aa55
+; bar-volume-foreground-4 = #55aa55
+; bar-volume-foreground-5 = #f5a70a
+; bar-volume-foreground-6 = #ff5555
+; bar-volume-gradient = false
+; bar-volume-indicator = |
+; bar-volume-indicator-font = 4
+; bar-volume-fill = :
+; bar-volume-fill-font = 4
+; bar-volume-empty = :
+; bar-volume-empty-font = 4
+; bar-volume-empty-foreground = ${colors.foreground-alt}
 
 [module/temperature]
 type = internal/temperature
