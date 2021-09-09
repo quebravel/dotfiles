@@ -78,13 +78,14 @@ c.bindings.commands = {
         'normal': {
             #  '<tab>': 'nop',
               'gR': 'spawn urxvt -e ranger /home/jonatas/Downloads'
-            , ',n': 'config-cycle content.user_stylesheets  ~/.config/qutebrowser/solarized-everything-css/css/solarized-dark/solarized-dark-all-sites.css ""'
-            , ',d': 'config-cycle content.user_stylesheets ~/.config/qutebrowser/solarized-everything-css/css/apprentice/apprentice-all-sites.css ""'
             , 'xx': 'config-cycle statusbar.show never always ;; config-cycle tabs.show switching always'
-            , 'xd': 'set downloads.location.directory ~/Imagens ;; hint images download'
+            , 'xi': 'set downloads.location.directory ~/Imagens ;; hint images download'
             , ',m': 'hint links spawn mpv --window-scale=0.5 {hint-url}'
-            , ',y': 'hint links spawn urxvt -e youtube-dl -x --audio-format mp3 {hint-url}'
-            , ',v': 'hint links spawn urxvt -e youtube-dl -o $HOME/Vídeos/%(title)s.%(ext)s {hint-url}'
+            , ',M': 'spawn mpv --window-scale=0.5 {url}'
+            , ',a': 'hint links userscript youtube_mp3_downloader.sh'
+            , ',A': 'spawn --userscript youtube_mp3_downloader.sh'
+            , ',v': 'hint links userscript youtube_downloader.sh'
+            , ',V': 'spawn --userscript youtube_downloader.sh'
             }
         }
 
