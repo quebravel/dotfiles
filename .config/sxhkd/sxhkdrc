@@ -17,11 +17,11 @@
 
 # terminal emulator
 super + Return
-    urxvt
+    alacritty
 
 # ranger
 super + r
-    [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh && urxvt -e ranger
+    [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh && alacritty -e ranger
 
 # program launcher
 super + p
