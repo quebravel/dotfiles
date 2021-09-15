@@ -1,7 +1,7 @@
-local mapper = function(mode, key, result) vim.api.nvim_set_keymap(mode, key, result, {noremap = true, silent = true})
+local mapper = function( mode, key, result ) vim.api.nvim_set_keymap( mode, key, result, { noremap = true, silent = true } )
 end
 
-vim.g.mapleader = ','
+vim.g.mapleader = ' '
 vim.b.mapleader = ' '
 vim.g.maplocalleader = '\\'
 vim.b.maplocalleader = '\\'
@@ -26,15 +26,29 @@ mapper( 'n', '<C-l>', '<C-w>l' )
 mapper( 'n', '<C-h>', '<C-w>h' )
 
 -- Move visual block
-mapper( 'v', 'J', ":m '>+1<CR>gv=gv" )
-mapper( 'v', 'K', ":m '<-2<CR>gv=gv" )
+mapper( 'x', 'J', ':move \'>+1<CR>gv-gv\\' )
+mapper( 'x', 'K', ':move \'<-2<CR>gv-gv\\' )
 
 -- Fugitive
 mapper( 'n', '<leader>g', ':Gvdiffsplit<CR>' )
 mapper( 'n', '<leader>l', ':Gclog<CR>' )
 
 -- Nvim comment
-mapper( '', '<leader>/', ':CommentToggle<CR>')
+mapper( '', '<leader>/', ':CommentToggle<CR>' )
+
+-- Melhor identacao (ctrl+v)
+mapper( 'v', '<', '<gb' )
+mapper( 'v', '>', '>gb' )
+
+-- Tecla para fechar buffer
+mapper( 'n', 'gb', ':BufferLinePick<CR>' )
+mapper( 'n', 'gx', ':BufferLinePickClose<CR>' )
+
+-- Limpar pesquisa (highlight)
+mapper( 'n', '<space><space>', ':noh<CR>' )
+
+-- TAB complete
+-- mapper('i', '<expr><TAB>', 'pumvisible() ? \'\\<C-n>\' : \'\\<TAB>\'')
 
 -- Execute codigo no neovim
 vim.api.nvim_exec([[

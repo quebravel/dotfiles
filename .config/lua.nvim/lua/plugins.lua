@@ -15,6 +15,8 @@ packer.init {
     }
 }
 
+local use = packer.use
+
 packer.reset()
 
 packer.startup(function()
@@ -24,34 +26,43 @@ packer.startup(function()
     opt = false
   }
 
-  packer.use 'windwp/nvim-autopairs'
-  packer.use 'folke/tokyonight.nvim'
-  packer.use 'morhetz/gruvbox'
-  packer.use 'sheerun/vim-polyglot'
-  packer.use 'kyazdani42/nvim-web-devicons'
-  packer.use 'ryanoasis/vim-devicons'
-  packer.use 'tpope/vim-fugitive'
+  use 'windwp/nvim-autopairs'
+  use 'folke/tokyonight.nvim'
+  use 'morhetz/gruvbox'
+  use 'sheerun/vim-polyglot'
+  use 'kyazdani42/nvim-web-devicons'
+  use 'ryanoasis/vim-devicons'
+  use 'tpope/vim-fugitive'
+  use 'neovim/nvim-lspconfig'
 
-  packer.use {
+  use {
+    "hrsh7th/nvim-cmp",
+    requires = {
+      "hrsh7th/vim-vsnip",
+      "hrsh7th/cmp-buffer",
+    }
+  }
+
+  use {
       'hoob3rt/lualine.nvim',
       requires = { 'kyazdani42/nvim-web-devicons', opt = true }
    }
       
-  packer.use {
+  use {
       'akinsho/bufferline.nvim',
       requires = 'kyazdani42/nvim-web-devicons'
    }
-  packer.use 'lukas-reineke/indent-blankline.nvim'
-  packer.use 'norcalli/nvim-colorizer.lua'
 
-  packer.use {
+  use 'norcalli/nvim-colorizer.lua'
+
+  use {
       'lewis6991/gitsigns.nvim',
       requires = { 'nvim-lua/plenary.nvim' }
    }
-  packer.use 'andymass/vim-matchup'
-  packer.use 'terrortylor/nvim-comment'
+  use 'andymass/vim-matchup'
+  use 'terrortylor/nvim-comment'
 
-  packer.use {
+  use {
     'kyazdani42/nvim-tree.lua',
     requires = 'kyazdani42/nvim-web-devicons'
 }

@@ -51,33 +51,11 @@ vim.opt.wildignore:append { '*/tmp/*', '*.so', '*.swp', '.zip', '.pyc', '*.db', 
 
 vim.cmd('language pt_BR.utf-8')
 vim.wo.list = true
-vim.opt.listchars = {
-    space = "⋅",
+-- vim.opt.listchars = {
+--    space = "⋅",
 --    eol = "↴",
-}
+-- }
 
 vim.g.markdown_fenced_languages = { 'sh', 'vim' }
 
 vim.g.termbufm_direction_cmd = 'new'
-
--- config Color Scheme
-vim.cmd[[colorscheme tokyonight]]
-vim.g.tokyonight_style = "night"
-
--- NvimTree
-vim.g['nvim_tree_ignore'] = { '.git', 'node_modules', '.cache' }
-vim.g['nvim_tree_gitignore'] = 1
-vim.g['nvim_tree_auto_close'] = 1
-vim.g['nvim_tree_hide_dotfiles'] = 0
-vim.g['nvim_tree_git_hl'] = 1
-vim.g['nvim_tree_highlight_opened_files'] = 1
-
--- Indent-blankline
-vim.cmd [[highlight IndentBlanklineIndent1 guifg=#E06C75 blend=nocombine]]
-vim.cmd [[highlight IndentBlanklineIndent2 guifg=#E5C07B blend=nocombine]]
-vim.cmd [[highlight IndentBlanklineIndent3 guifg=#98C379 blend=nocombine]]
-vim.cmd [[highlight IndentBlanklineIndent4 guifg=#56B6C2 blend=nocombine]]
-vim.cmd [[highlight IndentBlanklineIndent5 guifg=#61AFEF blend=nocombine]]
-vim.cmd [[highlight IndentBlanklineIndent6 guifg=#C678DD blend=nocombine]]
-
-vim.g['indent_blankline_char_highlight_list'] = true
