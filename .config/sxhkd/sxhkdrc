@@ -218,6 +218,10 @@ alt + {period,comma,p,s}
 #alt + Left
 #    xbacklight -dec 6
 
+# Brilho PC
+super + shift + b
+    ~/.config/sxhkd/scripts_sxhkd/d2_bright.sh
+
 # layout teclado
 #    super + shift + b
 #    setxkbmap -layout {br -model "",us -model ""}
