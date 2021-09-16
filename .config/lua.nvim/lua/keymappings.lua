@@ -34,7 +34,7 @@ mapper( 'n', '<leader>g', ':Gvdiffsplit<CR>' )
 mapper( 'n', '<leader>l', ':Gclog<CR>' )
 
 -- Nvim comment
-mapper( '', '//', ':CommentToggle<CR>' )
+mapper( '', '<leader>/', ':CommentToggle<CR>' )
 
 -- Melhor identacao (ctrl+v)
 mapper( 'v', '<', '<gb' )
