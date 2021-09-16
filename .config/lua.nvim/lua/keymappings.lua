@@ -9,7 +9,7 @@ vim.b.maplocalleader = '\\'
 -- mapper("n","w",":w<CR>")
 
 -- NvimTree
-mapper( 'n', '<leader>n',':NvimTreeToggle<CR>' )
+mapper( 'n', '<Esc><Esc>',':NvimTreeToggle<CR>' )
 
 -- Buffer
 mapper( 'n','<Tab>',':BufferLineCycleNext<CR>' )
@@ -34,7 +34,7 @@ mapper( 'n', '<leader>g', ':Gvdiffsplit<CR>' )
 mapper( 'n', '<leader>l', ':Gclog<CR>' )
 
 -- Nvim comment
-mapper( '', '<leader>/', ':CommentToggle<CR>' )
+mapper( '', '//', ':CommentToggle<CR>' )
 
 -- Melhor identacao (ctrl+v)
 mapper( 'v', '<', '<gb' )
