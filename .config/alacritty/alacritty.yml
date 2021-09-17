@@ -114,7 +114,7 @@ font:
     family: JetBrainsMono Nerd Font
 
     # The `style` can be specified to pick a specific face.
-    style: Normal
+    style: Medium
 
   # Bold font face
   bold:
@@ -301,31 +301,308 @@ font:
   #  magenta: '#75617b'
   #  cyan:    '#5b7d78'
   #  white:   '#828482'
-# Colors (Gruvbox Material Dark Medium)
-colors:
-  primary:
-    background: '0x282828'
-    foreground: '0xdfbf8e'
 
-  normal:
-    black:   '0x665c54'
-    red:     '0xea6962'
-    green:   '0xa9b665'
-    yellow:  '0xe78a4e'
-    blue:    '0x7daea3'
-    magenta: '0xd3869b'
-    cyan:    '0x89b482'
-    white:   '0xdfbf8e'
+schemes:
+  # (Gruvbox Material Dark Medium)
+    gruvbox_material: &gruvbox_material
+      # colors:
+         primary:
+           background: '0x282828'
+           foreground: '0xdfbf8e'
+         normal:
+           black:   '0x665c54'
+           red:     '0xea6962'
+           green:   '0xa9b665'
+           yellow:  '0xe78a4e'
+           blue:    '0x7daea3'
+           magenta: '0xd3869b'
+           cyan:    '0x89b482'
+           white:   '0xdfbf8e'
+         bright:
+           black:   '0x928374'
+           red:     '0xea6962'
+           green:   '0xa9b665'
+           yellow:  '0xe3a84e'
+           blue:    '0x7daea3'
+           magenta: '0xd3869b'
+           cyan:    '0x89b482'
+           white:   '0xdfbf8e'
 
-  bright:
-    black:   '0x928374'
-    red:     '0xea6962'
-    green:   '0xa9b665'
-    yellow:  '0xe3a84e'
-    blue:    '0x7daea3'
-    magenta: '0xd3869b'
-    cyan:    '0x89b482'
-    white:   '0xdfbf8e'
+    # Colors (Gruvbox dark)
+    gruvbox_dark: &gruvbox_dark
+    # colors:
+      primary:
+        # hard contrast background - '#1d2021'
+        background:        &gruvbox_dark_bg '#282828'
+        # soft contrast background - '#32302f'
+        foreground:        '#ebdbb2'
+        bright_foreground: '#fbf1c7'
+        dim_foreground:    '#a89984'
+      cursor:
+        text:   CellBackground
+        cursor: CellForeground
+      vi_mode_cursor:
+        text:   CellBackground
+        cursor: CellForeground
+      # search:
+      #   matches:
+      #     foreground: '#000000'
+      #     background: '#ffffff'
+      #   focused_match:
+      #    foreground: CellBackground
+      #    background: CellForeground
+      #   bar:
+      #     background: ''
+      #     foreground: ''
+      # line_indicator:
+      #   foreground: None
+      #   background: None
+      selection:
+        text:       CellBackground
+        background: CellForeground
+      bright:
+        black:   '#928374'
+        red:     '#fb4934'
+        green:   '#b8bb26'
+        yellow:  '#fabd2f'
+        blue:    '#83a598'
+        magenta: '#d3869b'
+        cyan:    '#8ec07c'
+        white:   '#ebdbb2'
+      normal:
+        black:   *gruvbox_dark_bg
+        red:     '#cc241d'
+        green:   '#98971a'
+        yellow:  '#d79921'
+        blue:    '#458588'
+        magenta: '#b16286'
+        cyan:    '#689d6a'
+        white:   '#a89984'
+      dim:
+        black:   '#32302f'
+        red:     '#9d0006'
+        green:   '#79740e'
+        yellow:  '#b57614'
+        blue:    '#076678'
+        magenta: '#8f3f71'
+        cyan:    '#427b58'
+        white:   '#928374'
+      # indexed_colors: []
+
+
+  # Gotham
+    gotham: &gotham
+      # colors:
+         primary:
+           background: '0x0a0f14'
+           foreground: '0x98d1ce'
+         normal:
+           black:   '0x0a0f14'
+           red:     '0xc33027'
+           green:   '0x26a98b'
+           yellow:  '0xedb54b'
+           blue:    '0x195465'
+           magenta: '0x4e5165'
+           cyan:    '0x33859d'
+           white:   '0x98d1ce'
+         bright:
+           black:   '0x10151b'
+           red:     '0xd26939'
+           green:   '0x081f2d'
+           yellow:  '0x245361'
+           blue:    '0x093748'
+           magenta: '0x888ba5'
+           cyan:    '0x599caa'
+           white:   '0xd3ebe9'
+
+        # Colors (Wombat)
+    wombat: &wombat
+        # colors:
+          # Default colors
+          primary:
+            background: '#1f1f1f'
+            foreground: '#e5e1d8'
+
+          # Normal colors
+          normal:
+            black:   '#000000'
+            red:     '#f7786d'
+            green:   '#bde97c'
+            yellow:  '#efdfac'
+            blue:    '#6ebaf8'
+            magenta: '#ef88ff'
+            cyan:    '#90fdf8'
+            white:   '#e5e1d8'
+
+          # Bright colors
+          bright:
+            black:   '#b4b4b4'
+            red:     '#f99f92'
+            green:   '#e3f7a1'
+            yellow:  '#f2e9bf'
+            blue:    '#b3d2ff'
+            magenta: '#e5bdff'
+            cyan:    '#c2fefa'
+            white:   '#ffffff'
+
+# Colors (Solarized Dark)
+    solarized_dark: &solarized_dark
+   # colors:
+      # Default colors
+      primary:
+        background: '#002b36' # base03
+        foreground: '#839496' # base0
+      # Cursor colors
+      cursor:
+        text:   '#002b36' # base03
+        cursor: '#839496' # base0
+      # Normal colors
+      normal:
+        black:   '#073642' # base02
+        red:     '#dc322f' # red
+        green:   '#859900' # green
+        yellow:  '#b58900' # yellow
+        blue:    '#268bd2' # blue
+        magenta: '#d33682' # magenta
+        cyan:    '#2aa198' # cyan
+        white:   '#eee8d5' # base2
+      # Bright colors
+      bright:
+        black:   '#002b36' # base03
+        red:     '#cb4b16' # orange
+        green:   '#586e75' # base01
+        yellow:  '#657b83' # base00
+        blue:    '#839496' # base0
+        magenta: '#6c71c4' # violet
+        cyan:    '#93a1a1' # base1
+        white:   '#fdf6e3' # base3
+
+      # Colors (Jellybeans)
+    jellybeans: &jellybeans
+    # colors:
+      # Default colors
+      primary:
+        background: '#161616'
+        foreground: '#e4e4e4'
+    
+      # Cursor volors
+      cursor:
+        text: '#feffff'
+        cursor: '#ffb472'
+    
+      # Normal colors
+      normal:
+        black:   '#a3a3a3'
+        red:     '#e98885'
+        green:   '#a3c38b'
+        yellow:  '#ffc68d'
+        blue:    '#a6cae2'
+        magenta: '#e7cdfb'
+        cyan:    '#00a69f'
+        white:   '#e4e4e4'
+    
+      # Bright colors
+      bright:
+        black:   '#c8c8c8'
+        red:     '#ffb2b0'
+        green:   '#c8e2b9'
+        yellow:  '#ffe1af'
+        blue:    '#bddff7'
+        magenta: '#fce2ff'
+        cyan:    '#0bbdb6'
+        white:   '#feffff'
+    
+      # Selection colors
+      selection:
+        text: '#5963a2'
+        background: '#f6f6f6'
+
+        #Afterglow
+    afterglow: &afterglow
+      colors:
+        # Default colors
+        primary:
+          background: '#2c2c2c'
+          foreground: '#d6d6d6'
+      
+          dim_foreground:    '#dbdbdb'
+          bright_foreground: '#d9d9d9'
+          dim_background:    '#202020' # not sure
+          bright_background: '#3a3a3a' # not sure
+      
+        # Cursor colors
+        cursor:
+          text:   '#2c2c2c'
+          cursor: '#d9d9d9'
+      
+        # Normal colors
+        normal:
+          black:   '#1c1c1c'
+          red:     '#bc5653'
+          green:   '#909d63'
+          yellow:  '#ebc17a'
+          blue:    '#7eaac7'
+          magenta: '#aa6292'
+          cyan:    '#86d3ce'
+          white:   '#cacaca'
+    
+      # Bright colors
+      bright:
+        black:   '#636363'
+        red:     '#bc5653'
+        green:   '#909d63'
+        yellow:  '#ebc17a'
+        blue:    '#7eaac7'
+        magenta: '#aa6292'
+        cyan:    '#86d3ce'
+        white:   '#f7f7f7'
+    
+      # Dim colors
+      dim:
+        black:   '#232323'
+        red:     '#74423f'
+        green:   '#5e6547'
+        yellow:  '#8b7653'
+        blue:    '#556b79'
+        magenta: '#6e4962'
+        cyan:    '#5c8482'
+        white:   '#828282'
+
+      # Colors (Ayu Mirage)
+      ayu_mirage: &ayu_mirage
+      # colors:
+        # Default colors
+        primary:
+          background: '#202734'
+          foreground: '#CBCCC6'
+      
+        # Normal colors
+        normal:
+          black: '#191E2A'
+          red: '#FF3333'
+          green: '#BAE67E'
+          yellow: '#FFA759'
+          blue: '#73D0FF'
+          magenta: '#FFD580'
+          cyan: '#95E6CB'
+          white: '#C7C7C7'
+      
+        # Bright colors
+        bright:
+          black: '#686868'
+          red: '#F27983'
+          green: '#A6CC70'
+          yellow: '#FFCC66'
+          blue: '#5CCFE6'
+          magenta: '#FFEE99'
+          cyan: '#95E6CB'
+          white: '#FFFFFF'
+
+
+
+        # Choose ONE color scheme: gotham, gruvbox, wombat, solarized_dark,
+        # jellybeans, afterglow, ayu_mirage and gruvbox_dark
+colors: *gruvbox_dark
 
   # Indexed Colors
   #
@@ -418,7 +695,7 @@ colors:
   # the style of the active value of the normal cursor.
   #
   # See `cursor.style` for available options.
-  #vi_mode_style: None
+  # vi_mode_style: Block
 
   # Cursor blinking interval in milliseconds.
   #blink_interval: 750
