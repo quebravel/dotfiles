@@ -12,7 +12,7 @@ require('gitsigns').setup() -- customizar depois
 require('nvim-autopairs').setup{}
 require('nvim_comment').setup()
 
--- lsp
+-- lsp https://www.chrisatmachine.com/Neovim/27-native-lsp/
 require'lspconfig'.pyright.setup{}
 require'lspconfig'.bashls.setup{}
 
