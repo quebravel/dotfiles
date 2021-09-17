@@ -57,5 +57,8 @@ augroup exe_code
     autocmd FileType python nnoremap <buffer> <localleader>r :sp<CR> :term python3 %<CR> :startinsert<CR>
     autocmd FileType javascript nnoremap <buffer> <localleader>r :sp<CR> :term node %<CR> :startinsert<CR>
     autocmd FileType bash,sh nnoremap <buffer> <localleader>r :sp<CR> :term bash %<CR> :startinsert<CR>
+    autocmd BufWritePre *.js lua vim.lsp.buf.formatting_sync(nil, 100)
+    autocmd BufWritePre *.jsx lua vim.lsp.buf.formatting_sync(nil, 100)
+    autocmd BufWritePre *.py lua vim.lsp.buf.formatting_sync(nil, 100)
 augroup End
     ]], true)

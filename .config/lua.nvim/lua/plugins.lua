@@ -33,15 +33,17 @@ packer.startup(function()
   use 'kyazdani42/nvim-web-devicons'
   use 'ryanoasis/vim-devicons'
   use 'tpope/vim-fugitive'
-  use 'neovim/nvim-lspconfig'
 
-  use {
-    "hrsh7th/nvim-cmp",
-    requires = {
-      "hrsh7th/vim-vsnip",
-      "hrsh7th/cmp-buffer",
-    }
-  }
+  use 'neovim/nvim-lspconfig'
+  use 'hrsh7th/nvim-compe'
+
+  -- use {
+  --   "hrsh7th/nvim-cmp",
+  --   requires = {
+  --     "hrsh7th/vim-vsnip",
+  --     "hrsh7th/cmp-buffer",
+  --   }
+  -- }
 
   use {
       'hoob3rt/lualine.nvim',
