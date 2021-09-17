@@ -9,7 +9,7 @@ vim.b.maplocalleader = '\\'
 -- mapper("n","w",":w<CR>")
 
 -- NvimTree
-mapper( 'n', '<Esc><Esc>',':NvimTreeToggle<CR>' )
+mapper( 'n', '<C-n>',':NvimTreeToggle<CR>' )
 
 -- Buffer
 mapper( 'n','<Tab>',':BufferLineCycleNext<CR>' )

@@ -28,11 +28,12 @@ packer.startup(function()
 
   use 'windwp/nvim-autopairs'
   use 'folke/tokyonight.nvim'
-  use 'morhetz/gruvbox'
+  use {"ellisonleao/gruvbox.nvim", requires = {"rktjmp/lush.nvim"}}
   use 'sheerun/vim-polyglot'
   use 'kyazdani42/nvim-web-devicons'
   use 'ryanoasis/vim-devicons'
   use 'tpope/vim-fugitive'
+  use 'glepnir/dashboard-nvim'
 
   use 'neovim/nvim-lspconfig'
   use 'hrsh7th/nvim-compe'
