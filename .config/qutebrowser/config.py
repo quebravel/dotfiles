@@ -8,16 +8,18 @@
 
 config.load_autoconfig()
 
-c.fonts.tabs.selected = "10.5pt tamzenforpowerline"
-c.fonts.tabs.unselected = "10.5pt tamzenforpowerline"
-c.fonts.statusbar = "10.5pt tamzenforpowerline"
-c.fonts.messages.info = "10.5pt tamzenforpowerline"
+font_name = "10pt tamzenforpowerline"
+
+c.fonts.tabs.selected = font_name
+c.fonts.tabs.unselected = font_name
+c.fonts.statusbar = font_name
+c.fonts.messages.info = font_name
 c.fonts.downloads = c.fonts.statusbar
-c.fonts.prompts = "10.5pt tamzenforpowerline"
+c.fonts.prompts = font_name
 c.fonts.keyhint = c.fonts.messages.info
 c.fonts.messages.warning = c.fonts.messages.info
 c.fonts.messages.error = c.fonts.messages.info
-c.fonts.completion.entry = "10.5pt tamzenforpowerline"
+c.fonts.completion.entry = font_name
 c.fonts.completion.category = c.fonts.statusbar
 #c.fonts.hints = "13px tamzenforpowerline"
 
