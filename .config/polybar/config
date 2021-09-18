@@ -111,7 +111,7 @@ spacing = 2
 
 mount-0 = /
 format-mounted = <label-mounted>
-format-mounted-prefix = " hdd "
+format-mounted-prefix = "%{T3}%{T-} hdd "
 format-mounted-foreground = ${colors.foreground-alt}
 
 label-mounted = %percentage_used%%
@@ -142,19 +142,19 @@ label-empty = %icon%
 label-empty-foreground = ${colors.foreground-alt}
 label-empty-padding = 2
 
-label-tiled = 
+label-tiled = %{T3}%{T-}
 ;label-tiled-foreground = ${colors.tiler}
-label-monocle = 
+label-monocle = %{T3}%{T-}
 ;label-monocle-foreground = ${colors.tiler}
-label-floating = 
+label-floating = %{T3}%{T-}
 ;label-floating-foreground = ${colors.tiler}
-label-pseudotiled = 
+label-pseudotiled = %{T3}%{T-}
 label-pseudotiled-foreground = ${colors.tiler}
-label-locked = " "
+label-locked = " %{T3}"%{T-}
 label-locked-foreground = ${colors.tiler}
-label-sticky = " "
+label-sticky = " %{T3}"%{T-}
 label-sticky-foreground = ${colors.tiler}
-label-private = " "
+label-private = " %{T3}"%{T-}
 label-private-foreground = ${colors.tiler}
 
 fuzzy-match = false
@@ -173,7 +173,7 @@ ws-icon-9 = MPD-10;0000-0
 [module/cpu]
 type = internal/cpu
 interval = 2
-format-prefix = " cpu "
+format-prefix = "%{T3}%{T-} cpu "
 format-prefix-foreground = ${colors.foreground-alt}
 
 ;label = %percentage-core2:3%%
@@ -183,7 +183,7 @@ format-foreground = ${colors.foreground}
 [module/memory]
 type = internal/memory
 interval = 2
-format-prefix = " ram "
+format-prefix = "%{T3}%{T-} ram "
 format-prefix-foreground = ${colors.foreground-alt}
 format-foreground = ${colors.foreground}
 label = %percentage_used:2%%
@@ -194,12 +194,12 @@ type = internal/network
 interface = enp2s0
 interval = 1.0
 
-format-connected-prefix = " net "
+format-connected-prefix = "%{T3}%{T-} net off"
 format-connected-prefix-foreground = ${colors.foreground-alt}
 label-connected = %ifname%
 label-connected-foreground = ${colors.foreground}
 
-format-disconnected = " net off"
+format-disconnected = "%{T3}%{T-} net off"
 label-disconnected-foreground = ${colors.connected-foreground}
 
 ;[module/wireless-network]
@@ -208,19 +208,19 @@ label-disconnected-foreground = ${colors.connected-foreground}
 ;interval = 1.0
 
 ;format-connected =  <label-connected>
-;format-connected-prefix = "wifi "
+;format-connected-prefix = "%{T3}%{T-} wifi "
 ;format-connected-prefix-foreground = ${colors.foreground-alt}
 ;label-connected = %signal%% %ifname% %essid%
 ;label-connected-foreground = ${colors.foreground}
 
-;;ramp-signal-0 = 
-;;ramp-signal-1 = 
-;;ramp-signal-2 = 
-;;ramp-signal-3 = 
-;;ramp-signal-4 = 
-;;ramp-signal-5 = 
+;;ramp-signal-0 = %{T3}%{T-}
+;;ramp-signal-1 = %{T3}%{T-}
+;;ramp-signal-2 = %{T3}%{T-}
+;;ramp-signal-3 = %{T3}%{T-}
+;;ramp-signal-4 = %{T3}%{T-}
+;;ramp-signal-5 = %{T3}%{T-}
 
-;format-disconnected = "wifi off"
+;format-disconnected = "%{T3}%{T-} wifi off"
 ;label-disconnected-foreground = ${colors.connected-foreground}
 
 [module/networkspeeddown]
@@ -228,7 +228,7 @@ type = internal/network
 interface = enp2s0
 label-connected = "%downspeed:8:0%"
 format-connected = <label-connected>
-format-connected-prefix = ""
+format-connected-prefix = "%{T3}%{T-}"
 format-connected-prefix-foreground = ${colors.foreground-alt}
 format-connected-foreground = ${colors.foreground}
 
@@ -237,7 +237,7 @@ type = internal/network
 interface = enp2s0
 label-connected = "%upspeed:8:0%"
 format-connected = <label-connected>
-format-connected-prefix = ""
+format-connected-prefix = "%{T3}%{T-}"
 format-connected-prefix-foreground = ${colors.foreground-alt}
 format-connected-foreground = ${colors.foreground}
 
@@ -251,7 +251,7 @@ date-alt = " %a %b %d-%m-%Y"
 time = %H:%M:%S
 time-alt = %H:%M
 
-format-prefix = " hora"
+format-prefix = "%{T3}%{T-} hora"
 format-prefix-foreground = ${colors.foreground-alt}
 format-foreground = ${colors.foreground}
 
@@ -270,9 +270,9 @@ format-volume = <label-volume> <bar-volume>
 label-volume = %percentage:3:3%%
 label-volume-foreground = ${root.foreground}
 
-format-volume-prefix = " vol "
+format-volume-prefix = "%{T3}%{T-} vol "
 format-volume-foreground = ${colors.foreground-alt}
-format-muted-prefix = ""
+format-muted-prefix = "%{T3}%{T-}"
 format-muted-foreground = ${colors.alert}
 label-muted =   " vol   0% %{T4}::::::::::%{T-}"
 
@@ -303,9 +303,9 @@ bar-volume-empty-foreground = ${colors.foreground-alt}
 ; label-volume = %percentage:3:3%%
 ; label-volume-foreground = ${root.foreground}
 
-; format-volume-prefix = " vol "
+; format-volume-prefix = "%{T3}%{T-} vol "
 ; format-volume-foreground = ${colors.foreground-alt}
-; format-muted-prefix = ""
+; format-muted-prefix = "%{T3}%{T-}"
 ; format-muted-foreground = ${colors.alert}
 ; label-muted =   " vol   0% %{T4}::::::::::%{T-}"
 
@@ -339,7 +339,7 @@ format = <ramp> <label>
 label = %temperature-c:6:6%
 label-foreground = ${colors.foreground}
 
-ramp-0 =  temp
+ramp-0 = %{T3} %{T-}temp
 ramp-foreground = ${colors.foreground-alt}
 
 ;[module/battery]
@@ -463,9 +463,9 @@ expand-right = false
 
 format-spacing = 1
 
-label-open = 
+label-open = %{T3}%{T-}
 label-open-foreground = ${colors.tiler}
-label-close =  X
+label-close = %{T3}%{T-} X
 label-close-foreground = ${colors.secondary}
 label-separator = |
 label-separator-foreground = ${colors.foreground-alt}
