@@ -28,13 +28,13 @@ packer.startup(function()
 
   use 'windwp/nvim-autopairs'
   use 'folke/tokyonight.nvim'
-  use {"ellisonleao/gruvbox.nvim", requires = {"rktjmp/lush.nvim"}}
+  use { 'ellisonleao/gruvbox.nvim', requires = { 'rktjmp/lush.nvim' } }
+  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
   use 'sheerun/vim-polyglot'
   use 'kyazdani42/nvim-web-devicons'
   use 'ryanoasis/vim-devicons'
   use 'tpope/vim-fugitive'
   use 'glepnir/dashboard-nvim'
-
   use 'neovim/nvim-lspconfig'
   use 'hrsh7th/nvim-compe'
 
@@ -46,30 +46,15 @@ packer.startup(function()
   --   }
   -- }
 
-  use {
-      'hoob3rt/lualine.nvim',
-      requires = { 'kyazdani42/nvim-web-devicons', opt = true }
-   }
-      
-  use {
-      'akinsho/bufferline.nvim',
-      requires = 'kyazdani42/nvim-web-devicons'
-   }
-
+  use { 'hoob3rt/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons', opt = true } }
+  use { 'akinsho/bufferline.nvim', requires = 'kyazdani42/nvim-web-devicons' }
   use 'norcalli/nvim-colorizer.lua'
-
-  use {
-      'lewis6991/gitsigns.nvim',
-      requires = { 'nvim-lua/plenary.nvim' }
-   }
+  use { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } }
   use 'andymass/vim-matchup'
   use 'terrortylor/nvim-comment'
+  use { 'kyazdani42/nvim-tree.lua', requires = 'kyazdani42/nvim-web-devicons' }
 
-  use {
-    'kyazdani42/nvim-tree.lua',
-    requires = 'kyazdani42/nvim-web-devicons'
-}
-  -- packer.use {
+--  packer.use {
 --      "rafamadriz/friendly-snippets",
 --      event = "InsertEnter",
 --   }
