@@ -8,7 +8,7 @@ require('lualine').setup {
     lualine_a = {'mode'},
     lualine_b = {'branch', {'diff', colored = true, color_added = '#b8bb26', color_modified = '#fabd2f', color_removed = '#fbf1c7'}},
     lualine_c = {'filename'},
-    lualine_x = {'encoding', 'fileformat', 'filetype'},
+    lualine_x = {'hostname', 'encoding', 'fileformat', 'filetype'},
     lualine_y = {'progress'},
     lualine_z = {'location'}
   },
