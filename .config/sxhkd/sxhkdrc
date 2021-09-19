@@ -288,5 +288,6 @@ alt + r
 super + shift + {s,a}
     bspc node @/ -C {forward,backward}
 
+# dmenu lanca uma lista de ajuda
 super + F1
     ~/.config/sxhkd/scripts_sxhkd/sxhkd_help.sh
