@@ -2,6 +2,13 @@
 
 monitor=`xrandr | grep -w connected | cut -f '1' -d ' '`
 
-light=`echo -e "90\n85\n75\n65\n55\n45\n35\n20\n10\n05" | dmenu -h 18 -nb "#3c3836" -nf "#fbf1c7" -sb "#bdae93" -sf "#1d2021" -fn "Source Code Pro-8" -p "Selecionar brilho da tela"`
+nothing=`xrandr --verbose | grep Brightness: | cut -f '1,2' -d '.' | awk '{print $2}'`
 
-xrandr --output $monitor --brightness 0.$light
+light=`echo -e "1.0\0.90\n0.85\n0.75\n0.65\n0.55\n0.45\n0.35\n0.20\n0.10\n0.05" | dmenu -h 18 -nb "#3c3836" -nf "#fbf1c7" -sb "#bdae93" -sf "#1d2021" -fn "JetBrainsMono Nerd Font-8" -p "Selecionar brilho da tela"`
+
+
+if [ -z $light ]; then
+    xrandr --output $monitor --brightness $nothing
+else
+    xrandr --output $monitor --brightness $light
+fi
