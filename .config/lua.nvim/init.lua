@@ -9,7 +9,6 @@ require('config-plugins.nvim-treesitter-config')
 
 -- Plugins
 require('colorizer').setup()
-require('gitsigns').setup() -- customizar depois
 require('nvim-autopairs').setup{}
 require('nvim_comment').setup()
 
