@@ -77,7 +77,7 @@ super + {t,shift + t,s,f}
 	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
 
 # marked | locked | follow windows all workspaces | keep local window
-super + ctrl + {m,x,y,z}
+super + ctrl + {m,x,s,z}
 	bspc node -g {marked,locked,sticky,private}
 
 #
