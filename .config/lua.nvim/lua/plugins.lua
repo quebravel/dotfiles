@@ -36,16 +36,13 @@ packer.startup(function()
   use 'tpope/vim-fugitive'
   use 'glepnir/dashboard-nvim'
   use 'neovim/nvim-lspconfig'
-  use 'hrsh7th/nvim-compe'
   use 'kabouzeid/nvim-lspinstall'
 
-  -- use {
-  --   "hrsh7th/nvim-cmp",
-  --   requires = {
-  --     "hrsh7th/vim-vsnip",
-  --     "hrsh7th/cmp-buffer",
-  --   }
-  -- }
+  use 'neovim/nvim-lspconfig' -- Collection of configurations for built-in LSP client
+  use 'hrsh7th/nvim-cmp' -- Autocompletion plugin
+  use 'hrsh7th/cmp-nvim-lsp' -- LSP source for nvim-cmp
+  use 'saadparwaiz1/cmp_luasnip' -- Snippets source for nvim-cmp
+  use 'L3MON4D3/LuaSnip' -- Snippets plugin
 
   use { 'hoob3rt/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons', opt = true } }
   use { 'akinsho/bufferline.nvim', requires = 'kyazdani42/nvim-web-devicons' }
@@ -54,48 +51,5 @@ packer.startup(function()
   use 'andymass/vim-matchup'
   use 'terrortylor/nvim-comment'
   use { 'kyazdani42/nvim-tree.lua', requires = 'kyazdani42/nvim-web-devicons' }
-
---  packer.use {
---      "rafamadriz/friendly-snippets",
---      event = "InsertEnter",
---   }
---
---  packer.use {
---      "hrsh7th/nvim-cmp",
---      after = "friendly-snippets",
---      config = function()
---         require "plugins.configs.cmp"
---      end,
---   }
---
---   packer.use {
---      "L3MON4D3/LuaSnip",
---      wants = "friendly-snippets",
---      after = "nvim-cmp",
---      config = function()
---         require("plugins.configs.others").luasnip()
---      end,
---   }
---
---   packer.use {
---      "saadparwaiz1/cmp_luasnip",
---      after = "LuaSnip",
---   }
---
---   packer.use {
---      "hrsh7th/cmp-nvim-lua",
---      after = "cmp_luasnip",
---   }
---
---   packer.use {
---      "hrsh7th/cmp-nvim-lsp",
---      after = "cmp-nvim-lua",
---   }
---
---   packer.use {
---      "hrsh7th/cmp-buffer",
---      after = "cmp-nvim-lsp",
---   }
-
 
 end)

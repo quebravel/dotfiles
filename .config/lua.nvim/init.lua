@@ -4,9 +4,9 @@ require('keymappings')
 require('plugins')
 require('appearence')
 require('settings')
-require('config-plugins.compe-config')
 require('config-plugins.nvim-treesitter-config')
 require('config-plugins.nvim-lspinstall')
+require('config-plugins.cmp')
 
 -- Plugins
 require('colorizer').setup()
