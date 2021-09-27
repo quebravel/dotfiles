@@ -9,6 +9,7 @@ cmp.setup {
       require('luasnip').lsp_expand(args.body)
     end,
   },
+  documentation = false,
   mapping = {
     ['<C-p>'] = cmp.mapping.select_prev_item(),
     ['<C-n>'] = cmp.mapping.select_next_item(),
@@ -44,3 +45,10 @@ cmp.setup {
     { name = 'luasnip' },
   },
 }
+
+vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+  virtual_text = true,
+  signs = true,
+  underline = true,
+  update_in_insert = false,
+})
