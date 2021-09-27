@@ -41,8 +41,8 @@ mapper( 'v', '<', '<gb' )
 mapper( 'v', '>', '>gb' )
 
 -- Tecla para fechar buffer
-mapper( 'n', 'gb', ':BufferLinePick<CR>' )
-mapper( 'n', 'gx', ':BufferLinePickClose<CR>' )
+mapper( 'n', '<leader>b', ':BufferLinePick<CR>' )
+mapper( 'n', '<leader>x', ':BufferLinePickClose<CR>' )
 
 -- Limpar pesquisa (highlight)
 mapper( 'n', '<space><space>', ':noh<CR>' )

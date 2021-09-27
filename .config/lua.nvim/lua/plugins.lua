@@ -37,6 +37,7 @@ packer.startup(function()
   use 'glepnir/dashboard-nvim'
   use 'neovim/nvim-lspconfig'
   use 'hrsh7th/nvim-compe'
+  use 'kabouzeid/nvim-lspinstall'
 
   -- use {
   --   "hrsh7th/nvim-cmp",

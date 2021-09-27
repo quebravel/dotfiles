@@ -6,6 +6,7 @@ require('appearence')
 require('settings')
 require('config-plugins.compe-config')
 require('config-plugins.nvim-treesitter-config')
+require('config-plugins.nvim-lspinstall')
 
 -- Plugins
 require('colorizer').setup()
