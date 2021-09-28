@@ -36,7 +36,8 @@ vim.g['nvim_tree_hide_dotfiles'] = 0
 vim.g['nvim_tree_git_hl'] = 1
 vim.g['nvim_tree_highlight_opened_files'] = 1
 vim.g['nvim_tree_show_icons'] = { folder_arrows = 0, git = 1, files = 1, folders = 1 }
-vim.g['nvim_tree_highlight_opened_files'] = 3
+vim.g['nvim_tree_highlight_opened_files'] = 1
+vim.g['nvim_tree_indent_markers'] = 1
 
 -- Dashboard
 vim.g.dashboard_disable_statusline = 1
