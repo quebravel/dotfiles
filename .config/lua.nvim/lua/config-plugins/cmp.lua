@@ -45,6 +45,7 @@ cmp.setup {
     { name = 'luasnip' },
     { name = 'path' },
     { name = 'calc' },
+    { name = 'treesitter' },
   },
 }
 
