@@ -3,6 +3,8 @@ require('lualine').setup {
   options = {
     icons_enabled = true,
     theme = 'dracula',
+    section_separators = {'', ''},
+    component_separators = {'', ''}
   },
   sections = {
     lualine_a = {'mode'},
@@ -17,6 +19,8 @@ require('lualine').setup {
 
 -- Color scheme
 vim.cmd[[colorscheme tokyonight]]
+
+-- Color scheme
 vim.g.tokyonight_style = "night"
 
 -- configuração para bufferline
@@ -25,6 +29,7 @@ require("bufferline").setup{
                   show_buffer_close_icons = false,
                   close_icon = 'x',
                   modified_icon = '●',
+                  show_tab_indicators = false,
                   offsets = {
                     {
                       filetype = "NvimTree",
@@ -33,7 +38,9 @@ require("bufferline").setup{
                       text_align = "left"
                     }
                     }
+
       }
+
 }
 
 require('gitsigns').setup {

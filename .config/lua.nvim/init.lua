@@ -3,13 +3,15 @@ require('opts')
 require('keymappings')
 require('plugins')
 require('appearence')
-require('settings')
-require('config-plugins.nvim-treesitter-config')
-require('config-plugins.nvim-lspinstall')
-require('config-plugins.cmp')
--- require('config-plugins.compe-config')
 
--- Plugins
+-- Plugins configurations
+require('config-plugins.cmp')
+require('config-plugins.tree')
+require('config-plugins.treesitter')
+require('config-plugins.dashboard')
+require('config-plugins.lspinstall')
+
+-- Plugins loader without configurations
 require('colorizer').setup()
 require('nvim-autopairs').setup{}
 require('nvim_comment').setup()
