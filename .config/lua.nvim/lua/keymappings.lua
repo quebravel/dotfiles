@@ -56,6 +56,9 @@ mapper( 'n', '<leader>fc', ':Telescope git_commits<CR>' )
 -- Dashboard
 mapper( 'n', '<leader>d', ':Dashboard<CR>' )
 
+-- Zen-Mode
+mapper( 'n', '<leader>z', ':ZenMode<CR>' )
+
 -- Execute codigo no neovim
 vim.api.nvim_exec([[
 augroup exe_code

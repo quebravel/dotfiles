@@ -41,6 +41,7 @@ packer.startup(function()
 
   -- use 'hrsh7th/nvim-compe'
   use { 'nvim-telescope/telescope.nvim', requires = { 'nvim-lua/plenary.nvim' } }
+  use 'folke/zen-mode.nvim'
 
   use { 'hrsh7th/nvim-cmp', requires = { 'hrsh7th/cmp-path', 'hrsh7th/cmp-calc' } } -- Autocompletion plugin
   use 'hrsh7th/cmp-nvim-lsp' -- LSP source for nvim-cmp
