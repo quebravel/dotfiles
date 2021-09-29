@@ -9,7 +9,7 @@ require('config-plugins.cmp')
 require('config-plugins.tree')
 require('config-plugins.treesitter')
 require('config-plugins.dashboard')
-require('config-plugins.lspinstall')
+require('config-plugins.lspinstaller')
 require('config-plugins.lspconfig')
 
 -- Plugins loader without configurations
