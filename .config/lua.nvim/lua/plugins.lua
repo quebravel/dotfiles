@@ -37,9 +37,8 @@ packer.startup(function()
   use 'tpope/vim-fugitive'
   use 'glepnir/dashboard-nvim'
   use 'neovim/nvim-lspconfig'
-  use 'kabouzeid/nvim-lspinstall'
+  use 'williamboman/nvim-lsp-installer'
 
-  -- use 'hrsh7th/nvim-compe'
   use { 'nvim-telescope/telescope.nvim', requires = { 'nvim-lua/plenary.nvim' } }
   use 'folke/zen-mode.nvim'
 
