@@ -3,7 +3,7 @@
 	name = quebravel
 [core]
     editor = nvim
-    pager = bat
+    pager = cat
 [log]
     date = human
 [format]
