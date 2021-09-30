@@ -291,3 +291,6 @@ super + shift + {s,a}
 # dmenu lanca uma lista de ajuda
 super + F1
     ~/.config/sxhkd/scripts_sxhkd/sxhkd_help.sh
+
+super + shift + v
+	cat ~/token | xargs | xclip && xclip -o
