@@ -112,3 +112,6 @@ fshow() {
                 {}
 FZF-EOF"
 }
+
+
+# vim:ft=bash

@@ -46,7 +46,7 @@ mapper( 'n', '<leader>x', ':BufferLinePickClose<CR>' )
 mapper( 'n', '<space><space>', ':noh<CR>' )
 
 -- Telescope
-mapper( 'n', '<leader>ff', '<cmd>lua require(\'telescope.builtin\').find_files()<CR>' )
+mapper( 'n', '<leader>ff', ':Telescope find_files hidden=true<CR>' )
 mapper( 'n', '<leader>fb', ':Telescope buffers<CR>' )
 mapper( 'n', '<leader>fh', ':Telescope help_tags<CR>' )
 mapper( 'n', '<leader>fw', ':Telescope file_browser<CR>' )
