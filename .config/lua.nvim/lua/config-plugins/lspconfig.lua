@@ -7,6 +7,6 @@ require'lspconfig'.bashls.setup{
     autostart = true
 }
 
-require'lspconfig'.sumneko_lua.setup{
-    autostart = false
-}
+-- require'lspconfig'.sumneko_lua.setup{
+--     autostart = false
+-- }
