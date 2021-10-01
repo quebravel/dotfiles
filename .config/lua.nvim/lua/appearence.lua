@@ -24,9 +24,8 @@ require('lualine').setup {
 
 -- Color scheme
 vim.cmd[[colorscheme tokyonight]]
-
--- Color scheme
 vim.g.tokyonight_style = "night"
+-- vim.g.gruvbox_contrast_dark = "hard"
 
 -- configuração para bufferline
 require("bufferline").setup{
@@ -56,4 +55,8 @@ require('gitsigns').setup {
     topdelete    = {hl = 'GitSignsDelete', text = '‾', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
     changedelete = {hl = 'GitSignsChange', text = '~!', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
   },
+  signcolumn = true,  -- Toggle with `:Gitsigns toggle_signs`
+  numhl      = true, -- Toggle with `:Gitsigns toggle_numhl`
+  linehl     = true, -- Toggle with `:Gitsigns toggle_linehl`
+  word_diff  = false, -- Toggle with `:Gitsigns toggle_word_diff`
 }
