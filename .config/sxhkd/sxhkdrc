@@ -228,11 +228,11 @@ super + shift + b
 
 # tira o print de toda a tela e salva na pasta Imagens.
 Print
-    maim -uo ~/Imagens/$(date +%d-%m-%y-%H:%M:%S)-maim.png
+    maim -uo ~/Imagens/$(date +%d-%m-%y_%H:%M:%S)_maim.png
 
 # selecionar ou tirar print da janela com um clique salvando na pasta Imagens.
 alt + Print
-    maim -os ~/Imagens/$(date +%d-%m-%y-%H:%M:%S)-maim.png
+    maim -os ~/Imagens/$(date +%d-%m-%y_%H:%M:%S)_maim.png
 
 # tira print da janela e copia para a aréa de transferência
 ctrl + Print
