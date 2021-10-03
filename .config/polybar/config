@@ -15,16 +15,9 @@
 ;   The README contains alot of information
 ;
 ;==========================================================
-
-[colors]
-background = #282828
-background-alt = #504945
-foreground = #ebdbb2
-foreground-alt = #888
-primary = #ffffd7
-secondary = #e60053
-alert = #bd2c40
-tiler = #fba922
+; setcolorsSolarizedDark, setcolorsGruvbox
+[section/base]
+include-file = ~/.config/polybar/setcolorsSolarizedDark
 
 ;cores para pywal
 ;[colors]

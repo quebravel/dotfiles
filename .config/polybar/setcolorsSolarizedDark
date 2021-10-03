@@ -1,0 +1,11 @@
+[colors]
+background = #002b36
+background-alt = #073642
+foreground = #00afaf
+foreground-alt = #93a1a1
+primary = #eee8d5
+secondary = #dc322f
+alert = #cb4b16
+tiler = #b58900
+
+; vim:ft=dosini
