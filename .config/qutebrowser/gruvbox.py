@@ -250,6 +250,6 @@ c.colors.keyhint.bg = 'rgba(40, 40, 40, 97%)'
 
 # Font color for hints.
 c.colors.hints.fg = base00
-c.colors.hints.bg = base0A
-c.colors.hints.match.fg = base08
+c.colors.hints.bg = base09
+c.colors.hints.match.fg = base07
 c.hints.border = "0px"
