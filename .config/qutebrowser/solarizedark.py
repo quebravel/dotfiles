@@ -248,3 +248,4 @@ c.colors.keyhint.bg = 'rgba(0, 43, 54, 97%)'
 c.colors.hints.fg = base01
 c.colors.hints.bg = base0D
 c.colors.hints.match.fg = base0F
+c.hints.border = "0px"
