@@ -1,5 +1,4 @@
    # Teclas do meu BSPWM
-   [![N|Solid](https://github.com/quebravel/dotfiles-conf/raw/master/gitresize.png?raw=true)](https://github.com/quebravel/dotfiles-conf)
 
 - #### Controle de janelas
 
