@@ -240,12 +240,11 @@ c.colors.statusbar.url.warn.fg = base0E
 c.colors.statusbar.url.success.http.fg = base0C
 c.colors.statusbar.url.success.https.fg = base0B
 
+c.colors.keyhint.fg = base05
+c.colors.keyhint.suffix.fg = base0A
+c.colors.keyhint.bg = 'rgba(0, 43, 54, 97%)'
+
 # Font color for hints.
-c.colors.hints.fg = base00
-
-# Background color for hints. Note that you can use a `rgba(...)` value
-# for transparency.
-c.colors.hints.bg = base0A
-
-# Font color for the matched part of hints.
+c.colors.hints.fg = base01
+c.colors.hints.bg = base0D
 c.colors.hints.match.fg = base0F
