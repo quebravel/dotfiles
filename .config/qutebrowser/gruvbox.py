@@ -242,7 +242,7 @@ c.colors.statusbar.url.error.fg = base08
 c.colors.statusbar.url.hover.fg = base05
 c.colors.statusbar.url.warn.fg = base0E
 c.colors.statusbar.url.success.http.fg = base0C
-c.colors.statusbar.url.success.https.fg = base09
+c.colors.statusbar.url.success.https.fg = base07
 
 c.colors.keyhint.fg = base07
 c.colors.keyhint.suffix.fg = base0A
@@ -253,3 +253,6 @@ c.colors.hints.fg = base00
 c.colors.hints.bg = base09
 c.colors.hints.match.fg = base07
 c.hints.border = "0px"
+
+c.colors.statusbar.insert.fg = base00
+c.colors.statusbar.insert.bg = base09
