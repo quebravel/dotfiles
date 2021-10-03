@@ -97,5 +97,6 @@ c.bindings.commands = {
 #  sys.path.append(os.path.join(sys.path[0], 'jblock'))
 #  config.source("jblock/jblock/integrations/qutebrowser.py")
 
+# config.source('solarizedark.py')
 config.source('gruvbox.py')
 

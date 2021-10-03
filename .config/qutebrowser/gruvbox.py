@@ -190,8 +190,8 @@ c.colors.messages.info.border = base00
 
 # Background color for prompts.
 c.colors.prompts.bg = base00
-
-# Background color for the selected item in filename prompts.
+c.colors.prompts.fg = base04
+c.colors.prompts.border = '0.5px solid #fe8019'
 c.colors.prompts.selected.bg = base0A
 
 # Foreground color of the statusbar.
@@ -236,19 +236,20 @@ c.colors.statusbar.caret.selection.bg = base0D
 # Background color of the progress bar.
 c.colors.statusbar.progress.bg = base0C
 
-# Default foreground color of the URL in the statusbar.
+# Default color of the URL in the statusbar.
 c.colors.statusbar.url.fg = base05
-
-# Foreground color of the URL in the statusbar on error.
 c.colors.statusbar.url.error.fg = base08
-
-# Foreground color of the URL in the statusbar for hovered links.
 c.colors.statusbar.url.hover.fg = base05
-
-
-# Foreground color of the URL in the statusbar when there's a warning.
 c.colors.statusbar.url.warn.fg = base0E
+c.colors.statusbar.url.success.http.fg = base0C
+c.colors.statusbar.url.success.https.fg = base09
 
-# Background color for webpages if unset (or empty to use the theme's
-# color).
-# c.colors.webpage.bg = base00
+c.colors.keyhint.fg = base07
+c.colors.keyhint.suffix.fg = base0A
+c.colors.keyhint.bg = 'rgba(40, 40, 40, 97%)'
+
+# Font color for hints.
+c.colors.hints.fg = base00
+c.colors.hints.bg = base0A
+c.colors.hints.match.fg = base08
+c.hints.border = "0px"
