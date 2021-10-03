@@ -1,8 +1,13 @@
-# add em USE="glamor"
+Section "Module"
+    Load "dri3"
+    Load "glamoregl"
+EndSection
 Section "Device"
          Identifier "Intel Graphics"
          Driver     "intel"
-         Option     "AccelMethod" "uxa"
+         Option     "AccelMethod" "glamor"
+#         Option     "AccelMethod" "sna"
+#         Option     "AccelMethod"  "uxa"
          Option     "TearFree" "true"
          Option     "DRI" "3"
 EndSection
