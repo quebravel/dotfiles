@@ -83,8 +83,8 @@ c.colors.tabs.selected.even.bg = base00
 
 # End tabs colors
 
-# all columns or a list of three colors, one for each column.
-c.colors.completion.fg = base0C
+# cor fg | sites no "o" open.
+c.colors.completion.fg = base07
 
 # Background color of the completion widget for odd rows.
 c.colors.completion.odd.bg = base01
@@ -106,19 +106,16 @@ c.colors.completion.category.border.bottom = base00
 
 # Foreground color of the selected completion item.
 c.colors.completion.item.selected.fg = base01
-
-# Background color of the selected completion item.
-c.colors.completion.item.selected.bg = base0A
+c.colors.completion.item.selected.bg = base09
 
 # Top border color of the selected completion item.
 c.colors.completion.item.selected.border.top = base0A
 
 # Bottom border color of the selected completion item.
-c.colors.completion.item.selected.border.bottom = base0A
+c.colors.completion.item.selected.border.bottom = base0F
 
 # Foreground color of the matched text in the selected completion item.
-c.colors.completion.item.selected.match.fg = base08
-
+c.colors.completion.item.selected.match.fg = base07
 # Foreground color of the matched text in the completion.
 c.colors.completion.match.fg = base0B
 
@@ -130,35 +127,18 @@ c.colors.completion.scrollbar.bg = base00
 
 # Background color of the context menu. If set to null, the Qt default is used.
 c.colors.contextmenu.menu.bg = base00
-
-# Foreground color of the context menu. If set to null, the Qt default is used.
 c.colors.contextmenu.menu.fg =  base05
-
-# Background color of the context menu’s selected item. If set to null, the Qt default is used.
 c.colors.contextmenu.selected.bg = base0C
-
-#Foreground color of the context menu’s selected item. If set to null, the Qt default is used.
 c.colors.contextmenu.selected.fg = base01
-
 c.colors.contextmenu.disabled.bg = base01
 c.colors.contextmenu.disabled.fg = base03
 
 # Background color for the download bar.
 c.colors.downloads.bar.bg = base00
-
-# Color gradient start for download text.
 c.colors.downloads.start.fg = base00
-
-# Color gradient start for download backgrounds.
 c.colors.downloads.start.bg = base0D
-
-# Color gradient end for download text.
 c.colors.downloads.stop.fg = base00
-
-# Color gradient stop for download backgrounds.
 c.colors.downloads.stop.bg = base0C
-
-# Foreground color for downloads with errors.
 c.colors.downloads.error.fg = base08
 
 # Foreground color of an error message.
@@ -209,8 +189,8 @@ c.colors.statusbar.private.fg = base00
 # Background color of the statusbar in private browsing mode.
 c.colors.statusbar.private.bg = base03
 
-# Foreground color of the statusbar in command mode.
-c.colors.statusbar.command.fg = base05
+# Foreground color of the statusbar in command mode onde digita a URL.
+c.colors.statusbar.command.fg = base06
 
 # Background color of the statusbar in command mode.
 c.colors.statusbar.command.bg = base00
@@ -234,7 +214,7 @@ c.colors.statusbar.caret.selection.fg = base00
 c.colors.statusbar.caret.selection.bg = base0D
 
 # Background color of the progress bar.
-c.colors.statusbar.progress.bg = base0C
+c.colors.statusbar.progress.bg = base09
 
 # Default color of the URL in the statusbar.
 c.colors.statusbar.url.fg = base05
@@ -242,7 +222,7 @@ c.colors.statusbar.url.error.fg = base08
 c.colors.statusbar.url.hover.fg = base05
 c.colors.statusbar.url.warn.fg = base0E
 c.colors.statusbar.url.success.http.fg = base0C
-c.colors.statusbar.url.success.https.fg = base07
+c.colors.statusbar.url.success.https.fg = base06
 
 c.colors.keyhint.fg = base07
 c.colors.keyhint.suffix.fg = base0A
