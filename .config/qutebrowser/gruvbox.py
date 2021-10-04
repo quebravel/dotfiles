@@ -87,15 +87,11 @@ c.colors.tabs.selected.even.bg = base00
 c.colors.completion.fg = base07
 
 # Background color of the completion widget for odd rows.
-c.colors.completion.odd.bg = base01
-
-# Background color of the completion widget for even rows.
-c.colors.completion.even.bg = base00
+c.colors.completion.odd.bg = base00
+c.colors.completion.even.bg = base01
 
 # Foreground color of completion widget category headers.
 c.colors.completion.category.fg = base06
-
-# Background color of the completion widget category headers.
 c.colors.completion.category.bg = base03
 
 # Top border color of the completion widget category headers.
@@ -107,11 +103,7 @@ c.colors.completion.category.border.bottom = base00
 # Foreground color of the selected completion item.
 c.colors.completion.item.selected.fg = base01
 c.colors.completion.item.selected.bg = base09
-
-# Top border color of the selected completion item.
 c.colors.completion.item.selected.border.top = base0A
-
-# Bottom border color of the selected completion item.
 c.colors.completion.item.selected.border.bottom = base0F
 
 # Foreground color of the matched text in the selected completion item.
@@ -176,6 +168,7 @@ c.colors.prompts.selected.bg = base0A
 
 # Foreground color of the statusbar.
 c.colors.statusbar.normal.fg = base0B
+c.colors.statusbar.normal.bg = base00
 
 # Foreground color of the statusbar in passthrough mode.
 c.colors.statusbar.passthrough.fg = base00
@@ -193,7 +186,7 @@ c.colors.statusbar.private.bg = base03
 c.colors.statusbar.command.fg = base06
 
 # Background color of the statusbar in command mode.
-c.colors.statusbar.command.bg = base00
+c.colors.statusbar.command.bg = base01
 
 # Foreground color of the statusbar in private browsing + command mode.
 c.colors.statusbar.command.private.fg = base05
@@ -229,7 +222,7 @@ c.colors.keyhint.suffix.fg = base0A
 c.colors.keyhint.bg = 'rgba(40, 40, 40, 97%)'
 
 # Font color for hints.
-c.colors.hints.fg = base00
+c.colors.hints.fg = base01
 c.colors.hints.bg = base09
 c.colors.hints.match.fg = base07
 c.hints.border = "0px"
