@@ -7,7 +7,7 @@ vim.g.maplocalleader = '\\'
 vim.b.maplocalleader = '\\'
 
 -- NvimTree
-mapper( 'n', '<C-n>',':NvimTreeToggle<CR>' )
+mapper( 'n', '<leader>n',':NvimTreeToggle<CR>' )
 
 -- Buffer
 mapper( 'n','<Tab>',':BufferLineCycleNext<CR>' )
