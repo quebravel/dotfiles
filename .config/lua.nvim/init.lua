@@ -11,9 +11,9 @@ require('config-plugins.treesitter')
 require('config-plugins.dashboard')
 require('config-plugins.lspinstaller')
 require('config-plugins.lspconfig')
+require('config-plugins.autopairs')
 
 -- Plugins loader without configurations
 require('colorizer').setup()
-require('nvim-autopairs').setup{}
 require('nvim_comment').setup()
 
