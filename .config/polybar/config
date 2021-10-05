@@ -17,18 +17,8 @@
 ;==========================================================
 ; setcolorsSolarizedDark, setcolorsGruvbox
 [section/base]
-include-file = ~/.config/polybar/setcolorsSolarizedDark
-
-;cores para pywal
-;[colors]
-;background = ${xrdb:color0:#222}
-;background-alt = ${xrdb:color8:#363636}
-;foreground = ${xrdb:color7:#00afaf}
-;foreground-alt = ${xrdb:color4:#888}
-;primary = ${xrdb:color5:#ffffd7
-;secondary = ${xrdb:color1:#e60053}
-;alert = ${xrdb:color6:#bd2c40}
-;tiler = ${xrdb:color4:#fba922}
+; include-file = ~/.config/polybar/gruvboxLight
+include-file = ~/.config/polybar/gruvboxDark
 
 [bar/bspoly]
 ;monitor = ${env:MONITOR:HDMI-1}
@@ -457,7 +447,7 @@ expand-right = false
 format-spacing = 1
 
 label-open = %{T3}%{T-}
-label-open-foreground = ${colors.tiler}
+label-open-foreground = ${colors.secondary}
 label-close = %{T3}%{T-} X
 label-close-foreground = ${colors.secondary}
 label-separator = |
