@@ -15,7 +15,6 @@
 ;   The README contains alot of information
 ;
 ;==========================================================
-; setcolorsSolarizedDark, setcolorsGruvbox
 [section/base]
 ; include-file = ~/.config/polybar/gruvboxLight
 include-file = ~/.config/polybar/gruvboxDark
@@ -27,63 +26,67 @@ include-file = ~/.config/polybar/gruvboxDark
 ;monitor = ${env:MONITOR:DisplayPort-1}
 
 width = 100%
-height = 18
+height = 15
 offset-x = 0.0%
 offset-y = 0.0%
 radius = 0.0
 fixed-center = true
 
-background = ${colors.background}
-foreground = ${colors.foreground}
+background = ${colors.base00}
+foreground = ${colors.base05}
 
 locale = pt_BR.UTF-8
 
 ;altura/cor da underline/overline
-;line-size = 0
-;overline-size = 2
-;underline-size = 2
+; line-size = 2
+; overline-size = 2
+; underline-size = 2
 
 border-size = 0
-
+padding = 0
 padding-left = 0
-padding-right = 2.5
+padding-right = 0
 
-module-margin = 1
+module-margin = 0
 
 tray-position = right
 tray-padding = 2
 tray-detached = false
+tray-background = ${colors.base06}
 pseudo-transparency = true
 
 ; instalar essas fontes
-font-0 = tamzen:size=12;2
+; font-0 = tamzen:size=12;2
+font-0 = JetBrainsMono Nerd Font:size=7.5;2
 font-1 = Font Awesome 5 Free:pixelsize=9;1
 font-2 = siji:pixelsize=14;2
 font-3 = unifont:fontformat=truetype:size=8:antialias=false;1
 
 modules-left = bspwm xwindow
 ;modules-center = mpd
-modules-right = xkeyboard wired-network networkspeeddown networkspeedup filesystem pulseaudio cpu temperature memory date powermenu
+modules-right = xkeyboard wired-network networkspeeddown networkspeedup filesystem alsa cpu temperature memory date powermenu
 
 cursor-click = pointer
 cursor-scroll = ns-resize
 
 [module/xwindow]
 type = internal/xwindow
-label = %title:0:67%
-format-foreground = ${colors.foreground}
+label = " %title:0:67%"
+format-foreground = ${colors.base05}
 format-padding = 0
 
 [module/xkeyboard]
 type = internal/xkeyboard
 blacklist-0 = num lock
-
+label-layout-foreground = ${colors.base07}
+label-layout-background = ${colors.base0A}
 format = <label-indicator>
 
 label-layout = %layout%
 label-indicator-padding = 1
 ; label-indicator-margin = 0
-;label-indicator-background = ${colors.background}
+;label-indicator-background = ${colors.base00}
+
 
 [module/filesystem]
 type = internal/fs
@@ -93,12 +96,20 @@ interval = 60
 spacing = 2
 
 mount-0 = /
-format-mounted = <label-mounted>
-format-mounted-prefix = "%{T3}%{T-} hdd "
-format-mounted-foreground = ${colors.foreground-alt}
+; format-mounted = <label-mounted>
+; format-mounted-foreground = ${colors.base0D}
+; label-mounted = "%{F#98971a}%{T3}%{F- T-}/hdd "
+; 
+; label-mounted = %percentage_used%%
+; label-mounted-foreground = ${colors.base05}
+label-mounted =    "%{T3}%{T-}/hdd %percentage_used:3:3%%"
+format-unmounted = <label-unmounted>
+label-unmounted = %{T4}Sᵗ%{T-} USB Stick
+format-mounted-foreground = ${colors.base06}
+format-mounted-background = ${colors.base03}
+format-mounted-padding = 1
+fixed-values = true
 
-label-mounted = %percentage_used%%
-label-mounted-foreground = ${colors.foreground}
 
 [module/bspwm]
 type = internal/bspwm
@@ -106,39 +117,40 @@ type = internal/bspwm
 format = <label-state> <label-mode>
 
 label-focused =  %name%
-label-focused-foreground = ${colors.background}
-label-focused-background = ${colors.foreground}
+label-focused-foreground = ${colors.base00}
+label-focused-background = ${colors.base05}
 label-focused-padding = 2
-;label-focused-overline = ${colors.secondary}
+label-focused-underline = ${colors.base09}
 ;label-focused-font = 5
 
 label-occupied = %name%
 label-occupied-padding = 2
-label-occupied-foreground = ${colors.foreground}
-label-occupied-background = ${colors.background-alt}
+label-occupied-foreground = ${colors.base05}
+label-occupied-background = ${colors.base02}
+; label-occupied-underline = ${colors.base05}
 
 label-urgent = %name%!
-label-urgent-background = ${colors.alert}
-label-urgent-padding = 2
+label-urgent-background = ${colors.base09}
+label-urgent-padding = 0
 
 label-empty = %icon%
-label-empty-foreground = ${colors.foreground-alt}
+label-empty-foreground = ${colors.base0D}
 label-empty-padding = 2
 
 label-tiled = %{T3}%{T-}
-;label-tiled-foreground = ${colors.tiler}
+;label-tiled-foreground = ${colors.base0A}
 label-monocle = %{T3}%{T-}
-; label-monocle-foreground = ${colors.tiler}
+; label-monocle-foreground = ${colors.base0A}
 label-floating = %{T3}%{T-}
-label-floating-foreground = ${colors.tiler}
+label-floating-foreground = ${colors.base0A}
 label-pseudotiled = %{T3}%{T-}
-label-pseudotiled-foreground = ${colors.tiler}
+label-pseudotiled-foreground = ${colors.base0A}
 label-locked = %{T3}%{T-}
-label-locked-foreground = ${colors.tiler}
+label-locked-foreground = ${colors.base0A}
 label-sticky = %{T3}%{T-}
-label-sticky-foreground = ${colors.tiler}
+label-sticky-foreground = ${colors.base0A}
 label-private = %{T3}%{T-}
-label-private-foreground = ${colors.tiler}
+label-private-foreground = ${colors.base0A}
 
 fuzzy-match = false
 
@@ -156,34 +168,40 @@ ws-icon-9 = MPD-10;0000-0
 [module/cpu]
 type = internal/cpu
 interval = 2
-format-prefix = "%{T3}%{T-} cpu "
-format-prefix-foreground = ${colors.foreground-alt}
+format-prefix = " %{T3}%{T-}/cpu "
+format-prefix-foreground = ${colors.base01}
+format-prefix-background = ${colors.base03b}
 
 ;label = %percentage-core2:3%%
-label = %percentage:3%%
-format-foreground = ${colors.foreground}
+label = "%percentage:3%% "
+format-foreground = ${colors.base01}
+format-background = ${colors.base03b}
 
 [module/memory]
 type = internal/memory
 interval = 2
-format-prefix = "%{T3}%{T-} ram "
-format-prefix-foreground = ${colors.foreground-alt}
-format-foreground = ${colors.foreground}
-label = %percentage_used:2%%
+format-prefix = " %{T3}%{T-}/ram "
+; format-prefix-foreground = ${colors.base00}
+format-foreground = ${colors.base01}
+format-background = ${colors.base05}
+label = "%percentage_used:2%% "
 format = <label>
+format-padding = 0
 
 [module/wired-network]
 type = internal/network
 interface = enp2s0
 interval = 1.0
 
-format-connected-prefix = "%{T3}%{T-} net off"
-format-connected-prefix-foreground = ${colors.foreground-alt}
-label-connected = %ifname%
-label-connected-foreground = ${colors.foreground}
+format-connected-prefix = " %{T3}%{T-}/net "
+format-connected-prefix-foreground = ${colors.base05}
+format-connected-prefix-background = ${colors.base01}
+label-connected = "%ifname% "
+label-connected-foreground = ${colors.base05}
+label-connected-background = ${colors.base01}
 
-format-disconnected = "%{T3}%{T-} net off"
-label-disconnected-foreground = ${colors.connected-foreground}
+format-disconnected = "%{T3}%{T-}/net off"
+label-disconnected-foreground = ${colors.connected-base05}
 
 ;[module/wireless-network]
 ;type = internal/network
@@ -191,10 +209,10 @@ label-disconnected-foreground = ${colors.connected-foreground}
 ;interval = 1.0
 
 ;format-connected =  <label-connected>
-;format-connected-prefix = "%{T3}%{T-} wifi "
-;format-connected-prefix-foreground = ${colors.foreground-alt}
+;format-connected-prefix = "%{F#b16286}%{T3}%{F- T-} wifi "
+;format-connected-prefix-foreground = ${colors.base0D}
 ;label-connected = %signal%% %ifname% %essid%
-;label-connected-foreground = ${colors.foreground}
+;label-connected-foreground = ${colors.base05}
 
 ;;ramp-signal-0 = %{T3}%{T-}
 ;;ramp-signal-1 = %{T3}%{T-}
@@ -204,25 +222,29 @@ label-disconnected-foreground = ${colors.connected-foreground}
 ;;ramp-signal-5 = %{T3}%{T-}
 
 ;format-disconnected = "%{T3}%{T-} wifi off"
-;label-disconnected-foreground = ${colors.connected-foreground}
+;label-disconnected-foreground = ${colors.connected-base05}
 
 [module/networkspeeddown]
 type = internal/network
 interface = enp2s0
 label-connected = "%downspeed:8:0%"
 format-connected = <label-connected>
-format-connected-prefix = "%{T3}%{T-}"
-format-connected-prefix-foreground = ${colors.foreground-alt}
-format-connected-foreground = ${colors.foreground}
+format-connected-prefix = " %{T3}%{T-}"
+format-connected-prefix-foreground = ${colors.base06}
+format-connected-prefix-background = ${colors.base02}
+format-connected-foreground = ${colors.base06}
+format-connected-background = ${colors.base02}
 
 [module/networkspeedup]
 type = internal/network
 interface = enp2s0
-label-connected = "%upspeed:8:0%"
+label-connected = "%upspeed:8:0% "
 format-connected = <label-connected>
-format-connected-prefix = "%{T3}%{T-}"
-format-connected-prefix-foreground = ${colors.foreground-alt}
-format-connected-foreground = ${colors.foreground}
+format-connected-prefix = " %{T3}%{T-}"
+format-connected-prefix-foreground = ${colors.base06}
+format-connected-prefix-background = ${colors.base02}
+format-connected-foreground = ${colors.base06}
+format-connected-background = ${colors.base02}
 
 [module/date]
 type = internal/date
@@ -231,65 +253,33 @@ interval = 1
 date =
 date-alt = " %a %b %d-%m-%Y"
 
-time = %H:%M:%S
-time-alt = %H:%M
+time = "%H:%M:%S "
+time-alt = "%H:%M "
 
-format-prefix = "%{T3}%{T-} hora"
-format-prefix-foreground = ${colors.foreground-alt}
-format-foreground = ${colors.foreground}
+format-prefix = " %{T3}%{T-}/hora"
+format-prefix-foreground = ${colors.base00}
+format-foreground = ${colors.base00}
+format-background = ${colors.base06}
 
 label = %date% %time%
 ;label-font = 5
 
-[module/pulseaudio]
-type = internal/pulseaudio
+; [module/pulseaudio]
+; type = internal/pulseaudio
 
-; Mostra o controle de volume do monitor
-; Sink e usando, se existir (use para procurar `pacmd list-sinks | grep 'name:'`, name field)
-; Se nao, use o padrao sink
-; sink = alsa_output.pci-0000_01_00.1.hdmi-stereo-extra3
-
-format-volume = <label-volume> <bar-volume>
-label-volume = %percentage:3:3%%
-label-volume-foreground = ${root.foreground}
-
-format-volume-prefix = "%{T3}%{T-} vol "
-format-volume-foreground = ${colors.foreground-alt}
-format-muted-prefix = "%{T3}%{T-}"
-format-muted-foreground = ${colors.alert}
-label-muted =   " vol   0% %{T4}::::::::::%{T-}"
-
-bar-volume-width = 10
-bar-volume-foreground-0 = #55aa55
-bar-volume-foreground-1 = #55aa55
-bar-volume-foreground-2 = #55aa55
-bar-volume-foreground-3 = #55aa55
-bar-volume-foreground-4 = #55aa55
-bar-volume-foreground-5 = #f5a70a
-bar-volume-foreground-6 = #ff5555
-bar-volume-gradient = false
-bar-volume-indicator = |
-bar-volume-indicator-font = 4 
-bar-volume-indicator-foreground = ${colors.foreground}
-bar-volume-fill = :
-bar-volume-fill-font = 4
-bar-volume-empty = :
-bar-volume-empty-font = 4
-bar-volume-empty-foreground = ${colors.foreground-alt}
-
-; [module/alsa]
-; type = internal/alsa
-
-; master-mixer = Master
+; ; Mostra o controle de volume do monitor
+; ; Sink e usando, se existir (use para procurar `pacmd list-sinks | grep 'name:'`, name field)
+; ; Se nao, use o padrao sink
+; ; sink = alsa_output.pci-0000_01_00.1.hdmi-stereo-extra3
 
 ; format-volume = <label-volume> <bar-volume>
 ; label-volume = %percentage:3:3%%
-; label-volume-foreground = ${root.foreground}
+; label-volume-foreground = ${root.base05}
 
 ; format-volume-prefix = "%{T3}%{T-} vol "
-; format-volume-foreground = ${colors.foreground-alt}
+; format-volume-foreground = ${colors.base0D}
 ; format-muted-prefix = "%{T3}%{T-}"
-; format-muted-foreground = ${colors.alert}
+; format-muted-foreground = ${colors.base09}
 ; label-muted =   " vol   0% %{T4}::::::::::%{T-}"
 
 ; bar-volume-width = 10
@@ -303,11 +293,47 @@ bar-volume-empty-foreground = ${colors.foreground-alt}
 ; bar-volume-gradient = false
 ; bar-volume-indicator = |
 ; bar-volume-indicator-font = 4
+; bar-volume-indicator-foreground = ${colors.base05}
 ; bar-volume-fill = :
 ; bar-volume-fill-font = 4
 ; bar-volume-empty = :
 ; bar-volume-empty-font = 4
-; bar-volume-empty-foreground = ${colors.foreground-alt}
+; bar-volume-empty-foreground = ${colors.base0D}
+
+[module/alsa]
+type = internal/alsa
+
+master-mixer = Master
+
+format-volume = "<label-volume> <bar-volume> "
+label-volume = "%percentage:3:3%%"
+label-volume-foreground = ${colors.base01}
+; label-volume-background = ${root.base02}
+
+format-volume-prefix = " %{T3}%{T-}/vol "
+format-volume-foreground = ${colors.base01}
+format-volume-background = ${colors.base03a}
+format-muted-prefix = " %{T3}%{T-}"
+format-muted-foreground = ${colors.base0A}
+format-muted-background = ${colors.base0F}
+label-muted = "/vol  --% %{T4}::::::::::%{T-} "
+
+bar-volume-width = 10
+bar-volume-foreground-0 = ${colors.base07}
+bar-volume-foreground-1 = ${colors.base07}
+bar-volume-foreground-2 = ${colors.base07}
+bar-volume-foreground-3 = ${colors.base07}
+bar-volume-foreground-4 = ${colors.base07}
+bar-volume-foreground-5 = ${colors.base0A}
+bar-volume-foreground-6 = ${colors.base08}
+bar-volume-gradient = false
+bar-volume-indicator = |
+bar-volume-indicator-font = 4
+bar-volume-fill = :
+bar-volume-fill-font = 4
+bar-volume-empty = :
+bar-volume-empty-font = 4
+bar-volume-empty-foreground = ${colors.base01}
 
 [module/temperature]
 type = internal/temperature
@@ -315,15 +341,19 @@ thermal-zone = 2
 ;warn-temperature = 60
 interval = 10
 
-format = <ramp> <label>
+format = <ramp><label>
 ; format = <label>
 ; hwmon-path = /sys/devices/platform/coretemp.0/hwmon/hwmon1/temp2_input
 
-label = %temperature-c:6:6%
-label-foreground = ${colors.foreground}
+label = "%temperature-c:6:6% "
+label-foreground = ${colors.base00}
+label-background = ${colors.base04}
+format-padding = 0
 
-ramp-0 = %{T3} %{T-}temp
-ramp-foreground = ${colors.foreground-alt}
+ramp-0 = " %{T3}%{T-}/temp"
+ramp-foreground = ${colors.base00}
+ramp-background = ${colors.base04}
+ramp-padding = 0
 
 ;[module/battery]
 ;type = internal/battery
@@ -358,7 +388,7 @@ ramp-foreground = ${colors.foreground-alt}
 ;;   <ramp-capacity>
 ;;   <animation-charging>
 ;format-charging = <animation-charging> <label-charging>
-;format-charging-background = ${colors.background}
+;format-charging-background = ${colors.base00}
 ;; format-charging-padding = ${layout.module-padding}
 ;;format-charging-prefix = 
 ;; Available tags:
@@ -367,7 +397,7 @@ ramp-foreground = ${colors.foreground-alt}
 ;;   <ramp-capacity>
 ;;   <animation-discharging>
 ;format-discharging = <animation-discharging> <ramp-capacity> <label-discharging>
-;format-discharging-background = ${colors.background}
+;format-discharging-background = ${colors.base00}
 ;; format-discharging-padding = ${layout.module-padding}
 
 ;; Available tags:
@@ -392,7 +422,7 @@ ramp-foreground = ${colors.foreground-alt}
 ;; Available tokens:
 ;;   %percentage% (default)
 ;label-full = Fully Charged
-;label-full-background = ${colors.background}
+;label-full-background = ${colors.base00}
 ;; label-full-padding = ${layout.module-padding}
 
 ;; Only applies if <ramp-capacity> is used
@@ -446,19 +476,20 @@ expand-right = false
 
 format-spacing = 1
 
-label-open = %{T3}%{T-}
-label-open-foreground = ${colors.secondary}
-label-close = %{T3}%{T-} X
-label-close-foreground = ${colors.secondary}
-label-separator = |
-label-separator-foreground = ${colors.foreground-alt}
+label-open = " %{T3}%{T-} "
+label-open-foreground = ${colors.base08}
+label-open-background = ${colors.base06}
+label-close = "%{T3}%{T-} X "
+label-close-foreground = ${colors.base08}
+label-separator = /
+label-separator-foreground = ${colors.base00}
 
-menu-0-0 = terminal
-menu-0-0-exec = urxvt&
-menu-0-1 = reiniciar
+menu-0-0 = "%{B#fbf1c7}%{F#282828} terminal%{F-}"
+menu-0-0-exec = alacritty&
+menu-0-1 = %{F#282828}reiniciar%{F-}
 menu-0-1-exec = sudo shutdown -r now
-menu-0-2 = desligar
-menu-0-2-exec = sudo shutdown -h now
+menu-0-2 = %{F#3c3836}desligar%{F-}
+menu-0-2-exec = sudo shutdown -h now%{B-}
 
 [settings]
 screenchange-reload = true
