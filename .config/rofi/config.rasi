@@ -40,7 +40,7 @@ font: "tamzenforpowerline 12";
 /*	line-padding: 1;*/
 /*	filter: ;*/
 /*	separator-style: "dash";*/
-    hide-scrollbar: true;
+    /* hide-scrollbar: true; */
 /*	fullscreen: false;*/
 /*	fake-transparency: false;*/
 /*	dpi: -1;*/
@@ -51,7 +51,7 @@ font: "tamzenforpowerline 12";
 /*	window-format: "{w}    {i}{c}   {t}";*/
 /*	click-to-exit: true;*/
 /*	show-match: true;*/
-theme: "ribbon.rasi";
+theme: "row_dropdown.rasi";
     /* color-normal: #0a81f5; */
     /* color-urgent: #e53935; */
     /* color-active: #363636; */
