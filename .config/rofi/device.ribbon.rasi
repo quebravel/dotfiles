@@ -68,3 +68,12 @@ configuration {
   text-color: @selected-color;
   background-color: @selected-bg;
 }
+
+
+element-text {
+    background-color: 				#00000000;
+    text-color: #fff;
+    expand: true;
+  }
+
+/* vim:ft=css
