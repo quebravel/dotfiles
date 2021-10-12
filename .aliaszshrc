@@ -10,6 +10,7 @@ alias f="sxiv -frqto * | xargs feh --bg-scale"
 alias vkp="sudo vkpurge rm all"
 alias n="nvim"
 alias sz="source ~/.zshrc"
+alias tmux='TERM=xterm-256color tmux'
 
 # atalhos
 alias nzshrc="nvim ~/.zshrc"
