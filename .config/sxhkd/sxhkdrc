@@ -219,8 +219,8 @@ alt + {period,comma,p,s}
 #    xbacklight -dec 6
 
 # Brilho PC
-super + shift + b
-    ~/.config/sxhkd/scripts_sxhkd/d2_bright.sh
+super + ctrl + {minus,equal}
+    ~/.config/sxhkd/scripts_sxhkd/d2_bright.sh {-d,-i}
 
 # layout teclado
 #    super + shift + b
