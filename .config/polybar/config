@@ -102,7 +102,7 @@ mount-0 = /
 ; 
 ; label-mounted = %percentage_used%%
 ; label-mounted-foreground = ${colors.base05}
-label-mounted =    "%{T3}%{T-}/hdd %percentage_used:3:3%%"
+label-mounted =    "%{T3}%{T-}/ssd %used%"
 format-unmounted = <label-unmounted>
 label-unmounted = %{T4}Sᵗ%{T-} USB Stick
 format-mounted-foreground = ${colors.base06}
@@ -184,7 +184,7 @@ format-prefix = " %{T3}%{T-}/ram "
 ; format-prefix-foreground = ${colors.base00}
 format-foreground = ${colors.base01}
 format-background = ${colors.base05}
-label = "%percentage_used:2%% "
+label = "%gb_used:0:8% "
 format = <label>
 format-padding = 0
 
