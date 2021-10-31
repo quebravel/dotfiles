@@ -490,7 +490,7 @@ menu-0-0-exec = alacritty&
 menu-0-1 = %{F#282828}reiniciar%{F-}
 menu-0-1-exec = sudo shutdown -r now
 menu-0-2 = %{F#3c3836}desligar%{F-}
-menu-0-2-exec = sudo shutdown -h now%{B-}
+menu-0-2-exec = sudo shutdown -h now
 
 [settings]
 screenchange-reload = true
