@@ -272,33 +272,34 @@ label = %date% %time%
 ; ; Se nao, use o padrao sink
 ; ; sink = alsa_output.pci-0000_01_00.1.hdmi-stereo-extra3
 
-; format-volume = <label-volume> <bar-volume>
+; format-volume = "<label-volume> <bar-volume> "
 ; label-volume = %percentage:3:3%%
-; label-volume-foreground = ${root.base05}
-
-; format-volume-prefix = "%{T3}%{T-} vol "
-; format-volume-foreground = ${colors.base0D}
-; format-muted-prefix = "%{T3}%{T-}"
-; format-muted-foreground = ${colors.base09}
-; label-muted =   " vol   0% %{T4}::::::::::%{T-}"
-
+; label-volume-foreground = ${colors.base01}
+; 
+; format-volume-prefix = " %{T3}%{T-}/vol "
+; format-volume-foreground = ${colors.base01}
+; format-volume-background = ${colors.base03a}
+; format-muted-prefix = " %{T3}%{T-}"
+; format-muted-foreground = ${colors.base0A}
+; format-muted-background = ${colors.base0F}
+; label-muted = "/vol  --% %{T4}::::::::::%{T-} "
+; 
 ; bar-volume-width = 10
-; bar-volume-foreground-0 = #55aa55
-; bar-volume-foreground-1 = #55aa55
-; bar-volume-foreground-2 = #55aa55
-; bar-volume-foreground-3 = #55aa55
-; bar-volume-foreground-4 = #55aa55
-; bar-volume-foreground-5 = #f5a70a
-; bar-volume-foreground-6 = #ff5555
+; bar-volume-foreground-0 = ${colors.base07}
+; bar-volume-foreground-1 = ${colors.base07}
+; bar-volume-foreground-2 = ${colors.base07}
+; bar-volume-foreground-3 = ${colors.base07}
+; bar-volume-foreground-4 = ${colors.base07}
+; bar-volume-foreground-5 = ${colors.base0A}
+; bar-volume-foreground-6 = ${colors.base08}
 ; bar-volume-gradient = false
 ; bar-volume-indicator = |
 ; bar-volume-indicator-font = 4
-; bar-volume-indicator-foreground = ${colors.base05}
 ; bar-volume-fill = :
 ; bar-volume-fill-font = 4
 ; bar-volume-empty = :
 ; bar-volume-empty-font = 4
-; bar-volume-empty-foreground = ${colors.base0D}
+; bar-volume-empty-foreground = ${colors.base01}
 
 [module/alsa]
 type = internal/alsa
