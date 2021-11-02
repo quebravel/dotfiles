@@ -263,7 +263,7 @@ super + apostrophe
 
 # reset polybar
 super + {alt,shift} + p
-    {pkill polybar,polybar bspoly&}
+    {pkill polybar,~/.config/polybar/launch.sh}
 
 # reset xresources
 super + x
