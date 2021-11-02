@@ -262,8 +262,8 @@ super + apostrophe
 #    bspc node -f {next,prev}.!hidden
 
 # reset polybar
-super + shift + p
-    pkill polybar; polybar bspoly&
+super + {alt,shift} + p
+    {pkill polybar,polybar bspoly&}
 
 # reset xresources
 super + x
