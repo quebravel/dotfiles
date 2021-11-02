@@ -88,6 +88,8 @@ c.bindings.commands = {
             , ',A': 'spawn --userscript youtube_mp3_downloader.sh'
             , ',v': 'hint links userscript youtube_downloader.sh'
             , ',V': 'spawn --userscript youtube_downloader.sh'
+            , '<': 'fake-key <Shift-\\,>'
+            , '>': 'fake-key <Shift-\\.>'
             }
         }
 
