@@ -51,7 +51,7 @@ font: "tamzenforpowerline 12";
 /*	window-format: "{w}    {i}{c}   {t}";*/
 /*	click-to-exit: true;*/
 /*	show-match: true;*/
-theme: "row_dropdown.rasi";
+/* theme: "row_dropdown.rasi"; */
     /* color-normal: #0a81f5; */
     /* color-urgent: #e53935; */
     /* color-active: #363636; */
@@ -136,4 +136,7 @@ theme: "row_dropdown.rasi";
 /*	me-accept-entry: "MouseDPrimary";*/
 /*	me-accept-custom: "Control+MouseDPrimary";*/
 }
+
+@theme "ribbon"
+
 /* vim:ft=css
