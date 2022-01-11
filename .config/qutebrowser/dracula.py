@@ -241,7 +241,7 @@ c.colors.keyhint.bg = 'rgba(40, 40, 40, 97%)'
 # Font color for hints.
 c.colors.hints.fg = base00
 c.colors.hints.bg = base09
-c.colors.hints.match.fg = base07
+c.colors.hints.match.fg = base0C
 c.hints.border = "0px"
 
 c.colors.statusbar.insert.fg = base00
