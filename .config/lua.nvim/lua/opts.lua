@@ -27,8 +27,8 @@ vim.opt.cursorline = true
 vim.o.shell = 'sh'
 
 vim.wo.number = true
-vim.wo.relativenumber = true
-vim.wo.signcolumn = 'number'
+vim.wo.relativenumber = false
+vim.wo.signcolumn = 'auto:2'
 vim.wo.wrap = true -- quebrar linhas
 vim.o.colorcolumn = '80'
 vim.o.modeline = true -- usa as variaveis # vim:ft=sh:
