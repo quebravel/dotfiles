@@ -10,9 +10,13 @@ require('lualine').setup {
     lualine_a = {'mode'},
     lualine_b = {'branch', {
       'diff', colored = true,
-      color_added = '#b8bb26',
-      color_modified = '#fabd2f',
-      color_removed = '#fbf1c7'}
+      diff_color = {
+        -- Same color values as the general color option can be used here.
+        added    = 'DiffAdd',    -- Changes the diff's added color
+        modified = 'DiffChange', -- Changes the diff's modified color
+        removed  = 'DiffDelete', -- Changes the diff's removed color you
+      },
+    }
                 },
     lualine_c = {'filename'},
     lualine_x = {'hostname', 'encoding', 'fileformat', 'filetype'},
