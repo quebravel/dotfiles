@@ -59,7 +59,7 @@ mapper( 'n', '<leader>d', ':Dashboard<CR>' )
 -- Zen-Mode
 mapper( 'n', '<leader>z', ':ZenMode<CR>' )
 
--- Execute codigo no neovim
+-- Execute codigo no neovim, auto-fechar nvim-tree,
 vim.api.nvim_exec([[
 augroup exe_code
     autocmd!
@@ -67,6 +67,8 @@ augroup exe_code
     autocmd FileType javascript nnoremap <buffer> <localleader>r :sp<CR> :term node %<CR> :startinsert<CR>
     autocmd FileType bash,sh nnoremap <buffer> <localleader>r :sp<CR> :term bash %<CR> :startinsert<CR>
     autocmd FileType lua nnoremap <buffer> <localleader>r :sp<CR> :term lua %<CR> :startinsert<CR>
+
+    autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif
 
     autocmd BufWritePre *.js lua vim.lsp.buf.formatting_sync(nil, 100)
     autocmd BufWritePre *.jsx lua vim.lsp.buf.formatting_sync(nil, 100)
