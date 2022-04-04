@@ -27,11 +27,11 @@ alias xq="xbps-query -Rs"
 alias xo="sudo xbps-remove -Oo"
 
 # Changing "ls" to "exa"
-alias la='exa -al --color-scale --color=always --group-directories-first --icons' # my preferred listing
-alias ls='exa -a --color-scale --color=always --group-directories-first --icons'  # all files and dirs
-alias ll='exa -l --color-scale --color=always --group-directories-first --icons'  # long format
-alias lt='exa -aT --color-scale --color=always --group-directories-first --icons' # tree listing
-alias l.='exa -a --color-scale | egrep "^\."'
+# alias la='exa -al --color-scale --color=always --group-directories-first --icons' # my preferred listing
+# alias ls='exa -a --color-scale --color=always --group-directories-first --icons'  # all files and dirs
+# alias ll='exa -l --color-scale --color=always --group-directories-first --icons'  # long format
+# alias lt='exa -aT --color-scale --color=always --group-directories-first --icons' # tree listing
+# alias l.='exa -a --color-scale | egrep "^\."'
 
 # youtube-dl
 alias yta-best="yt-dlp --extract-audio --audio-format best "
