@@ -73,5 +73,9 @@ augroup exe_code
     autocmd BufWritePre *.js lua vim.lsp.buf.formatting_sync(nil, 100)
     autocmd BufWritePre *.jsx lua vim.lsp.buf.formatting_sync(nil, 100)
     autocmd BufWritePre *.py lua vim.lsp.buf.formatting_sync(nil, 100)
+
+    " Return to last edit position when opening files (You want this!)
+    autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+
 augroup End
     ]], true)
