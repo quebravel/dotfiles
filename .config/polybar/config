@@ -26,7 +26,7 @@ include-file = ~/.config/polybar/gruvboxDark
 ;monitor = ${env:MONITOR:DisplayPort-1}
 
 width = 100%
-height = 15
+height = 18
 offset-x = 0.0%
 offset-y = 0.0%
 radius = 0.0
@@ -57,7 +57,7 @@ pseudo-transparency = true
 
 ; instalar essas fontes
 ; font-0 = tamzen:size=12;2
-font-0 = JetBrainsMono Nerd Font:size=7.5;2
+font-0 = JetBrainsMono Nerd Font:size=8.5;2
 font-1 = Font Awesome 5 Free:pixelsize=9;1
 font-2 = siji:pixelsize=14;2
 font-3 = unifont:fontformat=truetype:size=8:antialias=false;1
@@ -183,7 +183,7 @@ interval = 2
 format-prefix = " %{T3}%{T-}/ram "
 ; format-prefix-foreground = ${colors.base00}
 format-foreground = ${colors.base01}
-format-background = ${colors.base05}
+format-background = ${colors.base03a}
 label = "%gb_used:0:8% "
 format = <label>
 format-padding = 0
@@ -257,9 +257,9 @@ time = "%H:%M:%S "
 time-alt = "%H:%M "
 
 format-prefix = " %{T3}%{T-}/hora"
-format-prefix-foreground = ${colors.base00}
-format-foreground = ${colors.base00}
-format-background = ${colors.base06}
+format-prefix-foreground = ${colors.base06}
+format-foreground = ${colors.base06}
+format-background = ${colors.base03}
 
 label = %date% %time%
 ;label-font = 5
@@ -478,8 +478,8 @@ expand-right = false
 format-spacing = 1
 
 label-open = " %{T3}%{T-} "
-label-open-foreground = ${colors.base08}
-label-open-background = ${colors.base06}
+label-open-foreground = ${colors.base07}
+label-open-background = ${colors.base08}
 label-close = "%{T3}%{T-} X "
 label-close-foreground = ${colors.base08}
 label-separator = /
