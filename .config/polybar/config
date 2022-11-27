@@ -52,7 +52,7 @@ module-margin = 0
 tray-position = right
 tray-padding = 2
 tray-detached = false
-tray-background = ${colors.base06}
+tray-background = ${colors.base03}
 pseudo-transparency = true
 
 ; instalar essas fontes
