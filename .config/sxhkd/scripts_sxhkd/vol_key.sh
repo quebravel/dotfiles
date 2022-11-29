@@ -2,6 +2,8 @@
 
 sink_atual=`pacmd list-sinks | grep "\* index:" | sed 's/[[:space:]][[:space:]]\* index:[[:space:]]//g'`
 
+#sink_atual=`pacmd list-sinks | awk '/name: /{print $2; exit}' | cut -d\< -f2 | cut -d\> -f1`
+
 maisVolume(){
 pactl set-sink-volume $sink_atual +5%
 }
