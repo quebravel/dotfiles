@@ -24,6 +24,7 @@ include-file = ~/.config/polybar/gruvboxDark
 ;monitor = ${env:MONITOR:VGA-1}
 ;monitor = ${env:MONITOR:DVI-D-0}
 ;monitor = ${env:MONITOR:DisplayPort-1}
+wm-restack = bspwm
 
 width = 100%
 height = 18
