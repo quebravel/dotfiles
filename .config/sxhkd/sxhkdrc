@@ -60,6 +60,13 @@ super + {_,shift + }c
 super + m
 	bspc desktop -l next
 
+# bsp-layout
+super + space
+        bsp-layout next --layouts tall,rtall,wide,rwide,grid,rgrid
+
+super + shift + space
+        bsp-layout previous --layouts tall,rtall,wide,rwide,grid,rgrid
+
 # if the current node is automatic, send it to the last manual, otherwise pull the last leaf
 super + y
 	bspc query -N -n focused.automatic.local && bspc node -n last.!automatic.local || bspc node last.leaf.local -n focused.local
