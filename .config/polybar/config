@@ -58,14 +58,14 @@ pseudo-transparency = true
 
 ; instalar essas fontes
 ; font-0 = tamzen:size=12;2
-font-0 = JetBrainsMono Nerd Font:size=8.5;2
+font-0 = JetBrainsMono Nerd Font:size=9.0;2
 font-1 = Font Awesome 5 Free:pixelsize=9;1
 font-2 = siji:pixelsize=14;2
 font-3 = unifont:fontformat=truetype:size=8:antialias=false;1
 
 modules-left = bspwm xwindow
 ;modules-center = mpd
-modules-right = xkeyboard wired-network networkspeeddown networkspeedup filesystem alsa cpu temperature memory date powermenu
+modules-right = xkeyboard wired-network networkspeeddown networkspeedup filesystem pulseaudio cpu temperature memory date powermenu
 
 cursor-click = pointer
 cursor-scroll = ns-resize
@@ -170,28 +170,28 @@ ws-icon-9 = MPD-10;0000-0
 type = internal/cpu
 interval = 2
 format-prefix = " %{T3}%{T-}/cpu "
-format-prefix-foreground = ${colors.base01}
-format-prefix-background = ${colors.base03b}
+format-prefix-foreground = ${colors.base06}
+format-prefix-background = ${colors.base03}
 
 ;label = %percentage-core2:3%%
 label = "%percentage:3%% "
-format-foreground = ${colors.base01}
-format-background = ${colors.base03b}
+format-foreground = ${colors.base06}
+format-background = ${colors.base03}
 
 [module/memory]
 type = internal/memory
 interval = 2
 format-prefix = " %{T3}%{T-}/ram "
 ; format-prefix-foreground = ${colors.base00}
-format-foreground = ${colors.base01}
-format-background = ${colors.base03a}
+format-foreground = ${colors.base06}
+format-background = ${colors.base03}
 label = "%gb_used:0:8% "
 format = <label>
 format-padding = 0
 
 [module/wired-network]
 type = internal/network
-interface = enp2s0
+interface = enp3s0
 interval = 1.0
 
 format-connected-prefix = " %{T3}%{T-}/net "
@@ -227,7 +227,7 @@ label-disconnected-foreground = ${colors.connected-base05}
 
 [module/networkspeeddown]
 type = internal/network
-interface = enp2s0
+interface = enp3s0
 label-connected = "%downspeed:8:0%"
 format-connected = <label-connected>
 format-connected-prefix = " %{T3}%{T-}"
@@ -238,7 +238,7 @@ format-connected-background = ${colors.base02}
 
 [module/networkspeedup]
 type = internal/network
-interface = enp2s0
+interface = enp3s0
 label-connected = "%upspeed:8:0% "
 format-connected = <label-connected>
 format-connected-prefix = " %{T3}%{T-}"
@@ -258,63 +258,31 @@ time = "%H:%M:%S "
 time-alt = "%H:%M "
 
 format-prefix = " %{T3}%{T-}/hora"
-format-prefix-foreground = ${colors.base06}
-format-foreground = ${colors.base06}
-format-background = ${colors.base03}
+;format-prefix-foreground = ${colors.base06}
+format-prefix-foreground = #fff
+;format-foreground = ${colors.base06}
+format-foreground = #fff
+;format-background = ${colors.base03}
+format-background = #0066ff
 
 label = %date% %time%
 ;label-font = 5
 
-; [module/pulseaudio]
-; type = internal/pulseaudio
+[module/pulseaudio]
+type = internal/pulseaudio
 
-; ; Mostra o controle de volume do monitor
-; ; Sink e usando, se existir (use para procurar `pacmd list-sinks | grep 'name:'`, name field)
-; ; Se nao, use o padrao sink
-; ; sink = alsa_output.pci-0000_01_00.1.hdmi-stereo-extra3
-
-; format-volume = "<label-volume> <bar-volume> "
-; label-volume = %percentage:3:3%%
-; label-volume-foreground = ${colors.base01}
-; 
-; format-volume-prefix = " %{T3}%{T-}/vol "
-; format-volume-foreground = ${colors.base01}
-; format-volume-background = ${colors.base03a}
-; format-muted-prefix = " %{T3}%{T-}"
-; format-muted-foreground = ${colors.base0A}
-; format-muted-background = ${colors.base0F}
-; label-muted = "/vol  --% %{T4}::::::::::%{T-} "
-; 
-; bar-volume-width = 10
-; bar-volume-foreground-0 = ${colors.base07}
-; bar-volume-foreground-1 = ${colors.base07}
-; bar-volume-foreground-2 = ${colors.base07}
-; bar-volume-foreground-3 = ${colors.base07}
-; bar-volume-foreground-4 = ${colors.base07}
-; bar-volume-foreground-5 = ${colors.base0A}
-; bar-volume-foreground-6 = ${colors.base08}
-; bar-volume-gradient = false
-; bar-volume-indicator = |
-; bar-volume-indicator-font = 4
-; bar-volume-fill = :
-; bar-volume-fill-font = 4
-; bar-volume-empty = :
-; bar-volume-empty-font = 4
-; bar-volume-empty-foreground = ${colors.base01}
-
-[module/alsa]
-type = internal/alsa
-
-master-mixer = Master
+; Mostra o controle de volume do monitor
+; Sink e usando, se existir (use para procurar `pacmd list-sinks | grep 'name:'`, name field)
+; Se nao, use o padrao sink
+sink = alsa_output.pci-0000_01_00.1.hdmi-stereo-extra5
 
 format-volume = "<label-volume> <bar-volume> "
-label-volume = "%percentage:3:3%%"
-label-volume-foreground = ${colors.base01}
-; label-volume-background = ${root.base02}
+label-volume = %percentage:3:3%%
+label-volume-foreground = ${colors.base06}
 
 format-volume-prefix = " %{T3}%{T-}/vol "
-format-volume-foreground = ${colors.base01}
-format-volume-background = ${colors.base03a}
+format-volume-foreground = ${colors.base06}
+format-volume-background = ${colors.base03}
 format-muted-prefix = " %{T3}%{T-}"
 format-muted-foreground = ${colors.base0A}
 format-muted-background = ${colors.base0F}
@@ -337,6 +305,41 @@ bar-volume-empty = :
 bar-volume-empty-font = 4
 bar-volume-empty-foreground = ${colors.base01}
 
+;[module/alsa]
+;type = internal/alsa
+;
+;master-mixer = Master
+;
+;format-volume = "<label-volume> <bar-volume> "
+;label-volume = "%percentage:3:3%%"
+;label-volume-foreground = ${colors.base01}
+;; label-volume-background = ${root.base02}
+;
+;format-volume-prefix = " %{T3}%{T-}/vol "
+;format-volume-foreground = ${colors.base01}
+;format-volume-background = ${colors.base03a}
+;format-muted-prefix = " %{T3}%{T-}"
+;format-muted-foreground = ${colors.base0A}
+;format-muted-background = ${colors.base0F}
+;label-muted = "/vol  --% %{T4}::::::::::%{T-} "
+;
+;bar-volume-width = 10
+;bar-volume-foreground-0 = ${colors.base07}
+;bar-volume-foreground-1 = ${colors.base07}
+;bar-volume-foreground-2 = ${colors.base07}
+;bar-volume-foreground-3 = ${colors.base07}
+;bar-volume-foreground-4 = ${colors.base07}
+;bar-volume-foreground-5 = ${colors.base0A}
+;bar-volume-foreground-6 = ${colors.base08}
+;bar-volume-gradient = false
+;bar-volume-indicator = |
+;bar-volume-indicator-font = 4
+;bar-volume-fill = :
+;bar-volume-fill-font = 4
+;bar-volume-empty = :
+;bar-volume-empty-font = 4
+;bar-volume-empty-foreground = ${colors.base01}
+
 [module/temperature]
 type = internal/temperature
 thermal-zone = 2
@@ -348,13 +351,13 @@ format = <ramp><label>
 ; hwmon-path = /sys/devices/platform/coretemp.0/hwmon/hwmon1/temp2_input
 
 label = "%temperature-c:6:6% "
-label-foreground = ${colors.base00}
-label-background = ${colors.base04}
+label-foreground = ${colors.base06}
+label-background = ${colors.base03}
 format-padding = 0
 
 ramp-0 = " %{T3}%{T-}/temp"
-ramp-foreground = ${colors.base00}
-ramp-background = ${colors.base04}
+ramp-foreground = ${colors.base06}
+ramp-background = ${colors.base03}
 ramp-padding = 0
 
 ;[module/battery]
