@@ -67,7 +67,12 @@ c.tabs.mode_on_change = "persist"
 c.tabs.title.format = "{index}: {current_title} {audio}"
 c.colors.webpage.preferred_color_scheme = 'auto'
 c.colors.webpage.darkmode.enabled = True
-c.colors.webpage.darkmode.grayscale.all = True
+c.colors.webpage.darkmode.grayscale.all = False
+c.colors.webpage.preferred_color_scheme = 'dark'
+c.colors.webpage.darkmode.policy.page = 'smart'
+c.colors.webpage.darkmode.policy.images = 'smart'
+c.colors.webpage.darkmode.threshold.background = 205
+
 #  c.colors.webpage.bg = "#262626"
 #  c.content.blocking.hosts.lists.append( str(config.configdir) + "/blockedHosts")
 c.scrolling.bar = "when-searching"
