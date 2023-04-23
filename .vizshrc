@@ -25,6 +25,16 @@ bindkey -M menuselect 'k' vi-up-line-or-history
 bindkey -M menuselect 'j' vi-down-line-or-history
 bindkey -v '^?' backward-delete-char
 
+# Yank to the system clipboard ---------------------
+function vi-yank-xclip {
+    zle vi-yank
+   echo "$CUTBUFFER" | xclip -selection "clipboard"
+}
+
+zle -N vi-yank-xclip
+bindkey -M vicmd 'y' vi-yank-xclip
+# End Yank -----------------------------------------
+
 # Change cursor shape for different vi modes.
 function zle-keymap-select {
   if [[ ${KEYMAP} == vicmd ]] ||
