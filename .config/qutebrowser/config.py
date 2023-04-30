@@ -23,32 +23,6 @@ c.fonts.completion.entry = font_name
 c.fonts.completion.category = c.fonts.statusbar
 #c.fonts.hints = "13px tamzenforpowerline"
 
-# searches
-c.url.searchengines['DEFAULT'] = 'https://www.duckduckgo.com/?q={}'
-c.url.searchengines['g'] = 'https://www.google.com/search?q={}'
-c.url.searchengines['m'] = 'https://www.google.com/maps?q={}'
-c.url.searchengines['k'] = 'https://keep.google.com/#search/text%253D{}'
-c.url.searchengines['w'] = 'http://pt.wikipedia.org/w/index.php?search={}&title=Special:Search'
-c.url.searchengines['y'] = 'https://www.youtube.com/results?search_query={}'
-c.url.searchengines['ar'] = 'https://wiki.archlinux.org/?search={}'
-c.url.searchengines['v'] = 'https://wiki.voidlinux.org/?search={}'
-c.url.searchengines['ge'] = 'https://wiki.gentoo.org/wiki/?search={}'
-c.url.searchengines['t'] = 'https://translate.google.com/#view=home&op=translate&sl=en&tl=pt&text={}'
-c.url.searchengines['r'] = 'https://reddit.com/r/{}'
-c.url.searchengines['c'] = 'https://www.comandotorrents.com/?s={}'
-c.url.searchengines['l'] = 'https://www.deepl.com/pt-BR/translator#en/pt/{}'
-c.url.searchengines['b'] = 'https://bastos.bibipecas.com.br/search/{}'
-c.url.searchengines['n'] = 'https://www.netflix.com/search?q={}'
-
-# aliases
-c.aliases['gh'] = 'open -t https://github.com/quebravel'
-c.aliases['yh'] = 'open -r https://www.youtube.com/feed/history'
-c.aliases['rd'] = 'open -r https://reddit.com'
-c.aliases['kp'] = 'open -t https://keep.google.com'
-c.aliases['gm'] = 'open -t https://mail.google.com'
-c.aliases['fd'] = 'open -t https://feedly.com'
-c.aliases['ymp3'] = 'spawn -m youtube-dl -x --audio-format mp3 {url}'
-
 # geral
 c.new_instance_open_target = "tab"
 c.tabs.background = True
@@ -106,4 +80,4 @@ c.bindings.commands = {
 
 # config.source('solarizedark.py')
 config.source('gruvbox.py')
-
+config.source('aliases_search.py')
