@@ -39,7 +39,7 @@ c.content.autoplay = False
 c.content.geolocation = True
 c.tabs.mode_on_change = "persist"
 c.tabs.title.format = "{index}: {current_title} {audio}"
-c.colors.webpage.preferred_color_scheme = 'auto'
+c.colors.webpage.preferred_color_scheme = 'dark'
 c.colors.webpage.darkmode.enabled = True
 c.colors.webpage.darkmode.grayscale.all = False
 c.colors.webpage.preferred_color_scheme = 'dark'
@@ -52,7 +52,7 @@ c.colors.webpage.darkmode.threshold.background = 205
 c.scrolling.bar = "when-searching"
 c.scrolling.smooth = False
 # instalar adblock com o comando pip install adblock
-#  c.content.blocking.method = "adblock"
+c.content.blocking.method = "adblock"
 
 # plugins
 # https://gitlab.com/jgkamat/jblock
