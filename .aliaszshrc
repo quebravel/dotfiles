@@ -33,11 +33,11 @@ alias yr="yay -Rs"
 alias yss="yay -Ss"
 
 # Changing "ls" to "exa"
-alias la='exa -la --color-scale --color=always --group-directories-first --sort=modified --icons --git --header' # my preferred listing
-alias ls='exa -Gra --color-scale --color=always --group-directories-first --icons'  # all files and dirs
-alias ll='exa -l --color-scale --color=always --group-directories-first --icons'  # long format
-alias lt='exa -aT --color-scale --color=always --group-directories-first --icons' # tree listing
-alias l.='exa -a --color-scale | egrep "^\."'
+# alias la='exa -la --color-scale --color=always --group-directories-first --sort=modified --icons --git --header' # my preferred listing
+# alias ls='exa -a --color-scale --color=always --group-directories-first --icons'  # all files and dirs
+# alias ll='exa -l --color-scale --color=always --group-directories-first --icons'  # long format
+# alias lt='exa -aT --color-scale --color=always --group-directories-first --icons' # tree listing
+# alias l.='exa -a --color-scale | egrep "^\."'
 
 # youtube-dl
 alias yta-best="yt-dlp --extract-audio --audio-format best "
