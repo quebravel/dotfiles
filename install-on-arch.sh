@@ -181,17 +181,25 @@ $HELPER -S picom-jonaburg-git\
         redshift                                /
         unclutter                               
 
-    }
+    
 
 echo "Este computador é um notebook?"
 read -r -p "[s]im ou [n]ão" notebook
 
 case $notebook in
     [s])
-        $HELPER -S acpi\
-                   iwd                          /
+        $HELPER -S acpi iwd
+        ;;
+     [n])
+        echo "[ok]"
+        ;;
+    [*])
+        echo "[ok]"
+        ;;
+esac
 
 clear
+}
 
 lancadorProgramas(){
 mkdir -p ~/.config/
