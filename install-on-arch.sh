@@ -121,7 +121,7 @@ sudo pacman -S --noconfirm --needed $WMs $WMx $WMb
     if [ $WMb = "polybar" ]; then
         echo "Configurando polybar..."
         mkdir -p ~/.config/polybar/;
-        cp -recursive ./.config/polybar/* ~/.config/polybar/;
+        cp --recursive ./.config/polybar/* ~/.config/polybar/;
         echo "Configuração do polybar concluida"
     else
         echo "Polybar... [ok]"
