@@ -98,7 +98,7 @@ sudo pacman -S --noconfirm --needed $WMs $WMx $WMb
 
     if [ -d ~/.config/$WMs ]; then
         echo "$WMs configuração detectada, backup..."
-        mkdir ~/.config/$WMs.old && mv ~/.config/$WMs/* ~/.config/$WMs.old/;
+        rm --recursive --force ~/.config/$WMs/*
         cp -r ./.config/$WMs/* ~/.config/$WMs;
     else
         echo "Instalado configuração $WMs ..."
