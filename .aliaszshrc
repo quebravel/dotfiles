@@ -1,7 +1,7 @@
 # Alias
 
 # shutdown
-alias shutdown="sudo shutdown"
+# alias shutdown="sudo shutdown"
 
 # system
 alias ipa="ip -s -c -h a"
@@ -27,13 +27,14 @@ alias nqute="nvim ~/.config/qutebrowser/config.py"
 # alias vkp="sudo vkpurge rm all"
 
 # yay
-alias y="yay"
-alias ys="yay -S"
-alias yr="yay -Rs"
-alias yss="yay -Ss"
+# alias y="yay"
+# alias ys="yay -S"
+# alias yr="yay -Rs"
+# alias yss="yay -Ss"
 
 # Changing "ls" to "exa"
-# alias la='exa -la --color-scale --color=always --group-directories-first --sort=modified --icons --git --header' # my preferred listing
+# alias la='exa -la --color-scale --color=always --group-directories-first --icons --git --header' # my preferred listing
+# alias lau='exa -la --color-scale --color=always --group-directories-first --sort=modified --icons --git --header' # my preferred listing
 # alias ls='exa -a --color-scale --color=always --group-directories-first --icons'  # all files and dirs
 # alias ll='exa -l --color-scale --color=always --group-directories-first --icons'  # long format
 # alias lt='exa -aT --color-scale --color=always --group-directories-first --icons' # tree listing
