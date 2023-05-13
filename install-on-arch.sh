@@ -66,26 +66,26 @@ read -r -p "Qual gerenciador de janelas (window manager) vai ser desta vez... (d
 
 case $wme in 
 [1])
-	WMe='bspwm'
+	WMs='bspwm'
 	WMx='sxhkd'
 	WMb='polybar'
 	;;
 
 [2])
-	WMe='xmonad'
+	WMs='xmonad'
 	WMx='xmonad-contrib'
 	WMb='xmobar'
 	;;
 
 [3])
-	WMe=""
+	WMs=""
 	WMx=""
 	WMb=""
     echo "Pulou a instação do gerenciador de janelas." | tee -a ~/Notas.txt
 	;;
 
 [*])
-	WMe='bspwm'
+	WMs='bspwm'
 	WMx='sxhkd'
 	WMb='polybar'
     echo "Instalando bspwm e sxhkd" | tee -a ~/Notas.txt
@@ -93,16 +93,16 @@ case $wme in
 esac
 
 # insalando window manger
-sudo pacman -S --noconfirm --needed $WMe $WMx $WMb
+sudo pacman -S --noconfirm --needed $WMs $WMx $WMb
 
 
-    if [ -d ~/.config/$WMe ]; then
-        echo "$WMe configuração detectada, backup..."
-        mkdir ~/.config/$WMe.old && mv ~/.config/$WMe/* ~/.config/$WMe.old/;
-        cp -r ./config/$WMe/* ~/.config/$WMe;
+    if [ -d ~/.config/$WMs ]; then
+        echo "$WMs configuração detectada, backup..."
+        mkdir ~/.config/$WMs.old && mv ~/.config/$WMs/* ~/.config/$WMs.old/;
+        cp -r ./config/$WMs/* ~/.config/$WMs;
     else
-        echo "Instanado configuração $WMe ..."
-        mkdir ~/.config/$WMe && cp -r ./config/$WMe/* ~/.config/$WMe;
+        echo "Instalado configuração $WMs ..."
+        mkdir --parents ~/.config/$WMs && cp -r ./config/$WMs/* ~/.config/$WMs;
     fi
     if [ $WMx = "sxhkd" ]; then
         rm --recursive --force ~/.config/sxhkd/;
