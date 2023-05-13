@@ -98,7 +98,7 @@ sudo pacman -S --noconfirm --needed $WMs $WMx $WMb
 
     if [ -d ~/.config/$WMs ]; then
         echo "$WMs configuração detectada, backup..."
-        rm --recursive --force ~/.config/$WMs/*
+        rm --recursive --force ~/.config/$WMs/*;
         cp -r ./.config/$WMs/* ~/.config/$WMs;
     else
         echo "Instalado configuração $WMs ..."
@@ -113,15 +113,18 @@ sudo pacman -S --noconfirm --needed $WMs $WMx $WMb
         xmonad --recompile;
         echo "Concluido"
     fi
+    if [ -d ~/.config/polybar ]; then
+        rm --recursive --force ~/.config/polybar;
+    else
+        echo "[ok]"
+    fi
     if [ $WMb = "polybar" ]; then
-        mkdir -p ~/.config/polybar.old/ && mv ~/.config/polybar/* ~/.config/polybar.old/;
         echo "Configurando polybar..."
+        mkdir -p ~/.config/polybar/;
         cp -recursive ./.config/polybar/* ~/.config/polybar/;
         echo "Configuração do polybar concluida"
     else
-        echo "Configurando polybar..."
-        cp -recursive ./.config/polybar/* ~/.config/polybar/;
-        echo "Configuração do polybar concluida"
+        echo "Polybar... [ok]"
     fi
 
 
