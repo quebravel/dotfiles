@@ -99,7 +99,7 @@ sudo pacman -S --noconfirm --needed $WMs $WMx $WMb
     if [ -d ~/.config/$WMs ]; then
         echo "$WMs configuração detectada, backup..."
         mkdir ~/.config/$WMs.old && mv ~/.config/$WMs/* ~/.config/$WMs.old/;
-        cp -r ./config/$WMs/* ~/.config/$WMs;
+        cp -r ./.config/$WMs/* ~/.config/$WMs;
     else
         echo "Instalado configuração $WMs ..."
         mkdir --parents ~/.config/$WMs && cp -r ./config/$WMs/* ~/.config/$WMs;
@@ -107,7 +107,7 @@ sudo pacman -S --noconfirm --needed $WMs $WMx $WMb
     if [ $WMx = "sxhkd" ]; then
         rm --recursive --force ~/.config/sxhkd/;
         mkdir -p ~/.config/sxhkd/;
-        cp --recursive ./config/sxhkd/* ~/.config/sxhkd;
+        cp --recursive ./.config/sxhkd/* ~/.config/sxhkd;
         echo "Configuração keybinds do bspwm concluido."
     else 
         xmonad --recompile;
@@ -228,17 +228,17 @@ arquivosdeConfiguracao(){
     if [ -d ~/.config/picom ]; then
         echo "Picom configuração detectada, backup..."
         mkdir -p ~/.config/picom.old && cp ~/.config/picom/* ~/.config/picom.old/;
-        cp ./config/picom/* ~/.config/picom/;
+        cp ./.config/picom/* ~/.config/picom/;
     else
         echo "Installing picom configs..."
         mkdir -p ~/.config/picom/;
-        cp ./config/picom/* ~/.config/picom/;
+        cp ./.config/picom/* ~/.config/picom/;
     fi
     if [ -d ~/.config/alacritty ]; then
         echo "Alacritty configuração detectada, [ok] ..."
     else
         echo "Installando alacritty configurações..."
-        mkdir -p ~/.config/alacritty/ && cp ./config/alacritty/ ~/.config/alacritty/;
+        mkdir -p ~/.config/alacritty/ && cp ./.config/alacritty/ ~/.config/alacritty/;
     fi
     if [ -d ~/wallpapers ]; then
         echo "Adicionando wallpaper para ~/wallpapers..."
