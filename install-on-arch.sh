@@ -149,39 +149,39 @@ then
 fi
 
 
-$HELPER -S picom-jonaburg-git\
-	    alacritty                               /        
-	    herbe                                   / 
-	    xclip                                   / 
-	    maim                                    / 
-        xdo                                     /
-        mtools                                  /
-        xdotool                                 /
-        exa                                     /
-        mpv                                     / 
-        feh                                     /
-        xsel                                    /
-        python-pynvim                           /
-        yt-dlp                                  /
-        the_silver_searcher                     /
-        ntfs-3g                                 /
-        xorg-{xsetroot,xset,xrdb,fonts}         /
-        xf86-input-{evdev,libinput}             /
-        curl                                    /
-        zathura-pdf-poppler                     /
-        adwaita-icon-theme                      /
-        bpytop                                  /
-        xcursor-vanilla-dmz-aa                  /
-        nodejs                                  /
-        go                                      /
-        cmake                                   /
-        libxinerama                             /
-        libxft                                  /
-        python-pip                              /
-        sxiv                                    /
-        xdg-user-dirs                           /
-        ffmpeg                                  /
-        redshift                                /
+$HELPER -S --needed picom-jonaburg-git \
+	    alacritty                               \        
+	    herbe-git                               \ 
+	    xclip                                   \ 
+	    maim                                    \ 
+        xdo                                     \
+        mtools                                  \
+        xdotool                                 \
+        exa                                     \
+        mpv                                     \ 
+        feh                                     \
+        xsel                                    \
+        python-pynvim                           \
+        yt-dlp                                  \
+        the_silver_searcher                     \
+        ntfs-3g                                 \
+        xorg-{xsetroot,xset,xrdb,fonts}         \
+        xf86-input-{evdev,libinput}             \
+        curl                                    \
+        zathura-pdf-poppler                     \
+        adwaita-icon-theme                      \
+        bpytop                                  \
+        xcursor-vanilla-dmz-aa                  \
+        nodejs                                  \
+        go                                      \
+        cmake                                   \
+        libxinerama                             \
+        libxft                                  \
+        python-pip                              \
+        sxiv                                    \
+        xdg-user-dirs                           \
+        ffmpeg                                  \
+        redshift                                \
         unclutter                               
 
     
