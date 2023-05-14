@@ -158,8 +158,10 @@ elif [ -z $num ]; then
     HELPER="yay"
 fi
 
-if ! command -v $HELPER &> /dev/null
-then
+# if ! command -v $HELPER &> /dev/null
+if [ -e "/sbin/$HELPE" ]; then
+    echo "$HELPER já instalado"
+else
     echo "Parece que você não tem um gerenciador AUR instalado, Vou instalar o $HELPER para você antes de continuar."
 	git clone https://aur.archlinux.org/$HELPER.git ~/.srcs/$HELPER
 	(cd ~/.srcs/$HELPER/ && makepkg -si )
