@@ -167,6 +167,9 @@ esac
 # if ! command -v $HELPER &> /dev/null
 if [ -e "/sbin/$HELPER" ]; then
     echo "$HELPER já instalado"
+elif [ -d ~/.srcs/$HELPER ]; then
+    echo "Parece que você não tem um gerenciador AUR instalado, Vou instalar o $HELPER para você antes de continuar."
+	(cd ~/.srcs/$HELPER/ && makepkg -si )
 else
     echo "Parece que você não tem um gerenciador AUR instalado, Vou instalar o $HELPER para você antes de continuar."
 	git clone https://aur.archlinux.org/$HELPER.git ~/.srcs/$HELPER
