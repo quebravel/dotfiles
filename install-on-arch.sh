@@ -5,7 +5,7 @@
 inicio(){
 set -e
 
-echo "Bem vindo!" && sleep 2
+echo "Bem vindo!" && sleep 1
 
 # Default vars
 HELPER="yay"
@@ -28,8 +28,12 @@ sudo pacman -S --noconfirm --needed base-devel wget git
 
 driveVideo(){
 # choose video driver
+    clear
+    echo "driver de video .... \n ... \n .. \n ."
+    sleep 1
+
 echo "[1] xf86-video-intel 	[2] xf86-video-amdgpu    [3] nvidia   [4] Pular"
-read -r -p "Escolha o driver da sua placa de vídeo (default 1) (não será reinstalado): " vid
+read -r -p "Escolha o driver da sua placa de vídeo (default 1) (não será reinstalado): ... " vid
 
 case $vid in 
 [1])
@@ -60,9 +64,12 @@ sudo pacman -S --noconfirm --needed feh xorg xorg-xinit xorg-xinput $DRI
 } ### driveVideo
 
 windowManger(){
+    clear
+    echo "windows manager .... \n ... \n .. \n ."
+    sleep 1
 
 echo " [1] bspwm    [2] xmonad    [3] Pular"
-read -r -p "Qual gerenciador de janelas (window manager) vai ser desta vez... (default é bspwm) " wme
+read -r -p "Qual gerenciador de janelas (window manager) vai ser desta vez... (default é bspwm) ... " wme
 
 case $wme in 
 [1])
@@ -131,10 +138,13 @@ sudo pacman -S --noconfirm --needed $WMs $WMx $WMb
 } ### windowManger
 
 gerenciardorAUR(){
-clear 
+
+    clear 
+    echo "gerenciador AUR .... \n ... \n .. \n ."
+    sleep 1
 
 echo "Precisamos de um ajudante AUR. É essencial. [1] yay [2] paru"
-read -r -p "Qual é o ajudante AUR de sua escolha? (default é yay):" num
+read -r -p "Qual é o ajudante AUR de sua escolha? (default é yay): ... " num
 
 if [ $num -eq 2 ]
 then
@@ -151,8 +161,8 @@ fi
 
 $HELPER -S --needed picom-jonaburg-git alacritty herbe-git xclip maim xdo mtools xdotool exa mpv feh xsel python-pynvim yt-dlp the_silver_searcher ntfs-3g xorg-{xsetroot,xset,xrdb} xf86-input-{evdev,libinput} curl zathura-pdf-poppler adwaita-icon-theme bpytop xcursor-vanilla-dmz-aa nodejs go cmake libxinerama libxft python-pip sxiv xdg-user-dirs ffmpeg redshift unclutter                               
 
-echo "Este computador é um notebook?"
-read -r -p "[s]im ou [n]ão" notebook
+echo "[s]im ou [n]ão"
+read -r -p "Este computador é um notebook? ... " notebook
 
 case $notebook in
     [s])
@@ -170,6 +180,11 @@ clear
 }
 
 lancadorProgramas(){
+
+    clear
+    echo "lancador de programas .... \n ... \n .. \n ."
+    sleep 1
+
 mkdir -p ~/.config/
 
 if [ -d ~/.srcs ]; then
@@ -193,6 +208,10 @@ fi
 }
 
 arquivosdeConfiguracao(){
+    clear
+    echo "Configurando programas ... \n ... \n .. \n ."
+    sleep 1
+
     if [ -d ~/.config/picom ]; then
         echo "Picom configuração detectada, backup..."
         mkdir -p ~/.config/picom.old && cp ~/.config/picom/* ~/.config/picom.old/;
@@ -220,6 +239,8 @@ arquivosdeConfiguracao(){
 # feito 
 
 sleep 1
+
+echo "\n\t .... feito."
 
 } ### arquivosdeConfiguracao
 
