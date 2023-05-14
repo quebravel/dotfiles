@@ -214,7 +214,9 @@ arquivosdeConfiguracao(){
 
     if [ -d ~/.config/picom ]; then
         echo "Picom configuração detectada, backup..."
-        mkdir -p ~/.config/picom.old && cp ~/.config/picom/* ~/.config/picom.old/;
+        rm --recursive --force ~/.config/picom/;
+        echo "Installing picom configs..."
+        mkdir -p ~/.config/picom/;
         cp ./.config/picom/* ~/.config/picom/;
     else
         echo "Installing picom configs..."
