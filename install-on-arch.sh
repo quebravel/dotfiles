@@ -191,7 +191,8 @@ fi
 sxhkd &
 exec bspwm
 
-# vim:ft=sh' > ~/.xinitrc;
+# vim:ft=sh'
+    > ~/.xinitrc
     elif [ $WMs = "xmonad" ]; then
         echo '
 #!/bin/bash
@@ -220,7 +221,7 @@ $HOME/.fehbg
 
 # export MPD_HOST=$HOME/.config/mpd/socket
 # mpd --kill; mpd &
-# dunst &
+
 unclutter --timeout 7 &
 
 # Set up an icon tray
@@ -247,7 +248,8 @@ exec xmonad
 # exec dbus-launch $@
 # exec dbus-launch --exit-with-session bspwm
 
-# vim:ft=sh' > ~/.xinitrc;
+# vim:ft=sh' 
+        > ~/.xinitrc
         fi
 
 
