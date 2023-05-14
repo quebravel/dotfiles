@@ -220,10 +220,10 @@ arquivosdeConfiguracao(){
         echo "Picom configuração detectada, backup..."
         rm --recursive --force ~/.config/picom/;
         echo "Installing picom configs..."
-        cp --recursive ./.config/picom/* ~/.config/;
+        cp --recursive ./.config/picom/ ~/.config/;
     else
         echo "Installing picom configs..."
-        cp --recursive ./.config/picom/* ~/.config/picom/;
+        cp --recursive ./.config/picom/ ~/.config/;
     fi
     if [ -d ~/.config/alacritty ]; then
         echo "Alacritty configuração detectada, [ok] ..."
