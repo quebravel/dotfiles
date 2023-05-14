@@ -88,7 +88,6 @@ case $wme in
 	WMs=""
 	WMx=""
 	WMb=""
-    echo "Pulou a instação do gerenciador de janelas." | tee -a ~/Notas.txt
 	;;
 
 [*])
@@ -99,8 +98,14 @@ case $wme in
 	;;
 esac
 
-# insalando window manger
-sudo pacman -S --noconfirm --needed $WMs $WMx $WMb
+# teste para saber se a variavel esta vazia
+if [ -z $WMs ]; then
+    echo ""
+    echo "Pulou a instação do gerenciador de janelas." | tee -a ~/Notas.txt
+else
+    # insalando window manger
+    sudo pacman -S --noconfirm --needed $WMs $WMx $WMb
+fi
 
 
     if [ -d ~/.config/$WMs ]; then
