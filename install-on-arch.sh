@@ -155,12 +155,12 @@ read -r -p "Qual é o ajudante AUR de sua escolha? (default é yay): ... " num
 if [ $num -eq 2 ]; then
     HELPER="paru"
 elif [ -z $num ]; then
-    echo ""
+    HELPER="yay"
 fi
 
 if ! command -v $HELPER &> /dev/null
 then
-    echo "Parece que você não tem $HELPER instalado, Vou instalá-lo para você antes de continuar."
+    echo "Parece que você não tem um gerenciador AUR instalado, Vou instalar o $HELPER para você antes de continuar."
 	git clone https://aur.archlinux.org/$HELPER.git ~/.srcs/$HELPER
 	(cd ~/.srcs/$HELPER/ && makepkg -si )
 fi
