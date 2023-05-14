@@ -116,7 +116,7 @@ fi
         echo ""
     else
         echo "Instalado configuração $WMs ..."
-        cp -r ./.config/$WMs/ ~/.config/$WMs ;
+        cp -r ./.config/$WMs/ ~/.config/;
     fi
     if [ $WMx = "sxhkd" ]; then
         rm --recursive --force ~/.config/sxhkd/;
