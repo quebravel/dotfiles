@@ -142,7 +142,7 @@ fi
     if [ -e ~/.xinitrc ]; then
         echo "... xinitrc já existe."
     elif [ $WMs = "bspwm"]; then
-        echo '
+echo '
 #!/bin/bash
 
 userresources=$HOME/.Xresources
@@ -193,8 +193,8 @@ exec bspwm
 
 # vim:ft=sh'
     > ~/.xinitrc
-    elif [ $WMs = "xmonad" ]; then
-        echo '
+else
+echo '
 #!/bin/bash
 
 userresources=$HOME/.Xresources
