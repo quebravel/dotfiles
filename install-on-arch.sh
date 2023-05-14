@@ -142,7 +142,7 @@ fi
     if [ -e ~/.xinitrc ]; then
         echo "... xinitrc já existe."
     elif [ $WMs = "bspwm"]; then
-        echo >> "
+        echo '
 #!/bin/bash
 
 userresources=$HOME/.Xresources
@@ -191,10 +191,9 @@ fi
 sxhkd &
 exec bspwm
 
-# vim:ft=sh
-        " >> ~/.xinitrc
+# vim:ft=sh' > ~/.xinitrc;
     elif [ $WMs = "xmonad" ]; then
-        echo "
+        echo '
 #!/bin/bash
 
 userresources=$HOME/.Xresources
@@ -248,8 +247,7 @@ exec xmonad
 # exec dbus-launch $@
 # exec dbus-launch --exit-with-session bspwm
 
-# vim:ft=sh
-        " >> ~/.xinitrc
+# vim:ft=sh' > ~/.xinitrc;
         fi
 
 
