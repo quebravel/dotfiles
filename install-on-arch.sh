@@ -154,10 +154,10 @@ read -r -p "Qual é o ajudante AUR de sua escolha? (default é yay): ... " num
 
 case $num in
     [1])
-        HELPER="paru"
+        HELPER="yay"
         ;;
     [2])
-        HELPER="yay"
+        HELPER="paru"
         ;;
     [*])
         HELPER="yay"
@@ -165,8 +165,8 @@ case $num in
 esac
 
 # if ! command -v $HELPER &> /dev/null
-if [ -e "/sbin/$HELPER" ]; then
-    echo "$HELPER já instalado"
+if [ -e "/sbin/yay" || -e "/sbin/paru" ]; then
+    echo "Ajudante AUR já instalado"
 elif [ -d ~/.srcs/$HELPER ]; then
     echo "Parece que você não tem um gerenciador AUR instalado, Vou instalar o $HELPER para você antes de continuar."
 	(cd ~/.srcs/$HELPER/ && makepkg -si )
