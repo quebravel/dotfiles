@@ -159,7 +159,7 @@ elif [ -z $num ]; then
 fi
 
 # if ! command -v $HELPER &> /dev/null
-if [ -e "/sbin/$HELPE" ]; then
+if [ -e "/sbin/$HELPER" ]; then
     echo "$HELPER já instalado"
 else
     echo "Parece que você não tem um gerenciador AUR instalado, Vou instalar o $HELPER para você antes de continuar."
