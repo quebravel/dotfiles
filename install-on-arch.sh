@@ -199,16 +199,19 @@ else
     echo "pasta .srcs ... [ok]";
 fi
 
-    if [ -d ~/.srcs/dmenu2 ]; then
+if [ -e "/usr/local/bin/dmenu_run" ]; then 
+    echo "... dmenu já instalado."
+    elif [ -d ~/.srcs/dmenu2 ]; then
         echo "Detectar pasta para compilar dmenu2, deletar..."
         echo "ok"
-        tar zxf ~/.srcs/dmenu2/dmenu2-0.2.1.tar.gz -C ~/.srcs/dmenu2  && cd ~/.srcs/dmenu2/dmenu2-0.2.1/ && sudo make clean install
+        tar zxf ~/.srcs/dmenu2/dmenu2-0.2.1.tar.gz -C ~/.srcs/dmenu2  && cd ~/.srcs/dmenu2/dmenu2-0.2.1/ && sudo make clean install && cd
         echo "dmenu2 [ok]"
     else
         echo "Baixando fonte do dmenu2... e instalando"
         sh -c "$(wget -O- https://raw.githubusercontent.com/quebravel/myscripts/master/script_dmenu2.sh)"
         echo "dmenu2 [ok]"
     fi
+
 }
 
 arquivosdeConfiguracao(){
@@ -220,10 +223,10 @@ arquivosdeConfiguracao(){
         echo "Picom configuração detectada, backup..."
         rm --recursive --force ~/.config/picom/;
         echo "Installing picom configs..."
-        cp --recursive ./.config/picom/ ~/.config/;
+        cp -r ./.config/picom/ ~/.config/;
     else
         echo "Installing picom configs..."
-        cp --recursive ./.config/picom/ ~/.config/;
+        cp -r ./.config/picom/ ~/.config/;
     fi
     if [ -d ~/.config/alacritty ]; then
         echo "Alacritty configuração detectada, [ok] ..."
