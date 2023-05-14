@@ -225,7 +225,7 @@ arquivosdeConfiguracao(){
         echo "Alacritty configuração detectada, [ok] ..."
     else
         echo "Installando alacritty configurações..."
-        mkdir -p ~/.config/alacritty/ && cp ./.config/alacritty/ ~/.config/alacritty/;
+        mkdir -p ~/.config/alacritty/ && cp --recursive ./.config/alacritty/ ~/.config/alacritty/;
     fi
     if [ -d ~/wallpapers ]; then
         echo "Adicionando wallpaper para ~/wallpapers..."
