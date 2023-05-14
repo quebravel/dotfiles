@@ -112,6 +112,8 @@ fi
         echo "$WMs configuração detectada, backup..."
         rm --recursive --force ~/.config/$WMs/*;
         cp -r ./.config/$WMs/* ~/.config/$WMs;
+    elif [ -z $WMs ]; then
+        echo ""
     else
         echo "Instalado configuração $WMs ..."
         mkdir --parents ~/.config/$WMs && cp -r ./config/$WMs/* ~/.config/$WMs;
