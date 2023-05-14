@@ -149,15 +149,20 @@ gerenciardorAUR(){
     echo -e "gerenciador AUR \n ... \n .. \n ."
     sleep 1
 
-num="yay"
 echo "Precisamos de um ajudante AUR. É essencial. [1] yay [2] paru"
 read -r -p "Qual é o ajudante AUR de sua escolha? (default é yay): ... " num
 
-if [ $num -eq 2 ]; then
-    HELPER="paru"
-elif [ -z $num ]; then
-    HELPER="yay"
-fi
+case $num in
+    [1])
+        HELPER="paru"
+        ;;
+    [2])
+        HELPER="yay"
+        ;;
+    [*])
+        HELPER="yay"
+        ;;
+esac
 
 # if ! command -v $HELPER &> /dev/null
 if [ -e "/sbin/$HELPER" ]; then
