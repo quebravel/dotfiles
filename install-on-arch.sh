@@ -149,6 +149,7 @@ gerenciardorAUR(){
     echo -e "gerenciador AUR \n ... \n .. \n ."
     sleep 1
 
+num="yay"
 echo "Precisamos de um ajudante AUR. É essencial. [1] yay [2] paru"
 read -r -p "Qual é o ajudante AUR de sua escolha? (default é yay): ... " num
 
