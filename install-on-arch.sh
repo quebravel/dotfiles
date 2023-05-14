@@ -122,8 +122,7 @@ fi
         cp --recursive ./.config/sxhkd/* ~/.config/sxhkd;
         echo "Configuração keybinds do bspwm concluido."
     else 
-        xmonad --recompile;
-        echo "Concluido"
+        echo ""
     fi
     if [ -d ~/.config/polybar ]; then
         rm --recursive --force ~/.config/polybar;
