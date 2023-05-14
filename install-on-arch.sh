@@ -152,9 +152,10 @@ gerenciardorAUR(){
 echo "Precisamos de um ajudante AUR. É essencial. [1] yay [2] paru"
 read -r -p "Qual é o ajudante AUR de sua escolha? (default é yay): ... " num
 
-if [ $num -eq 2 ]
-then
+if [ $num -eq 2 ]; then
     HELPER="paru"
+elif [ -z $num ]; then
+    echo ""
 fi
 
 if ! command -v $HELPER &> /dev/null
