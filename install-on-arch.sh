@@ -29,7 +29,7 @@ sudo pacman -S --noconfirm --needed base-devel wget git
 driveVideo(){
 # choose video driver
     clear
-    echo "driver de video .... \n ... \n .. \n ."
+    echo -e "driver de video \n ... \n .. \n ."
     sleep 1
 
 echo "[1] xf86-video-intel 	[2] xf86-video-amdgpu    [3] nvidia   [4] Pular"
@@ -65,7 +65,7 @@ sudo pacman -S --noconfirm --needed feh xorg xorg-xinit xorg-xinput $DRI
 
 windowManger(){
     clear
-    echo "windows manager .... \n ... \n .. \n ."
+    echo -e "windows manager \n ... \n .. \n ."
     sleep 1
 
 echo " [1] bspwm    [2] xmonad    [3] Pular"
@@ -140,7 +140,7 @@ sudo pacman -S --noconfirm --needed $WMs $WMx $WMb
 gerenciardorAUR(){
 
     clear 
-    echo "gerenciador AUR .... \n ... \n .. \n ."
+    echo -e "gerenciador AUR \n ... \n .. \n ."
     sleep 1
 
 echo "Precisamos de um ajudante AUR. É essencial. [1] yay [2] paru"
@@ -182,7 +182,7 @@ clear
 lancadorProgramas(){
 
     clear
-    echo "lancador de programas .... \n ... \n .. \n ."
+    echo -e "lancador de programas \n ... \n .. \n ."
     sleep 1
 
 mkdir -p ~/.config/
@@ -209,19 +209,17 @@ fi
 
 arquivosdeConfiguracao(){
     clear
-    echo "Configurando programas ... \n ... \n .. \n ."
+    echo -e "Configurando programas \n ... \n .. \n ."
     sleep 1
 
     if [ -d ~/.config/picom ]; then
         echo "Picom configuração detectada, backup..."
         rm --recursive --force ~/.config/picom/;
         echo "Installing picom configs..."
-        mkdir -p ~/.config/picom/;
-        cp ./.config/picom/* ~/.config/picom/;
+        cp --recursive ./.config/picom/* ~/.config/;
     else
         echo "Installing picom configs..."
-        mkdir -p ~/.config/picom/;
-        cp ./.config/picom/* ~/.config/picom/;
+        cp --recursive ./.config/picom/* ~/.config/picom/;
     fi
     if [ -d ~/.config/alacritty ]; then
         echo "Alacritty configuração detectada, [ok] ..."
@@ -242,7 +240,7 @@ arquivosdeConfiguracao(){
 
 sleep 1
 
-echo "\n\t .... feito."
+echo -e "\n\t .... feito."
 
 } ### arquivosdeConfiguracao
 
