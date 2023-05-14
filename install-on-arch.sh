@@ -139,6 +139,118 @@ fi
     else
         echo "Polybar... [ok]"
     fi
+    if [ -e ~/.xinitrc ]; then
+        echo "... xinitrc já existe."
+    elif [ $WMs = "bspwm"]; then
+        echo >> "
+#!/bin/bash
+
+userresources=$HOME/.Xresources
+sysresources=/etc/X11/xinit/.Xresources
+
+# merge in defaults and keymaps
+
+if [ -f $sysresources ]; then
+    xrdb -merge $sysresources
+fi
+
+if [ -f "$userresources" ]; then
+    xrdb -merge "$userresources"
+fi
+
+[ -f ~/.Xdefaults ] && xrdb -merge ~/.Xdefaults
+
+xsetroot -cursor_name left_ptr &
+
+# feh --bg-tile ~/Imagens/wallpaperz.png
+$HOME/.fehbg
+# $HOME/trigger_custom_refresh.sh &
+# wal -R
+
+# export MPD_HOST=$HOME/.config/mpd/socket
+# mpd --kill; mpd &
+
+unclutter --timeout 7 &
+
+if [ "$(command -v xset)" >/dev/null 2>&1 ];
+then
+    #xset s off      	        #Disable screen saver blanking
+    #xset s 3600 3600 	        #Change blank time to 1 hour
+    #xset -dpms 	            #Turn off DPMS
+    xset s off -dpms 	        #Disable DPMS and prevent screen from blanking
+    #xset dpms force off 	    #Turn off screen immediately
+    #xset dpms force standby 	#Standby screen
+    #xset dpms force suspend 	#Suspend screen
+fi
+
+# numlockx &
+# pulseaudio -k
+# pulseaudio --start &
+# pulseaudio &
+
+sxhkd &
+exec bspwm
+
+# vim:ft=sh
+        " >> ~/.xinitrc
+    elif [ $WMs = "xmonad" ]; then
+        echo "
+#!/bin/bash
+
+userresources=$HOME/.Xresources
+sysresources=/etc/X11/xinit/.Xresources
+
+# merge in defaults and keymaps
+
+if [ -f $sysresources ]; then
+    xrdb -merge $sysresources
+fi
+
+if [ -f "$userresources" ]; then
+    xrdb -merge "$userresources"
+fi
+
+[ -f ~/.Xdefaults ] && xrdb -merge ~/.Xdefaults
+
+xsetroot -cursor_name left_ptr &
+
+# feh --bg-tile ~/Imagens/wallpaperz.png
+$HOME/.fehbg
+# $HOME/trigger_custom_refresh.sh &
+# wal -R
+
+# export MPD_HOST=$HOME/.config/mpd/socket
+# mpd --kill; mpd &
+# dunst &
+unclutter --timeout 7 &
+
+# Set up an icon tray
+# trayer --edge top --align right --SetDockType true --SetPartialStrut true \
+# --expand true --width 10 --transparent true --tint 0x5f5f5f --height 18 &
+
+if [ "$(command -v xset)" >/dev/null 2>&1 ];
+then
+    #xset s off      	        #Disable screen saver blanking
+    #xset s 3600 3600 	        #Change blank time to 1 hour
+    #xset -dpms 	            #Turn off DPMS
+    xset s off -dpms 	        #Disable DPMS and prevent screen from blanking
+    #xset dpms force off 	    #Turn off screen immediately
+    #xset dpms force standby 	#Standby screen
+    #xset dpms force suspend 	#Suspend screen
+fi
+
+numlockx &
+# pulseaudio -k
+# pulseaudio --start &
+# pulseaudio &
+
+exec xmonad
+# exec dbus-launch $@
+# exec dbus-launch --exit-with-session bspwm
+
+# vim:ft=sh
+        " >> ~/.xinitrc
+        fi
 
 
 } ### windowManger
@@ -178,6 +290,8 @@ fi
 
 
 $HELPER -S --needed picom-jonaburg-git alacritty herbe-git xclip maim xdo mtools xdotool exa mpv feh xsel python-pynvim yt-dlp the_silver_searcher ntfs-3g xorg-{xsetroot,xset,xrdb} xf86-input-{evdev,libinput} curl zathura-pdf-poppler adwaita-icon-theme bpytop xcursor-vanilla-dmz-aa nodejs go cmake libxinerama libxft python-pip sxiv xdg-user-dirs ffmpeg redshift unclutter                               
+
+clear
 
 echo "[s]im ou [n]ão"
 read -r -p "Este computador é um notebook? ... " notebook
