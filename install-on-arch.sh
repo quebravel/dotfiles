@@ -128,7 +128,9 @@ fi
     fi
     if [ -d ~/.config/polybar ]; then
         rm --recursive --force ~/.config/polybar;
+        cp --recursive ./.config/polybar ~/.config/polybar;
     else
+        cp --recursive ./.config/polybar ~/.config/polybar;
         echo "[ok]"
     fi
     if [ $WMb = "polybar" ]; then
