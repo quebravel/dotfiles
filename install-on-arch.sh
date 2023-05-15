@@ -112,11 +112,11 @@ fi
         echo ""
     elif [ -d ~/.config/$WMs ]; then
         echo "$WMs configuração detectada, backup..."
-        rm --recursive --force ~/.config/$WMs;
-        cp -r ./.config/$WMs/ ~/.config/;
+        rm --recursive --force ~/.config/$WMs
+        cp -r ./.config/$WMs/ ~/.config/
     else
         echo "Instalado configuração $WMs ..."
-        cp -r ./.config/$WMs/ ~/.config/;
+        cp -r ./.config/$WMs/ ~/.config/
     fi
     if [ $WMx = "sxhkd" ]; then
         rm --recursive --force ~/.config/sxhkd/;
