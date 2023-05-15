@@ -1,4 +1,4 @@
-#!/bin/env bash
+#\n!/bin/env bash
 
 # fork script of https://github.com/Axarva/dotfiles-2.0/tree/main
 
@@ -141,9 +141,9 @@ fi
     fi
     if [ -e ~/.xinitrc ]; then
         echo "... xinitrc já existe."
-    elif [ $WMs = "bspwm"]; then
+    elif [ $WMs = "bspwm" ]; then
         echo -e "sxhkd & \nexec bspwm \n# vim:ft=sh" > ~/.xinitrc
-    else 
+    elif [ $WMs = "xmonad" ]; then 
         echo -e "exec xmonad \n# vim:ft=sh" > ~/.xinitrc
     fi
 
