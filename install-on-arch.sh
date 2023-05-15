@@ -116,7 +116,8 @@ fi
         cp -r ./.config/$WMs/ ~/.config/
     else
         echo "Instalado configuração $WMs ..."
-        cp -r ./.config/$WMs/ ~/.config/
+        mkdir -p ~/.config/$WMs
+        cp -r ./.config/$WMs/* ~/.config/$WMs/
     fi
     if [ $WMx = "sxhkd" ]; then
         rm --recursive --force ~/.config/sxhkd/;
