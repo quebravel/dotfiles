@@ -108,12 +108,12 @@ else
 fi
 
 
-    if [ -d ~/.config/$WMs ]; then
+    if [ -z $WMs ]; then
+        echo ""
+    elif [ -d ~/.config/$WMs ]; then
         echo "$WMs configuração detectada, backup..."
         rm --recursive --force ~/.config/$WMs;
         cp -r ./.config/$WMs/ ~/.config/;
-    elif [ -z $WMs ]; then
-        echo ""
     else
         echo "Instalado configuração $WMs ..."
         cp -r ./.config/$WMs/ ~/.config/;
