@@ -142,17 +142,10 @@ fi
     if [ -e ~/.xinitrc ]; then
         echo "... xinitrc já existe."
     elif [ $WMs = "bspwm"]; then
-        echo 'sxhkd &
-exec bspwm
-
-# vim:ft=sh'
-    > ~/.xinitrc
-else 
-        echo 'exec xmonad
-
-# vim:ft=sh' 
-        > ~/.xinitrc
-        fi
+        echo -e "sxhkd & \nexec bspwm \n# vim:ft=sh" > ~/.xinitrc
+    else 
+        echo -e "exec xmonad \n# vim:ft=sh" > ~/.xinitrc
+    fi
 
 
 } ### windowManger
