@@ -126,20 +126,21 @@ fi
     else 
         echo ""
     fi
-    if [ -d ~/.config/polybar ]; then
-        rm --recursive --force ~/.config/polybar;
-        cp --recursive ./.config/polybar ~/.config/polybar;
-    else
-        cp --recursive ./.config/polybar ~/.config/polybar;
-        echo "[ok]"
-    fi
+    # if [ -d ~/.config/polybar ]; then
+    #     rm --recursive --force ~/.config/polybar;
+    #     cp --recursive ./.config/polybar ~/.config/polybar;
+    # else
+    #     cp --recursive ./.config/polybar ~/.config/polybar;
+    #     echo "[ok]"
+    # fi
     if [ $WMb = "polybar" ]; then
         echo "Configurando polybar..."
+        rm --recursive --force ~/.config/polybar;
         mkdir -p ~/.config/polybar/;
         cp --recursive ./.config/polybar/* ~/.config/polybar/;
         echo "Configuração do polybar concluida"
     else
-        echo "Polybar... [ok]"
+        echo "... [ok]"
     fi
     if [ -e ~/.xinitrc ]; then
         echo "... xinitrc já existe."
