@@ -5,10 +5,12 @@ import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers  -- Flutuar janelas
 import XMonad.Hooks.StatusBar
 import XMonad.Hooks.StatusBar.PP
+import XMonad.Hooks.SetWMName
 
 import XMonad.Util.EZConfig -- Teclas
 import XMonad.Util.Loggers -- Titulo das janelas no xmobar
 import XMonad.Util.Ungrab
+import XMonad.Util.SpawnOnce
 
 import XMonad.Layout.Magnifier
 import XMonad.Layout.ThreeColumns
@@ -49,14 +51,15 @@ myFocusFollowsMouse :: Bool
 myFocusFollowsMouse = False
 
 myConfig = def
-    { modMask    = mod4Mask      -- Rebind Mod to the Super key
-    , layoutHook =  avoidStruts . smartBorders $ myLayout      -- Use custom layouts
+    { modMask             = mod4Mask      -- Rebind Mod to the Super key
+    , layoutHook          =  avoidStruts . smartBorders $ myLayout      -- Use custom layouts
     -- , manageHook = manageDocks <+> myManageHook  -- Match on certain windows
-    , manageHook = myManageHook  -- Match on certain windows
-    , focusFollowsMouse = myFocusFollowsMouse
-    , borderWidth = 2
-    , focusedBorderColor = "#4fd3ff"
-	  , normalBorderColor  = "#222222"
+    , manageHook          = myManageHook  -- Match on certain windows
+    , focusFollowsMouse   = myFocusFollowsMouse
+    , startupHook         = myStartupHook
+    , borderWidth         = 2
+    , focusedBorderColor  = "#4fd3ff"
+	  , normalBorderColor   = "#222222"
     }
   `additionalKeysP`
     [ ("M-p"  , spawn "dmenu_run  -y 20 -h 18 -nf '#000' -nb '#bd93f9' -sf '#1d2021' -sb '#ff79c6' -fn 'JetBrainsMono Nerd Font-9:normal' -p 'dmenu2'")
@@ -111,6 +114,12 @@ myLayout = ResizableTall 1 (3/100) (1/2) [] ||| tiled ||| Mirror tiled ||| Full 
     nmaster  = 1      -- Default number of windows in the master pane
     ratio    = 1/2    -- Default proportion of screen occupied by master pane
     delta    = 3/100  -- Percent of screen to increment by when resizing panes
+
+myStartupHook :: X ()
+myStartupHook = do
+  spawnOnce "picom"
+  spawnOnce "sleep 2 && xmonad --restart"
+  setWMName "LG3D"
 
 myXmobarPP :: PP
 myXmobarPP = def
