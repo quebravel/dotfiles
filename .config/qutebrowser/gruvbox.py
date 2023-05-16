@@ -230,4 +230,4 @@ c.hints.border = "0px"
 c.colors.statusbar.insert.fg = base00
 c.colors.statusbar.insert.bg = base09
 
-c.colors.webpage.bg = base05
+# c.colors.webpage.bg = base05
