@@ -3,7 +3,6 @@
 
 _so="sudo pacman -S --needed"
 _s="sudo"
-_yay"yay -S"
 
 sudo pacman -Syu
 
