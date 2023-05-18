@@ -319,29 +319,6 @@ echo "zsh configurado"
 
 }
 
-ly_config(){
-
- clear
- echo -e "instalando ly  \n ... \n .. \n ."
- sleep 1
-
-$_yay ly-git cmatrix
-
-# cominho do arquivo de configuração
-arquivo="/etc/ly/config.ini"
-sd="sudo"
-
-# abilitando opções 
-$sd sed -i 's/#animate = false/animate = true/g' $arquivo
-
-$sd sed -i 's/#animation = 0/animation = 1/g' $arquivo
-
-$sd sed -i 's/#xinitrc \= \~\/.xinitrc/xinitrc \= \~\/.xinitrc/g' $arquivo
-
-# transformando arquivo xinitrc em executavel bash
-chmod +x ~/.xinitrc
-
-}
 
 zshconfig
 fontes-emoji-nipo
