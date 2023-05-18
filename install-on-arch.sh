@@ -17,10 +17,6 @@ GITFILES="dotfiles-conf"
 echo "Fazendo uma atualização do sistema, pode acontecer que coisas quebrem se não for a versão mais recente..."
 sudo pacman --noconfirm -Syu
 
-echo "###########################################################################"
-echo "Vamos, prepare-se"
-echo "###########################################################################"
-
 # install base-devel if not installed
 sudo pacman -S --noconfirm --needed base-devel wget git
 
@@ -32,8 +28,8 @@ driveVideo(){
     echo -e "driver de video \n ... \n .. \n ."
     sleep 1
 
-echo "[1] xf86-video-intel 	[2] xf86-video-amdgpu    [3] nvidia   [enter/*] Pular"
-read -r -p "Escolha o driver da sua placa de vídeo (default 1) (não será reinstalado): ... " vid
+echo "[1] xf86-video-intel 	  [2] xf86-video-amdgpu    [3] nvidia    [enter/*] Pular    [c]ancelar"
+read -r -p "Escolha o driver da sua placa de vídeo (default intel) ... " vid
 
 case $vid in 
 [1])
@@ -48,13 +44,13 @@ case $vid in
     DRI='nvidia nvidia-settings nvidia-utils'
     ;;
 
-[4])
+[*])
 	DRI=""
 	echo "Pulou instalação do driver de video" | tee -a ~/Notas.txt
 	;;
-[*])
+[c])
 	DRI=""
-	echo "Pulou instalação do driver de video" | tee -a ~/Notas.txt	
+	echo "Pulou instalação do driver de video" | tee -a ~/Notas.txt
 	;;
 esac
 
@@ -62,9 +58,11 @@ esac
 sudo pacman -S --noconfirm --needed feh xorg xorg-xinit xorg-xinput $DRI
 
 if [ $DRI = "xf86-video-amdgpu" ]; then
-    sudo pacman -S --noconfirm --needed vulkan-radeon
+    sudo pacman -S --noconfirm --needed vulkan-radeon # driver open-source (melhor)
+    sudo cp ./xorg_conf/40-amdgpu.conf /usr/share/X11/xorg.conf.d/
 elif [ $DRI = "xf86-video-intel" ]; then
-    sudo pacman -S --noconfirm --needed vulkan-intel 
+    sudo pacman -S --noconfirm --needed vulkan-intel # driver open-source (melhor)
+    sudo cp ./xorg_conf/20-intel.conf/ /usr/share/X11/xorg.conf.d/
 fi
 
 } ### driveVideo
@@ -234,14 +232,15 @@ siji-git
 
 clear
 
-echo "[s]im ou [n]ão"
+echo "[s]im ou [n]ão [enter/*] Pular"
 read -r -p "Este computador é um notebook? ... " notebook
 
 case $notebook in
     [s])
         $HELPER -S acpi acpid iwd
+        sudo systemctl enable iwd.service
         ;;
-     [n])
+    [n])
         echo "[ok]"
         ;;
     [*])
@@ -353,4 +352,5 @@ lancadorProgramas
 arquivosdeConfiguracao
 ly_config
 
+# acha outro arquivo
 ./install-2-arch.sh
