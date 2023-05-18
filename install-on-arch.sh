@@ -353,4 +353,5 @@ arquivosdeConfiguracao
 ly_config
 
 # acha outro arquivo
+chmod +x ./install-2-arch.sh
 ./install-2-arch.sh
