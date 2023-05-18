@@ -28,7 +28,7 @@ driveVideo(){
     echo -e "driver de video \n ... \n .. \n ."
     sleep 1
 
-echo "[1] xf86-video-intel 	  [2] xf86-video-amdgpu    [3] nvidia    [enter/*] Pular    [c]ancelar"
+echo "[1] xf86-video-intel 	  [2] xf86-video-amdgpu    [3] nvidia    [*] Pular    [c]ancelar"
 read -r -p "Escolha o driver da sua placa de vídeo (default intel) ... " vid
 
 case $vid in 
@@ -50,7 +50,7 @@ case $vid in
 	;;
 [c])
 	DRI=""
-	echo "Pulou instalação do driver de video" | tee -a ~/Notas.txt
+	echo "Pulou instalação do driver de video" | tee -a ~/Notas.txt	
 	;;
 esac
 
@@ -228,11 +228,13 @@ ffmpeg \
 redshift \
 unclutter \
 ttf-jetbrains-mono-nerd \
-siji-git                              
+siji-git \
+ly-git \
+cmatrix
 
 clear
 
-echo "[s]im ou [n]ão [enter/*] Pular"
+echo "[s]im ou [n]ão [*] Pular"
 read -r -p "Este computador é um notebook? ... " notebook
 
 case $notebook in
@@ -317,8 +319,6 @@ ly_config(){
  clear
  echo -e "instalando ly  \n ... \n .. \n ."
  sleep 1
-
-$HELPER --needed ly-git cmatrix
 
 # cominho do arquivo de configuração
 arquivo="/etc/ly/config.ini"
