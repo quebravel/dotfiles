@@ -352,3 +352,5 @@ gerenciardorAUR
 lancadorProgramas
 arquivosdeConfiguracao
 ly_config
+
+./install-2-arch.sh
