@@ -1,4 +1,5 @@
 #!/bin/bash
+# TODO 
 
 _so="sudo pacman -S --needed"
 _s="sudo"
@@ -57,9 +58,14 @@ echo 'reinicie o systema ... reboot'
 rangerfm(){
 
  clear
- echo -e "instalando ranger . ueberzug . ffmpegthumbnailer \n ... \n .. \n ."
+ echo -e "ranger . ueberzug . ffmpegthumbnailer \n ... \n .. \n ."
  sleep 1
 
+echo "Quer uma gerenciador de arquivos para terminal?"
+read -r -p "[1] ranger [2] Pular ... " rag
+
+case "$rag" in
+ 1)
 $_so \
 ranger \
 ueberzug \
@@ -110,6 +116,13 @@ sed -i '157,160s/#//' $HOME/.config/ranger/scope.sh
 sed -i 's/#set preview_script ~\/.config\/ranger\/scope.sh/set preview_script ~\/.config\/ranger\/scope.sh/g' $HOME/.config/ranger/rc.conf
 
 ranger --version
+ ;;
+ 2) echo "Pular"
+ ;;
+ *) echo "Pular"
+ ;;
+esac
+
 
 }
 
@@ -120,7 +133,7 @@ audio_config(){
  sleep 1
 
 echo "qual controlador de audio?"
-read -r -p "[1] pulseauido  [2] pipewire  [enter/*] pular ... (default pipewire) ... " aud
+read -r -p "[1] pulseauido  [2] pipewire  [*] pular ... (default pipewire) ... " aud
 
 case "$aud" in
  1) 
@@ -151,6 +164,11 @@ case "$aud" in
   helvum \
   # gst-plugin-pipewire
   echo "pipewire* ... instalado"
+  echo -e "use <wpctl status> para detectar en Sinks: o númeor ID da saída de áudío \nexemplo: \nwpctl status \n
+ Sinks: \n
+ 33. Áudio interno Estéreo analógico  [vol: 1.20] \n
+ 53. Ellesmere HDMI Audio [Radeon RX 470/480 / 570/580/590] Digital Stereo (HDMI 6) \n
+ wpctl set-default 53" >> notas.txt
   ;;
 esac
 
@@ -186,21 +204,6 @@ echo "fontes ... instaladas"
 
 }
 
-drive_video_amdgpu(){
-
- clear
- echo -e "instalando xorg  \n ... \n .. \n ."
- sleep 1
-
-$_so \
-xorg-{server,xinit} \
-xf86-video-amdgpu \
-vulkan-radeon # driver open-source
-
-echo "amdgpu ... instalado"
-
-}
-
 navegador(){
 
  clear
@@ -208,32 +211,31 @@ navegador(){
  sleep 1
 
 echo "Qual navegador preferido?"
-read -r -p "[q]utebrowser  [f]irefox  [enter/*] pular  ... " browser
+read -r -p "[q]utebrowser  [f]irefox  [*] pular  ... " browser
 
 case "$browser" in
  q|1) 
-   $_so qutebrowser
-   echo "Adicionando dicionário"
-   /usr/share/qutebrowser/scripts/dictcli.py install pt-BR
-   echo "qutebrowser ... instalado"
+   BROW="qutebrowser"
  ;;
  f|2)
-   $_so firefox firefox firefox-i18n-pt-br
-   echo "firefox ... instalado"
+   BROW="firefox"
  ;;
  *) echo "pular"
  ;;
 esac
 
-}
-
-github_config(){
-
-
-git clone https://github.com/quebravel/dotfiles-conf ~/dotfiles-conf
-cp -r ~/dotfiles-conf/.config ~/
-
-echo "configurações ... baixadas"
+if [ $BROW = "qutebrowser" ]; then
+ $_so qutebrowser
+ echo "Adicionando dicionário"
+ /usr/share/qutebrowser/scripts/dictcli.py install pt-BR
+ echo "qutebrowser ... instalado"
+ mkdir -p ~/.config/qutebrowser/;
+ cp -r ./.config/qutebrowser/* ~/.config/qutebrowser/;
+ echo "$BROW configurado"
+elif [ $BROW = "firefox" ]; then
+ $_so firefox firefox firefox-i18n-pt-br
+ echo "$BROW ... instalado"
+fi
 
 }
 
@@ -317,18 +319,17 @@ echo -e "\nexport\tEDITOR='nvim'\nexport\tTERMINAL='alacritty'\nexport\tBROWSER=
 
 echo "zsh configurado"
 
+echo -e "parte 2 feito \n ... \n .. \n ."
+
 }
 
 
 zshconfig
 fontes-emoji-nipo
-# drive_video_amdgpu
 navegador
-# github_config
 copilador_config
 temas
 autoscript_git
-# audio_pulseaudio
 audio_pipewire
 ohmyzsh
 rangerfm
