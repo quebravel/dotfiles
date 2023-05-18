@@ -311,6 +311,29 @@ arquivosdeConfiguracao(){
         mkdir ~/wallpapers && cp -r ./wallpapers/* ~/wallpapers/;
     fi
     
+} ### arquivosdeConfiguracao
+
+ly_config(){
+
+ clear
+ echo -e "instalando ly  \n ... \n .. \n ."
+ sleep 1
+
+$HELPER --needed ly-git cmatrix
+
+# cominho do arquivo de configuração
+arquivo="/etc/ly/config.ini"
+sd="sudo"
+
+# abilitando opções 
+$sd sed -i 's/#animate = false/animate = true/g' $arquivo
+
+$sd sed -i 's/#animation = 0/animation = 1/g' $arquivo
+
+$sd sed -i 's/#xinitrc \= \~\/.xinitrc/xinitrc \= \~\/.xinitrc/g' $arquivo
+
+# transformando arquivo xinitrc em executavel bash
+chmod +x ~/.xinitrc
 
 # feito 
 
@@ -318,7 +341,7 @@ sleep 1
 
 echo -e "\n\t .... feito."
 
-} ### arquivosdeConfiguracao
+} ### ly_config
 
 
 # chamar funções
@@ -328,3 +351,4 @@ windowManger
 gerenciardorAUR
 lancadorProgramas
 arquivosdeConfiguracao
+ly_config
