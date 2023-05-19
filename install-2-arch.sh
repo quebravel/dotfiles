@@ -192,7 +192,7 @@ echo "zsh ... instalado"
 
 }
 
-fontes-emoji-nipo(){
+fontes_doSistema(){
 
  clear
  echo -e "instalando fontes  \n ... \n .. \n ."
@@ -348,7 +348,7 @@ echo -e "parte 2 feito \n ... \n .. \n ."
 
 
 zshconfig
-fontes-emoji-nipo
+fontes_doSistema
 navegador
 copilador_config
 temas
