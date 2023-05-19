@@ -9,7 +9,7 @@ sudo pacman -Syu
 playermusica(){
 
  clear
- echo -e "instalando e configurando ncmpcpp . mpd . mpc \n ... \n .. \n ."
+ echo -e "... configurando ncmpcpp . mpd . mpc \n ... \n .. \n ."
  sleep 1
 
 echo "[1] Sim  ou  [2] Nao "
@@ -67,7 +67,7 @@ esac
 rangerfm(){
 
  clear
- echo -e "ranger . ueberzug . ffmpegthumbnailer \n ... \n .. \n ."
+ echo -e "... ranger . ueberzug . ffmpegthumbnailer \n ... \n .. \n ."
  sleep 1
 
 echo "[1] ranger   [2] Não   [*] Pular"
@@ -133,7 +133,7 @@ esac
 audio_config(){
 
  clear
- echo -e "instalando controlador audio \n ... \n .. \n ."
+ echo -e "... controlador audio \n ... \n .. \n ."
  sleep 1
 
 echo "[1] pulseauido  [2] pipewire  [*] pular ... (default pipewire)"
@@ -211,7 +211,7 @@ echo "fontes ... instaladas"
 navegador(){
 
  clear
- echo -e "instalando browser  \n ... \n .. \n ."
+ echo -e "... browser  \n ... \n .. \n ."
  sleep 1
 
 echo "[q]utebrowser  [f]irefox  [*] pular"

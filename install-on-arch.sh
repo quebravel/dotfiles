@@ -25,7 +25,7 @@ sudo pacman -S --noconfirm --needed base-devel wget git
 driveVideo(){
 # choose video driver
     clear
-    echo -e "driver de video \n ... \n .. \n ."
+    echo -e "... driver de video \n ... \n .. \n ."
     sleep 1
 
 echo "[1] xf86-video-intel 	  [2] xf86-video-amdgpu    [3] nvidia    [*] Pular    [c]ancelar"
@@ -69,7 +69,7 @@ fi
 
 windowManger(){
     clear
-    echo -e "windows manager \n ... \n .. \n ."
+    echo -e "... windows manager \n ... \n .. \n ."
     sleep 1
 
 echo " [1] bspwm    [2] xmonad    [*] Pular"
@@ -98,7 +98,7 @@ case $wme in
 	WMs='bspwm'
 	WMx='sxhkd'
 	WMb='polybar'
-    echo "Instalando bspwm e sxhkd" | tee -a ~/Notas.txt
+    echo "... bspwm e sxhkd" | tee -a ~/Notas.txt
 	;;
 esac
 
@@ -161,10 +161,10 @@ fi
 gerenciardorAUR(){
 
     clear 
-    echo -e "gerenciador AUR \n ... \n .. \n ."
+    echo -e "... gerenciador AUR \n ... \n .. \n ."
     sleep 1
 
-echo "Precisamos de um ajudante AUR. É essencial. [1] yay [2] paru"
+echo "Precisamos de um ajudante AUR. É essencial. [1] yay [2] paru [*] default"
 read -r -p "Qual é o ajudante AUR de sua escolha? (default é yay): ... " num
 
 case $num in
@@ -232,7 +232,22 @@ siji-git \
 ly-git \
 cmatrix
 
-clear
+}
+
+notebook_ger(){
+
+    clear
+    echo -e "... para notebooks \n ... \n .. \n ."
+    sleep 1
+
+echo "
+__________
+|         |      caso seja um notebook (laptop)
+| laptop  |      sera instalado acpi acpid e iwd
+| ________|      ...
+ \:::::::::\
+  \o _____;+\
+"
 
 echo "[1] Sim ou [2] Não [*] Pular"
 read -r -p "Este computador é um notebook? ... " notebook
@@ -317,7 +332,7 @@ arquivosdeConfiguracao(){
 ly_config(){
 
  clear
- echo -e "instalando ly  \n ... \n .. \n ."
+ echo -e "... ly  \n ... \n .. \n ."
  sleep 1
 
  echo "Deseja instalar um <Display Manager> (Ly)?"
@@ -356,6 +371,7 @@ inicio
 driveVideo
 windowManger
 gerenciardorAUR
+notebook_ger
 lancadorProgramas
 arquivosdeConfiguracao
 ly_config
