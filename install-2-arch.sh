@@ -12,7 +12,10 @@ playermusica(){
  echo -e "instalando e configurando ncmpcpp . mpd . mpc \n ... \n .. \n ."
  sleep 1
 
-
+echo "Quer instalar o player de música?"
+read -r -p "[s]im [n]ao ... " plmc
+case "$plmc" in
+ s) 
 $_so \
 ncmpcpp \
 mpd \
@@ -51,6 +54,13 @@ export MPD_HOST=$HOME/.config/mpd/socket
 echo 'mpd . mpc . ncmpcpp ... instalados'
 
 echo 'reinicie o systema ... reboot'
+
+ ;;
+ *) echo "pular"
+ ;;
+esac
+
+
 
 }
 
@@ -330,8 +340,7 @@ copilador_config
 temas
 autoscript_git
 audio_pipewire
-ohmyzsh
 rangerfm
 playermusica
 alias_autopair
-ly_config
+ohmyzsh
