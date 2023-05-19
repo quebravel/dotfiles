@@ -346,6 +346,22 @@ echo "zsh configurado"
 
 }
 
+editordeTexto(){
+
+ clear
+ echo -e "configurando instalando e astrovim  \n ... \n .. \n ."
+ sleep 1
+
+ $_so neovim \
+ python-pynvim
+
+ git clone --depth 1 https://github.com/AstroNvim/AstroNvim ~/.config/nvim
+
+ git clone https://github.com/quebravel/astronvim_config.git ~/.config/nvim/lua/user
+
+ nvim  --headless -c 'quitall'
+}
+
 
 zshconfig
 fontes_doSistema
@@ -357,3 +373,4 @@ rangerfm
 playermusica
 alias_autopair
 ohmyzsh
+editordeTexto
