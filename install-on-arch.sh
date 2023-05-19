@@ -72,7 +72,7 @@ windowManger(){
     echo -e "windows manager \n ... \n .. \n ."
     sleep 1
 
-echo " [1] bspwm    [2] xmonad    [3] Pular"
+echo " [1] bspwm    [2] xmonad    [*] Pular"
 read -r -p "Qual gerenciador de janelas (window manager) vai ser desta vez... (default é bspwm) ... " wme
 
 case $wme in 
@@ -234,15 +234,15 @@ cmatrix
 
 clear
 
-echo "[s]im ou [n]ão [*] Pular"
+echo "[1] Sim ou [2] Não [*] Pular"
 read -r -p "Este computador é um notebook? ... " notebook
 
 case $notebook in
-    [s])
+    [1])
         $HELPER -S acpi acpid iwd
         sudo systemctl enable iwd.service
         ;;
-    [n])
+    [2])
         echo "[ok]"
         ;;
     [*])
