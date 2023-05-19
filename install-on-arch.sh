@@ -324,23 +324,19 @@ ly_config(){
 arquivo="/etc/ly/config.ini"
 sd="sudo"
 
-# abilitando opções 
-$sd sed -i 's/#animate = false/animate = true/g' $arquivo
-
-$sd sed -i 's/#animation = 0/animation = 1/g' $arquivo
-
-$sd sed -i 's/#xinitrc \= \~\/.xinitrc/xinitrc \= \~\/.xinitrc/g' $arquivo
-
-# transformando arquivo xinitrc em executavel bash
-chmod +x ~/.xinitrc
-
-$sd systemctl enable ly.service
-
-# feito 
-
-sleep 1
-
-echo -e "\n\t .... feito."
+if [ -f $arquivo ]; then
+    # abilitando opções 
+    $sd sed -i 's/#animate = false/animate = true/g' $arquivo
+    $sd sed -i 's/#animation = 0/animation = 1/g' $arquivo
+    $sd sed -i 's/#xinitrc \= \~\/.xinitrc/xinitrc \= \~\/.xinitrc/g' $arquivo
+    # transformando arquivo xinitrc em executavel bash
+    chmod +x ~/.xinitrc
+    $sd systemctl enable ly.service
+    sleep 1
+    echo -e "\n\t .... feito."
+else
+    echo "nao existe o arquivo de configuracao"
+fi
 
 } ### ly_config
 
