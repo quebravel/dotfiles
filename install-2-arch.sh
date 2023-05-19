@@ -356,11 +356,26 @@ editordeTexto(){
  $_so neovim \
  python-pynvim
 
- git clone --depth 1 https://github.com/AstroNvim/AstroNvim ~/.config/nvim
+ if [ ! -d ~/.config/nvim ]; then
+  git clone --depth 1 https://github.com/AstroNvim/AstroNvim ~/.config/nvim
+  git clone https://github.com/quebravel/astronvim_config.git ~/.config/nvim/lua/user
+  nvim  --headless -c 'quitall'
+ else
+  echo "existe um diretorio nvim"
+  echo "Deseja re/instalar astronvim?"
+  read -r -p "[1] Sim   [2] Não ... " astronv
+  case "$astronv" in
+   1)
+    rm -rf ~/.config/nvim/;
+    git clone --depth 1 https://github.com/AstroNvim/AstroNvim ~/.config/nvim
+    git clone https://github.com/quebravel/astronvim_config.git ~/.config/nvim/lua/user
+    nvim  --headless -c 'quitall'
+   ;;
+   2|*) echo "Pular ou nao"
+   ;;
+  esac 
+ fi
 
- git clone https://github.com/quebravel/astronvim_config.git ~/.config/nvim/lua/user
-
- nvim  --headless -c 'quitall'
 }
 
 
