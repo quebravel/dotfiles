@@ -89,40 +89,35 @@ if [ -f ~/.config/ranger/rc.conf ]; then
  echo "arquivo rc.conf ... [ok]"
 else
  ranger --copy-config=rc
+ sleep 1
+ sed -i 's/set preview_images false/set preview_images true/g' $HOME/.config/ranger/rc.conf
+ sleep 1
+ sed -i 's/set draw_borders none/set draw_borders both/g' $HOME/.config/ranger/rc.conf
+ sleep 1
+ sed -i 's/set preview_images_method w3m/set preview_images_method ueberzug/g' $HOME/.config/ranger/rc.conf
+ sleep 1
+ sed -i 's/#set preview_script ~\/.config\/ranger\/scope.sh/set preview_script ~\/.config\/ranger\/scope.sh/g' $HOME/.config/ranger/rc.conf
+ # sed -i 's/set sort natural/set sort ctime/g' ~/.config/ranger/rc.conf
 fi
 if [ -f ~/.config/ranger/scope.sh ]; then
  echo "arquivo scope.sh ... [ok]"
 else
  ranger --copy-config=scope
+ sleep 1
+ sed -i '113,116s/#//' $HOME/.config/ranger/scope.sh
+ sleep 1
+ sed -i '157,160s/#//' $HOME/.config/ranger/scope.sh
 fi
 if [ -f ~/.config/ranger/rifle.conf ]; then
  echo "arquivo rifle.conf ... [ok]"
 else
  ranger --copy-config=rifle
+ sed -i 's/mime ^audio|ogg$, terminal, has mplayer  = mplayer -- "$@"/mime ^audio|ogg$, terminal, has moc      = ncmpcpp -- "$@"/g' $HOME/.config/ranger/rifle.conf
+ sleep 1
+ sed -i '/label wallpaper, number 15, mime ^image, has feh, X = wal -i "$1"/d' $HOME/.config/ranger/rifle.conf
+ sleep 1
+ sed -i 's/label wallpaper, number 14, mime ^image, has feh, X = feh --bg-fill "$1"/label wallpaper, number 14, mime ^image, has feh, X = feh --bg-fill "$1"\nlabel wallpaper, number 15, mime ^image, has feh, X = wal -i "$1"/g' $HOME/.config/ranger/rifle.conf
 fi
-
-sed -i 's/set preview_images false/set preview_images true/g' $HOME/.config/ranger/rc.conf
-
-sed -i 's/set draw_borders none/set draw_borders both/g' $HOME/.config/ranger/rc.conf
-
-sed -i 's/set preview_images_method w3m/set preview_images_method ueberzug/g' $HOME/.config/ranger/rc.conf
-
-# sed -i 's/set sort natural/set sort ctime/g' ~/.config/ranger/rc.conf
-
-sed -i 's/mime ^audio|ogg$, terminal, has mplayer  = mplayer -- "$@"/mime ^audio|ogg$, terminal, has moc      = ncmpcpp -- "$@"/g' $HOME/.config/ranger/rifle.conf
-sleep 1
-
-sed -i '/label wallpaper, number 15, mime ^image, has feh, X = wal -i "$1"/d' $HOME/.config/ranger/rifle.conf
-sleep 1
-
-sed -i 's/label wallpaper, number 14, mime ^image, has feh, X = feh --bg-fill "$1"/label wallpaper, number 14, mime ^image, has feh, X = feh --bg-fill "$1"\nlabel wallpaper, number 15, mime ^image, has feh, X = wal -i "$1"/g' $HOME/.config/ranger/rifle.conf
-sleep 1
-
-sed -i '113,116s/#//' $HOME/.config/ranger/scope.sh
-
-sed -i '157,160s/#//' $HOME/.config/ranger/scope.sh
-
-sed -i 's/#set preview_script ~\/.config\/ranger\/scope.sh/set preview_script ~\/.config\/ranger\/scope.sh/g' $HOME/.config/ranger/rc.conf
 
 ranger --version
  ;;
@@ -282,12 +277,17 @@ temas(){
  sleep 1
 
 # gruvbox tema
-mkdir -p ~/themes ~/icons
+if [ ! -d ~/.themes ]; then
 git clone https://github.com/jmattheis/gruvbox-dark-gtk ~/.themes/gruvbox-dark-gtk
-
+else
+ echo "voce ja tem o tema"
+fi
 sleep 1
+if [ ! -d ~/.icons ]; then
 git clone https://github.com/jmattheis/gruvbox-dark-icons-gtk ~/.icons/gruvbox-dark-icons-gtk
-
+else
+ echo "voce ja tem o tema"
+fi
 if [ -d ~/.config/gtk-3.0 ]; then
  cp ./.config/gtk-3.0/* ~/.config/;
 else
@@ -305,8 +305,12 @@ ohmyzsh(){
  echo -e "instalando oh-my-zsh  \n ... \n .. \n ."
  sleep 1
 
+if [ ! -d ~/.oh-my-zsh ]; then
  sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
  echo "oh-my-zsh ... instalado"
+else
+ echo "já existe oh-my-zsh"
+fi
 
 }
 
@@ -318,14 +322,24 @@ alias_autopair(){
 
 # zsh alias, autopair
 echo "arquivo alias"
+if [ ! -f ~/.aliaszshrc ]; then
 wget https://raw.githubusercontent.com/quebravel/dotfiles-conf/master/.aliaszshrc -P ~/
+else
+ echo "ja tem alias"
+fi
 
 echo "arquivo de plugins"
+if [ ! -f ~/.vizshrc ]; then
 wget https://raw.githubusercontent.com/quebravel/dotfiles-conf/master/.vizshrc -P ~/
-
 sleep 1
+
 echo -e "\nexport\tEDITOR='nvim'\nexport\tTERMINAL='alacritty'\nexport\tBROWSER='qutebrowser'\nexport\tREADER='zathura'\nexport\tSHELL='zsh'\nexport\tXDG_CURRENT_DESKTOP='bspwm'\n\n[[ ! -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] || source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh\n[[ ! -f ~/.aliaszshrc ]] || source ~/.aliaszshrc\n[[ ! -f ~/.vizshrc ]] || source ~/.vizshrc\n\n# autopair zsh\nif [[ ! -d ~/.zsh-autopair ]]; then\n\tgit clone https://github.com/hlissner/zsh-autopair ~/.zsh-autopair\nfi\n\nsource ~/.zsh-autopair/autopair.zsh\nautopair-init" >> $HOME/.zshrc
 
+else
+ echo "ja tem vizshrc"
+fi
+
+sleep 1
 echo "zsh configurado"
 
 echo -e "parte 2 feito \n ... \n .. \n ."
