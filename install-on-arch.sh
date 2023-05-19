@@ -334,6 +334,8 @@ $sd sed -i 's/#xinitrc \= \~\/.xinitrc/xinitrc \= \~\/.xinitrc/g' $arquivo
 # transformando arquivo xinitrc em executavel bash
 chmod +x ~/.xinitrc
 
+$sd systemctl enable ly.service
+
 # feito 
 
 sleep 1
@@ -354,4 +356,4 @@ ly_config
 
 # acha outro arquivo
 chmod +x ./install-2-arch.sh
-./install-2-arch.sh
+sh ./install-2-arch.sh
