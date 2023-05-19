@@ -13,7 +13,7 @@ playermusica(){
  sleep 1
 
 echo "[1] Sim  ou  [2] Nao "
-read -r -p "Quer instalar o player de música?" plmc
+read -r -p "Quer instalar o player de música? ... " plmc
 case "$plmc" in
  1) 
 $_so \
