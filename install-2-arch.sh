@@ -229,12 +229,13 @@ case "$browser" in
 esac
 
 if [ $BROW = "qutebrowser" ]; then
- $_so qutebrowser
+ $_so qutebrowser python-adblock
  echo "Adicionando dicionário"
  /usr/share/qutebrowser/scripts/dictcli.py install pt-BR
  echo "qutebrowser ... instalado"
  mkdir -p ~/.config/qutebrowser/;
  cp -r ./.config/qutebrowser/* ~/.config/qutebrowser/;
+ chmod +x ~/.config/qutebrowser/greasemonkey/*
  echo "$BROW configurado"
 elif [ $BROW = "firefox" ]; then
  $_so firefox firefox firefox-i18n-pt-br

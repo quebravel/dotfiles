@@ -320,23 +320,33 @@ ly_config(){
  echo -e "instalando ly  \n ... \n .. \n ."
  sleep 1
 
-# cominho do arquivo de configuração
-arquivo="/etc/ly/config.ini"
-sd="sudo"
+ echo "Deseja instalar um <Display Manager> (Ly)?"
+ read -r -p "[1] Sim [2] Não [*] pular ... " dmgr 
 
-if [ -f $arquivo ]; then
-    # abilitando opções 
-    $sd sed -i 's/#animate = false/animate = true/g' $arquivo
-    $sd sed -i 's/#animation = 0/animation = 1/g' $arquivo
-    $sd sed -i 's/#xinitrc \= \~\/.xinitrc/xinitrc \= \~\/.xinitrc/g' $arquivo
-    # transformando arquivo xinitrc em executavel bash
-    chmod +x ~/.xinitrc
-    $sd systemctl enable ly.service
-    sleep 1
-    echo -e "\n\t .... feito."
-else
-    echo "nao existe o arquivo de configuracao"
-fi
+    case "$dmgr" in
+    1)
+    # cominho do arquivo de configuração
+    arquivo="/etc/ly/config.ini"
+    sd="sudo"
+
+    if [ -f $arquivo ]; then
+        # abilitando opções 
+        $sd sed -i 's/#animate = false/animate = true/g' $arquivo
+        $sd sed -i 's/#animation = 0/animation = 1/g' $arquivo
+        $sd sed -i 's/#xinitrc \= \~\/.xinitrc/xinitrc \= \~\/.xinitrc/g' $arquivo
+        # transformando arquivo xinitrc em executavel bash
+        chmod +x ~/.xinitrc
+        $sd systemctl enable ly.service
+        sleep 1
+        echo -e "\n\t .... feito."
+    else
+        echo "nao existe o arquivo de configuracao"
+    fi
+    ;;
+    2|*) echo "Pular"
+    ;;
+    esac
+
 
 } ### ly_config
 
