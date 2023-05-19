@@ -12,10 +12,10 @@ playermusica(){
  echo -e "instalando e configurando ncmpcpp . mpd . mpc \n ... \n .. \n ."
  sleep 1
 
-echo "Quer instalar o player de música?"
-read -r -p "[s]im [n]ao ... " plmc
+echo "[1] Sim  ou  [2] Nao "
+read -r -p "Quer instalar o player de música?" plmc
 case "$plmc" in
- s) 
+ 1) 
 $_so \
 ncmpcpp \
 mpd \
@@ -70,8 +70,8 @@ rangerfm(){
  echo -e "ranger . ueberzug . ffmpegthumbnailer \n ... \n .. \n ."
  sleep 1
 
-echo "Quer uma gerenciador de arquivos para terminal?"
-read -r -p "[1] ranger [2] Pular ... " rag
+echo "[1] ranger   [2] Não   [*] Pular"
+read -r -p "Quer uma gerenciador de arquivos para terminal? ... " rag
 
 case "$rag" in
  1)
@@ -133,11 +133,11 @@ esac
 audio_config(){
 
  clear
- echo -e "instalando alsa-utils . pulseauido \n ... \n .. \n ."
+ echo -e "instalando controlador audio \n ... \n .. \n ."
  sleep 1
 
-echo "qual controlador de audio?"
-read -r -p "[1] pulseauido  [2] pipewire  [*] pular ... (default pipewire) ... " aud
+echo "[1] pulseauido  [2] pipewire  [*] pular ... (default pipewire)"
+read -r -p "qual controlador de audio? ... " aud
 
 case "$aud" in
  1) 
@@ -214,8 +214,8 @@ navegador(){
  echo -e "instalando browser  \n ... \n .. \n ."
  sleep 1
 
-echo "Qual navegador preferido?"
-read -r -p "[q]utebrowser  [f]irefox  [*] pular  ... " browser
+echo "[q]utebrowser  [f]irefox  [*] pular"
+read -r -p "Qual navegador preferido?  ... " browser
 
 case "$browser" in
  q|1) 
@@ -312,6 +312,8 @@ else
  echo "já existe oh-my-zsh"
 fi
 
+echo -e "parte 2 feito \n ... \n .. \n . \n =)"
+
 }
 
 alias_autopair(){
@@ -341,8 +343,6 @@ fi
 
 sleep 1
 echo "zsh configurado"
-
-echo -e "parte 2 feito \n ... \n .. \n ."
 
 }
 
