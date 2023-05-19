@@ -352,8 +352,7 @@ fontes_doSistema
 navegador
 copilador_config
 temas
-autoscript_git
-audio_pipewire
+audio_config
 rangerfm
 playermusica
 alias_autopair
