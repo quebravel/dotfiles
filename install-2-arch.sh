@@ -1,5 +1,5 @@
 #!/bin/bash
-# TODO 
+# TODO instalar astronvim e configurar 
 
 _so="sudo pacman -S --needed"
 _s="sudo"
