@@ -245,8 +245,8 @@ __________
 |         |      caso seja um notebook (laptop)
 | laptop  |      sera instalado acpi acpid e iwd
 | ________|      ...
- \:::::::::\
-  \o _____;+\
+ \:::::::::\ 
+  \= _____;=\\
 "
 
 echo "[1] Sim ou [2] Não [*] Pular"
