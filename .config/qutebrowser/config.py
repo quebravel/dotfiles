@@ -39,13 +39,26 @@ c.content.autoplay = False
 c.content.geolocation = True
 c.tabs.mode_on_change = "persist"
 c.tabs.title.format = "{index}: {current_title} {audio}"
+
+# configuracao nova
 c.colors.webpage.preferred_color_scheme = 'dark'
 c.colors.webpage.darkmode.enabled = True
-c.colors.webpage.darkmode.grayscale.all = False
-c.colors.webpage.preferred_color_scheme = 'dark'
-c.colors.webpage.darkmode.policy.page = 'smart'
-c.colors.webpage.darkmode.policy.images = 'smart'
-c.colors.webpage.darkmode.threshold.background = 205
+c.colors.webpage.darkmode.algorithm = "lightness-cielab"
+c.colors.webpage.darkmode.threshold.text = 150
+c.colors.webpage.darkmode.threshold.background = 100
+c.colors.webpage.darkmode.policy.images = 'always'
+c.colors.webpage.darkmode.grayscale.images = 0.35
+
+
+# configuracao minha antiga
+# c.colors.webpage.preferred_color_scheme = 'dark'
+# c.colors.webpage.darkmode.enabled = True
+# c.colors.webpage.darkmode.grayscale.all = False
+# c.colors.webpage.preferred_color_scheme = 'dark'
+# c.colors.webpage.darkmode.policy.page = 'smart'
+# c.colors.webpage.darkmode.policy.images = 'smart'
+# c.colors.webpage.darkmode.threshold.background = 205
+
 
 #  c.colors.webpage.bg = "#262626"
 #  c.content.blocking.hosts.lists.append( str(config.configdir) + "/blockedHosts")
