@@ -1,5 +1,5 @@
 #!/bin/bash
-# TODO instalar astronvim e configurar 
+# TODO concluido 
 
 _so="sudo pacman -S --needed"
 _s="sudo"
@@ -12,7 +12,7 @@ playermusica(){
  echo -e "... configurando ncmpcpp . mpd . mpc \n ... \n .. \n ."
  sleep 1
 
-echo "[1] Sim  ou  [2] Nao "
+echo "[1] Sim  ou  [2] Não "
 read -r -p "Quer instalar o player de música? ... " plmc
 case "$plmc" in
  1) 
@@ -56,7 +56,7 @@ echo 'mpd . mpc . ncmpcpp ... instalados'
 echo 'reinicie o systema ... reboot'
 
  ;;
- *) echo "pular"
+ *) echo "Oxente!!!"
  ;;
 esac
 
@@ -121,9 +121,9 @@ fi
 
 ranger --version
  ;;
- 2) echo "Pular"
+ 2) echo "Beleza"
  ;;
- *) echo "Pular"
+ *) echo "Ei mar!!!"
  ;;
 esac
 
@@ -159,7 +159,7 @@ case "$aud" in
   # gst-plugin-pipewire
   echo "pipewire* ... instalado"
   ;;
- *) echo pular
+ *) echo "Ta bom!"
   $_so \
   pipewire \
   pipewire-alsa \
@@ -224,7 +224,7 @@ case "$browser" in
  f|2)
    BROW="firefox"
  ;;
- *) echo "pular"
+ *) echo "Canelau"
  ;;
 esac
 
@@ -371,7 +371,7 @@ editordeTexto(){
     git clone https://github.com/quebravel/astronvim_config.git ~/.config/nvim/lua/user
     nvim  --headless -c 'quitall'
    ;;
-   2|*) echo "Pular ou nao"
+   2|*) echo "Tu quer frescar é? ..."
    ;;
   esac 
  fi

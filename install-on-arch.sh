@@ -46,11 +46,11 @@ case $vid in
 
 [*])
 	DRI=""
-	echo "Pulou instalação do driver de video" | tee -a ~/Notas.txt
+	echo "Pulou instalação do driver de video arriégua!" | tee -a ~/Notas.txt
 	;;
 [c])
 	DRI=""
-	echo "Pulou instalação do driver de video" | tee -a ~/Notas.txt	
+	echo "Pulou instalação do driver de video aperiado!" | tee -a ~/Notas.txt	
 	;;
 esac
 
@@ -105,7 +105,7 @@ esac
 # teste para saber se a variavel esta vazia
 if [ -z $WMs ]; then
     echo ""
-    echo "Pulou a instação do gerenciador de janelas." | tee -a ~/Notas.txt
+    echo "Pulou a instação do gerenciador de janelas, arrudia!." | tee -a ~/Notas.txt
 else
     # insalando window manger
     sudo pacman -S --noconfirm --needed $WMs $WMx $WMb
@@ -145,14 +145,14 @@ fi
         cp --recursive ./.config/polybar/* ~/.config/polybar/;
         echo "Configuração do polybar concluida"
     else
-        echo "... [ok]"
+        echo "... Abirobado!"
     fi
     if [ $WMs = "bspwm" ]; then
         echo -e '#!/bin/bash\n\nuserresources=$HOME/.Xresources\nsysresources=/etc/X11/xinit/.Xresources\n\n# merge in defaults\n\nif [ -f $sysresources ]; then\n    xrdb -merge $sysresources\nfi\n\nif [ -f "$userresources" ]; then\n    xrdb -merge "$userresources"\nfi\n\n[ -f ~/.Xdefaults ] && xrdb -merge ~/.Xdefaults\n\nxsetroot -cursor_name left_ptr &\n\n# feh --bg-tile ~/Imagens/wallpaperz.png\n$HOME/.fehbg\n# $HOME/trigger_custom_refresh.sh &\n# wal -R\n\n# export MPD_HOST=$HOME/.config/mpd/socket\n# mpd --kill; mpd &\nunclutter --timeout 7 &\n\n# Set up an icon tray\n# trayer --edge top --align right --SetDockType true --SetPartialStrut true \ \n# --expand true --width 10 --transparent true --tint 0x5f5f5f --height 18 &\n\nif [ "$(command -v xset)" >/dev/null 2>&1 ];\nthen\n    #xset s off      	        #Disable screen saver blanking\n    #xset s 3600 3600 	        #Change blank time to 1 hour\n    #xset -dpms 	            #Turn off DPMS\n    xset s off -dpms 	        #Disable DPMS and prevent screen from blanking\n    #xset dpms force off 	    #Turn off screen immediately\n    #xset dpms force standby 	#Standby screen\n    #xset dpms force suspend 	#Suspend screen\nfi\n\n# numlockx &\n# pulseaudio -k\n# pulseaudio &\n\nsxhkd &\nexec bspwm\n\n# exec xmonad\n\n#vim:ft=sh' > ~/.xinitrc
     elif [ $WMs = "xmonad" ]; then 
         echo -e '#!/bin/bash\n\nuserresources=$HOME/.Xresources\nsysresources=/etc/X11/xinit/.Xresources\n\n# merge in defaults\n\nif [ -f $sysresources ]; then\n    xrdb -merge $sysresources\nfi\n\nif [ -f "$userresources" ]; then\n    xrdb -merge "$userresources"\nfi\n\n[ -f ~/.Xdefaults ] && xrdb -merge ~/.Xdefaults\n\nxsetroot -cursor_name left_ptr &\n\n# feh --bg-tile ~/Imagens/wallpaperz.png\n$HOME/.fehbg\n# $HOME/trigger_custom_refresh.sh &\n# wal -R\n\n# export MPD_HOST=$HOME/.config/mpd/socket\n# mpd --kill; mpd &\nunclutter --timeout 7 &\n\n# Set up an icon tray\n# trayer --edge top --align right --SetDockType true --SetPartialStrut true \ \n# --expand true --width 10 --transparent true --tint 0x5f5f5f --height 18 &\n\nif [ "$(command -v xset)" >/dev/null 2>&1 ];\nthen\n    #xset s off      	        #Disable screen saver blanking\n    #xset s 3600 3600 	        #Change blank time to 1 hour\n    #xset -dpms 	            #Turn off DPMS\n    xset s off -dpms 	        #Disable DPMS and prevent screen from blanking\n    #xset dpms force off 	    #Turn off screen immediately\n    #xset dpms force standby 	#Standby screen\n    #xset dpms force suspend 	#Suspend screen\nfi\n\n# numlockx &\n# pulseaudio -k\n# pulseaudio &\n\n# sxhkd &\n# exec bspwm\n\nexec xmonad\n\n#vim:ft=sh' > ~/.xinitrc
     else
-        echo "window manager não definido"
+        echo "window manager não definido cabra!"
     fi
 
 
@@ -258,10 +258,10 @@ case $notebook in
         sudo systemctl enable iwd.service
         ;;
     [2])
-        echo "[ok]"
+        echo "Miolo de pote!"
         ;;
     [*])
-        echo "[ok]"
+        echo "Nem fresque não!"
         ;;
 esac
 
@@ -355,10 +355,10 @@ ly_config(){
         sleep 1
         echo -e "\n\t .... feito."
     else
-        echo "nao existe o arquivo de configuracao"
+        echo "não existe o arquivo de configuracao"
     fi
     ;;
-    2|*) echo "Pular"
+    2|*) echo "Diabeisso!"
     ;;
     esac
 
