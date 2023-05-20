@@ -10,7 +10,7 @@ c.url.searchengines['v'] = 'https://wiki.voidlinux.org/?search={}'
 c.url.searchengines['ge'] = 'https://wiki.gentoo.org/wiki/?search={}'
 c.url.searchengines['t'] = 'https://translate.google.com/#view=home&op=translate&sl=en&tl=pt&text={}'
 c.url.searchengines['r'] = 'https://reddit.com/r/{}'
-c.url.searchengines['l'] = 'https://www.deepl.com/pt-BR/translator#en/pt/{}'
+c.url.searchengines['l'] = 'https://www.deepl.com/pt-BR/translator#en/pt-br/{}'
 c.url.searchengines['b'] = 'https://bastos.bibipecas.com.br/search/{}'
 c.url.searchengines['n'] = 'https://www.netflix.com/search?q={}'
 
