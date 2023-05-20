@@ -12,7 +12,7 @@ playermusica(){
  echo -e "... configurando ncmpcpp . mpd . mpc \n ... \n .. \n ."
  sleep 1
 
-echo "[1] Sim  ou  [2] Não "
+echo "[1] Sim  ou  [2] Não [*] Pular"
 read -r -p "Quer instalar o player de música? ... " plmc
 case "$plmc" in
  1) 
@@ -363,7 +363,7 @@ editordeTexto(){
  else
   echo "existe um diretorio nvim"
   echo "Deseja re/instalar astronvim?"
-  read -r -p "[1] Sim   [2] Não ... " astronv
+  read -r -p "[1] Sim   [2] Não [*] Pular ... " astronv
   case "$astronv" in
    1)
     rm -rf ~/.config/nvim/;
@@ -371,7 +371,7 @@ editordeTexto(){
     git clone https://github.com/quebravel/astronvim_config.git ~/.config/nvim/lua/user
     nvim  --headless -c 'quitall'
    ;;
-   2|*) echo "Tu quer frescar é? ..."
+   2|*) echo "Simbora! ..."
    ;;
   esac 
  fi
