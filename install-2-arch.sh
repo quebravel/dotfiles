@@ -325,8 +325,8 @@ alias_autopair(){
 
 # zsh alias, autopair
 echo "arquivo alias"
-if [ ! -f ~/alias.zsh ]; then
-wget https://raw.githubusercontent.com/quebravel/dotfiles-conf/master/alias.zsh -P ~/.config/zsh/
+if [ ! -f ~/.config/zsh/alias.zsh ]; then
+wget https://raw.githubusercontent.com/quebravel/dotfiles-conf/main/.config/zsh/alias.zsh -P ~/.config/zsh/
 else
  echo "ja tem alias"
 fi
