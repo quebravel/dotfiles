@@ -307,7 +307,7 @@ ohmyzsh(){
  sleep 1
 
 if [ ! -d ~/.oh-my-zsh ]; then
- sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+ sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/main/tools/install.sh)"
  echo "oh-my-zsh ... instalado"
 else
  echo "já existe oh-my-zsh"
@@ -326,17 +326,19 @@ alias_autopair(){
 # zsh alias, autopair
 echo "arquivo alias"
 if [ ! -f ~/.config/zsh/alias.zsh ]; then
-wget https://raw.githubusercontent.com/quebravel/dotfiles-conf/main/.config/zsh/alias.zsh -P ~/.config/zsh/
-else
- echo "ja tem alias"
+ mkdir --parents ~/.config/zsh/;
+ cp ./.config/zsh/alias.zsh ~/.config/zsh/;
 fi
 
 echo "arquivo de plugins"
-if [ ! -f ~/.vizshrc ]; then
-wget https://raw.githubusercontent.com/quebravel/dotfiles-conf/master/.vizshrc -P ~/
+if [ ! -f ~/.config/zsh/vim-mode.zsh ]; then
+ mkdir --parents  ~/.config/zsh/;
+ cp ./.config/zsh/vim-mode.zsh ~/.config/zsh;
+fi
+
 sleep 1
 
-echo -e "\nexport\tEDITOR='nvim'\nexport\tTERMINAL='alacritty'\nexport\tBROWSER='qutebrowser'\nexport\tREADER='zathura'\nexport\tSHELL='zsh'\nexport\tXDG_CURRENT_DESKTOP='bspwm'\n\n[[ ! -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] || source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh\n[[ ! -f ~/.aliaszshrc ]] || source ~/.aliaszshrc\n[[ ! -f ~/.vizshrc ]] || source ~/.vizshrc\n\n# autopair zsh\nif [[ ! -d ~/.zsh-autopair ]]; then\n\tgit clone https://github.com/hlissner/zsh-autopair ~/.zsh-autopair\nfi\n\nsource ~/.zsh-autopair/autopair.zsh\nautopair-init" >> $HOME/.zshrc
+echo -e "\nexport	EDITOR='nvim'\nexport	TERMINAL='alacritty'\nexport	BROWSER='qutebrowser'\nexport	READER='zathura'\nexport	SHELL='zsh'\nexport	XDG_CURRENT_DESKTOP='bspwm'\n\n[[ ! -f ~/.config/zsh/alias.zsh ]] || source ~/.config/zsh/alias.zsh\n[[ ! -f ~/.config/zsh/vim-mode.zsh ]] || source ~/.config/zsh/vim-mode.zsh\n\n# autopair zsh\nif [[ ! -d ~/.config/zsh/zsh-autopair ]]; then\n\tgit clone https://github.com/hlissner/zsh-autopair ~/.config/zsh/zsh-autopair\nfi\n\nsource ~/.zsh-autopair/autopair.zsh\nautopair-init" >> $HOME/.zshrc
 
 else
  echo "ja tem vizshrc"
