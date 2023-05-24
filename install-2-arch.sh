@@ -12,7 +12,7 @@ playermusica(){
  echo -e "... configurando ncmpcpp . mpd . mpc \n ... \n .. \n ."
  sleep 1
 
-echo "[1] Sim  ou  [2] Não [*] Pular"
+ echo "1) Sim  ou  2) Não *) Pular"
 read -r -p "Quer instalar o player de música? ... " plmc
 case "$plmc" in
  1) 
@@ -60,8 +60,6 @@ echo 'reinicie o systema ... reboot'
  ;;
 esac
 
-
-
 }
 
 rangerfm(){
@@ -70,7 +68,7 @@ rangerfm(){
  echo -e "... ranger . ueberzug . ffmpegthumbnailer \n ... \n .. \n ."
  sleep 1
 
-echo "[1] ranger   [2] Não   [*] Pular"
+ echo "1) ranger   2) Não   *) Pular"
 read -r -p "Quer uma gerenciador de arquivos para terminal? ... " rag
 
 case "$rag" in
@@ -136,7 +134,7 @@ audio_config(){
  echo -e "... controlador audio \n ... \n .. \n ."
  sleep 1
 
-echo "[1] pulseauido  [2] pipewire  [*] pular ... (default pipewire)"
+ echo "1) pulseauido  2) pipewire  *) pular ... (default pipewire)"
 read -r -p "qual controlador de audio? ... " aud
 
 case "$aud" in
@@ -149,17 +147,7 @@ case "$aud" in
   # gst-libav
   echo "pulseaudio ... instalado"
   ;;
- 2) echo "pipewire"
-  $_so \
-  pipewire \
-  pipewire-alsa \
-  pipewire-audio \
-  pipewire-pulse \
-  helvum \
-  # gst-plugin-pipewire
-  echo "pipewire* ... instalado"
-  ;;
- *) echo "Ta bom!"
+ 2|*) echo "Ta bom!"
   $_so \
   pipewire \
   pipewire-alsa \
@@ -178,7 +166,7 @@ esac
 
 }
 
-zshconfig(){
+zshinstall(){
 
  clear
  echo -e "instalando zsh . zsh-completions  \n ... \n .. \n ."
@@ -214,14 +202,14 @@ navegador(){
  echo -e "... browser  \n ... \n .. \n ."
  sleep 1
 
-echo "[q]utebrowser  [f]irefox  [*] pular"
+ echo "1) qutebrowser  2) firefox  *) pular"
 read -r -p "Qual navegador preferido?  ... " browser
 
 case "$browser" in
- q|1) 
+ 1) 
    BROW="qutebrowser"
  ;;
- f|2)
+ 2)
    BROW="firefox"
  ;;
  *) echo "Canelau"
@@ -251,13 +239,14 @@ copilador_config(){
  sleep 1
 
 # processador 
-echo "congirurando makeflags para  4 processadores ativos durante a compilação ..."
-$_s sed -i "s/#MAKEFLAGS=\"-j2\"/MAKEFLAGS=\"-j4\"/g" /etc/makepkg.conf
+ncore=`lscpu | grep "^CPU(s)" | head -n 1 | cut -d: -f2 | tr -d " "`
 
-#lscpu | grep '^CPU(s):' | cut -d ' ' -f29
-lscpu | grep '^CPU(s):'
+echo "congirurando makeflags para  $ncore processadores ativos durante a compilação ..."
+echo "coloque a senha ... "
+$_s sed -i "s/#MAKEFLAGS=\"-j2\"/MAKEFLAGS=\"-j$ncore\"/g" /etc/makepkg.conf
 
-echo "copilador configurado para [4] processadores"
+
+echo "copilador configurado para [$ncore] processadores"
 
 }
 
@@ -365,7 +354,7 @@ editordeTexto(){
  else
   echo "existe um diretorio nvim"
   echo "Deseja re/instalar astronvim?"
-  read -r -p "[1] Sim   [2] Não [*] Pular ... " astronv
+  read -r -p "1) Sim   2) Não *) Pular ... " astronv
   case "$astronv" in
    1)
     rm -rf ~/.config/nvim/;
@@ -381,7 +370,7 @@ editordeTexto(){
 }
 
 
-zshconfig
+zshinstall
 fontes_doSistema
 navegador
 copilador_config
@@ -389,6 +378,6 @@ temas
 audio_config
 rangerfm
 playermusica
-alias_autopair
 ohmyzsh
+alias_autopair
 editordeTexto
