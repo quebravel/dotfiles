@@ -190,7 +190,7 @@ case $num in
 esac
 
 # if ! command -v $HELPER &> /dev/null
-if [[ -e "/sbin/yay" || -e "/sbin/paru" ]]; then
+if [[ -e "/sbin/$HELPER" ]]; then 
     echo "Ajudante AUR já instalado"
 elif [ -d ~/.srcs/$HELPER ]; then
     echo "Parece que você não tem um gerenciador AUR instalado, Vou instalar o $HELPER para você antes de continuar."
