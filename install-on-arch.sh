@@ -227,7 +227,6 @@ adwaita-icon-theme \
 bpytop \
 xcursor-vanilla-dmz-aa \
 nodejs \
-go \
 cmake \
 libxinerama \
 libxft \
@@ -240,7 +239,8 @@ unclutter \
 ttf-jetbrains-mono-nerd \
 siji-git \
 ly-git \
-cmatrix
+cmatrix \
+polkit
 
 }
 
