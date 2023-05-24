@@ -62,7 +62,7 @@ if [ $DRI = "xf86-video-amdgpu" ]; then
     sudo cp ./xorg_conf/40-amdgpu.conf /usr/share/X11/xorg.conf.d/
 elif [ $DRI = "xf86-video-intel" ]; then
     sudo pacman -S --noconfirm --needed vulkan-intel # driver open-source (melhor)
-    sudo cp ./xorg_conf/20-intel.conf/ /usr/share/X11/xorg.conf.d/
+    sudo cp ./xorg_conf/20-intel.conf /usr/share/X11/xorg.conf.d/
 fi
 
 } ### driveVideo
