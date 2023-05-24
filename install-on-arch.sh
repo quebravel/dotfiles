@@ -28,7 +28,7 @@ driveVideo(){
     echo -e "... driver de video \n ... \n .. \n ."
     sleep 1
 
-echo "[1] xf86-video-intel 	  [2] xf86-video-amdgpu    [3] nvidia    [*] Pular    [c]ancelar"
+echo "1) xf86-video-intel 	  2) xf86-video-amdgpu    3) nvidia    *) pular    c) cancelar"
 read -r -p "Escolha o driver da sua placa de vídeo (default intel) ... " vid
 
 case $vid in 
@@ -72,7 +72,17 @@ windowManger(){
     echo -e "... windows manager \n ... \n .. \n ."
     sleep 1
 
-echo " [1] bspwm    [2] xmonad    [*] Pular"
+echo "
+ +---------------------+
+ |           |         |      bspwm
+ |           |    2    |        ou
+ |     1     |         |      xmonad
+ |           |---------|      ...
+ |           |    3    |
+ +---------------------+
+"
+
+    echo " 1) bspwm    2) xmonad    3) cancelar   *) pular"
 read -r -p "Qual gerenciador de janelas (window manager) vai ser desta vez... (default é bspwm) ... " wme
 
 case $wme in 
@@ -117,7 +127,7 @@ fi
     elif [ -d ~/.config/$WMs ]; then
         echo "$WMs configuração detectada, backup..."
         rm --recursive --force ~/.config/$WMs
-        cp -r ./.config/$WMs/ ~/.config/
+        cp -r ./.config/$WMs ~/.config/
     else
         echo "Instalado configuração $WMs ..."
         mkdir -p ~/.config/$WMs
@@ -164,18 +174,18 @@ gerenciardorAUR(){
     echo -e "... gerenciador AUR \n ... \n .. \n ."
     sleep 1
 
-echo "Precisamos de um ajudante AUR. É essencial. [1] yay [2] paru [*] default"
-read -r -p "Qual é o ajudante AUR de sua escolha? (default é yay): ... " num
+    echo "Precisamos de um ajudante AUR. É essencial. 1) paru 2) yay *) default"
+    read -r -p "Qual é o ajudante AUR de sua escolha? (default é paru): ... " num
 
 case $num in
     [1])
-        HELPER="yay"
-        ;;
-    [2])
         HELPER="paru"
         ;;
-    [*])
+    [2])
         HELPER="yay"
+        ;;
+    [*])
+        HELPER="paru"
         ;;
 esac
 
@@ -249,13 +259,14 @@ __________
   \= _____;=\\
 "
 
-echo "[1] Sim ou [2] Não [*] Pular"
+echo "1) sim    2) não *) pular"
 read -r -p "Este computador é um notebook? ... " notebook
 
 case $notebook in
     [1])
         $HELPER -S acpi acpid iwd
         sudo systemctl enable iwd.service
+        sudo systemctl enable acpid.service
         ;;
     [2])
         echo "Miolo de pote!"
@@ -294,8 +305,8 @@ if [ -e "/usr/local/bin/dmenu_run" ]; then
     else
         mkdir -p ~/.srcs
         echo ""
-        echo "[1] installar   [2] remover   [e] sair"
-        read -r -p "Instalar ou remover dmenu2?... " dm2
+        echo "1) installar    2) remover    *) pular"
+        read -r -p "Instalar ou remover dmenu2? ... " dm2
     
         case $dm2 in
           [1])
@@ -322,8 +333,8 @@ if [ -e "/usr/local/bin/dmenu_run" ]; then
               cd ~/
               echo "dmenu2 removido [ok]"
               ;;
-          [n])
-              exit 1
+          [*])
+              echo "sem dmenu"
         esac
         echo "dmenu2 [ok]"
     fi
@@ -348,15 +359,16 @@ arquivosdeConfiguracao(){
         echo "Alacritty configuração detectada, [ok] ..."
     else
         echo "Installando alacritty configurações..."
-        mkdir -p ~/.config/alacritty/ && cp --recursive ./.config/alacritty/ ~/.config/alacritty/;
+        mkdir -p ~/.config/alacritty/;
+        cp --recursive ./.config/alacritty ~/.config/;
     fi
-    if [ -d ~/wallpapers ]; then
-        echo "Adicionando wallpaper para ~/wallpapers..."
-        cp ./wallpapers/* ~/wallpapers/;
-    else
-        echo "Installing wallpaper..."
-        mkdir ~/wallpapers && cp -r ./wallpapers/* ~/wallpapers/;
-    fi
+    # if [ -d ~/wallpapers ]; then
+    #     echo "Adicionando wallpaper para ~/wallpapers..."
+    #     cp ./wallpapers/* ~/wallpapers/;
+    # else
+    #     echo "Installing wallpaper..."
+    #     mkdir ~/wallpapers && cp -r ./wallpapers/* ~/wallpapers/;
+    # fi
     
 } ### arquivosdeConfiguracao
 
@@ -366,8 +378,18 @@ ly_config(){
  echo -e "... ly  \n ... \n .. \n ."
  sleep 1
 
- echo "Deseja instalar um <Display Manager> (Ly)?"
- read -r -p "[1] Sim [2] Não [*] pular ... " dmgr 
+echo "
++----------------------+
+|                      |
+|        _______       |  ly (display)
+|       | login |      |     (manager)    
+|       +-------+      |     ...
+|                      |
++----------------------+
+"
+
+ echo "1) sim    2) nao    *) pular ... " 
+ read -r -p "Deseja instalar um <Display Manager> (Ly)? ... " dmgr 
 
     case "$dmgr" in
     1)

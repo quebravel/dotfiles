@@ -279,10 +279,10 @@ else
  echo "voce ja tem o tema"
 fi
 if [ -d ~/.config/gtk-3.0 ]; then
- cp ./.config/gtk-3.0/* ~/.config/;
+ cp ./.config/gtk-3.0/* ~/.config/gtk-3.0/;
 else
  mkdir -p ~/.config/gtk-3.0/;
- cp ./.config/gtk-3.0/* ~/.config/;
+ cp ./.config/gtk-3.0/* ~/.config/gtk-3.0/;
 fi
 
 echo "temas gruvbox GTK ... instalados"
@@ -343,6 +343,16 @@ editordeTexto(){
  clear
  echo -e "configurando instalando e astrovim  \n ... \n .. \n ."
  sleep 1
+
+echo "
+ +--------------------+
+ |                    |      neovim
+ |       .ASTRO       |        +
+ |        NVIM.       |      astro
+ |        ....        |      ...
+ |         ..         |
+ +--------------------+
+"
 
  $_so neovim \
  python-pynvim
