@@ -256,8 +256,9 @@ pastas_config(){
  echo -e "criando pastas padrao  \n ... \n .. \n ."
  sleep 1
 
+if [[ -f /usr/bin/xdg-user-dirs-update ]]; then
 xdg-user-dirs-update
-
+fi
 }
 
 temas(){
@@ -385,6 +386,7 @@ fontes_doSistema
 navegador
 copilador_config
 temas
+pastas_config
 audio_config
 rangerfm
 playermusica
