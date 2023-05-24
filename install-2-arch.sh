@@ -296,7 +296,7 @@ ohmyzsh(){
  sleep 1
 
 if [ ! -d ~/.oh-my-zsh ]; then
- sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/main/tools/install.sh)"
+ sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
  echo "oh-my-zsh ... instalado"
 else
  echo "já existe oh-my-zsh"
