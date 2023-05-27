@@ -56,7 +56,7 @@ case $vid in
 esac
 
 # install xorg if not installed
-sudo pacman -S --noconfirm --needed feh xorg xorg-xinit xorg-xinput $DRI &> /dev/null
+sudo pacman -S --noconfirm --needed feh xorg xorg-xinit xorg-xinput $DRI
 
 if [ $DRI = "xf86-video-amdgpu" ]; then
     sudo pacman -S --noconfirm --needed vulkan-radeon # driver open-source (melhor)
@@ -206,6 +206,9 @@ else
 	(cd ~/.srcs/$HELPER/ && makepkg -si )
 fi
 
+if [[ $HELPER = "paru" ]]; then
+    sudo sed -i 's/#BottomUp/BottomUp/g' /etc/paru.conf
+fi
 
 $HELPER -S --needed --noconfirm \
 picom-jonaburg-git \
@@ -351,16 +354,18 @@ arquivosdeConfiguracao(){
     echo -e "Configurando programas \n ... \n .. \n ."
     sleep 1
 
-    if [ -d ~/.config/picom ]; then
+    if [ ! -d ~/.config/picom ]; then
+        echo "Instalando picom configs..."
+        cp --recursive --force ./.config/picom ~/.config/
+        mkdir ~/.config/picom
+        cp --force ./'.config/picom'/* ~/'.config/picom'/
+    else
         echo "Picom configuração detectada..."
         rm --recursive --force ~/.config/picom/;
         echo "Installing picom configs..."
         cp -r ./.config/picom ~/.config/;
-    else
-        echo "Instalando picom configs..."
-        sleep 1
-        cp --recursive --force ./.config/picom ~/.config/
     fi
+
     if [ -d ~/.config/alacritty ]; then
         echo "Alacritty configuração detectada, [ok] ..."
     else
