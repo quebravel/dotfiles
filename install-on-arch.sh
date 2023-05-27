@@ -15,7 +15,7 @@ GITFILES="dotfiles-conf"
 
 # does full system update
 echo "Fazendo uma atualização do sistema, pode acontecer que coisas quebrem se não for a versão mais recente..."
-sudo pacman --noconfirm -Syu &> /dev/null
+sudo pacman --noconfirm -Syu
 
 # install base-devel if not installed
 sudo pacman -S --noconfirm --needed base-devel wget git &> /dev/null
@@ -56,7 +56,7 @@ case $vid in
 esac
 
 # install xorg if not installed
-sudo pacman -S --noconfirm --needed feh xorg xorg-xinit xorg-xinput $DRI
+sudo pacman -S --noconfirm --needed xorg-server xorg-xinit xorg-xinput $DRI
 
 if [ $DRI = "xf86-video-amdgpu" ]; then
     sudo pacman -S --noconfirm --needed vulkan-radeon # driver open-source (melhor)
