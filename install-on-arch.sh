@@ -28,8 +28,8 @@ driveVideo(){
     echo -e "... driver de video \n ... \n .. \n ."
     sleep 1
 
-echo "1)_xf86-video-intel    2)_xf86-video-amdgpu    3)_nvidia    *)_Pular    c)_Cancelar"
-echo -e " \033[44;1;37m Escolha o driver da sua placa de vídeo (default intel) ...  \033[0m "
+echo " 1)_xf86-video-intel    2)_xf86-video-amdgpu    3)_nvidia    *)_Pular    c)_Cancelar"
+echo -e " \033[44;1;37m Escolha o driver da sua placa de vídeo. \033[0m "
 read -r -p "-> ... " vid
 
 case $vid in 
@@ -83,8 +83,10 @@ echo "
  +---------------------+
 "
 
-    echo " 1)_Bspwm    2)_Xmonad    3)_Cancelar    *)_Pular"
-read -r -p "Qual gerenciador de janelas (window manager) vai ser desta vez... (default é bspwm) ... " wme
+echo " 1)_Bspwm    2)_Xmonad    3)_Cancelar    *)_Pular"
+echo -e " \033[44;1;37m Qual gerenciador de janelas (window manager) vai ser desta vez \033[0m "
+echo "(default é bspwm)"
+read -r -p "-> ... " wme
 
 case $wme in 
 [1])
@@ -175,8 +177,10 @@ gerenciardorAUR(){
     echo -e "... gerenciador AUR \n ... \n .. \n ."
     sleep 1
 
-    echo "Precisamos de um ajudante AUR. É essencial. 1)_Paru    2)_Yay    *)_Default"
-    read -r -p "Qual é o ajudante AUR de sua escolha? (default é paru): ... " num
+    echo " Precisamos de um ajudante AUR. É essencial. 1)_Paru    2)_Yay    *)_Default"
+    echo -e " \033[44;1;37m Qual é o ajudante AUR de sua escolha? \033[0m "
+    echo " (default é paru)"
+    read -r -p "-> ... " num
 
 case $num in
     [1])
@@ -260,8 +264,9 @@ __________
   \= _____;=\\
 "
 
-echo "1)_Sim    2)_Nao    *)_Pular"
-read -r -p "Este computador é um notebook? ... " notebook
+echo " 1)_Sim    2)_Nao    *)_Pular"
+echo -e " \033[44;1;37m Este computador é um notebook? \033[0m "
+read -r -p "-> ... " notebook
 
 case $notebook in
     [1])
@@ -306,8 +311,9 @@ if [ -e "/usr/local/bin/dmenu_run" ]; then
     else
         mkdir -p ~/.srcs
         echo ""
-        echo "1)_Installar    2)_Remover    *)_Pular"
-        read -r -p "Instalar ou remover dmenu2? ... " dm2
+        echo " 1)_Installar    2)_Remover    *)_Pular"
+        echo -e " \033[44;1;37m Instalar ou remover dmenu2? \033[0m "
+        read -r -p "-> ... " dm2
     
         case $dm2 in
           [1])
@@ -390,8 +396,9 @@ echo "
 +----------------------+
 "
 
- echo "1)_Sim    2)_Nao    *)_Pular ... " 
- read -r -p "Deseja instalar um <Display Manager> (Ly)? ... " dmgr 
+ echo " 1)_Sim    2)_Nao    *)_Pular ... " 
+ echo -e " \033[44;1;37m Deseja instalar um <Display Manager> (Ly)? \033[0m "
+ read -r -p "-> ... " dmgr 
 
     case "$dmgr" in
     1)
