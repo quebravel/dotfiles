@@ -355,6 +355,9 @@ arquivosdeConfiguracao(){
 
     if [ ! -d ~/.config/picom ]; then
         echo "Instalando picom configs..."
+        pwd
+        echo "cd protegido"
+        (cd ./.config/ && ls && cp -r picom ~/.config/)
         cp --recursive --force ~/dotfiles-conf/.config/picom ~/.config/
         mkdir -p ~/.config/picom
         cp --force ./'.config/picom'/* ~/'.config/picom'/
