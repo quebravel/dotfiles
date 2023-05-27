@@ -29,7 +29,8 @@ driveVideo(){
     sleep 1
 
 echo "1)_xf86-video-intel    2)_xf86-video-amdgpu    3)_nvidia    *)_Pular    c)_Cancelar"
-read -r -p "Escolha o driver da sua placa de vídeo (default intel) ... " vid
+echo -e " \033[44;1;37m Escolha o driver da sua placa de vídeo (default intel) ...  \033[0m "
+read -r -p "-> ... " vid
 
 case $vid in 
 [1])
@@ -82,7 +83,7 @@ echo "
  +---------------------+
 "
 
-    echo " 1) bspwm    2) xmonad    3) cancelar    *) pular"
+    echo " 1)_Bspwm    2)_Xmonad    3)_Cancelar    *)_Pular"
 read -r -p "Qual gerenciador de janelas (window manager) vai ser desta vez... (default é bspwm) ... " wme
 
 case $wme in 
@@ -174,7 +175,7 @@ gerenciardorAUR(){
     echo -e "... gerenciador AUR \n ... \n .. \n ."
     sleep 1
 
-    echo "Precisamos de um ajudante AUR. É essencial. 1)_paru    2)_yay    *)_default"
+    echo "Precisamos de um ajudante AUR. É essencial. 1)_Paru    2)_Yay    *)_Default"
     read -r -p "Qual é o ajudante AUR de sua escolha? (default é paru): ... " num
 
 case $num in
@@ -282,7 +283,7 @@ clear
 lancadorProgramas(){
 
     clear
-    echo -e "lancador de programas \n ... \n .. \n ."
+    echo -e "lancador de programas Dmenu2 \n ... \n .. \n ."
     sleep 1
 
 mkdir -p ~/.config/
