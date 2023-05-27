@@ -3,7 +3,7 @@
 
 _so="sudo pacman -S --needed --noconfirm"
 _s="sudo"
-_ocultar"&> /dev/null"
+_ocultar="&> /dev/null"
 
 sudo pacman -Syu --noconfirm &> /dev/null
 
