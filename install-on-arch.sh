@@ -306,7 +306,7 @@ if [ -e "/usr/local/bin/dmenu_run" ]; then
     elif [ -d ~/.srcs/dmenu2 ]; then
         echo "Detectar pasta para compilar dmenu2, deletar..."
         echo "ok"
-        tar zxf ~/.srcs/dmenu2/dmenu2-0.2.1.tar.gz -C ~/.srcs/dmenu2  && cd ~/.srcs/dmenu2/dmenu2-0.2.1/ && sudo make clean install && cd
+        (tar zxf ~/.srcs/dmenu2/dmenu2-0.2.1.tar.gz -C ~/.srcs/dmenu2  && cd ~/.srcs/dmenu2/dmenu2-0.2.1/ && sudo make clean install)
         echo "dmenu2 [ok]"
     else
         mkdir -p ~/.srcs
@@ -320,24 +320,19 @@ if [ -e "/usr/local/bin/dmenu_run" ]; then
               if [ -d ~/.srcs/dmenu2-1 ]; then
                 echo "Detectado pasta para compilar dmenu2, instalando..."
                 echo "[ok]"
-                tar zxf ~/.srcs/dmenu2-1/dmenu2-0.2.1.tar.gz -C ~/.srcs/dmenu2-1/ && cd ~/.srcs/dmenu2-1/dmenu2-0.2.1/ && sudo make clean install
+                (tar zxf ~/.srcs/dmenu2-1/dmenu2-0.2.1.tar.gz -C ~/.srcs/dmenu2-1/ && cd ~/.srcs/dmenu2-1/dmenu2-0.2.1/ && sudo make clean install)
               else 
                 echo "Clonando dmenu2..."
                 git -C ~/.srcs clone https://github.com/quebravel/dmenu2-1.git
                 echo -e "Instalando dmenu2..."
-                tar zxf ~/.srcs/dmenu2-1/dmenu2-0.2.1.tar.gz -C ~/.srcs/dmenu2-1/  && cd ~/.srcs/dmenu2-1/dmenu2-0.2.1/ && sudo make clean install
+                (tar zxf ~/.srcs/dmenu2-1/dmenu2-0.2.1.tar.gz -C ~/.srcs/dmenu2-1/  && cd ~/.srcs/dmenu2-1/dmenu2-0.2.1/ && sudo make clean install)
                 echo "[ok]"
               fi
-    
-              cd ~/
               echo "dmenu2 instalado [ok]"
               ;;
           [2])
               echo "Removendo dmenu2..."
-              cd ~/.srcs/dmenu2-1/dmenu2-0.2.1
-              sudo make uninstall
-              sudo make clean
-              cd ~/
+              (cd ~/.srcs/dmenu2-1/dmenu2-0.2.1 && sudo make uninstall && sudo make clean)
               echo "dmenu2 removido [ok]"
               ;;
           [*])
@@ -356,11 +351,9 @@ arquivosdeConfiguracao(){
     if [ ! -d ~/.config/picom ]; then
         echo "Instalando picom configs..."
         pwd
-        echo "cd protegido"
-        (cd ./.config/ && ls && cp -r picom ~/.config/)
-        cp --recursive --force ~/dotfiles-conf/.config/picom ~/.config/
-        mkdir -p ~/.config/picom
-        cp --force ./'.config/picom'/* ~/'.config/picom'/
+        cp --recursive --force ./.config/picom ~/.config/
+        # mkdir -p ~/.config/picom
+        # cp --force ./'.config/picom'/* ~/'.config/picom'/
     else
         echo "Picom configuração detectada..."
         rm --recursive --force ~/.config/picom/;
