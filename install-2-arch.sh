@@ -365,9 +365,9 @@ echo "
   git clone https://github.com/quebravel/astronvim_config.git ~/.config/nvim/lua/user
   nvim  --headless -c 'quitall'
  else
-  echo -e " 1)_Sim    2)_Nao    *)_Pular ... "
+  echo " 1)_Sim    2)_Nao    *)_Pular ... "
   echo " Existe um diretorio nvim"
-  echo " \033[44;1;37m Deseja re/instalar astronvim? \033[0m "
+  echo -e " \033[44;1;37m Deseja re/instalar astronvim? \033[0m "
   read -r -p "-> ... " astronv
 
   case "$astronv" in
