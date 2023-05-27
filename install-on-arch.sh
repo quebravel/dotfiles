@@ -85,7 +85,7 @@ echo "
 
 echo " 1)_Bspwm    2)_Xmonad    3)_Cancelar    *)_Pular"
 echo -e " \033[44;1;37m Qual gerenciador de janelas (window manager) vai ser desta vez \033[0m "
-echo "(default é bspwm)"
+echo " (default é bspwm)"
 read -r -p "-> ... " wme
 
 case $wme in 

@@ -12,8 +12,9 @@ playermusica(){
  echo -e "... configurando ncmpcpp . mpd . mpc \n ... \n .. \n ."
  sleep 1
 
- echo "1) Sim    2) Nao    *) Pular"
-read -r -p "Quer instalar o player de música? ... " plmc
+ echo " 1) Sim    2) Nao    *) Pular"
+echo -e " \033[44;1;37m Quer instalar o player de música? \033[0m "
+read -r -p "-> ... " plmc
 case "$plmc" in
  1) 
 $_so \
@@ -68,8 +69,9 @@ rangerfm(){
  echo -e "... ranger . ueberzug . ffmpegthumbnailer \n ... \n .. \n ."
  sleep 1
 
- echo "1) ranger    2) Não    *) Pular"
-read -r -p "Quer uma gerenciador de arquivos para terminal? ... " rag
+echo " 1)_Ranger    2)_Nao    *)_Pular"
+echo -e " \033[44;1;37m Quer uma gerenciador de arquivos para terminal? \033[0m "
+read -r -p "-> ... " rag
 
 case "$rag" in
  1)
@@ -134,8 +136,10 @@ audio_config(){
  echo -e "... controlador audio \n ... \n .. \n ."
  sleep 1
 
- echo "1) pipewire    2) pulseaudio    *) pular ... (default pipewire)"
- read -r -p "qual controlador de audio? ... " aud
+ echo " 1)_Pipewire    2)_Pulseaudio    *)_Pular"
+ echo -e " \033[44;1;37m qual controlador de audio? \033[0m "
+ echo " (default pipewire)"
+ read -r -p "-> ... " aud
 
 case "$aud" in
  1|*) 
@@ -199,8 +203,9 @@ navegador(){
  echo -e "... browser  \n ... \n .. \n ."
  sleep 1
 
- echo "1) qutebrowser    2) firefox    *) pular"
-read -r -p "Qual navegador preferido?  ... " browser
+echo " 1)_Qutebrowser    2)_Firefox    *)_Pular"
+echo -e " \033[44;1;37m Qual navegador preferido? \033[0m "
+read -r -p "-> ... " browser
 
 case "$browser" in
  1) 
@@ -360,9 +365,11 @@ echo "
   git clone https://github.com/quebravel/astronvim_config.git ~/.config/nvim/lua/user
   nvim  --headless -c 'quitall'
  else
-  echo "existe um diretorio nvim"
-  echo "Deseja re/instalar astronvim?"
-  read -r -p "1) Sim   2) Não *) Pular ... " astronv
+  echo -e " 1)_Sim    2)_Nao    *)_Pular ... "
+  echo " Existe um diretorio nvim"
+  echo " \033[44;1;37m Deseja re/instalar astronvim? \033[0m "
+  read -r -p "-> ... " astronv
+
   case "$astronv" in
    1)
     rm -rf ~/.config/nvim/;
