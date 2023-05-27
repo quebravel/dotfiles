@@ -148,8 +148,9 @@ case "$aud" in
   pipewire-alsa \
   pipewire-audio \
   pipewire-pulse \
-  helvum \
+  wireplumber \
   # gst-plugin-pipewire
+  # helvum \
   ;;
  2)
   $_so \
