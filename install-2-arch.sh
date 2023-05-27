@@ -1,10 +1,11 @@
 #!/bin/bash
 # TODO concluido 
 
-_so="sudo pacman -S --needed"
+_so="sudo pacman -S --needed --noconfirm"
 _s="sudo"
+_ocultar"&> /dev/null"
 
-sudo pacman -Syu
+sudo pacman -Syu --noconfirm &> /dev/null
 
 playermusica(){
 
@@ -175,7 +176,8 @@ zshinstall(){
 
 $_so \
 zsh \
-zsh-completions 
+zsh-completions \
+$_ocultar
 
 echo "zsh ... instalado"
 
@@ -192,6 +194,7 @@ ttf-dejavu \
 noto-fonts-emoji \
 gnu-free-fonts \
 noto-fonts-cjk
+$_ocultar
 
 echo "fontes ... instaladas"
 
@@ -219,7 +222,10 @@ case "$browser" in
 esac
 
 if [ $BROW = "qutebrowser" ]; then
- $_so qutebrowser python-adblock
+ $_so qutebrowser \
+python-adblock \
+$_ocultar
+
  echo "Adicionando dicionário"
  /usr/share/qutebrowser/scripts/dictcli.py install pt-BR
  echo "qutebrowser ... instalado"
@@ -228,7 +234,11 @@ if [ $BROW = "qutebrowser" ]; then
  chmod +x ~/.config/qutebrowser/greasemonkey/*
  echo "$BROW configurado"
 elif [ $BROW = "firefox" ]; then
- $_so firefox firefox firefox-i18n-pt-br
+ $_so firefox \
+firefox \
+firefox-i18n-pt-br \
+$_ocultar
+
  echo "$BROW ... instalado"
 fi
 
