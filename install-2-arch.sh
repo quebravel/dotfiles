@@ -4,7 +4,7 @@
 _so="sudo pacman -S --needed --noconfirm"
 _s="sudo"
 
-sudo pacman -Syu --noconfirm &> /dev/null
+sudo pacman -Syu --noconfirm
 
 playermusica(){
 
@@ -176,7 +176,7 @@ zshinstall(){
 
 $_so \
 zsh \
-zsh-completions &> /dev/null
+zsh-completions
 
 echo "zsh ... instalado"
 
@@ -192,7 +192,7 @@ $_so \
 ttf-dejavu \
 noto-fonts-emoji \
 gnu-free-fonts \
-noto-fonts-cjk &> /dev/null
+noto-fonts-cjk
 
 echo "fontes ... instaladas"
 
@@ -221,7 +221,7 @@ esac
 
 if [ $BROW = "qutebrowser" ]; then
  $_so qutebrowser \
-python-adblock &> /dev/null
+python-adblock
 
  echo "Adicionando dicionário"
  /usr/share/qutebrowser/scripts/dictcli.py install pt-BR
@@ -232,7 +232,7 @@ python-adblock &> /dev/null
  echo "$BROW configurado"
 elif [ $BROW = "firefox" ]; then
  $_so firefox \
-firefox-i18n-pt-br &> /dev/null
+firefox-i18n-pt-br
 
  echo "$BROW ... instalado"
 fi

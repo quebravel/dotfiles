@@ -121,7 +121,7 @@ if [ -z $WMs ]; then
     echo "Pulou a instação do gerenciador de janelas, arrudia!." | tee -a ~/Notas.txt
 else
     # insalando window manger
-    sudo pacman -S --noconfirm --needed $WMs $WMx $WMb &> /dev/null
+    sudo pacman -S --noconfirm --needed $WMs $WMx $WMb
 fi
 
 
@@ -357,7 +357,7 @@ arquivosdeConfiguracao(){
     if [ ! -d ~/.config/picom ]; then
         echo "Instalando picom configs..."
         cp --recursive --force ./.config/picom ~/.config/
-        mkdir ~/.config/picom
+        mkdir -p ~/.config/picom
         cp --force ./'.config/picom'/* ~/'.config/picom'/
     else
         echo "Picom configuração detectada..."
