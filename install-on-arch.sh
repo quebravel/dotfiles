@@ -210,9 +210,6 @@ if [[ $HELPER = "paru" ]]; then
     sudo sed -i 's/#BottomUp/BottomUp/g' /etc/paru.conf
 fi
 
-sed -i 's/#ParallelDownloads/ParallelDownloads/g' ./pacman.conf;
-sed -ie 's/#Color/Color\nILoveCandy/g' ./pacman.conf;
-
 $HELPER -S --needed --noconfirm \
 picom-jonaburg-git \
 alacritty \
