@@ -3,7 +3,6 @@
 
 _so="sudo pacman -S --needed --noconfirm"
 _s="sudo"
-_ocultar="&> /dev/null"
 
 sudo pacman -Syu --noconfirm &> /dev/null
 
@@ -176,8 +175,7 @@ zshinstall(){
 
 $_so \
 zsh \
-zsh-completions \
-$_ocultar
+zsh-completions &> /dev/null
 
 echo "zsh ... instalado"
 
@@ -193,8 +191,7 @@ $_so \
 ttf-dejavu \
 noto-fonts-emoji \
 gnu-free-fonts \
-noto-fonts-cjk
-$_ocultar
+noto-fonts-cjk &> /dev/null
 
 echo "fontes ... instaladas"
 
@@ -223,8 +220,7 @@ esac
 
 if [ $BROW = "qutebrowser" ]; then
  $_so qutebrowser \
-python-adblock \
-$_ocultar
+python-adblock &> /dev/null
 
  echo "Adicionando dicionário"
  /usr/share/qutebrowser/scripts/dictcli.py install pt-BR
@@ -235,9 +231,7 @@ $_ocultar
  echo "$BROW configurado"
 elif [ $BROW = "firefox" ]; then
  $_so firefox \
-firefox \
-firefox-i18n-pt-br \
-$_ocultar
+firefox-i18n-pt-br &> /dev/null
 
  echo "$BROW ... instalado"
 fi
