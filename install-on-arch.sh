@@ -213,7 +213,6 @@ fi
 $HELPER -S --needed --noconfirm \
 picom-jonaburg-git \
 alacritty \
-herbe-git \
 xclip \
 maim \
 xdo \
@@ -225,20 +224,15 @@ feh \
 xsel \
 python-pynvim \
 yt-dlp \
-the_silver_searcher \
 ntfs-3g \
 xorg-{xsetroot,xset,xrdb} \
 xf86-input-{evdev,libinput} \
-curl \
 zathura-pdf-poppler \
 adwaita-icon-theme \
-bpytop \
 xcursor-vanilla-dmz-aa \
-nodejs \
 cmake \
 libxinerama \
 libxft \
-python-pip \
 sxiv \
 xdg-user-dirs \
 ffmpeg \
@@ -246,8 +240,13 @@ redshift \
 unclutter \
 ttf-jetbrains-mono-nerd \
 siji-git \
-polkit
-
+polkit \
+# nodejs \
+# herbe-git \
+# python-pip \
+# bpytop \
+# curl \
+# the_silver_searcher \
 }
 
 notebook_ger(){
@@ -356,7 +355,7 @@ arquivosdeConfiguracao(){
 
     if [ ! -d ~/.config/picom ]; then
         echo "Instalando picom configs..."
-        cp --recursive --force ./.config/picom ~/.config/
+        cp --recursive --force ~/dotfiles-conf/.config/picom ~/.config/
         mkdir -p ~/.config/picom
         cp --force ./'.config/picom'/* ~/'.config/picom'/
     else
