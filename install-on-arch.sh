@@ -28,7 +28,7 @@ driveVideo(){
     echo -e "... driver de video \n ... \n .. \n ."
     sleep 1
 
-echo "1) xf86-video-intel 	  2) xf86-video-amdgpu    3) nvidia    *) pular    c) cancelar"
+echo "1)_xf86-video-intel    2)_xf86-video-amdgpu    3)_nvidia    *)_Pular    c)_Cancelar"
 read -r -p "Escolha o driver da sua placa de vídeo (default intel) ... " vid
 
 case $vid in 
@@ -82,7 +82,7 @@ echo "
  +---------------------+
 "
 
-    echo " 1) bspwm    2) xmonad    3) cancelar   *) pular"
+    echo " 1) bspwm    2) xmonad    3) cancelar    *) pular"
 read -r -p "Qual gerenciador de janelas (window manager) vai ser desta vez... (default é bspwm) ... " wme
 
 case $wme in 
@@ -174,7 +174,7 @@ gerenciardorAUR(){
     echo -e "... gerenciador AUR \n ... \n .. \n ."
     sleep 1
 
-    echo "Precisamos de um ajudante AUR. É essencial. 1) paru 2) yay *) default"
+    echo "Precisamos de um ajudante AUR. É essencial. 1)_paru    2)_yay    *)_default"
     read -r -p "Qual é o ajudante AUR de sua escolha? (default é paru): ... " num
 
 case $num in
@@ -202,7 +202,7 @@ else
 fi
 
 
-$HELPER -S --needed \
+$HELPER -S --needed --noconfirm \
 picom-jonaburg-git \
 alacritty \
 herbe-git \
@@ -259,7 +259,7 @@ __________
   \= _____;=\\
 "
 
-echo "1) sim    2) não *) pular"
+echo "1)_Sim    2)_Nao    *)_Pular"
 read -r -p "Este computador é um notebook? ... " notebook
 
 case $notebook in
@@ -305,7 +305,7 @@ if [ -e "/usr/local/bin/dmenu_run" ]; then
     else
         mkdir -p ~/.srcs
         echo ""
-        echo "1) installar    2) remover    *) pular"
+        echo "1)_Installar    2)_Remover    *)_Pular"
         read -r -p "Instalar ou remover dmenu2? ... " dm2
     
         case $dm2 in
@@ -352,8 +352,9 @@ arquivosdeConfiguracao(){
         echo "Installing picom configs..."
         cp -r ./.config/picom ~/.config/;
     else
-        echo "Installing picom configs..."
-        cp -r ./.config/picom ~/.config/;
+        echo "Instalando picom configs..."
+        sleep 1
+        cp --recursive --force ./.config/picom ~/.config/
     fi
     if [ -d ~/.config/alacritty ]; then
         echo "Alacritty configuração detectada, [ok] ..."
@@ -388,7 +389,7 @@ echo "
 +----------------------+
 "
 
- echo "1) sim    2) nao    *) pular ... " 
+ echo "1)_Sim    2)_Nao    *)_Pular ... " 
  read -r -p "Deseja instalar um <Display Manager> (Ly)? ... " dmgr 
 
     case "$dmgr" in

@@ -12,7 +12,7 @@ playermusica(){
  echo -e "... configurando ncmpcpp . mpd . mpc \n ... \n .. \n ."
  sleep 1
 
- echo "1) Sim  ou  2) Não *) Pular"
+ echo "1) Sim    2) Nao    *) Pular"
 read -r -p "Quer instalar o player de música? ... " plmc
 case "$plmc" in
  1) 
@@ -68,7 +68,7 @@ rangerfm(){
  echo -e "... ranger . ueberzug . ffmpegthumbnailer \n ... \n .. \n ."
  sleep 1
 
- echo "1) ranger   2) Não   *) Pular"
+ echo "1) ranger    2) Não    *) Pular"
 read -r -p "Quer uma gerenciador de arquivos para terminal? ... " rag
 
 case "$rag" in
@@ -134,20 +134,11 @@ audio_config(){
  echo -e "... controlador audio \n ... \n .. \n ."
  sleep 1
 
- echo "1) pulseauido  2) pipewire  *) pular ... (default pipewire)"
-read -r -p "qual controlador de audio? ... " aud
+ echo "1) pipewire    2) pulseaudio    *) pular ... (default pipewire)"
+ read -r -p "qual controlador de audio? ... " aud
 
 case "$aud" in
- 1) 
-  echo "pulseauido" 
-  $_so \
-  alsa-utils \
-  pulseaudio \
-  # gst-plugins-{base,good,bad,ugly} \
-  # gst-libav
-  echo "pulseaudio ... instalado"
-  ;;
- 2|*) echo "Ta bom!"
+ 1|*) 
   $_so \
   pipewire \
   pipewire-alsa \
@@ -155,8 +146,14 @@ case "$aud" in
   pipewire-pulse \
   helvum \
   # gst-plugin-pipewire
-  echo "pipewire* ... instalado"
-  echo -e "use <wpctl status> para detectar en Sinks: o númeor ID da saída de áudío \nexemplo: \nwpctl status \n
+  ;;
+ 2)
+  $_so \
+  alsa-utils \
+  pulseaudio \
+  # gst-plugins-{base,good,bad,ugly} \
+  # gst-libav
+ echo -e "use <wpctl status> para detectar en Sinks: o númeor ID da saída de áudío \nexemplo: \nwpctl status \n
  Sinks: \n
  33. Áudio interno Estéreo analógico  [vol: 1.20] \n
  53. Ellesmere HDMI Audio [Radeon RX 470/480 / 570/580/590] Digital Stereo (HDMI 6) \n
@@ -202,7 +199,7 @@ navegador(){
  echo -e "... browser  \n ... \n .. \n ."
  sleep 1
 
- echo "1) qutebrowser  2) firefox  *) pular"
+ echo "1) qutebrowser    2) firefox    *) pular"
 read -r -p "Qual navegador preferido?  ... " browser
 
 case "$browser" in
