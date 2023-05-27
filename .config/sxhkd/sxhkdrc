@@ -205,7 +205,10 @@ alt + {equal,minus,m}
 
 # changer out audio | script toggle_switch_sound.sh | credit be gaco and user512557
 alt + backslash
-    ~/.config/sxhkd/scripts_sxhkd/toggle_switch_sound.sh
+    ~/.config/sxhkd/scripts_sxhkd/toggle_switch_sound.sh # pulseaudio
+
+ctrl + backslash
+    ~/.config/sxhkd/scripts_sxhkd/dmenuWpctl.sh # pipewire
 
 # mpd next sound
 alt + {period,comma,p,s}
