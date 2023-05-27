@@ -9,16 +9,17 @@ echo "Bem vindo!" && sleep 1
 
 # Default vars
 HELPER="yay"
+OCULTAR="&> /dev/null"
 
 # Default past github dotfiles
 GITFILES="dotfiles-conf"
 
 # does full system update
 echo "Fazendo uma atualização do sistema, pode acontecer que coisas quebrem se não for a versão mais recente..."
-sudo pacman --noconfirm -Syu
+sudo pacman --noconfirm -Syu $OCULTAR
 
 # install base-devel if not installed
-sudo pacman -S --noconfirm --needed base-devel wget git
+sudo pacman -S --noconfirm --needed base-devel wget git $OCULTAR
 
 } ### inicio
 
@@ -56,7 +57,7 @@ case $vid in
 esac
 
 # install xorg if not installed
-sudo pacman -S --noconfirm --needed feh xorg xorg-xinit xorg-xinput $DRI
+sudo pacman -S --noconfirm --needed feh xorg xorg-xinit xorg-xinput $DRI $OCULTAR
 
 if [ $DRI = "xf86-video-amdgpu" ]; then
     sudo pacman -S --noconfirm --needed vulkan-radeon # driver open-source (melhor)
@@ -121,7 +122,7 @@ if [ -z $WMs ]; then
     echo "Pulou a instação do gerenciador de janelas, arrudia!." | tee -a ~/Notas.txt
 else
     # insalando window manger
-    sudo pacman -S --noconfirm --needed $WMs $WMx $WMb
+    sudo pacman -S --noconfirm --needed $WMs $WMx $WMb $OCULTAR
 fi
 
 
@@ -243,8 +244,6 @@ redshift \
 unclutter \
 ttf-jetbrains-mono-nerd \
 siji-git \
-ly-git \
-cmatrix \
 polkit
 
 }
@@ -402,6 +401,7 @@ echo "
 
     case "$dmgr" in
     1)
+    $HELPER ly-git cmatrix $OCULTAR
     # cominho do arquivo de configuração
     arquivo="/etc/ly/config.ini"
     sd="sudo"
