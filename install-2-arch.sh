@@ -192,7 +192,7 @@ $_so \
 ttf-dejavu \
 noto-fonts-emoji \
 gnu-free-fonts \
-xorg-fonts-cjk
+xorg-fonts-{cjk,75dpi,100dpi,encodings}
 
 echo "fontes ... instaladas"
 

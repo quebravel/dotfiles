@@ -56,7 +56,7 @@ case $vid in
 esac
 
 # install xorg if not installed
-sudo pacman -S --noconfirm --needed xorg xorg-xinit xorg-xinput $DRI
+sudo pacman -S --noconfirm --needed xorg-server xorg-xinit xorg-xinput $DRI
 
 if [ $DRI = "xf86-video-amdgpu" ]; then
     sudo pacman -S --noconfirm --needed vulkan-radeon # driver open-source (melhor)
