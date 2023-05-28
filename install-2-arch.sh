@@ -368,7 +368,7 @@ echo "
  if [ ! -d ~/.config/nvim ]; then
   git clone --depth 1 https://github.com/AstroNvim/AstroNvim ~/.config/nvim
   git clone https://github.com/quebravel/astronvim_config.git ~/.config/nvim/lua/user
-  nvim  --headless -c 'quitall'
+  (nvim  --headless -c 'quitall')
  else
   echo " 1)_Sim    2)_Nao    *)_Pular ... "
   echo " Existe um diretorio nvim"
@@ -380,12 +380,14 @@ echo "
     rm -rf ~/.config/nvim/;
     git clone --depth 1 https://github.com/AstroNvim/AstroNvim ~/.config/nvim
     git clone https://github.com/quebravel/astronvim_config.git ~/.config/nvim/lua/user
-    nvim  --headless -c 'quitall'
+    (nvim  --headless -c 'quitall')
    ;;
    2|*) echo "Simbora! ..."
    ;;
   esac 
  fi
+
+ echo -e " .... Script finalizado \n ... \n .. \n ."
 
 }
 
