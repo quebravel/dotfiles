@@ -1,0 +1,7 @@
+# aliases c.aliases['gh'] = 'open -t https://github.com/quebravel'
+c.aliases['yh'] = 'open -r https://www.youtube.com/feed/history'
+c.aliases['rd'] = 'open -r https://reddit.com'
+c.aliases['kp'] = 'open -t https://keep.google.com'
+c.aliases['gm'] = 'open -t https://mail.google.com'
+c.aliases['fd'] = 'open -t https://feedly.com'
+c.aliases['ymp3'] = 'spawn -m youtube-dl -x --audio-format mp3 {url}'

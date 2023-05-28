@@ -76,5 +76,6 @@ c.content.blocking.method = "adblock"
 
 # config.source('solarizedark.py')
 config.source('gruvbox.py')
-config.source('aliases_search.py')
+config.source('aliases.py')
+config.source('search.py')
 config.source('bindings_commands.py')
