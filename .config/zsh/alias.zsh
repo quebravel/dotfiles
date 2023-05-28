@@ -10,6 +10,7 @@ alias f="sxiv -frqto * | xargs feh --bg-scale"
 alias n="nvim"
 alias sz="source ~/.zshrc"
 alias tmux='TERM=xterm-256color tmux'
+alias mkfs.ntfs='mkfs.ntfs --fast'
 
 # atalhos
 alias nzshrc="nvim ~/.zshrc"
