@@ -2,7 +2,6 @@
 // @match https://www.youtube.com/*
 // @match https://astronvim.com/*
 // @match https://www.reddit.com/*
-// @match https://start.duckduckgo.com/*
 // @match https://keep.google.com/*
 // @match https://mail.google.com/*
 // ==/UserScript==
