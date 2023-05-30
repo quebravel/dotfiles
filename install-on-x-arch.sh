@@ -226,14 +226,6 @@ fi
 
 gerenciardorAUR(){
 
-cat <<AURDESENHO
-          .        .  ______.
-   /\     |        |  |      \
-  /  \    |        |  |_____,/
- /____\   |        |  |     \
-/      \   \______/   |      \
-AURDESENHO
-
     clear 
     echo -e "... gerenciador AUR \n ... \n .. \n ."
     sleep 0.2
@@ -349,7 +341,7 @@ lancadorProgramas(){
     echo -e "lancador de programas Dmenu2 \n ... \n .. \n ."
     sleep 0.2
 
-cat <<DMENUDESENHO
+cat << DMENUDESENHO
    .____________________________________________________________________.
    |_dmenu2_[_________________]_[_2to3_2to3-3.11_411toppm_4channels_a2x_|
 DMENUDESENHO
