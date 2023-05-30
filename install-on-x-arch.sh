@@ -73,15 +73,15 @@ if [ $DRI = "xf86-video-nvidia" ]; then
 fi
 
 # adicionando modulos
-if [ "$(ls /boot | grep hardened -c)" -gt "0" ]; then
-	mkinitcpio -p linux-hardened
-elif [ "$(ls /boot | grep lts -c)" -gt "0" ]; then
-	mkinitcpio -p linux-lts
-elif [ "$(ls /boot | grep zen -c)" -gt "0" ]; then
-	mkinitcpio -p linux-zen
-else
-	mkinitcpio -p linux
-fi
+# if [ "$(ls /boot | grep hardened -c)" -gt "0" ]; then
+# 	mkinitcpio -p linux-hardened
+# elif [ "$(ls /boot | grep lts -c)" -gt "0" ]; then
+# 	mkinitcpio -p linux-lts
+# elif [ "$(ls /boot | grep zen -c)" -gt "0" ]; then
+# 	mkinitcpio -p linux-zen
+# else
+# 	mkinitcpio -p linux
+# fi
 
 
 } ### driveVideo
