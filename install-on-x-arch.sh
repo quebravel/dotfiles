@@ -34,23 +34,23 @@ echo -e " \033[44;1;37m Escolha o driver da sua placa de vídeo. \033[0m "
 read -r -p "-> ... " vid
 
 case $vid in 
-[1])
+1)
 	DRI='xf86-video-intel'
 	;;
 
-[2])
+2)
 	DRI='xf86-video-amdgpu'
 	;;
 
-[3])
+3)
     DRI='xf86-video-nvidia'
     ;;
 
-[P|p])
+P|p)
 	DRI=""
 	echo "Pulou instalação do driver de video arriégua!" | tee -a ~/Notas.txt
 	;;
-[*]) driveVideo
+*) driveVideo
 
 	;;
 esac
@@ -107,25 +107,25 @@ echo " (default é bspwm)"
 read -r -p "-> ... " wme
 
 case $wme in 
-[1])
+1)
 	WMs='bspwm'
 	WMx='sxhkd'
 	WMb='polybar'
 	;;
 
-[2])
+2)
 	WMs='xmonad'
 	WMx='xmonad-contrib'
 	WMb='xmobar'
 	;;
 
-[P|p])
+P|p)
 	WMs='bspwm'
 	WMx='sxhkd'
 	WMb='polybar'
 	;;
 
-[*]) windowManger
+*) windowManger
 	;;
 esac
 
@@ -197,13 +197,13 @@ gerenciardorAUR(){
     read -r -p "-> ... " num
 
 case $num in
-    [1])
+    1)
         HELPER="paru"
         ;;
-    [2])
+    2)
         HELPER="yay"
         ;;
-    [*])
+    *)
         HELPER="paru"
         ;;
 esac
@@ -252,8 +252,6 @@ xdg-user-dirs \
 ffmpeg \
 redshift \
 unclutter \
-ttf-jetbrains-mono-nerd \
-siji-git \
 polkit \
 # nodejs \
 # herbe-git \
@@ -283,15 +281,15 @@ echo -e " \033[44;1;37m Este computador é um notebook? \033[0m "
 read -r -p "-> ... " notebook
 
 case $notebook in
-    [1])
+    1)
         $HELPER -S acpi acpid iwd
         sudo systemctl enable iwd.service
         sudo systemctl enable acpid.service
         ;;
-    [2])
+    2)
         echo "Miolo de pote!"
         ;;
-    [*]) notebook_ger
+    *) notebook_ger
         ;;
 esac
 
@@ -329,7 +327,7 @@ if [ -e "/usr/local/bin/dmenu_run" ]; then
         read -r -p "-> ... " dm2
     
         case $dm2 in
-          [1])
+          1)
               if [ -d ~/.srcs/dmenu2-1 ]; then
                 echo "Detectado pasta para compilar dmenu2, instalando..."
                 echo "[ok]"
@@ -343,12 +341,12 @@ if [ -e "/usr/local/bin/dmenu_run" ]; then
               fi
               echo "dmenu2 instalado [ok]"
               ;;
-          [2])
+          2)
               echo "Removendo dmenu2..."
               (cd ~/.srcs/dmenu2-1/dmenu2-0.2.1 && sudo make uninstall && sudo make clean)
               echo "dmenu2 removido [ok]"
               ;;
-          [*]) lancadorProgramas
+          *) lancadorProgramas
               echo "sem dmenu"
         esac
         echo "dmenu2 [ok]"
@@ -412,7 +410,7 @@ echo "
  read -r -p "-> ... " dmgr 
 
     case "$dmgr" in
-    [1])
+    1)
     $HELPER ly cmatrix &> /dev/null
     # cominho do arquivo de configuração
     arquivo="/etc/ly/config.ini"
@@ -432,9 +430,9 @@ echo "
         echo "não existe o arquivo de configuracao"
     fi
     ;;
-    [2]) echo "Diabeisso!"
+    2) echo "Diabeisso!"
     ;;
-    [*]) ly_config
+    *) ly_config
     ;;
     esac
 
@@ -455,7 +453,7 @@ playermusica(){
 echo -e " \033[44;1;37m Quer instalar o player de música? \033[0m "
 read -r -p "-> ... " plmc
 case "$plmc" in
- [1]) 
+ 1) 
 $_so \
 ncmpcpp \
 mpd \
@@ -496,9 +494,9 @@ echo 'mpd . mpc . ncmpcpp ... instalados'
 echo 'reinicie o systema ... reboot'
 
  ;;
- [2]) echo "Oxente!!!"
+ 2) echo "Oxente!!!"
  ;;
- [*]) playermusica
+ *) playermusica
  ;;
 esac
 
@@ -515,59 +513,61 @@ echo -e " \033[44;1;37m Quer uma gerenciador de arquivos para terminal? \033[0m 
 read -r -p "-> ... " rag
 
 case "$rag" in
- [1])
-$_so \
-ranger \
-ueberzug \
-ffmpegthumbnailer
-
-if [ ! -d ~/.config/ranger/ ]; then
- mkdir --parents ~/.config/ranger/;
-else
- echo "pasta ranger ... [ok]"
-fi
-if [ -f ~/.config/ranger/rc.conf ]; then
- echo "arquivo rc.conf ... [ok]"
-else
- ranger --copy-config=rc
- sleep 1
- sed -i 's/set preview_images false/set preview_images true/g' $HOME/.config/ranger/rc.conf
- sleep 1
- sed -i 's/set draw_borders none/set draw_borders both/g' $HOME/.config/ranger/rc.conf
- sleep 1
- sed -i 's/set preview_images_method w3m/set preview_images_method ueberzug/g' $HOME/.config/ranger/rc.conf
- sleep 1
- sed -i 's/#set preview_script ~\/.config\/ranger\/scope.sh/set preview_script ~\/.config\/ranger\/scope.sh/g' $HOME/.config/ranger/rc.conf
- # sed -i 's/set sort natural/set sort ctime/g' ~/.config/ranger/rc.conf
-fi
-if [ -f ~/.config/ranger/scope.sh ]; then
- echo "arquivo scope.sh ... [ok]"
-else
- ranger --copy-config=scope
- sleep 1
- sed -i '113,116s/#//' $HOME/.config/ranger/scope.sh
- sleep 1
- sed -i '157,160s/#//' $HOME/.config/ranger/scope.sh
-fi
-if [ -f ~/.config/ranger/rifle.conf ]; then
- echo "arquivo rifle.conf ... [ok]"
-else
- ranger --copy-config=rifle
- sed -i 's/mime ^audio|ogg$, terminal, has mplayer  = mplayer -- "$@"/mime ^audio|ogg$, terminal, has moc      = ncmpcpp -- "$@"/g' $HOME/.config/ranger/rifle.conf
- sleep 1
- sed -i '/label wallpaper, number 15, mime ^image, has feh, X = wal -i "$1"/d' $HOME/.config/ranger/rifle.conf
- sleep 1
- sed -i 's/label wallpaper, number 14, mime ^image, has feh, X = feh --bg-fill "$1"/label wallpaper, number 14, mime ^image, has feh, X = feh --bg-fill "$1"\nlabel wallpaper, number 15, mime ^image, has feh, X = wal -i "$1"/g' $HOME/.config/ranger/rifle.conf
-fi
-
-ranger --version
-sleep 1
+ 1) FILEMANAGER='RANGER'
  ;;
- [2]) echo "Beleza"
+ 2) echo "Beleza"
  ;;
- [*]) rangerfm
+ *) rangerfm
  ;;
 esac
+
+if [ $FILEMANAGER = RANGER ]; then
+
+ $_so \
+ ranger \
+ ueberzug \
+ ffmpegthumbnailer
+
+    if [ ! -d ~/.config/ranger/ ]; then
+     mkdir --parents ~/.config/ranger/;
+    fi
+    if [ -f ~/.config/ranger/rc.conf ]; then
+     echo "arquivo rc.conf ... [ok]"
+    else
+     ranger --copy-config=rc
+     sleep 1
+     sed -i 's/set preview_images false/set preview_images true/g' $HOME/.config/ranger/rc.conf
+     sleep 1
+     sed -i 's/set draw_borders none/set draw_borders both/g' $HOME/.config/ranger/rc.conf
+     sleep 1
+     sed -i 's/set preview_images_method w3m/set preview_images_method ueberzug/g' $HOME/.config/ranger/rc.conf
+     sleep 1
+     sed -i 's/#set preview_script ~\/.config\/ranger\/scope.sh/set preview_script ~\/.config\/ranger\/scope.sh/g' $HOME/.config/ranger/rc.conf
+     # sed -i 's/set sort natural/set sort ctime/g' ~/.config/ranger/rc.conf
+    fi
+    if [ -f ~/.config/ranger/scope.sh ]; then
+     echo "arquivo scope.sh ... [ok]"
+    else
+     ranger --copy-config=scope
+     sleep 1
+     sed -i '113,116s/#//' $HOME/.config/ranger/scope.sh
+     sleep 1
+     sed -i '157,160s/#//' $HOME/.config/ranger/scope.sh
+    fi
+    if [ -f ~/.config/ranger/rifle.conf ]; then
+     echo "arquivo rifle.conf ... [ok]"
+    else
+     ranger --copy-config=rifle
+     sed -i 's/mime ^audio|ogg$, terminal, has mplayer  = mplayer -- "$@"/mime ^audio|ogg$, terminal, has moc      = ncmpcpp -- "$@"/g' $HOME/.config/ranger/rifle.conf
+     sleep 1
+     sed -i '/label wallpaper, number 15, mime ^image, has feh, X = wal -i "$1"/d' $HOME/.config/ranger/rifle.conf
+     sleep 1
+     sed -i 's/label wallpaper, number 14, mime ^image, has feh, X = feh --bg-fill "$1"/label wallpaper, number 14, mime ^image, has feh, X = feh --bg-fill "$1"\nlabel wallpaper, number 15, mime ^image, has feh, X = wal -i "$1"/g' $HOME/.config/ranger/rifle.conf
+    fi
+
+    ranger --version
+
+fi
 
 }
 
@@ -579,10 +579,19 @@ audio_config(){
 
  echo " 1)_Pipewire    2)_Pulseaudio"
  echo -e " \033[44;1;37m qual controlador de audio? \033[0m "
+ echo "Padrao (Pipewire"
  read -r -p "-> ... " aud
 
 case "$aud" in
- [1]) 
+ 1) AUDIOD='PIPEWIRE'
+  ;;
+ 2) AUDIOD='PULSEAUDIO'
+  ;;
+ *) audio_config
+  ;;
+esac
+
+if [ $AUDIOD = PIPEWIRE ]; then
   $_so \
   pipewire \
   pipewire-alsa \
@@ -591,22 +600,14 @@ case "$aud" in
   wireplumber \
   # gst-plugin-pipewire
   # helvum \
-  ;;
- [2])
+  echo -e "use <wpctl status> para detectar en Sinks: o númeor ID da saída de áudío\nexemplo:\nwpctl status\nSinks:\n33. Áudio interno Estéreo analógico  [vol: 1.20]\n53. Ellesmere HDMI Audio [Radeon RX 470/480 / 570/580/590] Digital Stereo (HDMI 6)\nwpctl set-default 53" >> notas.txt
+elif [ $AUDIOD = PULSEAUDIO ]; then
   $_so \
   alsa-utils \
   pulseaudio \
   # gst-plugins-{base,good,bad,ugly} \
   # gst-libav
- echo -e "use <wpctl status> para detectar en Sinks: o númeor ID da saída de áudío \nexemplo: \nwpctl status \n
- Sinks: \n
- 33. Áudio interno Estéreo analógico  [vol: 1.20] \n
- 53. Ellesmere HDMI Audio [Radeon RX 470/480 / 570/580/590] Digital Stereo (HDMI 6) \n
- wpctl set-default 53" >> notas.txt
-  ;;
- [*]) audio_config
-  ;;
-esac
+fi
 
 }
 
@@ -637,7 +638,9 @@ noto-fonts-emoji \
 gnu-free-fonts \
 wqy-microhei \
 noto-fonts-cjk \
-xorg-fonts-{75dpi,100dpi,encodings}
+xorg-fonts-{75dpi,100dpi,encodings} \
+ttf-jetbrains-mono-nerd \
+siji-git \
 
 echo "fontes ... instaladas"
 
@@ -654,15 +657,13 @@ echo -e " \033[44;1;37m Qual navegador preferido? \033[0m "
 read -r -p "-> ... " browser
 
 case "$browser" in
- [1]) 
-   BROW="qutebrowser"
+ 1) BROW="qutebrowser"
  ;;
- [2])
-   BROW="firefox"
+ 2) BROW="firefox"
  ;;
- [P|p]) echo "Canelau"
+ P|p) echo "Canelau"
  ;;
- [*]) navegador
+ *) navegador
  ;;
 esac
 
@@ -823,15 +824,15 @@ echo "
   read -r -p "-> ... " astronv
 
   case "$astronv" in
-   [1])
+   1)
     rm -rf ~/.config/nvim/;
     git clone --depth 1 https://github.com/AstroNvim/AstroNvim ~/.config/nvim
     git clone https://github.com/quebravel/astronvim_config.git ~/.config/nvim/lua/user
     (nvim  --headless -c 'quitall')
    ;;
-   [2]) echo "Simbora! ..."
+   2) echo "Simbora! ..."
    ;;
-   [*]) editordeTexto
+   *) editordeTexto
    ;;
   esac 
  fi
@@ -863,3 +864,4 @@ playermusica
 ohmyzsh
 alias_autopair
 editordeTexto
+
