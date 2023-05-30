@@ -639,8 +639,9 @@ gnu-free-fonts \
 wqy-microhei \
 noto-fonts-cjk \
 xorg-fonts-{75dpi,100dpi,encodings} \
-ttf-jetbrains-mono-nerd \
-siji-git \
+ttf-jetbrains-mono-nerd 
+
+$HELPER -S --needed --noconfirm siji-git 
 
 echo "fontes ... instaladas"
 
