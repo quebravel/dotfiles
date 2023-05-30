@@ -6,7 +6,37 @@
 inicio(){
 set -e
 
-echo "Bem vindo!" && sleep 1
+echo "              Bem vindo!......................................" && sleep 1.2
+
+cat <<EOL
+                    Este instalador e configurador foi feito como um
+                    projeto pessoal para fazer uma instalação rapida
+                    e  precisa  das  minhas configurações prediletas
+                    dos principais programas que utilizo em meu arch
+                    linux.
+
+                    Por  favor  sinta-se  a  vontade para utilizar e
+                    modificar  de  acordo  com  suas preferencias de
+                    configuração.
+
+                    Para  utilizar  este  script você de esta logado 
+                    como  um usuario não  root  para que  as  pastas  
+                    sejas  enviadas  para o  local  correto.
+                    
+                    
+
+EOL
+
+echo "Esta pronto para continuar?"
+read -r -p "1)_Sim    2)_Nao ... " CONTINUAR
+case "$CONTINUAR" in
+    1) echo "Vamos lá ... "
+    ;;
+    2) exit 1
+    ;;
+    *) inicio
+    ;;
+esac
 
 # Default vars
 HELPER="paru"
@@ -27,7 +57,16 @@ driveVideo(){
 # choose video driver
     clear
     echo -e "... driver de video \n ... \n .. \n ."
-    sleep 1
+    sleep 0.2
+
+cat <<DRIVERDESENHO
+  .__________________________________.
+  |  .______.                     |O|/
+  | ./      \..............,      |O|/
+  | |        | PLACA VIDEO  |     |[]\
+  | .\______/.............../     |[]\
+  |_______________________________|__|
+DRIVERDESENHO
 
 echo " 1)_xf86-video-intel    2)_xf86-video-amdgpu    3)_nvidia    P)_Pular"
 echo -e " \033[44;1;37m Escolha o driver da sua placa de vídeo. \033[0m "
@@ -89,7 +128,7 @@ fi
 windowManger(){
     clear
     echo -e "... windows manager \n ... \n .. \n ."
-    sleep 1
+    sleep 0.2
 
 echo "
  +---------------------+
@@ -187,9 +226,17 @@ fi
 
 gerenciardorAUR(){
 
+cat <<AURDESENHO
+          .        .  ______.
+   /\     |        |  |      \
+  /  \    |        |  |_____,/
+ /____\   |        |  |     \
+/      \   \______/   |      \
+AURDESENHO
+
     clear 
     echo -e "... gerenciador AUR \n ... \n .. \n ."
-    sleep 1
+    sleep 0.2
 
     echo " Precisamos de um ajudante AUR. É essencial. 1)_Paru    2)_Yay    *)_Default"
     echo -e " \033[44;1;37m Qual é o ajudante AUR de sua escolha? \033[0m "
@@ -265,7 +312,7 @@ notebook_ger(){
 
     clear
     echo -e "... para notebooks \n ... \n .. \n ."
-    sleep 1
+    sleep 0.2
 
 echo "
 __________
@@ -300,7 +347,12 @@ lancadorProgramas(){
 
     clear
     echo -e "lancador de programas Dmenu2 \n ... \n .. \n ."
-    sleep 1
+    sleep 0.2
+
+cat <<DMENUDESENHO
+   .____________________________________________________________________.
+   |_dmenu2_[_________________]_[_2to3_2to3-3.11_411toppm_4channels_a2x_|
+DMENUDESENHO
 
 mkdir -p ~/.config/
 
@@ -357,27 +409,22 @@ if [ -e "/usr/local/bin/dmenu_run" ]; then
 arquivosdeConfiguracao(){
     clear
     echo -e "Configurando programas \n ... \n .. \n ."
-    sleep 1
+    sleep 0.2
 
     if [ ! -d ~/.config/picom ]; then
-        echo "Instalando picom configs..."
-        pwd
-        cp --recursive --force ./.config/picom ~/.config/
-        # mkdir -p ~/.config/picom
-        # cp --force ./'.config/picom'/* ~/'.config/picom'/
+        mkdir --parents ~/.config/picom/;
+        cp --force ./.config/picom/* ~/.config/picom/;
     else
-        echo "Picom configuração detectada..."
         rm --recursive --force ~/.config/picom/;
-        echo "Installing picom configs..."
-        cp -r ./.config/picom ~/.config/;
+        cp --force ./.config/picom/* ~/.config/picom/;
     fi
 
-    if [ -d ~/.config/alacritty ]; then
-        echo "Alacritty configuração detectada, [ok] ..."
-    else
-        echo "Installando alacritty configurações..."
+    if [ ! -d ~/.config/alacritty ]; then
         mkdir -p ~/.config/alacritty/;
-        cp --recursive ./.config/alacritty ~/.config/;
+        cp --recursive --force ./.config/alacritty ~/.config/;
+    else
+        rm --recursive --force ~/.config/alacritty/;
+        cp --recursive --force ./.config/alacritty ~/.config/;
     fi
     # if [ -d ~/wallpapers ]; then
     #     echo "Adicionando wallpaper para ~/wallpapers..."
@@ -386,6 +433,38 @@ arquivosdeConfiguracao(){
     #     echo "Installing wallpaper..."
     #     mkdir ~/wallpapers && cp -r ./wallpapers/* ~/wallpapers/;
     # fi
+    if [ ! -d ~/.config/mpv ]; then
+        mkdir --parents ~/.config/mpv;
+        cp ./.config/mpv/* ~/.config/mpv/;
+    else
+        rm --recursive --force ~/.config/mpv/*
+        cp --recursive --force ./.config/mpv/* ~/.config/mpv/;
+    fi
+
+    if [ ! -d ~/.config/zathura ]; then
+        mkdir --parents ~/.config/zathura/;
+        cp ./.config/zathura/zathurarc ~/.config/zathura/;
+    else
+        rm --force ~/.config/zathura/zathurarc;
+        cp ./.config/zathura/zathurarc ~/.config/zathura/;
+    fi
+
+    if [ ! -d ~/.config/sxiv ]; then
+        mkdir --parents ~/.config/sxiv/;
+        cp --recursive --force ./.config/sxiv/* ~/.config/sxiv/;
+    else
+        rm --recursive --force  ~/.config/sxiv/;
+        cp --recursive --force ./.config/sxiv/* ~/.config/;
+    fi
+
+    if [ ! -d ~/.config/redshift ]; then
+        mkdir --parents ~/.config/redshift/;
+        cp --recursive --force ./.config/redshift/* ~/.config/redshift/;
+    else
+        rm --recursive --force  ~/.config/redshift/;
+        cp --recursive --force ./.config/redshift/ ~/.config/;
+    fi
+        
     
 } ### arquivosdeConfiguracao
 
@@ -393,7 +472,7 @@ ly_config(){
 
  clear
  echo -e "... ly  \n ... \n .. \n ."
- sleep 1
+ sleep 0.2
 
 echo "
 +----------------------+
@@ -424,7 +503,7 @@ echo "
         # transformando arquivo xinitrc em executavel bash
         chmod +x ~/.xinitrc
         $sd systemctl enable ly.service
-        sleep 1
+        sleep 0.2
         echo -e "\n\t .... feito."
     else
         echo "não existe o arquivo de configuracao"
@@ -447,7 +526,7 @@ playermusica(){
 
  clear
  echo -e "... configurando ncmpcpp . mpd . mpc \n ... \n .. \n ."
- sleep 1
+ sleep 0.2
 
  echo " 1)_Ncmpcpp    2)_Nao"
 echo -e " \033[44;1;37m Quer instalar o player de música? \033[0m "
@@ -506,7 +585,7 @@ rangerfm(){
 
  clear
  echo -e "... ranger . ueberzug . ffmpegthumbnailer \n ... \n .. \n ."
- sleep 1
+ sleep 0.2
 
 echo " 1)_Ranger    2)_Nao"
 echo -e " \033[44;1;37m Quer uma gerenciador de arquivos para terminal? \033[0m "
@@ -535,13 +614,13 @@ if [ $FILEMANAGER = RANGER ]; then
      echo "arquivo rc.conf ... [ok]"
     else
      ranger --copy-config=rc
-     sleep 1
+     sleep 0.2
      sed -i 's/set preview_images false/set preview_images true/g' $HOME/.config/ranger/rc.conf
-     sleep 1
+     sleep 0.2
      sed -i 's/set draw_borders none/set draw_borders both/g' $HOME/.config/ranger/rc.conf
-     sleep 1
+     sleep 0.2
      sed -i 's/set preview_images_method w3m/set preview_images_method ueberzug/g' $HOME/.config/ranger/rc.conf
-     sleep 1
+     sleep 0.2
      sed -i 's/#set preview_script ~\/.config\/ranger\/scope.sh/set preview_script ~\/.config\/ranger\/scope.sh/g' $HOME/.config/ranger/rc.conf
      # sed -i 's/set sort natural/set sort ctime/g' ~/.config/ranger/rc.conf
     fi
@@ -549,9 +628,9 @@ if [ $FILEMANAGER = RANGER ]; then
      echo "arquivo scope.sh ... [ok]"
     else
      ranger --copy-config=scope
-     sleep 1
+     sleep 0.2
      sed -i '113,116s/#//' $HOME/.config/ranger/scope.sh
-     sleep 1
+     sleep 0.2
      sed -i '157,160s/#//' $HOME/.config/ranger/scope.sh
     fi
     if [ -f ~/.config/ranger/rifle.conf ]; then
@@ -559,9 +638,9 @@ if [ $FILEMANAGER = RANGER ]; then
     else
      ranger --copy-config=rifle
      sed -i 's/mime ^audio|ogg$, terminal, has mplayer  = mplayer -- "$@"/mime ^audio|ogg$, terminal, has moc      = ncmpcpp -- "$@"/g' $HOME/.config/ranger/rifle.conf
-     sleep 1
+     sleep 0.2
      sed -i '/label wallpaper, number 15, mime ^image, has feh, X = wal -i "$1"/d' $HOME/.config/ranger/rifle.conf
-     sleep 1
+     sleep 0.2
      sed -i 's/label wallpaper, number 14, mime ^image, has feh, X = feh --bg-fill "$1"/label wallpaper, number 14, mime ^image, has feh, X = feh --bg-fill "$1"\nlabel wallpaper, number 15, mime ^image, has feh, X = wal -i "$1"/g' $HOME/.config/ranger/rifle.conf
     fi
 
@@ -575,7 +654,7 @@ audio_config(){
 
  clear
  echo -e "... controlador audio \n ... \n .. \n ."
- sleep 1
+ sleep 0.2
 
  echo " 1)_Pipewire    2)_Pulseaudio"
  echo -e " \033[44;1;37m qual controlador de audio? \033[0m "
@@ -615,7 +694,7 @@ zshinstall(){
 
  clear
  echo -e "instalando zsh . zsh-completions  \n ... \n .. \n ."
- sleep 1
+ sleep 0.2
 
 $_so \
 zsh \
@@ -629,7 +708,7 @@ fontes_doSistema(){
 
  clear
  echo -e "instalando fontes  \n ... \n .. \n ."
- sleep 1
+ sleep 0.2
 
 # wqy-microhei (koreano), cjk (japones)
 $_so \
@@ -651,7 +730,7 @@ navegador(){
 
  clear
  echo -e "... browser  \n ... \n .. \n ."
- sleep 1
+ sleep 0.2
 
 echo " 1)_Qutebrowser    2)_Firefox    P)_Pular"
 echo -e " \033[44;1;37m Qual navegador preferido? \033[0m "
@@ -692,7 +771,7 @@ copilador_config(){
 
  clear
  echo -e "configurando copilador  \n ... \n .. \n ."
- sleep 1
+ sleep 0.2
 
 # processador 
 ncore=`lscpu | grep "^CPU(s)" | head -n 1 | cut -d: -f2 | tr -d " "`
@@ -710,7 +789,7 @@ pastas_config(){
 
  clear
  echo -e "criando pastas padrao  \n ... \n .. \n ."
- sleep 1
+ sleep 0.2
 
 if [[ -f /usr/bin/xdg-user-dirs-update ]]; then
 xdg-user-dirs-update
@@ -721,7 +800,7 @@ temas(){
 
  clear
  echo -e "configurando temas gruvbox-dark para GTK  \n ... \n .. \n ."
- sleep 1
+ sleep 0.2
 
 # gruvbox tema
 if [ ! -d ~/.themes ]; then
@@ -729,7 +808,7 @@ git clone https://github.com/jmattheis/gruvbox-dark-gtk ~/.themes/gruvbox-dark-g
 else
  echo "voce ja tem o tema"
 fi
-sleep 1
+sleep 0.2
 if [ ! -d ~/.icons ]; then
 git clone https://github.com/jmattheis/gruvbox-dark-icons-gtk ~/.icons/gruvbox-dark-icons-gtk
 else
@@ -750,7 +829,7 @@ ohmyzsh(){
 
  clear
  echo -e "instalando oh-my-zsh  \n ... \n .. \n ."
- sleep 1
+ sleep 0.2
 
 if [ ! -d ~/.oh-my-zsh ]; then
  sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -767,7 +846,7 @@ alias_autopair(){
 
  clear
  echo -e "configurando zsh  \n ... \n .. \n ."
- sleep 1
+ sleep 0.2
 
 # zsh alias, autopair
 echo "arquivo alias"
@@ -782,7 +861,7 @@ if [ ! -f ~/.config/zsh/vim-mode.zsh ]; then
  cp ./.config/zsh/vim-mode.zsh ~/.config/zsh/;
 fi
 
-sleep 1
+sleep 0.2
 
 if [ -f ~/.zshrc ]; then
 echo -e "\nexport	EDITOR='nvim'\nexport	TERMINAL='alacritty'\nexport	BROWSER='qutebrowser'\nexport	READER='zathura'\nexport	SHELL='zsh'\nexport	XDG_CURRENT_DESKTOP='bspwm'\n\n[[ ! -f ~/.config/zsh/alias.zsh ]] || source ~/.config/zsh/alias.zsh\n[[ ! -f ~/.config/zsh/vim-mode.zsh ]] || source ~/.config/zsh/vim-mode.zsh\n\n# autopair zsh\nif [[ ! -d ~/.config/zsh/zsh-autopair ]]; then\n\tgit clone https://github.com/hlissner/zsh-autopair ~/.config/zsh/zsh-autopair\nfi\n\nsource ~/.config/zsh/zsh-autopair/autopair.zsh\nautopair-init" >> $HOME/.zshrc
@@ -790,7 +869,7 @@ echo -e "\nexport	EDITOR='nvim'\nexport	TERMINAL='alacritty'\nexport	BROWSER='qu
 sed -i s'/plugins+=(git)/plugins+=(git extract universalarchive)/' $HOME/.zshrc
 fi
 
-sleep 1
+sleep 0.2
 echo "zsh configurado"
 
 }
@@ -799,7 +878,7 @@ editordeTexto(){
 
  clear
  echo -e "configurando instalando e astrovim  \n ... \n .. \n ."
- sleep 1
+ sleep 0.2
 
 echo "
  +--------------------+
