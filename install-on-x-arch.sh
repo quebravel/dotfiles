@@ -636,7 +636,8 @@ ttf-dejavu \
 noto-fonts-emoji \
 gnu-free-fonts \
 wqy-microhei \
-xorg-fonts-{cjk,75dpi,100dpi,encodings}
+noto-fonts-cjk \
+xorg-fonts-{75dpi,100dpi,encodings}
 
 echo "fontes ... instaladas"
 
