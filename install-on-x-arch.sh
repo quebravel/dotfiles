@@ -6,9 +6,10 @@
 inicio(){
 set -e
 
-echo "              Bem vindo!......................................" && sleep 1.2
+clear
 
 cat <<EOL
+                    Bem vindo!......................................
                     Este instalador e configurador foi feito como um
                     projeto pessoal para fazer uma instalação rapida
                     e  precisa  das  minhas configurações prediletas
@@ -19,13 +20,12 @@ cat <<EOL
                     modificar  de  acordo  com  suas preferencias de
                     configuração.
 
-                    Para  utilizar  este  script você de esta logado 
+                    Para utilizar este  script você deve esta logado 
                     como  um usuario não  root  para que  as  pastas  
-                    sejas  enviadas  para o  local  correto.
-                    
-                    
-
+                    sejas  enviadas  para o  local  correto.........
 EOL
+
+sleep 1.2
 
 echo "Esta pronto para continuar?"
 read -r -p "1)_Sim    2)_Nao ... " CONTINUAR
@@ -60,12 +60,14 @@ driveVideo(){
     sleep 0.2
 
 cat <<DRIVERDESENHO
-  .__________________________________.
-  |  .______.                     |O|/
-  | ./      \..............,      |O|/
-  | |        | PLACA VIDEO  |     |[]\
-  | .\______/.............../     |[]\
-  |_______________________________|__|
+.__________________________________.
+| .________.                    |O||
+| |        |..............,     |O||
+| |        | PLACA VIDEO  |     |00|
+| |________|..............|     |U0|
+|_______________________________|__|
+
+
 DRIVERDESENHO
 
 echo " 1)_xf86-video-intel    2)_xf86-video-amdgpu    3)_nvidia    P)_Pular"
@@ -264,7 +266,6 @@ if [[ $HELPER = "paru" ]]; then
 fi
 
 $HELPER -S --needed --noconfirm \
-picom-jonaburg-git \
 alacritty \
 xclip \
 maim \
@@ -298,6 +299,12 @@ polkit \
 # bpytop \
 # curl \
 # the_silver_searcher \
+
+if [ ! -f /bin/picom ]; then
+$HELPER -S --needed --noconfirm \
+picom-jonaburg-git 
+fi
+
 }
 
 notebook_ger(){
@@ -408,6 +415,7 @@ arquivosdeConfiguracao(){
         cp --force ./.config/picom/* ~/.config/picom/;
     else
         rm --recursive --force ~/.config/picom/;
+        mkdir --parents ~/.config/picom/;
         cp --force ./.config/picom/* ~/.config/picom/;
     fi
 
@@ -712,7 +720,9 @@ noto-fonts-cjk \
 xorg-fonts-{75dpi,100dpi,encodings} \
 ttf-jetbrains-mono-nerd 
 
+if [ ! -f /usr/share/fonts/misc/siji.bdf ]; then
 $HELPER -S --needed --noconfirm siji-git 
+fi
 
 echo "fontes ... instaladas"
 
@@ -743,13 +753,15 @@ if [ $BROW = "qutebrowser" ]; then
  $_so qutebrowser \
 python-adblock
 
- echo "Adicionando dicionário"
+ dicionario_versao=$(ls $HOME/.local/share/qutebrowser/qtwebengine_dictionaries/)
+ if [ ! -f $HOME/.local/share/qutebrowser/qtwebengine_dictionaries/$dicionario_versao ]; then
  /usr/share/qutebrowser/scripts/dictcli.py install pt-BR
- echo "qutebrowser ... instalado"
+ fi
+
  mkdir -p ~/.config/qutebrowser/;
  cp -r ./.config/qutebrowser/* ~/.config/qutebrowser/;
  chmod +x ~/.config/qutebrowser/greasemonkey/*
- echo "$BROW configurado"
+
 elif [ $BROW = "firefox" ]; then
  $_so firefox \
 firefox-i18n-pt-br
