@@ -753,10 +753,7 @@ if [ $BROW = "qutebrowser" ]; then
  $_so qutebrowser \
 python-adblock
 
- dicionario_versao=$(ls $HOME/.local/share/qutebrowser/qtwebengine_dictionaries/)
- if [ ! -f $HOME/.local/share/qutebrowser/qtwebengine_dictionaries/$dicionario_versao ]; then
- /usr/share/qutebrowser/scripts/dictcli.py install pt-BR
- fi
+/usr/share/qutebrowser/scripts/dictcli.py install pt-BR
 
  mkdir -p ~/.config/qutebrowser/;
  cp -r ./.config/qutebrowser/* ~/.config/qutebrowser/;
