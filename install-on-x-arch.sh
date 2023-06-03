@@ -556,9 +556,9 @@ else
  cp ./.config/mpd/mpd.conf ~/.config/mpd/;
 fi
 
-$_s systemctl --user enable mpd.service
+$_s systemctl enable mpd.service
 
-$_s systemctl --user start mpd.service
+$_s systemctl start mpd.service
 
 touch ~/.config/mpd/socket
 
