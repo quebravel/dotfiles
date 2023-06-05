@@ -144,7 +144,7 @@ echo "
 
 echo " 1)_Bspwm    2)_Xmonad    P)_Pular"
 echo -e " \033[44;1;37m Qual gerenciador de janelas (window manager) vai ser desta vez \033[0m "
-echo " (default é bspwm)"
+echo " (Padrao: bspwm)"
 read -r -p "-> ... " wme
 
 case $wme in 
@@ -232,9 +232,9 @@ gerenciardorAUR(){
     echo -e "... gerenciador AUR \n ... \n .. \n ."
     sleep 0.2
 
-    echo " Precisamos de um ajudante AUR. É essencial. 1)_Paru    2)_Yay    *)_Default"
+    echo " Precisamos de um ajudante AUR. É essencial. 1)_Paru    2)_Yay    *)_Padrao"
     echo -e " \033[44;1;37m Qual é o ajudante AUR de sua escolha? \033[0m "
-    echo " (default é paru)"
+    echo " (Padrao: paru)"
     read -r -p "-> ... " num
 
 case $num in
@@ -488,7 +488,7 @@ echo "
 
     case "$dmgr" in
     1)
-    $HELPER -S --needed --noconfirm ly cmatrix
+    $HELPER -S --needed --noconfirm ly-git cmatrix
     # cominho do arquivo de configuração
     arquivo="/etc/ly/config.ini"
 
@@ -655,7 +655,7 @@ audio_config(){
 
  echo " 1)_Pipewire    2)_Pulseaudio"
  echo -e " \033[44;1;37m qual controlador de audio? \033[0m "
- echo "Padrao (Pipewire"
+ echo "(Padrao: pipewire)"
  read -r -p "-> ... " aud
 
 case "$aud" in
@@ -919,6 +919,22 @@ echo "
 
 }
 
+layout_teclado(){
+    echo " 1)_abnt2    2)_us-intl"
+    read -r -p "Qual o layout do seu teclado? ..." LAYOUTTECLADO 
+
+    case "$LAYOUTTECLADO" in
+        1)
+            sudo cp ./xorg_conf/31-keyboard-abnt2.conf /usr/share/X11/xorg.conf.d/
+        ;;
+        2) 
+            sudo cp ./xorg_conf/30-keyboard-us-intl.conf /usr/share/X11/xorg.conf.d/
+        ;;
+        *) layout_teclado
+        ;;
+    esac
+}
+
 # chamar funções parte 1
 inicio
 driveVideo
@@ -942,4 +958,4 @@ playermusica
 ohmyzsh
 alias_autopair
 editordeTexto
-
+layout_teclado
