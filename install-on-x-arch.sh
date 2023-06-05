@@ -655,7 +655,7 @@ audio_config(){
 
  echo " 1)_Pipewire    2)_Pulseaudio"
  echo -e " \033[44;1;37m qual controlador de audio? \033[0m "
- echo "(Padrao: pipewire)"
+ echo " (Padrao: pipewire)"
  read -r -p "-> ... " aud
 
 case "$aud" in
@@ -921,7 +921,8 @@ echo "
 
 layout_teclado(){
     echo " 1)_abnt2    2)_us-intl"
-    read -r -p "Qual o layout do seu teclado? ..." LAYOUTTECLADO 
+    echo " Qual o layout do seu teclado?"
+    read -r -p "-> ... " LAYOUTTECLADO 
 
     case "$LAYOUTTECLADO" in
         1)
