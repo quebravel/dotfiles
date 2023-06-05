@@ -327,8 +327,7 @@ read -r -p "-> ... " notebook
 
 case $notebook in
     1)
-        $HELPER -S acpi acpid iwd
-        sudo systemctl enable iwd.service
+        $HELPER -S --needed --noconfirm acpi acpid
         sudo systemctl enable acpid.service
         ;;
     2)
@@ -489,7 +488,7 @@ echo "
 
     case "$dmgr" in
     1)
-    $HELPER ly cmatrix
+    $HELPER -S --needed --noconfirm ly cmatrix
     # cominho do arquivo de configuração
     arquivo="/etc/ly/config.ini"
 
