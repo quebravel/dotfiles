@@ -49,7 +49,7 @@ echo "Fazendo uma atualização do sistema, pode acontecer que coisas quebrem se
 sudo pacman --noconfirm -Syu
 
 # install base-devel if not installed
-sudo pacman -S --noconfirm --needed base-devel wget git &> /dev/null
+sudo pacman -S --noconfirm --needed base-devel wget git
 
 } ### inicio
 
@@ -249,7 +249,6 @@ case $num in
         ;;
 esac
 
-# if ! command -v $HELPER &> /dev/null
 if [[ -e "/sbin/$HELPER" ]]; then 
     echo "Ajudante AUR já instalado"
 elif [ -d ~/.srcs/$HELPER ]; then
@@ -490,19 +489,18 @@ echo "
 
     case "$dmgr" in
     1)
-    $HELPER ly cmatrix &> /dev/null
+    $HELPER ly cmatrix
     # cominho do arquivo de configuração
     arquivo="/etc/ly/config.ini"
-    sd="sudo"
 
     if [ -f $arquivo ]; then
         # abilitando opções 
-        $sd sed -i 's/#animate = false/animate = true/g' $arquivo
-        $sd sed -i 's/#animation = 0/animation = 1/g' $arquivo
-        $sd sed -i 's/#xinitrc \= \~\/.xinitrc/xinitrc \= \~\/.xinitrc/g' $arquivo
+        sudo sed -i 's/#animate = false/animate = true/g' $arquivo
+        sudo sed -i 's/#animation = 0/animation = 1/g' $arquivo
+        sudo sed -i 's/#xinitrc \= \~\/.xinitrc/xinitrc \= \~\/.xinitrc/g' $arquivo
         # transformando arquivo xinitrc em executavel bash
         chmod +x ~/.xinitrc
-        $sd systemctl enable ly.service
+        sudo systemctl enable ly.service
         sleep 0.2
         echo -e "\n\t .... feito."
     else
