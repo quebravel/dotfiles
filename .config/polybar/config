@@ -259,11 +259,11 @@ time-alt = "%H:%M "
 
 format-prefix = " %{T3}%{T-}/hora"
 ;format-prefix-foreground = ${colors.base06}
-format-prefix-foreground = #fff
+format-prefix-foreground = #000
 ;format-foreground = ${colors.base06}
-format-foreground = #fff
+format-foreground = #000
 ;format-background = ${colors.base03}
-format-background = #0066ff
+format-background = ${colors.base09}
 
 label = %date% %time%
 ;label-font = 5

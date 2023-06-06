@@ -8,7 +8,7 @@
 
 config.load_autoconfig()
 
-font_name = "10pt tamzenforpowerline"
+font_name = "9pt JetBrainsMono Nerd Font"
 
 c.fonts.tabs.selected = font_name
 c.fonts.tabs.unselected = font_name
