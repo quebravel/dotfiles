@@ -225,7 +225,7 @@ c.colors.keyhint.bg = 'rgba(40, 40, 40, 97%)'
 # c.colors.hints.fg = base00
 c.colors.hints.fg = 'black'
 # c.colors.hints.bg = base09
-c.colors.hints.bg = 'qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 rgba(250, 199, 162, 0.95), stop:1 rgba(255, 109, 0, 0.9))'
+c.colors.hints.bg = 'qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 rgba(250, 199, 0, 0.9), stop:1 rgba(255, 109, 0, 0.9))'
 c.colors.hints.match.fg = base07
 c.hints.border = "0px"
 
