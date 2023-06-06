@@ -327,8 +327,9 @@ read -r -p "-> ... " notebook
 
 case $notebook in
     1)
-        $HELPER -S --needed --noconfirm acpi acpid
+        $HELPER -S --needed --noconfirm acpi acpid xf86-input-synaptics
         sudo systemctl enable acpid.service
+        sudo cp ./xorg_conf/70-synaptics.conf /usr/share/X11/xorg.conf.d/
         ;;
     2)
         echo "Miolo de pote!"
