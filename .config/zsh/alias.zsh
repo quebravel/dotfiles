@@ -8,17 +8,18 @@ alias ipa="ip -s -c -h a"
 alias s="sxiv -ftq *"
 alias f="sxiv -frqto * | xargs feh --bg-scale"
 alias n="nvim"
-alias sz="source ~/.zshrc"
 alias tmux='TERM=xterm-256color tmux'
 alias mkfs.ntfs='mkfs.ntfs --fast'
+alias lynx='lynx -cfg=~/lynx.cfg'
 
 # atalhos
-alias nzshrc="nvim ~/.zshrc"
-alias npolybar="nvim ~/.config/polybar/config"
+alias nzshrc="nvim ~/.zshrc && source ~/.zshrc"
+alias npolybar="nvim ~/.config/polybar/config.ini"
 alias nbspwm="nvim ~/.config/bspwm/bspwmrc"
 alias nsxhkd="nvim ~/.config/sxhkd/sxhkdrc"
 alias nqute="nvim ~/.config/qutebrowser/config.py"
 alias nxmonad="nvim ~/.config/xmonad/xmonad.hs"
+alias nalacri="nvim ~/.config/alacritty/alacritty.yml"
 
 # xbps
 # alias xi="sudo xbps-install -S"
