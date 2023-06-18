@@ -196,7 +196,7 @@ c.colors.hints.bg = base00
 c.colors.hints.match.fg = base0A
 c.hints.border = "0px"
 
-c.colors.statusbar.insert.fg = base00
-c.colors.statusbar.insert.bg = base09
+c.colors.statusbar.insert.fg = base07
+c.colors.statusbar.insert.bg = base0C
 
 c.colors.webpage.bg = base03
