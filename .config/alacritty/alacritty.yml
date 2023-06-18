@@ -17,6 +17,7 @@ import:
  # - ~/.config/alacritty/themes/solarized_dark.yml
  # - ~/.config/alacritty/themes/jellybeans.yml
  # - ~/.config/alacritty/themes/ayu_mirage.yml
+ # - ~/.config/alacritty/themes/tokyonight_day.yml
 
 # Any items in the `env` entry below will be added as
 # environment variables. Some entries may override variables
