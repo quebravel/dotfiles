@@ -328,9 +328,10 @@ libxft \
 sxiv \
 xdg-user-dirs \
 ffmpeg \
-redshift \
 unclutter \
 polkit \
+gammastep \
+# redshift \
 # nodejs \
 # herbe-git \
 # python-pip \
@@ -515,14 +516,21 @@ arquivosdeConfiguracao(){
         cp --recursive --force ./.config/sxiv/* ~/.config/;
     fi
 
-    if [ ! -d ~/.config/redshift ]; then
-        mkdir --parents ~/.config/redshift/;
-        cp --recursive --force ./.config/redshift/* ~/.config/redshift/;
+    # if [ ! -d ~/.config/redshift ]; then
+    #     mkdir --parents ~/.config/redshift/;
+    #     cp --recursive --force ./.config/redshift/* ~/.config/redshift/;
+    # else
+    #     rm --recursive --force  ~/.config/redshift/;
+    #     cp --recursive --force ./.config/redshift/ ~/.config/;
+    # fi
+
+    if [ ! -d ~/.config/gammastep ]; then
+        mkdir --parents ~/.config/gammastep/;
+        cp --recursive --force ./.config/gammastep/* ~/.config/gammastep/;
     else
-        rm --recursive --force  ~/.config/redshift/;
-        cp --recursive --force ./.config/redshift/ ~/.config/;
+        rm --recursive --force  ~/.config/gammastep/;
+        cp --recursive --force ./.config/gammastep/ ~/.config/;
     fi
-        
     
 } ### arquivosdeConfiguracao
 
@@ -945,10 +953,13 @@ ohmyzsh(){
  sleep 0.2
 
 if [ ! -d ~/.oh-my-zsh ]; then
- sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
- echo "oh-my-zsh ... instalado"
+ # sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+    sleep 0.2
+    chsh -s $(which zsh)
+    echo "oh-my-zsh ... instalado"
 else
- echo "já existe oh-my-zsh"
+    echo "já existe oh-my-zsh"
 fi
 
 echo -e "parte 2 feito \n ... \n .. \n . \n =)"
