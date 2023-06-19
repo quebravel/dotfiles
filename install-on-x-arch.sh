@@ -380,6 +380,13 @@ case $notebook in
         $HELPER -S --needed --noconfirm acpi acpid xf86-input-synaptics
         sudo systemctl enable acpid.service
         sudo cp ./xorg_conf/70-synaptics.conf /usr/share/X11/xorg.conf.d/
+
+        sed -i 's/FILE-6/#FILE-6/' $HOME/.config/bspwm/bspwmrc
+        sed -i 's/ws-icon-5 \= FILE-6\;0110-6/\;ws-icon-5 \= FILE-6\;0110-6/' $HOME/.config/polybar/{config.ini,center.config.ini}
+        sed -i 's/ws-icon-6 \= EDIT-7\;0111-7/\;ws-icon-6 \= EDIT-7\;0111-7/' $HOME/.config/polybar/{config.ini,center.config.ini}
+        sed -i 's/ws-icon-7 \= GAME-8\;1000-8/\;ws-icon-7 \= GAME-8\;1000-8/' $HOME/.config/polybar/{config.ini,center.config.ini}
+        sed -i 's/ws-icon-8 \= MAIL-9\;1001-9/\;ws-icon-8 \= MAIL-9\;1001-9/' $HOME/.config/polybar/{config.ini,center.config.ini}
+        sed -i 's/ws-icon-9 \= MPD-10\;0000-0/\;ws-icon-9 \= MPD-10\;0000-0/' $HOME/.config/polybar/{config.ini,center.config.ini}
         ;;
     2)
         echo "Miolo de pote!"
