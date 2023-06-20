@@ -1,0 +1,2 @@
+#!/bin/sh
+bemenu-run -Tn -H 20 --fn "JetBrainsMono Nerd Font 9" --tb "#fe8019" --tf "#000000" --fb "#282828" --ff "#8ec07c" --cb "#cc241d" --cf "#458588" --nb "#282828" --nf "#fbf1c7" --hb "#fe8019" --hf "#000000" --ab "#3c3836" --af "#d5c4a1"
