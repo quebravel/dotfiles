@@ -1,0 +1,8 @@
+#!/bin/sh
+
+if [ "$(pgrep -x gammastep)" ]; then
+    pkill gammaste
+else
+    gammastep
+fi
+
