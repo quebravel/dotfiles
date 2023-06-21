@@ -4,6 +4,7 @@
 // @match https://www.reddit.com/*
 // @match https://keep.google.com/*
 // @match https://mail.google.com/*
+// @match https://draculatheme.com/*
 // ==/UserScript==
 
 const meta = document.createElement('meta');
