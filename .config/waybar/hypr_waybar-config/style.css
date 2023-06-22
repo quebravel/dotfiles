@@ -1,0 +1,288 @@
+@import "mocha.css";
+* {
+    /* reference the color by using @color-name */
+    /* color: @red; */
+    /* border: none; */
+    /* border-radius: 3px; */
+    /* `otf-font-awesome` is required to be installed for icons */
+    /* font-family: Iosevka, monospace, Helvetica, Arial, sans-serif; */
+    font-family: JetBrainsMono Nerd Font;
+    font-size: 13px;
+    min-height: 0;
+    margin:  0.1px;
+
+}
+#waybar {
+    background: alpha(@crust, 0.88);
+    color: @pink;
+    margin: 0px 1px;
+}
+
+window#waybar {
+    /* you can also GTK3 CSS functions! */
+    /* background-color: shade(@base, 0.9); */
+    /* border: 0px solid alpha(@crust, 0.3); */
+    /* border: none; */
+    color: @subtext1;
+    /* transition-property: background-color; */
+    /* transition-duration: .5s; */
+    /* border-radius: 4px; */
+    /* margin: 0px 1px; */
+    /* padding: 0px 1px; */
+}
+
+#window {
+    font-style: italic;
+}
+
+/* window#waybar.hidden { */
+/*     opacity: 0.3; */
+/* } */
+
+/*
+window#waybar.empty {
+background-color: transparent;
+}
+window#waybar.solo {
+background-color: #FFFFFF;
+}*/
+
+
+/* window#waybar.kitty { */
+/*     background-color: @surface0; */
+/* } */
+
+/* window#waybar.qutebrowser { */
+/*     background-color: #2; */
+/*     border: none; */
+/* } */
+#workspaces {
+    border-radius: 4px;
+    background-color: @mantle;
+    /* margin-left: 3px; */
+    /* background-color: transparent; */
+    /* border-radius: 3px; */
+    margin-left: 1rem;
+    /* margin-right: 0.3rem; */
+}
+
+#workspaces button {
+    /* background-color: transparent; */
+    color: @peach;
+    /* border-radius: 4px; */
+    padding: 0px 10px; /*largura do modulo*/
+    /* Use box-shadow instead of border so the text isn't offset */
+    /* box-shadow: inset 0 -3px transparent; */
+    margin: 0px 0px; /*crece largura alem do radio*/
+    /* border: 5rem; */
+}
+
+#workspaces button.active {
+    background: @subtext1;
+    /* border: none; */
+    color: @crust; 
+    border-radius: 4px;
+    /* border-radius: 3px; */
+    /* border-bottom: 1px solid #51afef; */
+}
+
+/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+/* #workspaces button:hover { */
+/*     color: @red; */
+/*     background: @orange; */
+/* } */
+#workspaces button.persistent {
+    /* background: @blue; */
+    color: @overlay2;
+    font-family: JetBrainsMono Nerd Font;
+    font-style: italic;
+
+}
+
+
+#workspaces button.visible {
+    background: @orange;
+    color: #fff;
+    /* border-bottom: 2px solid transparent; */
+}
+
+#workspaces button.urgent {
+    background-color: @red;
+}
+#workspaces button.hidden {
+    background: @green;
+    color: #889fa7;
+    /* border-bottom: 2px solid transparent; */
+}
+
+#mode {
+    background-color: @mantle;
+    border: none;
+    /* border-bottom: 2px solid #ffffff; */
+}
+
+#clock,
+#battery,
+#cpu,
+#memory,
+#temperature,
+#backlight,
+#network,
+#pulseaudio,
+#custom-media,
+#tray,
+#mode,
+#idle_inhibitor,
+#temp_bsd,
+#weather,
+#disk,
+#onoffi,
+
+#mpd {
+    padding: 0px 5px;
+    margin: 0px 5px;
+    color: #ffffff;
+}
+
+/* #window, */
+
+/* .modules-left > widget:first-child > #workspaces { */
+/*     margin-left: 0; */
+/* } */
+/**/
+/* .modules-right > widget:last-child > #workspaces { */
+/*     margin-right: 0; */
+/* } */
+#temperature {
+    /* background: @mantle; */
+    border-radius: 4px;
+    color: @surface1;
+}
+#disk {
+    /* background-color: @mantle; */
+    margin: 0px 5px;
+    padding: 0px 5px;
+    color: @surface1;
+    border-radius: 4px;
+}
+
+#custom-weather {
+    background-color: #64727D;
+    margin: 0px 1px;
+    padding: 0px 1px;
+    color: #fff;
+    border-radius: 4px;
+}
+
+/* #custom-temp_bsd { */
+/*     background-color: #64727D; */
+/*     margin: 0px 3px; */
+/*     padding: 0 10px; */
+/*     color: #fff; */
+/* } */
+
+#clock {
+    background-color: @peach;
+    color: #000000;
+    border-radius: 4px;
+    /* margin: 0px 5px; */
+}
+
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+        color: @crust;
+    }
+}
+
+label:focus {
+    background-color: @crust;
+}
+
+#memory {
+    /* background-color: @base; */
+    color: @surface1;
+    border-radius: 4px;
+}
+
+#network {
+    /* background-color: @mantle; */
+    border-radius: 4px;
+    color: @neutral_aqua;
+}
+
+#network.disconnected {
+    background-color: #90b1b1;
+    border-radius: 4px;
+}
+
+#pulseaudio {
+    /* background-color: @mantle; */
+    color: @neutral_aqua;
+    border-radius: 4px;
+}
+
+#pulseaudio.muted {
+    background-color: @orange;
+    color: @text;
+    border-radius: 4px;
+}
+
+#custom-media {
+    background-color: #66cc99;
+    color: #2a5c45;
+    min-width: 100px;
+    border-radius: 4px;
+}
+
+#tray {
+    background-color: #2980b9;
+    border-radius: 4px;
+}
+
+#idle_inhibitor {
+    background-color: #2d3436;
+}
+
+#idle_inhibitor.activated {
+    background-color: #ecf0f1;
+    color: #2d3436;
+}
+
+#mpd {
+    background-color: #66cc99;
+    color: #2a5c45;
+    border-radius: 4px;
+}
+
+#mpd.disconnected {
+    background-color: #f53c3c;
+    border-radius: 4px;
+}
+
+#mpd.stopped {
+    background-color: #90b1b1;
+    border-radius: 4px;
+}
+
+#mpd.paused {
+    background-color: @mantle;
+    border-radius: 4px;
+}
+
+#language {
+    /* background: @mantle; */
+    color: @surface1;
+    padding: 0px 3px;
+    margin: 0px 3px;
+    min-width: 16px;
+    border-radius: 4px;
+}
+
+#custom-onoffi {
+    /* background-color: @mantle; */
+    color: @bright_green;
+    /* padding: 0px 5px; */
+    /* margin: 0px 3px; */
+    border-radius: 4px;
+}
