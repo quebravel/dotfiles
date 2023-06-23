@@ -1,6 +1,5 @@
 #!/bin/sh
 bemenu-run \
-  -b \
   -H 30 \
   --fn "JetBrainsMono Nerd Font 9" \
   --tb "#fe8019" \
