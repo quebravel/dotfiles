@@ -116,7 +116,11 @@ P|p)
 esac
 
 # install xorg if not installed
-sudo pacman -S --noconfirm --needed xorg-server xorg-xinit xorg-xinput $DRI
+if [[ -z $DRI ]]; then
+    echo ""
+else
+    sudo pacman -S --noconfirm --needed $DRI
+fi
 
 # complemetos para os drivers
 if [ $DRI = "xf86-video-amdgpu" ]; then
@@ -170,7 +174,7 @@ cat <<WINDOWMANAGER
 
 WINDOWMANAGER
 
-echo " 1)_Bspwm    2)_Xmonad    P)_Pular"
+echo " 1)_Bspwm    2)_Xmonad    3)_Hyprland    P)_Pular"
 echo -e " \033[44;1;37m Qual gerenciador de janelas (window manager) vai ser desta vez \033[0m "
 echo " (Padrao: bspwm)"
 read -r -p "-> ... " wme
@@ -188,6 +192,10 @@ case $wme in
 	WMb='xmobar'
 	;;
 
+3)
+    WM_WAYLAND='hyprland'
+    ;;
+
 P|p)
 	WMs='bspwm'
 	WMx='sxhkd'
@@ -204,9 +212,23 @@ if [ -z $WMs ]; then
     echo "Pulou a instação do gerenciador de janelas, arrudia!." | tee -a ~/Notas.txt
 else
     # insalando window manger
-    sudo pacman -S --noconfirm --needed $WMs $WMx $WMb
+    sudo pacman -S --noconfirm --needed $WMs $WMx $WMb xorg-server xorg-xinit xorg-xinput xclip xdo mtools xdotool xsel feh xorg-{xsetroot,xset,xrdb} libxinerama libxft nsxiv unclutter maim
 fi
 
+if [ $WM_WAYLAND = "hyprland" ]; then
+    sudo pacman -S --noconfirm --needed $WM_WAYLAND wl-clipboard bemenu hyprpaper waybar ttf-font-awesome
+else
+    echo ""
+fi
+
+    if [ $WM_WAYLAND = "hyprland" ]; then
+       rm --recursive --force ~/.config/{hypr,waybar}; 
+       cp -r ./.config/hypr ~/.config/;
+       mkdir -p ~/.config/waybar
+       cp -r ./.config/waybar/hypr_waybar-config/* ~/.config/waybar/
+    else
+        echo ""
+    fi
 
     if [ -z $WMs ]; then
         echo ""
@@ -305,30 +327,18 @@ fi
 
 $HELPER -S --needed --noconfirm \
 alacritty \
-xclip \
-maim \
-xdo \
-mtools \
-xdotool \
 exa \
 mpv \
-feh \
-xsel \
 python-pynvim \
 yt-dlp \
 ntfs-3g \
-xorg-{xsetroot,xset,xrdb} \
 xf86-input-{evdev,libinput} \
 zathura-pdf-poppler \
 adwaita-icon-theme \
 xcursor-vanilla-dmz-aa \
 cmake \
-libxinerama \
-libxft \
-sxiv \
 xdg-user-dirs \
 ffmpeg \
-unclutter \
 polkit \
 gammastep \
 # redshift \
@@ -380,13 +390,16 @@ case $notebook in
         $HELPER -S --needed --noconfirm acpi acpid xf86-input-synaptics
         sudo systemctl enable acpid.service
         sudo cp ./xorg_conf/70-synaptics.conf /usr/share/X11/xorg.conf.d/
-
-        sed -i 's/FILE-6/#FILE-6/' $HOME/.config/bspwm/bspwmrc
-        sed -i 's/ws-icon-5 \= FILE-6\;0110-6/\;ws-icon-5 \= FILE-6\;0110-6/' $HOME/.config/polybar/{config.ini,center.config.ini}
-        sed -i 's/ws-icon-6 \= EDIT-7\;0111-7/\;ws-icon-6 \= EDIT-7\;0111-7/' $HOME/.config/polybar/{config.ini,center.config.ini}
-        sed -i 's/ws-icon-7 \= GAME-8\;1000-8/\;ws-icon-7 \= GAME-8\;1000-8/' $HOME/.config/polybar/{config.ini,center.config.ini}
-        sed -i 's/ws-icon-8 \= MAIL-9\;1001-9/\;ws-icon-8 \= MAIL-9\;1001-9/' $HOME/.config/polybar/{config.ini,center.config.ini}
-        sed -i 's/ws-icon-9 \= MPD-10\;0000-0/\;ws-icon-9 \= MPD-10\;0000-0/' $HOME/.config/polybar/{config.ini,center.config.ini}
+        if [[ $WMb = "polybar" ]]; then
+            sed -i 's/FILE-6/#FILE-6/' $HOME/.config/bspwm/bspwmrc
+            sed -i 's/ws-icon-5 \= FILE-6\;0110-6/\;ws-icon-5 \= FILE-6\;0110-6/' $HOME/.config/polybar/{config.ini,center.config.ini}
+            sed -i 's/ws-icon-6 \= EDIT-7\;0111-7/\;ws-icon-6 \= EDIT-7\;0111-7/' $HOME/.config/polybar/{config.ini,center.config.ini}
+            sed -i 's/ws-icon-7 \= GAME-8\;1000-8/\;ws-icon-7 \= GAME-8\;1000-8/' $HOME/.config/polybar/{config.ini,center.config.ini}
+            sed -i 's/ws-icon-8 \= MAIL-9\;1001-9/\;ws-icon-8 \= MAIL-9\;1001-9/' $HOME/.config/polybar/{config.ini,center.config.ini}
+            sed -i 's/ws-icon-9 \= MPD-10\;0000-0/\;ws-icon-9 \= MPD-10\;0000-0/' $HOME/.config/polybar/{config.ini,center.config.ini}
+        else
+            echo ""
+        fi
         ;;
     2)
         echo "Miolo de pote!"
@@ -420,7 +433,9 @@ cat << DMENUDESENHO
 DMENUDESENHO
 
 mkdir -p ~/.config/
-
+if [[ $WM_WAYLAND = "hyprland" ]]; then
+    echo "wayland ..."
+else
 if [ -d ~/.srcs ]; then
     echo "pasta .srcs ... [ok]"
 else
@@ -468,7 +483,7 @@ if [ -e "/usr/local/bin/dmenu_run" ]; then
         esac
         echo "dmenu2 [ok]"
     fi
-
+fi
 }
 
 arquivosdeConfiguracao(){
@@ -1064,6 +1079,9 @@ ASTRONVIM-DESENHO
 
 layout_teclado(){
 
+if [[ $WM_WAYLAND = "hyprland" ]]; then
+    echo ""
+else
 cat << TECLADO-DESENHO
  ██                      ██                                     ██
 ░██              ██   ██░██                                    ░██
@@ -1076,7 +1094,7 @@ cat << TECLADO-DESENHO
 TECLADO-DESENHO
 
     echo " 1)_abnt2    2)_us-intl"
-    echo " Qual o layout do seu teclado?"
+    echo " Qual o layout do seu teclado no xorg?"
     read -r -p "-> ... " LAYOUTTECLADO 
 
     case "$LAYOUTTECLADO" in
@@ -1089,6 +1107,7 @@ TECLADO-DESENHO
         *) layout_teclado
         ;;
     esac
+fi
 }
 
 # chamar funções parte 1
