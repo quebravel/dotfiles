@@ -359,6 +359,7 @@ if [[ $WM_WAYLAND = "hyprland" ]]; then
 $HELPER -S --needed --noconfirm \
 grimblast-git
 notify-send.sh
+polkit-kde-agent
 fi
 
 }
