@@ -216,7 +216,7 @@ else
 fi
 
 if [ $WM_WAYLAND = "hyprland" ]; then
-    sudo pacman -S --noconfirm --needed $WM_WAYLAND wl-clipboard bemenu hyprpaper waybar ttf-font-awesome
+    sudo pacman -S --noconfirm --needed $WM_WAYLAND wl-clipboard bemenu swaybg waybar ttf-font-awesome
 else
     echo ""
 fi
@@ -352,6 +352,13 @@ gammastep \
 if [ ! -f /bin/picom ]; then
 $HELPER -S --needed --noconfirm \
 picom-jonaburg-git 
+fi
+
+# AUR para hyprland
+if [[ $WM_WAYLAND = "hyprland" ]]; then
+$HELPER -S --needed --noconfirm \
+grimblast-git
+notify-send.sh
 fi
 
 }
