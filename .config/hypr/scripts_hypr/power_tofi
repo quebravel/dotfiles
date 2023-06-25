@@ -1,0 +1,19 @@
+#!/bin/bash
+
+
+
+## shutdown menu Void linux
+
+
+
+MENU=$(echo -e "Shutdown\nReboot\nLogout" | tofi --prompt-text "tcha tchau!")
+
+            case "$MENU" in
+
+                *Shutdown) poweroff ;;
+
+                *Reboot) reboot ;;
+
+                *Logout) bspc wm -r ;;
+
+            esac
