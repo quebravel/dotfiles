@@ -216,7 +216,7 @@ else
 fi
 
 if [ $WM_WAYLAND = "hyprland" ]; then
-    sudo pacman -S --noconfirm --needed $WM_WAYLAND wl-clipboard bemenu swaybg waybar ttf-font-awesome
+    sudo pacman -S --noconfirm --needed $WM_WAYLAND wl-clipboard swaybg waybar ttf-font-awesome
 else
     echo ""
 fi
@@ -358,8 +358,9 @@ fi
 if [[ $WM_WAYLAND = "hyprland" ]]; then
 $HELPER -S --needed --noconfirm \
 grimblast-git
-notify-send.sh
-polkit-kde-agent
+# notify-send.sh
+# polkit-kde-agent
+tofi
 fi
 
 }
