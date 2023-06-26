@@ -20,6 +20,8 @@ alias nsxhkd="nvim ~/.config/sxhkd/sxhkdrc"
 alias nqute="nvim ~/.config/qutebrowser/config.py"
 alias nxmonad="nvim ~/.config/xmonad/xmonad.hs"
 alias nalacri="nvim ~/.config/alacritty/alacritty.yml"
+alias nwaybar='nvim ~/.config/waybar/config'
+alias nhypr="nvim ~/.config/hypr/hyprland.conf"
 
 # xbps
 # alias xi="sudo xbps-install -S"
