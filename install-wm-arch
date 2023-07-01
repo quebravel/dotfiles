@@ -5,12 +5,12 @@
 #TODO parei no ly
 
 # cores
-CNT="[\e[1;36mNOTA\e[0m]"
-COK="[\e[1;32mOK\e[0m]"
-CER="[\e[1;31mERRO\e[0m]"
-CAT="[\e[1;37mATENCAO\e[0m]"
-CWR="[\e[1;35mALERTA\e[0m]"
-CAC="[\e[1;33mACAO\e[0m]"
+CNT="[\e[1;36mNOTA\e[0m]" #azul
+COK="[\e[1;32mOK\e[0m]" #verde
+CER="[\e[1;31mERRO\e[0m]" #vermelhor claro
+CAT="[\e[1;37mATENCAO\e[0m]" #branco
+CWR="[\e[1;35mALERTA\e[0m]" #roxo claro
+CAC="[\e[1;33mACAO\e[0m]" #amarelo
 INSTLOG="$HOME/install.log"
 FIN_INST="&>> $INSTLOG & show_progress $!"
 
@@ -434,14 +434,14 @@ esac
 lancadorProgramas(){
     sleep 0.2
 cat << DMENUDESENHO
-              ██                                       ████
-             ░██                                      █░░░ █
-             ░██ ██████████   █████  ███████  ██   ██░    ░█
-          ██████░░██░░██░░██ ██░░░██░░██░░░██░██  ░██   ███
-         ██░░░██ ░██ ░██ ░██░███████ ░██  ░██░██  ░██  █░░
-        ░██  ░██ ░██ ░██ ░██░██░░░░  ░██  ░██░██  ░██ █
-        ░░██████ ███ ░██ ░██░░██████ ███  ░██░░██████░██████
-         ░░░░░░ ░░░  ░░  ░░  ░░░░░░ ░░░   ░░  ░░░░░░ ░░░░░░
+      ██                                       ████
+     ░██                                      █░░░ █
+     ░██ ██████████   █████  ███████  ██   ██░    ░█
+  ██████░░██░░██░░██ ██░░░██░░██░░░██░██  ░██   ███
+ ██░░░██ ░██ ░██ ░██░███████ ░██  ░██░██  ░██  █░░
+░██  ░██ ░██ ░██ ░██░██░░░░  ░██  ░██░██  ░██ █
+░░██████ ███ ░██ ░██░░██████ ███  ░██░░██████░██████
+ ░░░░░░ ░░░  ░░  ░░  ░░░░░░ ░░░   ░░  ░░░░░░ ░░░░░░
 DMENUDESENHO
 
 mkdir -p ~/.config/
@@ -481,7 +481,10 @@ if [[ -e "/usr/local/bin/dmenu_run" ]]; then
               echo -e "$COK - dmenu2 instalado."
               ;;
         n|N)
-              (cd ~/.srcs/dmenu2-1/dmenu2-0.2.1 && sudo make uninstall && sudo make clean)
+              if ! (cd ~/.srcs/dmenu2-1/dmenu2-0.2.1 && sudo make uninstall && sudo make clean) &>> /dev/null
+              then
+                  echo -e "$CNT - dmenu2 nao será instalado."
+              fi
               ;;
           *) lancadorProgramas
         esac
@@ -490,8 +493,6 @@ fi
 }
 
 arquivosdeConfiguracao(){
-    clear
-    echo -e "Configurando programas \n ... \n .. \n ."
     sleep 0.2
 
     if [[ ! -d ~/.config/picom ]]; then
@@ -559,17 +560,16 @@ arquivosdeConfiguracao(){
     
 } ### arquivosdeConfiguracao
 
-ly_config(){
+lyConfig(){
  sleep 0.2
 cat <<LOGINLY
-     ██
-    ░██        ██   ██
-    ░██       ░░██ ██
-    ░██        ░░███
-    ░██         ░██
-    ░██         ██
-    ░████████  ██
-    ░░░░░░░░  ░░
+░██  ██   ██
+░██ ░░██ ██
+░██  ░░███
+░██   ░██
+░██   ██
+░███ ██
+░░░ ░░
 LOGINLY
 echo ""
 read -rep $'[\e[1;33mACAO\e[0m] - Deseja instalar um <Display Manager> (Ly)? - (s,n) ... ' DMGR
@@ -596,7 +596,7 @@ read -rep $'[\e[1;33mACAO\e[0m] - Deseja instalar um <Display Manager> (Ly)? - (
     ;;
     n|N) echo -e "$CNT - Nao terá display manager."
     ;;
-    *) ly_config
+    *) lyConfig
     ;;
     esac
 
@@ -604,13 +604,8 @@ read -rep $'[\e[1;33mACAO\e[0m] - Deseja instalar um <Display Manager> (Ly)? - (
 } ### ly_config
 
 # parte 2
-_so="sudo pacman -S --needed --noconfirm"
-_s="sudo"
 
 playermusica(){
-
- clear
- echo -e "... configurando ncmpcpp . mpd . mpc \n ... \n .. \n ."
  sleep 0.2
  cat <<PLAYMSC
                               ██████          ██████  ██████
@@ -620,18 +615,16 @@ playermusica(){
  ░██  ░██░██   ██ ░██ ░██ ░██░██░░░  ░██   ██░██░░░  ░██░░░
  ███  ░██░░█████  ███ ░██ ░██░██     ░░█████ ░██     ░██
 ░░░   ░░  ░░░░░  ░░░  ░░  ░░ ░░       ░░░░░  ░░      ░░
-
 PLAYMSC
-
- echo " 1)_Ncmpcpp    2)_Nao"
-echo -e " \033[44;1;37m Quer instalar o player de música? \033[0m "
-read -r -p "-> ... " plmc
-case "$plmc" in
- 1) 
-$_so \
+ echo ""
+ read -rep $'[\e[1;33mACAO\e[0m] - Quer instalar o player de música? - (s,n) ... ' PLMC
+case "$PLMC" in
+ s|S) 
+install_software \
 ncmpcpp \
 mpd \
-mpc
+mpc \
+&>> $INSTLOG & show_progress $!
 
 if [ ! -d ~/Músicas ]; then 
  mkdir -p ~/Músicas
@@ -651,9 +644,9 @@ else
  cp ./.config/mpd/mpd.conf ~/.config/mpd/;
 fi
 
-$_s systemctl enable mpd.service
+sudo systemctl enable mpd.service
 
-$_s systemctl start mpd.service
+sudo systemctl start mpd.service
 
 touch ~/.config/mpd/socket
 
@@ -668,7 +661,7 @@ echo 'mpd . mpc . ncmpcpp ... instalados'
 echo 'reinicie o systema ... reboot'
 
  ;;
- 2) echo "Oxente!!!"
+ n|N) echo -e "$CNT - Ncmpcpp nao será instalado."
  ;;
  *) playermusica
  ;;
@@ -677,9 +670,6 @@ esac
 }
 
 rangerfm(){
-
- clear
- echo -e "... ranger . ueberzug . ffmpegthumbnailer \n ... \n .. \n ."
  sleep 0.2
 
 cat << RANGER-DESENHO
@@ -690,17 +680,15 @@ cat << RANGER-DESENHO
  ░██    ██░░░░██  ░██  ░██ ░░░░░██░██░░░░  ░██
 ░███   ░░████████ ███  ░██  █████ ░░██████░███
 ░░░     ░░░░░░░░ ░░░   ░░  ░░░░░   ░░░░░░ ░░░
-
 RANGER-DESENHO
 
-echo " 1)_Ranger    2)_Nao"
-echo -e " \033[44;1;37m Quer uma gerenciador de arquivos para terminal? \033[0m "
-read -r -p "-> ... " rag
+echo ""
+read -rep $'[\e[1;33mACAO\e[0m] - Quer uma gerenciador de arquivos para terminal? - (s,n) ... ' RAG
 
-case "$rag" in
- 1) FILEMANAGER='RANGER'
+case "$RAG" in
+ s|S) FILEMANAGER='RANGER'
  ;;
- 2) echo "Beleza"
+ n|N) echo "Beleza"
  ;;
  *) rangerfm
  ;;
@@ -708,10 +696,11 @@ esac
 
 if [ $FILEMANAGER = RANGER ]; then
 
- $_so \
- ranger \
- ueberzug \
- ffmpegthumbnailer
+install_software \
+ranger \
+ueberzug \
+ffmpegthumbnailer \
+&>> $INSTLOG & show_progress $!
 
     if [ ! -d ~/.config/ranger/ ]; then
      mkdir --parents ~/.config/ranger/;
@@ -757,9 +746,6 @@ fi
 }
 
 audio_config(){
-
- clear
- echo -e "... controlador audio \n ... \n .. \n ."
  sleep 0.2
 
 cat <<AUDIOCONF
@@ -771,85 +757,80 @@ cat <<AUDIOCONF
  ██░░░░██ ░██  ░██░██  ░██░██░██   ░██
 ░░████████░░██████░░██████░██░░██████
  ░░░░░░░░  ░░░░░░  ░░░░░░ ░░  ░░░░░░
-
 AUDIOCONF
+ echo ""
+ read -rep $'[\e[1;33mACAO\e[0m] - Qual controlador de audio?  [PIPE\e[1;37mW\e[0m\e[1;36mIRE\e[0m]    [\e[1;37mP\e[0m\e[1;36mULSEAUDIO\e[0m] - (w,p ...) ... ' AUD
 
- echo " 1)_Pipewire    2)_Pulseaudio"
- echo -e " \033[44;1;37m qual controlador de audio? \033[0m "
- echo " (Padrao: pipewire)"
- read -r -p "-> ... " aud
-
-case "$aud" in
- 1) AUDIOD='PIPEWIRE'
+case "$AUD" in
+ s|S) AUDIOD='PIPEWIRE'
   ;;
- 2) AUDIOD='PULSEAUDIO'
+ n|N) AUDIOD='PULSEAUDIO'
   ;;
  *) audio_config
   ;;
 esac
 
 if [ $AUDIOD = PIPEWIRE ]; then
-  $_so \
+  install_software \
   pipewire \
   pipewire-alsa \
   pipewire-audio \
   pipewire-pulse \
   wireplumber \
+  &>> $INSTLOG & show_progress $!
   # gst-plugin-pipewire
   # helvum \
-  echo -e "use <wpctl status> para detectar en Sinks: o númeor ID da saída de áudío\nexemplo:\nwpctl status\nSinks:\n33. Áudio interno Estéreo analógico  [vol: 1.20]\n53. Ellesmere HDMI Audio [Radeon RX 470/480 / 570/580/590] Digital Stereo (HDMI 6)\nwpctl set-default 53" >> notas.txt
+  echo -e "$COK - $AUDIOD instalado."
+  echo -e "$CAT - Use <wpctl status> para detectar en Sinks: o númeor ID da saída de áudío\nexemplo:\nwpctl status\nSinks:\n33. Áudio interno Estéreo analógico  [vol: 1.20]\n53. Ellesmere HDMI Audio [Radeon RX 470/480 / 570/580/590] Digital Stereo (HDMI 6)\nwpctl set-default 53" >> notas.txt
 elif [ $AUDIOD = PULSEAUDIO ]; then
-  $_so \
+  install_software \
   alsa-utils \
   pulseaudio \
+  &>> $INSTLOG & show_progress $!
   # gst-plugins-{base,good,bad,ugly} \
   # gst-libav
+  echo -e "$COK - $AUDIOD instalado."
 fi
 
 }
 
 zshinstall(){
-
- clear
- echo -e "instalando zsh . zsh-completions  \n ... \n .. \n ."
  sleep 0.2
 
-$_so \
+install_software \
 zsh \
-zsh-completions
+zsh-completions \
+&>> $INSTLOG & show_progress $!
 
-echo "zsh ... instalado"
+echo -e "$COK - Zsh instalado"
 
 }
 
 fontes_doSistema(){
-
- clear
- echo -e "instalando fontes  \n ... \n .. \n ."
  sleep 0.2
 
 # wqy-microhei (koreano), cjk (japones)
-$_so \
+install_software \
 ttf-dejavu \
 noto-fonts-emoji \
 gnu-free-fonts \
 wqy-microhei \
 noto-fonts-cjk \
 xorg-fonts-{75dpi,100dpi,encodings} \
-ttf-jetbrains-mono-nerd 
+ttf-jetbrains-mono-nerd \
+&>> $INSTLOG & show_progress $!
+echo -e "$COK - Fontes dos sistema."
 
 if [ ! -f /usr/share/fonts/misc/siji.bdf ]; then
-$HELPER -S --needed --noconfirm siji-git 
+install_software \
+siji-git 
+&>> $INSTLOG & show_progress $!
+echo "$COK - Fonte siji instalada."
 fi
-
-echo "fontes ... instaladas"
 
 }
 
 navegador(){
-
- clear
- echo -e "... browser  \n ... \n .. \n ."
  sleep 0.2
 
 cat <<NAVEGADOR-DESENHO
@@ -861,27 +842,30 @@ cat <<NAVEGADOR-DESENHO
 ░██  ░██ ░██   ░██   ░██ ░████░████ ░░░░░██░██░░░░  ░██
 ░██████ ░███   ░░██████  ███░ ░░░██ ██████ ░░██████░███
 ░░░░░   ░░░     ░░░░░░  ░░░    ░░░ ░░░░░░   ░░░░░░ ░░░
-
 NAVEGADOR-DESENHO
 
-echo " 1)_Qutebrowser    2)_Firefox    P)_Pular"
-echo -e " \033[44;1;37m Qual navegador preferido? \033[0m "
-read -r -p "-> ... " browser
+echo ""
+read -rep $'[\e[1;33mACAO\e[0m] - Qual navegador preferido? - [\e[1;36mQUTEBROWSER\e[0m], [\e[1;36mFIREFOX\e[0m], [\e[1;36mAMBOS\e[0m] ou [\e[1;35mPular\e[0m] - (q,f,a,p)' BROWSER
 
-case "$browser" in
- 1) BROW="qutebrowser"
+case "$BROWSER" in
+ q|Q) BROWq="qutebrowser"
  ;;
- 2) BROW="firefox"
+ f|F) BROWf="firefox"
  ;;
- P|p) echo "Canelau"
+ a|A)
+      BROWq="qutebrowser"
+      BROWf="firefox"
+ ;;
+ p|P) echo -e "$CNT - Nao será instalado nenhum navegador."
  ;;
  *) navegador
  ;;
 esac
 
-if [ $BROW = "qutebrowser" ]; then
- $_so qutebrowser \
-python-adblock
+if [[ $BROWq = "qutebrowser" ]]; then
+install_software qutebrowser \
+python-adblock \
+&>> $INSTLOG & show_progress $!
 
 /usr/share/qutebrowser/scripts/dictcli.py install pt-BR
 
@@ -889,37 +873,35 @@ python-adblock
  cp -r ./.config/qutebrowser/* ~/.config/qutebrowser/;
  chmod +x ~/.config/qutebrowser/greasemonkey/*
 
-elif [ $BROW = "firefox" ]; then
- $_so firefox \
-firefox-i18n-pt-br
+ echo -e "$COK - $BROWq instalado"
+fi
 
- echo "$BROW ... instalado"
+if [[ $BROWf = "firefox" ]]; then
+install_software firefox \
+firefox-i18n-pt-br \
+&>> $INSTLOG & show_progress $!
+
+ echo -e "$COK - $BROWf instalado"
 fi
 
 }
 
 copilador_config(){
-
- clear
- echo -e "configurando copilador  \n ... \n .. \n ."
  sleep 0.2
 
 # processador 
 ncore=`lscpu | grep "^CPU(s)" | head -n 1 | cut -d: -f2 | tr -d " "`
 
-echo "congirurando makeflags para  $ncore processadores ativos durante a compilação ..."
-echo "coloque a senha ... "
-$_s sed -i "s/#MAKEFLAGS=\"-j2\"/MAKEFLAGS=\"-j$ncore\"/g" /etc/makepkg.conf
+echo -e "$CAT - Congirurando makeflags para  $ncore processadores ativos durante a compilação ..."
+echo -e "$CAC - Coloque a senha ... "
+sudo sed -i "s/#MAKEFLAGS=\"-j2\"/MAKEFLAGS=\"-j$ncore\"/g" /etc/makepkg.conf
 
 
-echo "copilador configurado para [$ncore] processadores"
+echo -e "$CAT - Copilador configurado para [$ncore] processadores"
 
 }
 
 pastas_config(){
-
- clear
- echo -e "criando pastas padrao  \n ... \n .. \n ."
  sleep 0.2
 
 if [[ -f /usr/bin/xdg-user-dirs-update ]]; then
@@ -928,22 +910,19 @@ fi
 }
 
 temas(){
-
- clear
- echo -e "configurando temas gruvbox-dark para GTK  \n ... \n .. \n ."
  sleep 0.2
 
 # gruvbox tema
 if [ ! -d ~/.themes ]; then
-git clone https://github.com/jmattheis/gruvbox-dark-gtk ~/.themes/gruvbox-dark-gtk
+git clone https://github.com/jmattheis/gruvbox-dark-gtk ~/.themes/gruvbox-dark-gtk &>> $INSTLOG & show_progress $!
 else
- echo "voce ja tem o tema"
+ echo -e "$CWR - Voce já tem o tema gruvbox-dark-gtk."
 fi
 sleep 0.2
 if [ ! -d ~/.icons ]; then
-git clone https://github.com/jmattheis/gruvbox-dark-icons-gtk ~/.icons/gruvbox-dark-icons-gtk
+git clone https://github.com/jmattheis/gruvbox-dark-icons-gtk ~/.icons/gruvbox-dark-icons-gtk &>> $INSTLOG & show_progress $!
 else
- echo "voce ja tem o tema"
+ echo -e "$CWR - Voce já tem o tema gruvbox-dark-icons-gtk."
 fi
 if [ -d ~/.config/gtk-3.0 ]; then
  cp ./.config/gtk-3.0/* ~/.config/gtk-3.0/;
@@ -952,66 +931,62 @@ else
  cp ./.config/gtk-3.0/* ~/.config/gtk-3.0/;
 fi
 
-echo "temas gruvbox GTK ... instalados"
+echo -e "$COK - Temas gruvbox GTK."
 
 }
 
 ohmyzsh(){
-
- clear
- echo -e "instalando oh-my-zsh  \n ... \n .. \n ."
  sleep 0.2
 
-if [ ! -d ~/.oh-my-zsh ]; then
+if [[ ! -d ~/.oh-my-zsh ]]; then
  # sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
     sleep 0.2
     chsh -s $(which zsh)
-    echo "oh-my-zsh ... instalado"
+    echo -e "$COK - Oh-my-zsh"
 else
-    echo "já existe oh-my-zsh"
+    echo -e "$CAT - Já existe oh-my-zsh no sistema."
 fi
-
-echo -e "parte 2 feito \n ... \n .. \n . \n =)"
 
 }
 
 alias_autopair(){
-
- clear
- echo -e "configurando zsh  \n ... \n .. \n ."
  sleep 0.2
 
 # zsh alias, autopair
-echo "arquivo alias"
-if [ ! -f ~/.config/zsh/alias.zsh ]; then
+if [[ ! -f ~/.config/zsh/alias.zsh ]]; then
  mkdir --parents ~/.config/zsh/;
  cp ./.config/zsh/alias.zsh ~/.config/zsh/;
+ echo -e "$COK - Zsh alias."
 fi
 
-echo "arquivo de plugins"
-if [ ! -f ~/.config/zsh/vim-mode.zsh ]; then
+if [[ ! -f ~/.config/zsh/vim-mode.zsh ]]; then
  mkdir --parents  ~/.config/zsh/;
  cp ./.config/zsh/vim-mode.zsh ~/.config/zsh/;
+ echo -e "$COK - Plugin zsh vi-mode."
 fi
+
+if [[ ! -f ~/.config/zsh/custom_extra_config.zsh ]]; then
+ mkdir --parents  ~/.config/zsh/;
+ cp ./.config/zsh/custom_extra_config.zsh ~/.config/zsh/;
+ echo -e "$COK - Plugin zsh extras."
+fi
+
 
 sleep 0.2
 
-if [ -f ~/.zshrc ]; then
-echo -e "\nexport	EDITOR='nvim'\nexport	TERMINAL='alacritty'\nexport	BROWSER='qutebrowser'\nexport	READER='zathura'\nexport	SHELL='zsh'\nexport	XDG_CURRENT_DESKTOP='bspwm'\n\n[[ ! -f ~/.config/zsh/alias.zsh ]] || source ~/.config/zsh/alias.zsh\n[[ ! -f ~/.config/zsh/vim-mode.zsh ]] || source ~/.config/zsh/vim-mode.zsh\n\n# autopair zsh\nif [[ ! -d ~/.config/zsh/zsh-autopair ]]; then\n\tgit clone https://github.com/hlissner/zsh-autopair ~/.config/zsh/zsh-autopair\nfi\n\nsource ~/.config/zsh/zsh-autopair/autopair.zsh\nautopair-init" >> $HOME/.zshrc
-
+if [[ -f ~/.zshrc ]]; then
+sed -i '/^\[\[ \!/d' $HOME/.zshrc
+echo "[[ ! -f ~/.config/zsh/custom_extra_config.zsh ]] || source ~/.config/zsh/custom_extra_config.zsh" >> $HOME/.zshrc
 sed -i '/(git)/s/git/git extract universalarchive/' $HOME/.zshrc
 fi
 
 sleep 0.2
-echo "zsh configurado"
+echo -e "$COK - Zsh com configuracao extra."
 
 }
 
 editordeTexto(){
-
- clear
- echo -e "configurando instalando e astrovim  \n ... \n .. \n ."
  sleep 0.2
 
 cat <<ASTRONVIM-DESENHO
@@ -1034,41 +1009,40 @@ cat <<ASTRONVIM-DESENHO
 
 ASTRONVIM-DESENHO
 
- $_so neovim \
- python-pynvim
+install_software \
+neovim \
+python-pynvim
+&>> $INSTLOG & show_progress $!
 
- if [ ! -d ~/.config/nvim ]; then
+ if [[ ! -d ~/.config/nvim ]]; then
   git clone --depth 1 https://github.com/AstroNvim/AstroNvim ~/.config/nvim
   git clone https://github.com/quebravel/astronvim_config.git ~/.config/nvim/lua/user
   (nvim  --headless -c 'quitall')
  else
-  echo " 1)_Sim    2)_Nao"
-  echo " Existe um diretorio nvim"
-  echo -e " \033[44;1;37m Deseja re/instalar astronvim? \033[0m "
-  read -r -p "-> ... " astronv
+  read -rep $'[\e[1;33mACAO\e[0m] - Existe um diretorio nvim Deseja re/instalar astronvim? - (s,n) ... ' ASTRONV
 
-  case "$astronv" in
-   1)
+  case "$ASTRONV" in
+   s|S)
     rm -rf ~/.config/nvim/;
     git clone --depth 1 https://github.com/AstroNvim/AstroNvim ~/.config/nvim
     git clone https://github.com/quebravel/astronvim_config.git ~/.config/nvim/lua/user
     (nvim  --headless -c 'quitall')
    ;;
-   2) echo "Simbora! ..."
+   n|N) echo -e "$CNT - Astronvim nao será reinstalado."
    ;;
    *) editordeTexto
    ;;
   esac 
  fi
 
- echo -e " .... Astro neovim finalizado \n ... \n .. \n ."
+ echo -e "$COK - Astronvim instalado."
 
 }
 
 layout_teclado(){
 
 if [[ $WM_WAYLAND = "hyprland" ]]; then
-    echo ""
+    echo -e "$CNT - Foi instalado o $WM_WAYLAND nao será configurado o teclado."
 else
 cat << TECLADO-DESENHO
  ██                      ██                                     ██
@@ -1081,16 +1055,17 @@ cat << TECLADO-DESENHO
 ░░  ░░  ░░░░░░  ░░      ░░░░░    ░░░░░░   ░░░░░░░░ ░░░     ░░░░░░
 TECLADO-DESENHO
 
-    echo " 1)_abnt2    2)_us-intl"
-    echo " Qual o layout do seu teclado no xorg?"
-    read -r -p "-> ... " LAYOUTTECLADO 
+    echo ""
+    read -rep $'[\e[1;33mACAO\e[0m] Qual o layout do seu teclado no xorg? - [\e[1;36mBR-ABNT2\e[0m] ou [\e[1;36mUS-INTL\e[0m] - (b,u) .. ' LAYOUTTECLADO
 
     case "$LAYOUTTECLADO" in
-        1)
+        b|B)
             sudo cp ./xorg_conf/31-keyboard-abnt2.conf /usr/share/X11/xorg.conf.d/
+            echo -e "$COK - Teclado configurado para br-abnt2."
         ;;
-        2) 
+        u|U) 
             sudo cp ./xorg_conf/30-keyboard-us-intl.conf /usr/share/X11/xorg.conf.d/
+            echo -e "$COK - Teclado configurado para us-intl."
         ;;
         *) layout_teclado
         ;;
@@ -1106,7 +1081,7 @@ gerenciardorAUR
 notebook_ger
 lancadorProgramas
 arquivosdeConfiguracao
-ly_config
+lyConfig
 
 # chamar funções parte 2
 zshinstall
