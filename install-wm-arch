@@ -243,6 +243,7 @@ else
     # insalando window manger
     echo -e "$ESPEPACMAN"
 install_software_pacman "$WMs $WMx $WMb" &>> $INSTLOG & show_progress $!
+    echo -e "$ESPEPACMAN"
 install_software_pacman "xclip xdo mtools xdotool xsel feh xorg-xsetroot xorg-xset xorg-xrdb xorg-server xorg-xinit xorg-xinput libxinerama libxft nsxiv unclutter maim" &>> $INSTLOG & show_progress $!
 
 # &>> $INSTLOG & show_progress $!
