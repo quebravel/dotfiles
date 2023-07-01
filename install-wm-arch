@@ -1,0 +1,1124 @@
+#!/bin/env bash
+
+# fork script of https://github.com/Axarva/dotfiles-2.0/tree/main
+# fork script of https://github.com/SolDoesTech/HyprV4/blob/2cf439c27475a32fd00e816a1fde82a5804efe2a/set-hypr
+#TODO parei no ly
+
+# cores
+CNT="[\e[1;36mNOTA\e[0m]"
+COK="[\e[1;32mOK\e[0m]"
+CER="[\e[1;31mERRO\e[0m]"
+CAT="[\e[1;37mATENCAO\e[0m]"
+CWR="[\e[1;35mALERTA\e[0m]"
+CAC="[\e[1;33mACAO\e[0m]"
+INSTLOG="$HOME/install.log"
+FIN_INST="&>> $INSTLOG & show_progress $!"
+
+# barra de progresso
+show_progress() {
+    while ps | grep $1 &> /dev/null;
+    do
+        echo -n "."
+        sleep 2
+    done
+    echo -en "Pronto!\n"
+    sleep 2
+}
+
+install_software() {
+    # First lets see if the package is there
+    if $HELPER -Q $1 &>> /dev/null ; then
+        echo -e "$COK - $1 is already installed."
+    else
+        # no package found so installing
+        echo -en "$CNT - Now installing $1 ."
+        $HELPER -S --noconfirm $1 &>> $INSTLOG &
+        show_progress $!
+        # test to make sure package installed
+        if $HELPER -Q $1 &>> /dev/null ; then
+            echo -e "\e[1A\e[K$COK - $1 was installed."
+        else
+            # if this is hit then a package is missing, exit to review log
+            echo -e "\e[1A\e[K$CER - $1 install had failed, please check the install.log"
+            exit
+        fi
+    fi
+}
+install_software_pacman() {
+    # First lets see if the package is there
+    if pacman -Q $1 &>> /dev/null ; then
+        echo -e "$COK - $1 Ja esta instalado."
+    else
+        # no package found so installing
+        echo -en "$CNT - Instalando agora $1 ."
+        sudo pacman -S --noconfirm $1 &>> $INSTLOG &
+        show_progress $!
+        # test to make sure package installed
+        if pacman -Q $1 &>> /dev/null ; then
+            echo -e "\e[1A\e[K$COK - $1 foi instalado."
+        else
+            # if this is hit then a package is missing, exit to review log
+            echo -e "\e[1A\e[K$CER - $1 a instalacao falhou, por favor verifique o install.log"
+            exit
+        fi
+    fi
+}
+
+# porte 1
+inicio(){
+set -e
+
+clear
+
+cat <<EOL
+  ██                    ██              ██  ██                                                        ██
+ ░░                    ░██             ░██ ░██                                                       ░██
+  ██ ███████   ██████ ██████  ██████   ░██ ░██        ██████  ███████         ██████   ██████  █████ ░██
+ ░██░░██░░░██ ██░░░░ ░░░██░  ░░░░░░██  ░██ ░██ █████ ██░░░░██░░██░░░██ █████ ░░░░░░██ ░░██░░█ ██░░░██░██████
+ ░██ ░██  ░██░░█████   ░██    ███████  ░██ ░██░░░░░ ░██   ░██ ░██  ░██░░░░░   ███████  ░██ ░ ░██  ░░ ░██░░░██
+ ░██ ░██  ░██ ░░░░░██  ░██   ██░░░░██  ░██ ░██      ░██   ░██ ░██  ░██       ██░░░░██  ░██   ░██   ██░██  ░██
+ ░██ ███  ░██ ██████   ░░██ ░░████████ ███ ███      ░░██████  ███  ░██      ░░████████░███   ░░█████ ░██  ░██
+ ░░ ░░░   ░░ ░░░░░░     ░░   ░░░░░░░░ ░░░ ░░░        ░░░░░░  ░░░   ░░        ░░░░░░░░ ░░░     ░░░░░  ░░   ░░
+
+
+
+                            Bem vindo!......................................
+                            Este instalador e configurador foi feito como um
+                            projeto pessoal para fazer uma instalação rapida
+                            e  precisa  das  minhas configurações prediletas
+                            dos principais programas que utilizo em meu arch
+                            linux.
+        
+                            Por  favor  sinta-se  a  vontade para utilizar e
+                            modificar  de  acordo  com  suas preferencias de
+                            configuração.
+        
+                            Para utilizar este  script você deve esta logado 
+                            como  um usuario não  root  para que  as  pastas  
+                            sejas  enviadas  para o  local  correto.........
+EOL
+
+sleep 0.2
+
+read -rep $'[\e[1;33mACAO\e[0m] - Esta pronto para continuar? - (s,n) ... ' CONTINUAR
+case "$CONTINUAR" in
+    s|j) echo "Vamos lá ... "
+    ;;
+    n|N) exit 1
+    ;;
+    *) inicio
+    ;;
+esac
+
+
+# Default past github dotfiles
+# GITFILES="dotfiles-conf"
+
+# does full system update
+echo -e "$CWR Fazendo uma atualização do sistema, pode acontecer que coisas quebrem se não for a versão mais recente..."
+if ! sudo pacman --noconfirm -Syu &>> $INSTLOG
+then
+    echo -e "$CER - Erro na atualizaçao"
+fi
+
+# install base-devel if not installed
+install_software_pacman base-devel wget git &>> $INSTLOG & show_progress $!
+
+} ### inicio
+
+driveVideo(){
+# choose video driver
+    sleep 0.2
+
+cat <<DRIVERDESENHO
+      ██        ██                                     ██      ██
+     ░██       ░░                                     ░░      ░██
+     ░██ ██████ ██ ██    ██  █████  ██████    ██    ██ ██     ░██  █████   ██████
+  ██████░░██░░█░██░██   ░██ ██░░░██░░██░░█   ░██   ░██░██  ██████ ██░░░██ ██░░░░██
+ ██░░░██ ░██ ░ ░██░░██ ░██ ░███████ ░██ ░    ░░██ ░██ ░██ ██░░░██░███████░██   ░██
+░██  ░██ ░██   ░██ ░░████  ░██░░░░  ░██       ░░████  ░██░██  ░██░██░░░░ ░██   ░██
+░░██████░███   ░██  ░░██   ░░██████░███        ░░██   ░██░░██████░░██████░░██████
+ ░░░░░░ ░░░    ░░    ░░     ░░░░░░ ░░░          ░░    ░░  ░░░░░░  ░░░░░░  ░░░░░░
+DRIVERDESENHO
+
+echo ""
+read -rep $'[\e[1;33mACAO\e[0m] -  Escolha o driver da sua placa de vídeo: [\e[1;36mINTEL\e[0m], [\e[1;36mAMDGPU\e[0m], [\e[1;36mNVIDIA\e[0m] ou [\e[1;36mMaquinaVirtual\e[0m] - (i,a,n,m) ... ' VIDEO
+
+case $VIDEO in 
+i|I)
+	DRI='xf86-video-intel'
+	;;
+
+a|A)
+	DRI='xf86-video-amdgpu'
+	;;
+
+n|N)
+    DRI='xf86-video-nvidia'
+    ;;
+
+m|M)
+	DRI="NAO"
+	echo -e "$CAT - Voce esta usando uma Maquina Vitual." 
+	;;
+*) driveVideo
+
+	;;
+esac
+
+# install xorg if not installed
+# if [[ -z $DRI ]]; then
+#     echo ""
+# else
+#     install_software_pacman $DRI &>> /dev/null
+# fi
+
+# complemetos para os drivers
+if [ $DRI == "xf86-video-amdgpu" ]; then
+    install_software_pacman mesa-libgl mesa-vdpau libvdpau-va-gl vulkan-radeon &>> $INSTLOG & show_progress $! # driver open-source (melhor)
+    sudo cp ./xorg_conf/40-amdgpu.conf /usr/share/X11/xorg.conf.d/
+fi
+if [ $DRI == "xf86-video-intel" ]; then
+    install_software_pacman mesa-libgl libvdpau-va-gl vulkan-intel &>> $INSTLOG & show_progress $! # driver open-source (melhor)
+    sudo cp ./xorg_conf/20-intel.conf /usr/share/X11/xorg.conf.d/
+fi
+if [ $DRI == "xf86-video-nvidia" ]; then
+    install_software_pacman nvidia-utils libglvnd nvidia-settings lib32-nvidia-utils nvidia-dkmsa &>> $INSTLOG & show_progress $! # tem que testa para ver ser funciona
+    nvidia-xconfig --add-argb-glx-visuals --allow-glx-with-composite --composite --render-accel -o /usr/share/X11/xorg.conf.d/20-nvidia.conf
+fi
+
+# adicionando modulos
+# if [ "$(ls /boot | grep hardened -c)" -gt "0" ]; then
+# 	mkinitcpio -p linux-hardened
+# elif [ "$(ls /boot | grep lts -c)" -gt "0" ]; then
+# 	mkinitcpio -p linux-lts
+# elif [ "$(ls /boot | grep zen -c)" -gt "0" ]; then
+# 	mkinitcpio -p linux-zen
+# else
+# 	mkinitcpio -p linux
+# fi
+
+
+} ### driveVideo
+
+windowManger(){
+    sleep 0.2
+
+cat <<WINDOWMANAGER 
+            ██               ██
+           ░░               ░██                                                                 █████
+ ███     ██ ██ ███████      ░██  ██████  ███     ██   ██████████   ██████   ███████   ██████   ██░░░██  █████  ██████
+░░██  █ ░██░██░░██░░░██  ██████ ██░░░░██░░██  █ ░██  ░░██░░██░░██ ░░░░░░██ ░░██░░░██ ░░░░░░██ ░██  ░██ ██░░░██░░██░░█
+ ░██ ███░██░██ ░██  ░██ ██░░░██░██   ░██ ░██ ███░██   ░██ ░██ ░██  ███████  ░██  ░██  ███████ ░░██████░███████ ░██ ░
+ ░████░████░██ ░██  ░██░██  ░██░██   ░██ ░████░████   ░██ ░██ ░██ ██░░░░██  ░██  ░██ ██░░░░██  ░░░░░██░██░░░░  ░██
+ ███░ ░░░██░██ ███  ░██░░██████░░██████  ███░ ░░░██   ███ ░██ ░██░░████████ ███  ░██░░████████  █████ ░░██████░███
+░░░    ░░░ ░░ ░░░   ░░  ░░░░░░  ░░░░░░  ░░░    ░░░   ░░░  ░░  ░░  ░░░░░░░░ ░░░   ░░  ░░░░░░░░  ░░░░░   ░░░░░░ ░░░
+WINDOWMANAGER
+
+echo ""
+read -rep $'[\e[1;33mACAO\e[0m] - Qual gerenciador de janelas (window manager) vai ser desta vez? [\e[1;36mBSPWM\e[0m], [\e[1;36mXMONAD\e[0m], [\e[1;36mHYPRLAND\e[0m], [\e[1;36mPular\e[0m] - (b,x,h ou pular) ... ' WME
+
+case $WME in 
+b|B)
+	WMs='bspwm'
+	WMx='sxhkd'
+	WMb='polybar'
+	;;
+
+x|X)
+	WMs='xmonad'
+	WMx='xmonad-contrib'
+	WMb='xmobar'
+	;;
+
+h|H)
+    WM_WAYLAND='hyprland'
+    ;;
+
+p|P)
+	echo ""
+	;;
+
+*) windowManger
+	;;
+esac
+
+# teste para saber se a variavel esta vazia
+if [[ -z $WMs ]]; then
+    echo ""
+else
+    # insalando window manger
+    install_software_pacman $WMs $WMx $WMb xorg-server xorg-xinit xorg-xinput xclip xdo mtools xdotool xsel feh xorg-{xsetroot,xset,xrdb} libxinerama libxft nsxiv unclutter maim &>> $INSTLOG & show_progress $!
+    echo -e "$COK - $WMs instalado."
+fi
+
+if [[ $WM_WAYLAND = "hyprland" ]]; then
+    install_software_pacman $WM_WAYLAND wl-clipboard swaybg waybar ttf-font-awesome &>> $INSTLOG & show_progress $!
+    echo -e "$COK - Instalado o $WM_WAYLAND."
+fi
+
+    if [[ $WM_WAYLAND = "hyprland" ]]; then
+       rm --recursive --force ~/.config/{hypr,waybar}; 
+       cp -r ./.config/hypr ~/.config/;
+       mkdir -p ~/.config/waybar
+       cp -r ./.config/waybar/hypr_waybar-config/* ~/.config/waybar/
+       echo -e "$COK - Configuracao do $WM_WAYLAND."
+    fi
+
+    if [[ -z $WMs ]]; then
+        echo ""
+    elif [[ -d ~/.config/$WMs ]]; then
+        rm --recursive --force ~/.config/$WMs
+        cp -r ./.config/$WMs ~/.config/
+        echo -e "$COK - Configuração $WMs detectada, backup."
+    else
+        mkdir -p ~/.config/$WMs
+        cp -r ./.config/$WMs/* ~/.config/$WMs/
+        echo -e "$COK - Configuração do $WMs."
+    fi
+    if [[ $WMx = "sxhkd" ]]; then
+        rm --recursive --force ~/.config/sxhkd/;
+        mkdir -p ~/.config/sxhkd/;
+        cp --recursive ./.config/sxhkd/* ~/.config/sxhkd;
+        echo -e "$COK - Configuração keybinds do bspwm."
+    fi
+    # if [ -d ~/.config/polybar ]; then
+    #     rm --recursive --force ~/.config/polybar;
+    #     cp --recursive ./.config/polybar ~/.config/polybar;
+    # else
+    #     cp --recursive ./.config/polybar ~/.config/polybar;
+    #     echo "[ok]"
+    # fi
+    if [[ $WMb = "polybar" ]]; then
+        rm --recursive --force ~/.config/polybar;
+        mkdir -p ~/.config/polybar/;
+        cp --recursive ./.config/polybar/* ~/.config/polybar/;
+        echo -e "$COK - Configuração do polybar concluida"
+    fi
+
+    if [[ $WMs = "bspwm" ]]; then
+        echo -e '#!/bin/bash\n\nuserresources=$HOME/.Xresources\nsysresources=/etc/X11/xinit/.Xresources\n\n# merge in defaults\n\nif [ -f $sysresources ]; then\n    xrdb -merge $sysresources\nfi\n\nif [ -f "$userresources" ]; then\n    xrdb -merge "$userresources"\nfi\n\n[ -f ~/.Xdefaults ] && xrdb -merge ~/.Xdefaults\n\nxsetroot -cursor_name left_ptr &\n\n# feh --bg-tile ~/Imagens/wallpaperz.png\n$HOME/.fehbg\n# $HOME/trigger_custom_refresh.sh &\n# wal -R\n\n# export MPD_HOST=$HOME/.config/mpd/socket\n# mpd --kill; mpd &\nunclutter --timeout 7 &\n\n# Set up an icon tray\n# trayer --edge top --align right --SetDockType true --SetPartialStrut true \ \n# --expand true --width 10 --transparent true --tint 0x5f5f5f --height 18 &\n\nif [ "$(command -v xset)" >/dev/null 2>&1 ];\nthen\n    #xset s off      	        #Disable screen saver blanking\n    #xset s 3600 3600 	        #Change blank time to 1 hour\n    #xset -dpms 	            #Turn off DPMS\n    xset s off -dpms 	        #Disable DPMS and prevent screen from blanking\n    #xset dpms force off 	    #Turn off screen immediately\n    #xset dpms force standby 	#Standby screen\n    #xset dpms force suspend 	#Suspend screen\nfi\n\n# numlockx &\n# pulseaudio -k\n# pulseaudio &\n\nsxhkd &\nexec bspwm\n\n# exec xmonad\n\n#vim:ft=sh' > ~/.xinitrc
+    fi
+
+    if [[ $WMs = "xmonad" ]]; then 
+        echo -e '#!/bin/bash\n\nuserresources=$HOME/.Xresources\nsysresources=/etc/X11/xinit/.Xresources\n\n# merge in defaults\n\nif [ -f $sysresources ]; then\n    xrdb -merge $sysresources\nfi\n\nif [ -f "$userresources" ]; then\n    xrdb -merge "$userresources"\nfi\n\n[ -f ~/.Xdefaults ] && xrdb -merge ~/.Xdefaults\n\nxsetroot -cursor_name left_ptr &\n\n# feh --bg-tile ~/Imagens/wallpaperz.png\n$HOME/.fehbg\n# $HOME/trigger_custom_refresh.sh &\n# wal -R\n\n# export MPD_HOST=$HOME/.config/mpd/socket\n# mpd --kill; mpd &\nunclutter --timeout 7 &\n\n# Set up an icon tray\n# trayer --edge top --align right --SetDockType true --SetPartialStrut true \ \n# --expand true --width 10 --transparent true --tint 0x5f5f5f --height 18 &\n\nif [ "$(command -v xset)" >/dev/null 2>&1 ];\nthen\n    #xset s off      	        #Disable screen saver blanking\n    #xset s 3600 3600 	        #Change blank time to 1 hour\n    #xset -dpms 	            #Turn off DPMS\n    xset s off -dpms 	        #Disable DPMS and prevent screen from blanking\n    #xset dpms force off 	    #Turn off screen immediately\n    #xset dpms force standby 	#Standby screen\n    #xset dpms force suspend 	#Suspend screen\nfi\n\n# numlockx &\n# pulseaudio -k\n# pulseaudio &\n\n# sxhkd &\n# exec bspwm\n\nexec xmonad\n\n#vim:ft=sh' > ~/.xinitrc
+    fi
+
+} ### windowManger
+
+gerenciardorAUR(){
+    sleep 0.2
+cat <<GERENCIADORAUR
+  ██████   ██   ██ ██████
+ ░░░░░░██ ░██  ░██░░██░░█
+  ███████ ░██  ░██ ░██ ░
+ ██░░░░██ ░██  ░██ ░██
+░░████████░░██████░███
+ ░░░░░░░░  ░░░░░░ ░░░
+GERENCIADORAUR
+    echo ""
+    read -rep $'[\e[1;33mACAO\e[0m] - Qual é o ajudante AUR de sua escolha? Precisamos de um ajudante AUR. É essencial!!! [\e[1;36mPARU\e[0m] ou [\e[1;36mYAY\e[0m] - (p,y) ... ' NUM
+
+case $NUM in
+    p|P)
+        HELPER="paru"
+        ;;
+    y|Y)
+        HELPER="yay"
+        ;;
+    *)
+        HELPER="paru"
+        ;;
+esac
+
+if [[ -e "/sbin/$HELPER" ]]; then 
+    echo -e "$COK - Ajudante AUR já esta instalado."
+elif [[ -d ~/.srcs/$HELPER ]]; then
+    echo -e "$CNT - Vou instalar o $HELPER agora para você antes de continuar."
+	(cd ~/.srcs/$HELPER/ && makepkg -si )
+	echo -e "$COK - $HELPER instalado."
+else
+    echo -e "$CNT - Vou instalar o $HELPER agora para você antes de continuar."
+	git clone https://aur.archlinux.org/$HELPER.git ~/.srcs/$HELPER
+	(cd ~/.srcs/$HELPER/ && makepkg -si )
+	echo -e "$COK - $HELPER instalado."
+fi
+
+if [[ $HELPER = "paru" ]]; then
+    sudo sed -i 's/#BottomUp/BottomUp/g' /etc/paru.conf
+	echo -e "$COK - $HELPER configurado."
+fi
+
+install_software \
+alacritty \
+exa \
+mpv \
+python-pynvim \
+yt-dlp \
+ntfs-3g \
+xf86-input-{evdev,libinput} \
+zathura-pdf-poppler \
+adwaita-icon-theme \
+xcursor-vanilla-dmz-aa \
+cmake \
+xdg-user-dirs \
+ffmpeg \
+polkit \
+gammastep \
+&>> $INSTLOG & show_progress $!
+# redshift \
+# nodejs \
+# herbe-git \
+# python-pip \
+# bpytop \
+# curl \
+# the_silver_searcher \
+
+if [[ ! -f /bin/picom ]]; then
+install_software \
+picom-jonaburg-git \
+&>> $INSTLOG & show_progress $!
+fi
+
+# AUR para hyprland
+if [[ $WM_WAYLAND = "hyprland" ]]; then
+install_software \
+grimblast-git \
+tofi \
+&>> $INSTLOG & show_progress $!
+# notify-send.sh
+# polkit-kde-agent
+fi
+
+}
+
+notebook_ger(){
+    sleep 0.2
+cat <<LAPTOP
+                     ██           ██                        ██
+                    ░██          ░██                       ░██
+ ███████   ██████  ██████  █████ ░██       ██████   ██████ ░██  ██
+░░██░░░██ ██░░░░██░░░██░  ██░░░██░██████  ██░░░░██ ██░░░░██░██ ██
+ ░██  ░██░██   ░██  ░██  ░███████░██░░░██░██   ░██░██   ░██░████
+ ░██  ░██░██   ░██  ░██  ░██░░░░ ░██  ░██░██   ░██░██   ░██░██░██
+ ███  ░██░░██████   ░░██ ░░██████░██████ ░░██████ ░░██████ ░██░░██
+░░░   ░░  ░░░░░░     ░░   ░░░░░░ ░░░░░    ░░░░░░   ░░░░░░  ░░  ░░
+LAPTOP
+echo ""
+read -rep $'[\e[1;33mACAO\e[0m] - Este computador é um notebook? - (s,n) ... ' $NOTEBOOK
+
+case $NOTEBOOK in
+    s|S)
+    install_software acpi acpid xf86-input-synaptics &>> $INSTLOG & show_progress $!
+    sudo systemctl enable acpid.service
+    sudo cp ./xorg_conf/70-synaptics.conf /usr/share/X11/xorg.conf.d/
+    if [[ $WMb = "polybar" ]]; then
+        sed -i 's/FILE-6/#FILE-6/' $HOME/.config/bspwm/bspwmrc
+        sed -i 's/ws-icon-5 \= FILE-6\;0110-6/\;ws-icon-5 \= FILE-6\;0110-6/' $HOME/.config/polybar/{config.ini,center.config.ini}
+        sed -i 's/ws-icon-6 \= EDIT-7\;0111-7/\;ws-icon-6 \= EDIT-7\;0111-7/' $HOME/.config/polybar/{config.ini,center.config.ini}
+        sed -i 's/ws-icon-7 \= GAME-8\;1000-8/\;ws-icon-7 \= GAME-8\;1000-8/' $HOME/.config/polybar/{config.ini,center.config.ini}
+        sed -i 's/ws-icon-8 \= MAIL-9\;1001-9/\;ws-icon-8 \= MAIL-9\;1001-9/' $HOME/.config/polybar/{config.ini,center.config.ini}
+        sed -i 's/ws-icon-9 \= MPD-10\;0000-0/\;ws-icon-9 \= MPD-10\;0000-0/' $HOME/.config/polybar/{config.ini,center.config.ini}
+    else
+        echo -e "$COK - Configuracao do polybar para notebook"
+    fi
+    echo -e "$COK - Configuracao par notebook."
+    ;;
+    n|N)
+    echo -e "$CNT - Este é um desktop."
+    ;;
+esac
+
+}
+
+lancadorProgramas(){
+    sleep 0.2
+cat << DMENUDESENHO
+              ██                                       ████
+             ░██                                      █░░░ █
+             ░██ ██████████   █████  ███████  ██   ██░    ░█
+          ██████░░██░░██░░██ ██░░░██░░██░░░██░██  ░██   ███
+         ██░░░██ ░██ ░██ ░██░███████ ░██  ░██░██  ░██  █░░
+        ░██  ░██ ░██ ░██ ░██░██░░░░  ░██  ░██░██  ░██ █
+        ░░██████ ███ ░██ ░██░░██████ ███  ░██░░██████░██████
+         ░░░░░░ ░░░  ░░  ░░  ░░░░░░ ░░░   ░░  ░░░░░░ ░░░░░░
+DMENUDESENHO
+
+mkdir -p ~/.config/
+if [[ $WM_WAYLAND = "hyprland" ]]; then
+    echo -e "$CAT - Wayland detectado dmenu2 nao sera instalado."
+else
+if [[ -d ~/.srcs ]]; then
+    echo -e "$COK - Pasta .srcs";
+else
+    mkdir -p ~/.srcs
+    echo -e "$COK - Pasta .srcs";
+fi
+
+if [[ -e "/usr/local/bin/dmenu_run" ]]; then 
+    echo -e "$COK - dmenu2 já estava instalado."
+    elif [ -d ~/.srcs/dmenu2 ]; then
+        echo -e "$COK - Pasta dmenu2 exite."
+        (tar zxf ~/.srcs/dmenu2/dmenu2-0.2.1.tar.gz -C ~/.srcs/dmenu2  && cd ~/.srcs/dmenu2/dmenu2-0.2.1/ && sudo make clean install)
+        echo -e "$COK - dmenu2 instalado."
+    else
+        mkdir -p ~/.srcs
+        echo ""
+        read -rep $'[\e[1;33mACAO\e[0m] - Voce quer instalar o dmenu2? - (s,n) ... ' DM2
+        case $DM2 in
+        s|S)
+            if [[ -d ~/.srcs/dmenu2-1 ]]; then
+                echo -e "$CNT - Detectado pasta para compilar dmenu2, instalando..."
+                (tar zxf ~/.srcs/dmenu2-1/dmenu2-0.2.1.tar.gz -C ~/.srcs/dmenu2-1/ && cd ~/.srcs/dmenu2-1/dmenu2-0.2.1/ && sudo make clean install)
+                echo -e "$COK - dmenu2 instalado."
+            else 
+                echo -e "$CNT - Clonando dmenu2..."
+                git -C ~/.srcs clone https://github.com/quebravel/dmenu2-1.git
+                echo -e "$CNT Instalando dmenu2..."
+                (tar zxf ~/.srcs/dmenu2-1/dmenu2-0.2.1.tar.gz -C ~/.srcs/dmenu2-1/  && cd ~/.srcs/dmenu2-1/dmenu2-0.2.1/ && sudo make clean install)
+                echo -e "$COK - dmenu2 instalado."
+            fi
+              echo -e "$COK - dmenu2 instalado."
+              ;;
+        n|N)
+              (cd ~/.srcs/dmenu2-1/dmenu2-0.2.1 && sudo make uninstall && sudo make clean)
+              ;;
+          *) lancadorProgramas
+        esac
+    fi
+fi
+}
+
+arquivosdeConfiguracao(){
+    clear
+    echo -e "Configurando programas \n ... \n .. \n ."
+    sleep 0.2
+
+    if [[ ! -d ~/.config/picom ]]; then
+        mkdir --parents ~/.config/picom/;
+        cp --force ./.config/picom/* ~/.config/picom/;
+    else
+        rm --recursive --force ~/.config/picom/;
+        mkdir --parents ~/.config/picom/;
+        cp --force ./.config/picom/* ~/.config/picom/;
+    fi
+
+    if [[ ! -d ~/.config/alacritty ]]; then
+        mkdir -p ~/.config/alacritty/;
+        cp --recursive --force ./.config/alacritty ~/.config/;
+    else
+        rm --recursive --force ~/.config/alacritty/;
+        cp --recursive --force ./.config/alacritty ~/.config/;
+    fi
+    # if [ -d ~/wallpapers ]; then
+    #     echo "Adicionando wallpaper para ~/wallpapers..."
+    #     cp ./wallpapers/* ~/wallpapers/;
+    # else
+    #     echo "Installing wallpaper..."
+    #     mkdir ~/wallpapers && cp -r ./wallpapers/* ~/wallpapers/;
+    # fi
+    if [[ ! -d ~/.config/mpv ]]; then
+        mkdir --parents ~/.config/mpv;
+        cp ./.config/mpv/* ~/.config/mpv/;
+    else
+        rm --recursive --force ~/.config/mpv/*
+        cp --recursive --force ./.config/mpv/* ~/.config/mpv/;
+    fi
+
+    if [[ ! -d ~/.config/zathura ]]; then
+        mkdir --parents ~/.config/zathura/;
+        cp ./.config/zathura/zathurarc ~/.config/zathura/;
+    else
+        rm --force ~/.config/zathura/zathurarc;
+        cp ./.config/zathura/zathurarc ~/.config/zathura/;
+    fi
+
+    if [[ ! -d ~/.config/sxiv ]]; then
+        mkdir --parents ~/.config/sxiv/;
+        cp --recursive --force ./.config/sxiv/* ~/.config/sxiv/;
+    else
+        rm --recursive --force  ~/.config/sxiv/;
+        cp --recursive --force ./.config/sxiv/* ~/.config/;
+    fi
+
+    # if [ ! -d ~/.config/redshift ]; then
+    #     mkdir --parents ~/.config/redshift/;
+    #     cp --recursive --force ./.config/redshift/* ~/.config/redshift/;
+    # else
+    #     rm --recursive --force  ~/.config/redshift/;
+    #     cp --recursive --force ./.config/redshift/ ~/.config/;
+    # fi
+
+    if [[ ! -d ~/.config/gammastep ]]; then
+        mkdir --parents ~/.config/gammastep/;
+        cp --recursive --force ./.config/gammastep/* ~/.config/gammastep/;
+    else
+        rm --recursive --force  ~/.config/gammastep/;
+        cp --recursive --force ./.config/gammastep/ ~/.config/;
+    fi
+    
+} ### arquivosdeConfiguracao
+
+ly_config(){
+ sleep 0.2
+cat <<LOGINLY
+     ██
+    ░██        ██   ██
+    ░██       ░░██ ██
+    ░██        ░░███
+    ░██         ░██
+    ░██         ██
+    ░████████  ██
+    ░░░░░░░░  ░░
+LOGINLY
+echo ""
+read -rep $'[\e[1;33mACAO\e[0m] - Deseja instalar um <Display Manager> (Ly)? - (s,n) ... ' DMGR
+
+    case "$DMGR" in
+    s|S)
+    install_software ly-git cmatrix &>> $INSTLOG & show_progress $!
+    # cominho do arquivo de configuração
+    arquivo="/etc/ly/config.ini"
+
+    if [[ -f $arquivo ]]; then
+        # abilitando opções 
+        sudo sed -i 's/#animate = false/animate = true/g' $arquivo
+        sudo sed -i 's/#animation = 0/animation = 1/g' $arquivo
+        sudo sed -i 's/#xinitrc \= \~\/.xinitrc/xinitrc \= \~\/.xinitrc/g' $arquivo
+        # transformando arquivo xinitrc em executavel bash
+        chmod +x ~/.xinitrc
+        sudo systemctl enable ly.service
+        sleep 0.2
+        echo -e "$COK - Ly instalado."
+    else
+        echo -e "$CER - não existe o arquivo de configuracao"
+    fi
+    ;;
+    n|N) echo -e "$CNT - Nao terá display manager."
+    ;;
+    *) ly_config
+    ;;
+    esac
+
+
+} ### ly_config
+
+# parte 2
+_so="sudo pacman -S --needed --noconfirm"
+_s="sudo"
+
+playermusica(){
+
+ clear
+ echo -e "... configurando ncmpcpp . mpd . mpc \n ... \n .. \n ."
+ sleep 0.2
+ cat <<PLAYMSC
+                              ██████          ██████  ██████
+ ███████   █████  ██████████ ░██░░░██  █████ ░██░░░██░██░░░██
+░░██░░░██ ██░░░██░░██░░██░░██░██  ░██ ██░░░██░██  ░██░██  ░██
+ ░██  ░██░██  ░░  ░██ ░██ ░██░██████ ░██  ░░ ░██████ ░██████
+ ░██  ░██░██   ██ ░██ ░██ ░██░██░░░  ░██   ██░██░░░  ░██░░░
+ ███  ░██░░█████  ███ ░██ ░██░██     ░░█████ ░██     ░██
+░░░   ░░  ░░░░░  ░░░  ░░  ░░ ░░       ░░░░░  ░░      ░░
+
+PLAYMSC
+
+ echo " 1)_Ncmpcpp    2)_Nao"
+echo -e " \033[44;1;37m Quer instalar o player de música? \033[0m "
+read -r -p "-> ... " plmc
+case "$plmc" in
+ 1) 
+$_so \
+ncmpcpp \
+mpd \
+mpc
+
+if [ ! -d ~/Músicas ]; then 
+ mkdir -p ~/Músicas
+else
+ echo "pasta Músicas já existe"
+fi
+if [ ! -d ~/.config/ncmpcpp ]; then
+ mkdir --parents ~/.config/ncmpcpp/;
+ cp ./.config/ncmpcpp/* ~/.config/ncmpcpp/;
+else
+ cp ./.config/ncmpcpp/* ~/.config/ncmpcpp/;
+fi
+if [ ! -d ~/.config/mpd ]; then
+ mkdir --parents ~/.config/mpd/;
+ cp ./.config/mpd/mpd.conf ~/.config/mpd/;
+else
+ cp ./.config/mpd/mpd.conf ~/.config/mpd/;
+fi
+
+$_s systemctl enable mpd.service
+
+$_s systemctl start mpd.service
+
+touch ~/.config/mpd/socket
+
+sed -i 's/\# export MPD_HOST\=\$HOME\/.config\/mpd\/socket/export MPD_HOST\=\$HOME\/.config\/mpd\/socket/g' $HOME/.xinitrc
+
+sed -i 's/# mpd --kill; mpd \&/mpd --kill; mpd \&/g' $HOME/.xinitrc
+
+export MPD_HOST=$HOME/.config/mpd/socket
+
+echo 'mpd . mpc . ncmpcpp ... instalados'
+
+echo 'reinicie o systema ... reboot'
+
+ ;;
+ 2) echo "Oxente!!!"
+ ;;
+ *) playermusica
+ ;;
+esac
+
+}
+
+rangerfm(){
+
+ clear
+ echo -e "... ranger . ueberzug . ffmpegthumbnailer \n ... \n .. \n ."
+ sleep 0.2
+
+cat << RANGER-DESENHO
+                            █████
+ ██████  ██████   ███████  ██░░░██  █████  ██████
+░░██░░█ ░░░░░░██ ░░██░░░██░██  ░██ ██░░░██░░██░░█
+ ░██ ░   ███████  ░██  ░██░░██████░███████ ░██ ░
+ ░██    ██░░░░██  ░██  ░██ ░░░░░██░██░░░░  ░██
+░███   ░░████████ ███  ░██  █████ ░░██████░███
+░░░     ░░░░░░░░ ░░░   ░░  ░░░░░   ░░░░░░ ░░░
+
+RANGER-DESENHO
+
+echo " 1)_Ranger    2)_Nao"
+echo -e " \033[44;1;37m Quer uma gerenciador de arquivos para terminal? \033[0m "
+read -r -p "-> ... " rag
+
+case "$rag" in
+ 1) FILEMANAGER='RANGER'
+ ;;
+ 2) echo "Beleza"
+ ;;
+ *) rangerfm
+ ;;
+esac
+
+if [ $FILEMANAGER = RANGER ]; then
+
+ $_so \
+ ranger \
+ ueberzug \
+ ffmpegthumbnailer
+
+    if [ ! -d ~/.config/ranger/ ]; then
+     mkdir --parents ~/.config/ranger/;
+    fi
+    if [ -f ~/.config/ranger/rc.conf ]; then
+     echo "arquivo rc.conf ... [ok]"
+    else
+     ranger --copy-config=rc
+     sleep 0.2
+     sed -i 's/set preview_images false/set preview_images true/g' $HOME/.config/ranger/rc.conf
+     sleep 0.2
+     sed -i 's/set draw_borders none/set draw_borders both/g' $HOME/.config/ranger/rc.conf
+     sleep 0.2
+     sed -i 's/set preview_images_method w3m/set preview_images_method ueberzug/g' $HOME/.config/ranger/rc.conf
+     sleep 0.2
+     sed -i 's/#set preview_script ~\/.config\/ranger\/scope.sh/set preview_script ~\/.config\/ranger\/scope.sh/g' $HOME/.config/ranger/rc.conf
+     # sed -i 's/set sort natural/set sort ctime/g' ~/.config/ranger/rc.conf
+    fi
+    if [ -f ~/.config/ranger/scope.sh ]; then
+     echo "arquivo scope.sh ... [ok]"
+    else
+     ranger --copy-config=scope
+     sleep 0.2
+     sed -i '113,116s/#//' $HOME/.config/ranger/scope.sh
+     sleep 0.2
+     sed -i '157,160s/#//' $HOME/.config/ranger/scope.sh
+    fi
+    if [ -f ~/.config/ranger/rifle.conf ]; then
+     echo "arquivo rifle.conf ... [ok]"
+    else
+     ranger --copy-config=rifle
+     sed -i 's/mime ^audio|ogg$, terminal, has mplayer  = mplayer -- "$@"/mime ^audio|ogg$, terminal, has moc      = ncmpcpp -- "$@"/g' $HOME/.config/ranger/rifle.conf
+     sleep 0.2
+     sed -i '/label wallpaper, number 15, mime ^image, has feh, X = wal -i "$1"/d' $HOME/.config/ranger/rifle.conf
+     sleep 0.2
+     sed -i 's/label wallpaper, number 14, mime ^image, has feh, X = feh --bg-fill "$1"/label wallpaper, number 14, mime ^image, has feh, X = feh --bg-fill "$1"\nlabel wallpaper, number 15, mime ^image, has feh, X = wal -i "$1"/g' $HOME/.config/ranger/rifle.conf
+    fi
+
+    ranger --version
+
+fi
+
+}
+
+audio_config(){
+
+ clear
+ echo -e "... controlador audio \n ... \n .. \n ."
+ sleep 0.2
+
+cat <<AUDIOCONF
+                        ██ ██
+                       ░██░░
+  ██████   ██   ██     ░██ ██  ██████
+ ░░░░░░██ ░██  ░██  ██████░██ ██░░░░██
+  ███████ ░██  ░██ ██░░░██░██░██   ░██
+ ██░░░░██ ░██  ░██░██  ░██░██░██   ░██
+░░████████░░██████░░██████░██░░██████
+ ░░░░░░░░  ░░░░░░  ░░░░░░ ░░  ░░░░░░
+
+AUDIOCONF
+
+ echo " 1)_Pipewire    2)_Pulseaudio"
+ echo -e " \033[44;1;37m qual controlador de audio? \033[0m "
+ echo " (Padrao: pipewire)"
+ read -r -p "-> ... " aud
+
+case "$aud" in
+ 1) AUDIOD='PIPEWIRE'
+  ;;
+ 2) AUDIOD='PULSEAUDIO'
+  ;;
+ *) audio_config
+  ;;
+esac
+
+if [ $AUDIOD = PIPEWIRE ]; then
+  $_so \
+  pipewire \
+  pipewire-alsa \
+  pipewire-audio \
+  pipewire-pulse \
+  wireplumber \
+  # gst-plugin-pipewire
+  # helvum \
+  echo -e "use <wpctl status> para detectar en Sinks: o númeor ID da saída de áudío\nexemplo:\nwpctl status\nSinks:\n33. Áudio interno Estéreo analógico  [vol: 1.20]\n53. Ellesmere HDMI Audio [Radeon RX 470/480 / 570/580/590] Digital Stereo (HDMI 6)\nwpctl set-default 53" >> notas.txt
+elif [ $AUDIOD = PULSEAUDIO ]; then
+  $_so \
+  alsa-utils \
+  pulseaudio \
+  # gst-plugins-{base,good,bad,ugly} \
+  # gst-libav
+fi
+
+}
+
+zshinstall(){
+
+ clear
+ echo -e "instalando zsh . zsh-completions  \n ... \n .. \n ."
+ sleep 0.2
+
+$_so \
+zsh \
+zsh-completions
+
+echo "zsh ... instalado"
+
+}
+
+fontes_doSistema(){
+
+ clear
+ echo -e "instalando fontes  \n ... \n .. \n ."
+ sleep 0.2
+
+# wqy-microhei (koreano), cjk (japones)
+$_so \
+ttf-dejavu \
+noto-fonts-emoji \
+gnu-free-fonts \
+wqy-microhei \
+noto-fonts-cjk \
+xorg-fonts-{75dpi,100dpi,encodings} \
+ttf-jetbrains-mono-nerd 
+
+if [ ! -f /usr/share/fonts/misc/siji.bdf ]; then
+$HELPER -S --needed --noconfirm siji-git 
+fi
+
+echo "fontes ... instaladas"
+
+}
+
+navegador(){
+
+ clear
+ echo -e "... browser  \n ... \n .. \n ."
+ sleep 0.2
+
+cat <<NAVEGADOR-DESENHO
+ ██
+░██
+░██      ██████  ██████  ███     ██  ██████  █████  ██████
+░██████ ░░██░░█ ██░░░░██░░██  █ ░██ ██░░░░  ██░░░██░░██░░█
+░██░░░██ ░██ ░ ░██   ░██ ░██ ███░██░░█████ ░███████ ░██ ░
+░██  ░██ ░██   ░██   ░██ ░████░████ ░░░░░██░██░░░░  ░██
+░██████ ░███   ░░██████  ███░ ░░░██ ██████ ░░██████░███
+░░░░░   ░░░     ░░░░░░  ░░░    ░░░ ░░░░░░   ░░░░░░ ░░░
+
+NAVEGADOR-DESENHO
+
+echo " 1)_Qutebrowser    2)_Firefox    P)_Pular"
+echo -e " \033[44;1;37m Qual navegador preferido? \033[0m "
+read -r -p "-> ... " browser
+
+case "$browser" in
+ 1) BROW="qutebrowser"
+ ;;
+ 2) BROW="firefox"
+ ;;
+ P|p) echo "Canelau"
+ ;;
+ *) navegador
+ ;;
+esac
+
+if [ $BROW = "qutebrowser" ]; then
+ $_so qutebrowser \
+python-adblock
+
+/usr/share/qutebrowser/scripts/dictcli.py install pt-BR
+
+ mkdir -p ~/.config/qutebrowser/;
+ cp -r ./.config/qutebrowser/* ~/.config/qutebrowser/;
+ chmod +x ~/.config/qutebrowser/greasemonkey/*
+
+elif [ $BROW = "firefox" ]; then
+ $_so firefox \
+firefox-i18n-pt-br
+
+ echo "$BROW ... instalado"
+fi
+
+}
+
+copilador_config(){
+
+ clear
+ echo -e "configurando copilador  \n ... \n .. \n ."
+ sleep 0.2
+
+# processador 
+ncore=`lscpu | grep "^CPU(s)" | head -n 1 | cut -d: -f2 | tr -d " "`
+
+echo "congirurando makeflags para  $ncore processadores ativos durante a compilação ..."
+echo "coloque a senha ... "
+$_s sed -i "s/#MAKEFLAGS=\"-j2\"/MAKEFLAGS=\"-j$ncore\"/g" /etc/makepkg.conf
+
+
+echo "copilador configurado para [$ncore] processadores"
+
+}
+
+pastas_config(){
+
+ clear
+ echo -e "criando pastas padrao  \n ... \n .. \n ."
+ sleep 0.2
+
+if [[ -f /usr/bin/xdg-user-dirs-update ]]; then
+xdg-user-dirs-update
+fi
+}
+
+temas(){
+
+ clear
+ echo -e "configurando temas gruvbox-dark para GTK  \n ... \n .. \n ."
+ sleep 0.2
+
+# gruvbox tema
+if [ ! -d ~/.themes ]; then
+git clone https://github.com/jmattheis/gruvbox-dark-gtk ~/.themes/gruvbox-dark-gtk
+else
+ echo "voce ja tem o tema"
+fi
+sleep 0.2
+if [ ! -d ~/.icons ]; then
+git clone https://github.com/jmattheis/gruvbox-dark-icons-gtk ~/.icons/gruvbox-dark-icons-gtk
+else
+ echo "voce ja tem o tema"
+fi
+if [ -d ~/.config/gtk-3.0 ]; then
+ cp ./.config/gtk-3.0/* ~/.config/gtk-3.0/;
+else
+ mkdir -p ~/.config/gtk-3.0/;
+ cp ./.config/gtk-3.0/* ~/.config/gtk-3.0/;
+fi
+
+echo "temas gruvbox GTK ... instalados"
+
+}
+
+ohmyzsh(){
+
+ clear
+ echo -e "instalando oh-my-zsh  \n ... \n .. \n ."
+ sleep 0.2
+
+if [ ! -d ~/.oh-my-zsh ]; then
+ # sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+    sleep 0.2
+    chsh -s $(which zsh)
+    echo "oh-my-zsh ... instalado"
+else
+    echo "já existe oh-my-zsh"
+fi
+
+echo -e "parte 2 feito \n ... \n .. \n . \n =)"
+
+}
+
+alias_autopair(){
+
+ clear
+ echo -e "configurando zsh  \n ... \n .. \n ."
+ sleep 0.2
+
+# zsh alias, autopair
+echo "arquivo alias"
+if [ ! -f ~/.config/zsh/alias.zsh ]; then
+ mkdir --parents ~/.config/zsh/;
+ cp ./.config/zsh/alias.zsh ~/.config/zsh/;
+fi
+
+echo "arquivo de plugins"
+if [ ! -f ~/.config/zsh/vim-mode.zsh ]; then
+ mkdir --parents  ~/.config/zsh/;
+ cp ./.config/zsh/vim-mode.zsh ~/.config/zsh/;
+fi
+
+sleep 0.2
+
+if [ -f ~/.zshrc ]; then
+echo -e "\nexport	EDITOR='nvim'\nexport	TERMINAL='alacritty'\nexport	BROWSER='qutebrowser'\nexport	READER='zathura'\nexport	SHELL='zsh'\nexport	XDG_CURRENT_DESKTOP='bspwm'\n\n[[ ! -f ~/.config/zsh/alias.zsh ]] || source ~/.config/zsh/alias.zsh\n[[ ! -f ~/.config/zsh/vim-mode.zsh ]] || source ~/.config/zsh/vim-mode.zsh\n\n# autopair zsh\nif [[ ! -d ~/.config/zsh/zsh-autopair ]]; then\n\tgit clone https://github.com/hlissner/zsh-autopair ~/.config/zsh/zsh-autopair\nfi\n\nsource ~/.config/zsh/zsh-autopair/autopair.zsh\nautopair-init" >> $HOME/.zshrc
+
+sed -i '/(git)/s/git/git extract universalarchive/' $HOME/.zshrc
+fi
+
+sleep 0.2
+echo "zsh configurado"
+
+}
+
+editordeTexto(){
+
+ clear
+ echo -e "configurando instalando e astrovim  \n ... \n .. \n ."
+ sleep 0.2
+
+cat <<ASTRONVIM-DESENHO
+                     +--------------------+
+                     |                    |      neovim
+                     |       .ASTRO       |        +
+                     |        NVIM.       |      astro
+                     |        ....        |      ...
+                     |         ..         |
+                     +--------------------+
+
+                     ██                                       ██
+                    ░██                                      ░░
+  ██████    ██████ ██████ ██████  ██████    ███████  ██    ██ ██ ██████████
+ ░░░░░░██  ██░░░░ ░░░██░ ░░██░░█ ██░░░░██  ░░██░░░██░██   ░██░██░░██░░██░░██
+  ███████ ░░█████   ░██   ░██ ░ ░██   ░██   ░██  ░██░░██ ░██ ░██ ░██ ░██ ░██
+ ██░░░░██  ░░░░░██  ░██   ░██   ░██   ░██   ░██  ░██ ░░████  ░██ ░██ ░██ ░██
+░░████████ ██████   ░░██ ░███   ░░██████    ███  ░██  ░░██   ░██ ███ ░██ ░██
+ ░░░░░░░░ ░░░░░░     ░░  ░░░     ░░░░░░    ░░░   ░░    ░░    ░░ ░░░  ░░  ░░
+
+ASTRONVIM-DESENHO
+
+ $_so neovim \
+ python-pynvim
+
+ if [ ! -d ~/.config/nvim ]; then
+  git clone --depth 1 https://github.com/AstroNvim/AstroNvim ~/.config/nvim
+  git clone https://github.com/quebravel/astronvim_config.git ~/.config/nvim/lua/user
+  (nvim  --headless -c 'quitall')
+ else
+  echo " 1)_Sim    2)_Nao"
+  echo " Existe um diretorio nvim"
+  echo -e " \033[44;1;37m Deseja re/instalar astronvim? \033[0m "
+  read -r -p "-> ... " astronv
+
+  case "$astronv" in
+   1)
+    rm -rf ~/.config/nvim/;
+    git clone --depth 1 https://github.com/AstroNvim/AstroNvim ~/.config/nvim
+    git clone https://github.com/quebravel/astronvim_config.git ~/.config/nvim/lua/user
+    (nvim  --headless -c 'quitall')
+   ;;
+   2) echo "Simbora! ..."
+   ;;
+   *) editordeTexto
+   ;;
+  esac 
+ fi
+
+ echo -e " .... Astro neovim finalizado \n ... \n .. \n ."
+
+}
+
+layout_teclado(){
+
+if [[ $WM_WAYLAND = "hyprland" ]]; then
+    echo ""
+else
+cat << TECLADO-DESENHO
+ ██                      ██                                     ██
+░██              ██   ██░██                                    ░██
+░██  ██  █████  ░░██ ██ ░██       ██████   ██████   ██████     ░██
+░██ ██  ██░░░██  ░░███  ░██████  ██░░░░██ ░░░░░░██ ░░██░░█  ██████
+░████  ░███████   ░██   ░██░░░██░██   ░██  ███████  ░██ ░  ██░░░██
+░██░██ ░██░░░░    ██    ░██  ░██░██   ░██ ██░░░░██  ░██   ░██  ░██
+░██░░██░░██████  ██     ░██████ ░░██████ ░░████████░███   ░░██████
+░░  ░░  ░░░░░░  ░░      ░░░░░    ░░░░░░   ░░░░░░░░ ░░░     ░░░░░░
+TECLADO-DESENHO
+
+    echo " 1)_abnt2    2)_us-intl"
+    echo " Qual o layout do seu teclado no xorg?"
+    read -r -p "-> ... " LAYOUTTECLADO 
+
+    case "$LAYOUTTECLADO" in
+        1)
+            sudo cp ./xorg_conf/31-keyboard-abnt2.conf /usr/share/X11/xorg.conf.d/
+        ;;
+        2) 
+            sudo cp ./xorg_conf/30-keyboard-us-intl.conf /usr/share/X11/xorg.conf.d/
+        ;;
+        *) layout_teclado
+        ;;
+    esac
+fi
+}
+
+# chamar funções parte 1
+inicio
+driveVideo
+windowManger
+gerenciardorAUR
+notebook_ger
+lancadorProgramas
+arquivosdeConfiguracao
+ly_config
+
+# chamar funções parte 2
+zshinstall
+fontes_doSistema
+navegador
+copilador_config
+temas
+pastas_config
+audio_config
+rangerfm
+playermusica
+ohmyzsh
+alias_autopair
+editordeTexto
+layout_teclado
