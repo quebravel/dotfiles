@@ -14,6 +14,7 @@ CAC="[\e[1;33mACAO\e[0m]" #amarelo
 INSTLOG="$HOME/install.log"
 FIN_INST="&>> $INSTLOG & show_progress $!"
 ESPEPACMAN="[\e[1;37mPACMAN\e[0m]"
+CONFIGANDO="[\e[1;37mCONFIGURANDO\e[0m]"
 
 # barra de progresso
 show_progress() {
@@ -358,8 +359,7 @@ install_software "alacritty exa mpv python-pynvim yt-dlp ntfs-3g xf86-input-evde
 
 if [[ ! -f /bin/picom ]]; then
 echo -e "$ESPEPACMAN"
-install_software "picom-jonaburg-git"
-&>> $INSTLOG & show_progress $!
+install_software "picom-jonaburg-git" &>> $INSTLOG & show_progress $!
 fi
 
 # AUR para hyprland
@@ -391,6 +391,7 @@ case $NOTEBOOK in
     s|S)
     echo -e "$ESPEPACMAN"
     install_software "acpi acpid xf86-input-synaptics" &>> $INSTLOG & show_progress $!
+    echo -e "$CONFIGANDO"
     sudo systemctl enable acpid.service &>> $INSTLOG & show_progress $!
     sudo cp ./xorg_conf/70-synaptics.conf /usr/share/X11/xorg.conf.d/
     if [[ $WMb = "polybar" ]]; then
@@ -621,8 +622,10 @@ else
  cp ./.config/mpd/mpd.conf ~/.config/mpd/;
 fi
 
+echo -e "$CONFIGANDO"
 sudo systemctl enable mpd &>> $INSTLOG & show_progress $!
 
+echo -e "$CONFIGANDO"
 sudo systemctl start mpd &>> $INSTLOG & show_progress $!
 
 touch ~/.config/mpd/socket
@@ -682,6 +685,7 @@ install_software "ranger ueberzug ffmpegthumbnailer" &>> $INSTLOG & show_progres
     if [ -f ~/.config/ranger/rc.conf ]; then
      echo -e "$COK - ARQUIVO RC.CONF."
     else
+     echo -e "$CONFIGANDO"
      ranger --copy-config=rc &>> $INSTLOG & show_progress $!
      sleep 0.2
      sed -i 's/set preview_images false/set preview_images true/g' $HOME/.config/ranger/rc.conf
@@ -696,6 +700,7 @@ install_software "ranger ueberzug ffmpegthumbnailer" &>> $INSTLOG & show_progres
     if [ -f ~/.config/ranger/scope.sh ]; then
      echo -e "$COK - ARQUIVO SCOPE.SH."
     else
+     echo -e "$CONFIGANDO"
      ranger --copy-config=scope &>> $INSTLOG & show_progress $!
      sleep 0.2
      sed -i '113,116s/#//' $HOME/.config/ranger/scope.sh
@@ -705,6 +710,7 @@ install_software "ranger ueberzug ffmpegthumbnailer" &>> $INSTLOG & show_progres
     if [ -f ~/.config/ranger/rifle.conf ]; then
      echo -e "$COK - ARQUIVO RIFLE.CONF."
     else
+     echo -e "$CONFIGANDO"
      ranger --copy-config=rifle &>> $INSTLOG & show_progress $!
      sed -i 's/mime ^audio|ogg$, terminal, has mplayer  = mplayer -- "$@"/mime ^audio|ogg$, terminal, has moc      = ncmpcpp -- "$@"/g' $HOME/.config/ranger/rifle.conf
      sleep 0.2
@@ -713,7 +719,9 @@ install_software "ranger ueberzug ffmpegthumbnailer" &>> $INSTLOG & show_progres
      sed -i 's/label wallpaper, number 14, mime ^image, has feh, X = feh --bg-fill "$1"/label wallpaper, number 14, mime ^image, has feh, X = feh --bg-fill "$1"\nlabel wallpaper, number 15, mime ^image, has feh, X = wal -i "$1"/g' $HOME/.config/ranger/rifle.conf
     fi
 
-    ranger --version
+    # ranger --version
+    ranger_versao=$(ranger --version | grep ranger | cut -d: -f2 | sed s/^" "//g | tr a-z A-Z)
+    echo -e "$COK - $ranger_versao INSTALADO"
 
 fi
 
@@ -822,7 +830,7 @@ esac
 if [[ $BROWq = "qutebrowser" ]]; then
 echo -e "$ESPEPACMAN"
 install_software "qutebrowser python-adblock" &>> $INSTLOG & show_progress $!
-
+echo -e "$CONFIGANDO"
 /usr/share/qutebrowser/scripts/dictcli.py install pt-BR &>> $INSTLOG & show_progress $!
 
  mkdir -p ~/.config/qutebrowser/;
@@ -869,12 +877,14 @@ temas(){
 
 # gruvbox tema
 if [ ! -d ~/.themes ]; then
+echo -e "$CONFIGANDO"
 git clone https://github.com/jmattheis/gruvbox-dark-gtk ~/.themes/gruvbox-dark-gtk &>> $INSTLOG & show_progress $!
 else
  echo -e "$CWR - VOCÊ JÁ TEM O TEMA GRUVBOX-DARK-GTK."
 fi
 sleep 0.2
 if [ ! -d ~/.icons ]; then
+echo -e "$CONFIGANDO"
 git clone https://github.com/jmattheis/gruvbox-dark-icons-gtk ~/.icons/gruvbox-dark-icons-gtk &>> $INSTLOG & show_progress $!
 else
  echo -e "$CWR - VOCÊ JÁ TEM O TEMA GRUVBOX-DARK-ICONS-GTK."
@@ -960,7 +970,9 @@ echo -e "$ESPEPACMAN"
 install_software "neovim python-pynvim" &>> $INSTLOG & show_progress $!
 
  if [[ ! -d ~/.config/nvim ]]; then
+  echo -e "$CONFIGANDO"
   git clone --depth 1 https://github.com/AstroNvim/AstroNvim ~/.config/nvim &>> $INSTLOG & show_progress $!
+  echo -e "$CONFIGANDO"
   git clone https://github.com/quebravel/astronvim_config.git ~/.config/nvim/lua/user &>> $INSTLOG & show_progress $!
   (nvim  --headless -c 'quitall')
  else
@@ -969,7 +981,9 @@ install_software "neovim python-pynvim" &>> $INSTLOG & show_progress $!
   case "$ASTRONV" in
    s|S)
     rm -rf ~/.config/nvim/;
+    echo -e "$CONFIGANDO"
     git clone --depth 1 https://github.com/AstroNvim/AstroNvim ~/.config/nvim &>> $INSTLOG & show_progress $!
+    echo -e "$CONFIGANDO"
     git clone https://github.com/quebravel/astronvim_config.git ~/.config/nvim/lua/user &>> $INSTLOG & show_progress $!
     (nvim  --headless -c 'quitall')
    ;;
