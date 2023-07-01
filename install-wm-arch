@@ -13,8 +13,8 @@ CWR="[\e[1;35mALERTA\e[0m]" #roxo claro
 CAC="[\e[1;33mACAO\e[0m]" #amarelo
 INSTLOG="$HOME/install.log"
 FIN_INST="&>> $INSTLOG & show_progress $!"
-ESPEPACMAN="[\e[1;37mPACMAN\e[0m]"
-CONFIGANDO="[\e[1;37mCONFIGURANDO\e[0m]"
+ESPEPACMAN="[\e[1;37mPACMAN\e[0m"
+CONFIGANDO="[\e[1;37mCONFIGURANDO\e[0m"
 
 # barra de progresso
 show_progress() {
@@ -23,7 +23,7 @@ show_progress() {
         echo -n "."
         sleep 2
     done
-    echo -en "\e[1;32mPRONTO!\e[0m\n"
+    echo -en "\e[1;32mPRONTO!\e[0m]\n"
     sleep 2
 }
 
@@ -105,7 +105,8 @@ esac
 
 # does full system update
 echo -e "$CAC - FAZENDO UMA ATUALIZAÇÃO DO SISTEMA, PODE ACONTECER QUE COISAS QUEBREM SE NÃO FOR A VERSÃO MAIS RECENTE."
-if ! sudo pacman --noconfirm -Syu &>> $INSTLOG
+echo -e $ESPEPACMAN
+if ! sudo pacman --noconfirm -Syu
 then
     echo -e "$CER - ERRO NA ATUALIZAÇAO."
 fi
@@ -209,7 +210,7 @@ cat <<WINDOWMANAGER
 WINDOWMANAGER
 
 echo ""
-read -rep $'[\e[1;33mACAO\e[0m] - Qual gerenciador de janelas (window manager) vai ser desta vez? [\e[1;36mBSPWM\e[0m], [\e[1;36mXMONAD\e[0m], [\e[1;36mHYPRLAND\e[0m], [\e[1;36mPular\e[0m] - (b,x,h ou pular) ... ' WME
+read -rep $'[\e[1;33mACAO\e[0m] - Qual gerenciador de janelas (window manager) vai ser desta vez? [\e[1;36mBSPWM\e[0m], [\e[1;36mXMONAD\e[0m], [\e[1;36mHYPRLAND\e[0m], [\e[1;35mPular\e[0m] - (b,x,h ou pular) ... ' WME
 
 case $WME in 
 b|B)
@@ -252,7 +253,12 @@ fi
 
 if [[ $WM_WAYLAND = "hyprland" ]]; then
     echo -e "$ESPEPACMAN"
-    install_software_pacman $WM_WAYLAND wl-clipboard swaybg waybar ttf-font-awesome &>> $INSTLOG & show_progress $!
+    install_software_pacman $WM_WAYLAND 
+    install_software_pacman "wl-clipboard seatd swaybg waybar ttf-font-awesome" &>> $INSTLOG & show_progress $!
+    echo -e "$CONFIGANDO"
+    sudo systemctl enable seatd.service &>> $INSTLOG & show_progress $!
+    echo -e "$CONFIGANDO"
+    sudo systemctl start seatd.service &>> $INSTLOG & show_progress $!
     echo -e "$COK - INSTALADO O $WM_WAYLAND."
 fi
 
