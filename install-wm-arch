@@ -4,6 +4,10 @@
 # fork script of https://github.com/SolDoesTech/HyprV4/blob/2cf439c27475a32fd00e816a1fde82a5804efe2a/set-hypr
 #TODO parei no ly
 
+# cores letras de seleçao
+LETRA="\e[1;36m"
+RESETLETRA="\e[0m"
+
 # cores
 CNT="[\e[1;36mNOTA\e[0m]" #azul
 COK="[\e[1;32mOK\e[0m]" #verde
@@ -13,7 +17,7 @@ CWR="[\e[1;35mALERTA\e[0m]" #roxo claro
 CAC="[\e[1;33mACAO\e[0m]" #amarelo
 INSTLOG="$HOME/install.log"
 FIN_INST="&>> $INSTLOG & show_progress $!"
-ESPEPACMAN="[\e[1;37mPACMAN\e[0m"
+ESPEPACMAN="[\e[1;37mEXECUTANDO\e[0m"
 CONFIGANDO="[\e[1;37mCONFIGURANDO\e[0m"
 
 # barra de progresso
@@ -38,18 +42,19 @@ install_software() {
         show_progress $!
         # test to make sure package installed
         if $HELPER -Q $1 &>> /dev/null ; then
-            echo -e "\e[1A\e[K$COK - $1 FOI INSTALDO."
+            echo -e "\e[1A\e[K$COK - $1 FOI INSTALADO."
         else
             # if this is hit then a package is missing, exit to review log
-            echo -e "\e[1A\e[K$CER - $1 INSTALAÇAO FALHOU VEJA O ARQUIVO install.log"
+            echo -e "\e[1A\e[K$CER - $1 INSTALAÇAO FALHOU VEJA O ARQUIVO DE LOG EM $HOME/install.log"
             exit
         fi
     fi
 }
 install_software_pacman() {
     # instala pacotes com pacman
+    echo -e "$ESPEPACMAN - ATUALIZAÇAO DO SISTEMA."
     for PKGS in ${1}; do
-    sudo pacman -S --noconfirm --needed "${PKGS}"
+    sudo pacman -S --noconfirm --needed "${PKGS}" &>> $INSTLOG & show_progress $!
     done
 }
 
@@ -89,9 +94,9 @@ EOL
 
 sleep 0.2
 
-read -rep $'[\e[1;33mACAO\e[0m] - Esta pronto para continuar? - (s,n) ... ' CONTINUAR
+read -rep "$(echo -e $CAC) - Esta pronto para continuar? - (s,n) ... " CONTINUAR
 case "$CONTINUAR" in
-    s|j) echo "Vamos lá ... "
+    s|j) echo ""
     ;;
     n|N) exit 1
     ;;
@@ -133,7 +138,7 @@ cat <<DRIVERDESENHO
 DRIVERDESENHO
 
 echo ""
-read -rep $'[\e[1;33mACAO\e[0m] -  Escolha o driver da sua placa de vídeo: [\e[1;36mINTEL\e[0m], [\e[1;36mAMDGPU\e[0m], [\e[1;36mNVIDIA\e[0m] ou [\e[1;36mMaquinaVirtual\e[0m] - (i,a,n,m) ... ' VIDEO
+read -rep "$(echo -e $CAC) - Escolha o driver da sua placa de vídeo: $(echo -e $LETRA)I$(echo -e $RESETLETRA)NTEL, $(echo -e $LETRA)A$(echo -e $RESETLETRA)MDGPU, $(echo -e $LETRA)N$(echo -e $RESETLETRA)VIDIA ou $(echo -e $LETRA)M$(echo -e $RESETLETRA)aquinaVirtual - (i,a,n,m) ... " VIDEO
 
 case $VIDEO in 
 i|I)
@@ -166,17 +171,17 @@ esac
 
 # complemetos para os drivers
 if [ $DRI == "xf86-video-amdgpu" ]; then
-    echo -e "$ESPEPACMAN"
+    echo -e "$ESPEPACMAN - AMDGPU."
     install_software_pacman "mesa-libgl mesa-vdpau libvdpau-va-gl vulkan-radeon" &>> $INSTLOG & show_progress $! # driver open-source (melhor)
     sudo cp ./xorg_conf/40-amdgpu.conf /usr/share/X11/xorg.conf.d/
 fi
 if [ $DRI == "xf86-video-intel" ]; then
-    echo -e "$ESPEPACMAN"
+    echo -e "$ESPEPACMAN - INTEL."
     install_software_pacman "mesa-libgl libvdpau-va-gl vulkan-intel" &>> $INSTLOG & show_progress $! # driver open-source (melhor)
     sudo cp ./xorg_conf/20-intel.conf /usr/share/X11/xorg.conf.d/
 fi
 if [ $DRI == "xf86-video-nvidia" ]; then
-    echo -e "$ESPEPACMAN"
+    echo -e "$ESPEPACMAN - NVIDIA."
     install_software_pacman "nvidia-utils libglvnd nvidia-settings lib32-nvidia-utils nvidia-dkmsa" &>> $INSTLOG & show_progress $! # tem que testa para ver ser funciona
     nvidia-xconfig --add-argb-glx-visuals --allow-glx-with-composite --composite --render-accel -o /usr/share/X11/xorg.conf.d/20-nvidia.conf
 fi
@@ -210,7 +215,7 @@ cat <<WINDOWMANAGER
 WINDOWMANAGER
 
 echo ""
-read -rep $'[\e[1;33mACAO\e[0m] - Qual gerenciador de janelas (window manager) vai ser desta vez? [\e[1;36mBSPWM\e[0m], [\e[1;36mXMONAD\e[0m], [\e[1;36mHYPRLAND\e[0m], [\e[1;35mPular\e[0m] - (b,x,h ou pular) ... ' WME
+read -rep "$(echo -e $CAC) - Qual gerenciador de janelas (window manager) vai ser desta vez? $(echo -e $LETRA)B$(echo -e $RESETLETRA)SPWM, $(echo -e $LETRA)X$(echo -e $RESETLETRA)MONAD, $(echo -e $LETRA)H$(echo -e $RESETLETRA)YPRLAND, $(echo -e $LETRA)P$(echo -e $RESETLETRA)ular - (b,x,h,p) ... " WME
 
 case $WME in 
 b|B)
@@ -242,9 +247,9 @@ if [[ -z $WMs ]]; then
     echo ""
 else
     # insalando window manger
-    echo -e "$ESPEPACMAN"
+    echo -e "$ESPEPACMAN - INSTALAÇAO DE $WMs."
 install_software_pacman "$WMs $WMx $WMb" &>> $INSTLOG & show_progress $!
-    echo -e "$ESPEPACMAN"
+    echo -e "$ESPEPACMAN - INSTALAÇAO DO XORG."
 install_software_pacman "xclip xdo mtools xdotool xsel feh xorg-xsetroot xorg-xset xorg-xrdb xorg-server xorg-xinit xorg-xinput libxinerama libxft nsxiv unclutter maim" &>> $INSTLOG & show_progress $!
 
 # &>> $INSTLOG & show_progress $!
@@ -252,14 +257,15 @@ echo -e "$COK - $WMs INSTALADO."
 fi
 
 if [[ $WM_WAYLAND = "hyprland" ]]; then
-    echo -e "$ESPEPACMAN"
+    echo -e "$ESPEPACMAN - INSTALAÇAO DE HYPRLAND."
     install_software_pacman $WM_WAYLAND 
-    install_software_pacman "wl-clipboard seatd swaybg waybar ttf-font-awesome" &>> $INSTLOG & show_progress $!
+    install_software_pacman "wl-clipboard seatd swaybg waybar ttf-font-awesome" &>> $INSTLOG
+    sleep 0.2
     echo -e "$CONFIGANDO"
-    sudo systemctl enable seatd.service &>> $INSTLOG & show_progress $!
-    echo -e "$CONFIGANDO"
+    sudo systemctl enable seatd.service &>> $INSTLOG
+    sleep 0.2
     sudo systemctl start seatd.service &>> $INSTLOG & show_progress $!
-    echo -e "$COK - INSTALADO O $WM_WAYLAND."
+    echo -e "$COK - HYPRLAND INSTALADO."
 fi
 
     if [[ $WM_WAYLAND = "hyprland" ]]; then
@@ -322,7 +328,7 @@ cat <<GERENCIADORAUR
  ░░░░░░░░  ░░░░░░ ░░░
 GERENCIADORAUR
     echo ""
-    read -rep $'[\e[1;33mACAO\e[0m] - Qual é o ajudante AUR de sua escolha? Precisamos de um ajudante AUR. É essencial!!! [\e[1;36mPARU\e[0m] ou [\e[1;36mYAY\e[0m] - (p,y) ... ' NUM
+    read -rep "$(echo -e $CAC) - Qual é o ajudante AUR de sua escolha? Precisamos de um ajudante AUR é essencial!!! $(echo -e $LETRA)P$(echo -e $RESETLETRA)ARU ou $(echo -e $LETRA)Y$(echo -e $RESETLETRA)AY - (p,y) ... " NUM
 
 case $NUM in
     p|P)
@@ -354,7 +360,7 @@ if [[ $HELPER = "paru" ]]; then
 	echo -e "$COK - $HELPER CONFIGURADO."
 fi
 
-echo -e "$ESPEPACMAN"
+echo -e "$ESPEPACMAN - $HELPER."
 install_software "alacritty exa mpv python-pynvim yt-dlp ntfs-3g xf86-input-evdev xf86-input-libinput zathura-pdf-poppler adwaita-icon-theme xcursor-vanilla-dmz-aa cmake xdg-user-dirs ffmpeg polkit gammastep" &>> $INSTLOG & show_progress $!
 # redshift \
 # nodejs \
@@ -365,13 +371,13 @@ install_software "alacritty exa mpv python-pynvim yt-dlp ntfs-3g xf86-input-evde
 # the_silver_searcher \
 
 if [[ ! -f /bin/picom ]]; then
-echo -e "$ESPEPACMAN"
+echo -e "$ESPEPACMAN - INSTALAÇAO DO PICOM."
 install_software "picom-jonaburg-git" &>> $INSTLOG & show_progress $!
 fi
 
 # AUR para hyprland
 if [[ $WM_WAYLAND = "hyprland" ]]; then
-echo -e "$ESPEPACMAN"
+echo -e "$ESPEPACMAN - INSTALAÇAO DE PROGRAMAS EXTRAS PARA WAYLAND."
 install_software "grimblast-git tofi" &>> $INSTLOG & show_progress $!
 # notify-send.sh
 # polkit-kde-agent
@@ -392,7 +398,7 @@ cat <<LAPTOP
 ░░░   ░░  ░░░░░░     ░░   ░░░░░░ ░░░░░    ░░░░░░   ░░░░░░  ░░  ░░
 LAPTOP
 echo ""
-read -rep $'[\e[1;33mACAO\e[0m] - Este computador é um notebook? - (s,n) ... ' $NOTEBOOK
+read -rep "$(echo -e $CAC) - Este computador é um notebook? - (s,n) ... " NOTEBOOK
 
 case $NOTEBOOK in
     s|S)
@@ -453,7 +459,7 @@ if [[ -e "/usr/local/bin/dmenu_run" ]]; then
     else
         mkdir -p ~/.srcs
         echo ""
-        read -rep $'[\e[1;33mACAO\e[0m] - Voce quer instalar o dmenu2? - (s,n) ... ' DM2
+        read -rep "$(echo -e $CAC) - Voce quer instalar o dmenu2? - (s,n) ... " DM2
         case $DM2 in
         s|S)
             if [[ -d ~/.srcs/dmenu2-1 ]]; then
@@ -546,6 +552,8 @@ arquivosdeConfiguracao(){
         rm --recursive --force  ~/.config/gammastep/;
         cp --recursive --force ./.config/gammastep/ ~/.config/;
     fi
+
+    echo -e "$COK - CONFIGURAÇOES DIVERSAS."
     
 } ### arquivosdeConfiguracao
 
@@ -561,7 +569,7 @@ cat <<LOGINLY
 ░░░ ░░
 LOGINLY
 echo ""
-read -rep $'[\e[1;33mACAO\e[0m] - Deseja instalar um <Display Manager> (Ly)? - (s,n) ... ' DMGR
+read -rep "$(echo -e $CAC) - Deseja instalar um Display Manager LY? - (s,n) ... " DMGR
 
     case "$DMGR" in
     s|S)
@@ -607,7 +615,7 @@ playermusica(){
 ░░░   ░░  ░░░░░  ░░░  ░░  ░░ ░░       ░░░░░  ░░      ░░
 PLAYMSC
  echo ""
- read -rep $'[\e[1;33mACAO\e[0m] - Quer instalar o player de música? - (s,n) ... ' PLMC
+ read -rep "$(echo -e $CAC) - Quer instalar o player de música? - (s,n) ... " PLMC
 case "$PLMC" in
  s|S) 
 echo -e "$ESPEPACMAN"
@@ -670,7 +678,7 @@ cat << RANGER-DESENHO
 RANGER-DESENHO
 
 echo ""
-read -rep $'[\e[1;33mACAO\e[0m] - Quer uma gerenciador de arquivos para terminal? - (s,n) ... ' RAG
+read -rep "$(echo -e $CAC) - Quer uma gerenciador de arquivos para terminal? - (s,n) ... " RAG
 
 case "$RAG" in
  s|S) FILEMANAGER='RANGER'
@@ -748,7 +756,7 @@ cat <<AUDIOCONF
  ░░░░░░░░  ░░░░░░  ░░░░░░ ░░  ░░░░░░
 AUDIOCONF
  echo ""
- read -rep $'[\e[1;33mACAO\e[0m] - Qual controlador de audio?  [\e[1;36mPIPE\e[0m\e[1;37mW\e[0m\e[1;36mIRE\e[0m] ou [\e[1;37mP\e[0m\e[1;36mULSEAUDIO\e[0m] - (w,p) ... ' AUD
+ read -rep "$(echo -e $CAC) - Qual controlador de audio?  $(echo -e $LETRA)P$(echo -e $RESETLETRA)IPEWIRE ou $(echo -e $LETRA)P$(echo -e $RESETLETRA)ULSEAUDIO - (w,p) ... " AUD
 
 case "$AUD" in
  w|W) AUDIOD='PIPEWIRE'
@@ -817,7 +825,7 @@ cat <<NAVEGADOR-DESENHO
 NAVEGADOR-DESENHO
 
 echo ""
-read -rep $'[\e[1;33mACAO\e[0m] - Qual navegador preferido? - [\e[1;36mQUTEBROWSER\e[0m], [\e[1;36mFIREFOX\e[0m], [\e[1;36mAMBOS\e[0m] ou [\e[1;35mPular\e[0m] - (q,f,a,p) ... ' BROWSER
+read -rep "$(echo -e $CAC) - Qual navegador preferido? - $(echo -e $LETRA)Q$(echo -e $RESETLETRA)UTEBROWSER, $(echo -e $LETRA)F$(echo -e $RESETLETRA)IREFOX, $(echo -e $LETRA)A$(echo -e $RESETLETRA)mbos ou $(echo -e $LETRA)P$(echo -e $RESETLETRA)ular - (q,f,a,p) ... " BROWSER
 
 case "$BROWSER" in
  q|Q) BROWq="qutebrowser"
@@ -983,7 +991,7 @@ install_software "neovim python-pynvim" &>> $INSTLOG & show_progress $!
   git clone https://github.com/quebravel/astronvim_config.git ~/.config/nvim/lua/user &>> $INSTLOG & show_progress $!
   (nvim  --headless -c 'quitall')
  else
-  read -rep $'[\e[1;33mACAO\e[0m] - Existe um diretorio nvim Deseja re/instalar astronvim? - (s,n) ... ' ASTRONV
+     read -rep "$(echo -e $CAC) - Já existe um diretório nvim você deseja reinstalar astronvim? - (s,n) ... " ASTRONV
 
   case "$ASTRONV" in
    s|S)
@@ -1022,7 +1030,7 @@ cat << TECLADO-DESENHO
 TECLADO-DESENHO
 
     echo ""
-    read -rep $'[\e[1;33mACAO\e[0m] Qual o layout do seu teclado no xorg? - [\e[1;36mBR-ABNT2\e[0m] ou [\e[1;36mUS-INTL\e[0m] - (b,u) ... ' LAYOUTTECLADO
+    read -rep "$(echo -e $CAC) - Qual o layout do seu teclado no xorg? - $(echo -e $LETRA)B$(echo -e $RESETLETRA)R-ABNT2 ou $(echo -e $LETRA)U$(echo -e $RESETLETRA)S-INTL - (b,u) ... " LAYOUTTECLADO
 
     case "$LAYOUTTECLADO" in
         b|B)
