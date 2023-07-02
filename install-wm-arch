@@ -138,7 +138,7 @@ cat <<DRIVERDESENHO
 DRIVERDESENHO
 
 echo ""
-read -rep "$(echo -e $CAC) - Escolha o driver da sua placa de vídeo: $(echo -e $LETRA)I$(echo -e $RESETLETRA)NTEL, $(echo -e $LETRA)A$(echo -e $RESETLETRA)MDGPU, $(echo -e $LETRA)N$(echo -e $RESETLETRA)VIDIA ou $(echo -e $LETRA)M$(echo -e $RESETLETRA)aquinaVirtual - (i,a,n,m) ... " VIDEO
+read -rep "$(echo -e $CAC) - Driver da sua placa de vídeo: $(echo -e $LETRA)I$(echo -e $RESETLETRA)NTEL, $(echo -e $LETRA)A$(echo -e $RESETLETRA)MDGPU, $(echo -e $LETRA)N$(echo -e $RESETLETRA)VIDIA ou $(echo -e $LETRA)M$(echo -e $RESETLETRA)aquinaVirtual - (i,a,n,m) ... "  VIDEO
 
 case $VIDEO in 
 i|I)
@@ -247,7 +247,7 @@ if [[ -z $WMs ]]; then
     echo ""
 else
     # insalando window manger
-    echo -e "$ESPEPACMAN - INSTALAÇAO DE $WMs."
+    echo -e "$ESPEPACMAN - INSTALAÇAO DO $WMs."
 install_software_pacman "$WMs $WMx $WMb" &>> $INSTLOG & show_progress $!
     echo -e "$ESPEPACMAN - INSTALAÇAO DO XORG."
 install_software_pacman "xclip xdo mtools xdotool xsel feh xorg-xsetroot xorg-xset xorg-xrdb xorg-server xorg-xinit xorg-xinput libxinerama libxft nsxiv unclutter maim" &>> $INSTLOG & show_progress $!
@@ -573,7 +573,7 @@ read -rep "$(echo -e $CAC) - Deseja instalar um Display Manager LY? - (s,n) ... 
 
     case "$DMGR" in
     s|S)
-    echo -e "$ESPEPACMAN"
+    echo -e "$ESPEPACMAN - INSTALAÇAO DO LY."
     install_software "ly-git cmatrix" &>> $INSTLOG & show_progress $!
     # cominho do arquivo de configuração
     arquivo="/etc/ly/config.ini"
@@ -700,7 +700,7 @@ install_software "ranger ueberzug ffmpegthumbnailer" &>> $INSTLOG & show_progres
     if [ -f ~/.config/ranger/rc.conf ]; then
      echo -e "$COK - ARQUIVO RC.CONF."
     else
-     echo -e "$CONFIGANDO"
+     echo -e "$CONFIGANDO - RC."
      ranger --copy-config=rc &>> $INSTLOG & show_progress $!
      sleep 0.2
      sed -i 's/set preview_images false/set preview_images true/g' $HOME/.config/ranger/rc.conf
@@ -715,7 +715,7 @@ install_software "ranger ueberzug ffmpegthumbnailer" &>> $INSTLOG & show_progres
     if [ -f ~/.config/ranger/scope.sh ]; then
      echo -e "$COK - ARQUIVO SCOPE.SH."
     else
-     echo -e "$CONFIGANDO"
+     echo -e "$CONFIGANDO - SCOPE."
      ranger --copy-config=scope &>> $INSTLOG & show_progress $!
      sleep 0.2
      sed -i '113,116s/#//' $HOME/.config/ranger/scope.sh
@@ -725,7 +725,7 @@ install_software "ranger ueberzug ffmpegthumbnailer" &>> $INSTLOG & show_progres
     if [ -f ~/.config/ranger/rifle.conf ]; then
      echo -e "$COK - ARQUIVO RIFLE.CONF."
     else
-     echo -e "$CONFIGANDO"
+     echo -e "$CONFIGANDO - RIFLE."
      ranger --copy-config=rifle &>> $INSTLOG & show_progress $!
      sed -i 's/mime ^audio|ogg$, terminal, has mplayer  = mplayer -- "$@"/mime ^audio|ogg$, terminal, has moc      = ncmpcpp -- "$@"/g' $HOME/.config/ranger/rifle.conf
      sleep 0.2
@@ -736,7 +736,7 @@ install_software "ranger ueberzug ffmpegthumbnailer" &>> $INSTLOG & show_progres
 
     # ranger --version
     ranger_versao=$(ranger --version | grep ranger | cut -d: -f2 | sed s/^" "//g | tr a-z A-Z)
-    echo -e "$COK - $ranger_versao INSTALADO"
+    echo -e "$COK - $ranger_versao INSTALADO."
 
 fi
 
@@ -756,7 +756,7 @@ cat <<AUDIOCONF
  ░░░░░░░░  ░░░░░░  ░░░░░░ ░░  ░░░░░░
 AUDIOCONF
  echo ""
- read -rep "$(echo -e $CAC) - Qual controlador de audio?  $(echo -e $LETRA)P$(echo -e $RESETLETRA)IPEWIRE ou $(echo -e $LETRA)P$(echo -e $RESETLETRA)ULSEAUDIO - (w,p) ... " AUD
+ read -rep "$(echo -e $CAC) - Qual controlador de audio?  PIPE$(echo -e $LETRA)W$(echo -e $RESETLETRA)IRE ou $(echo -e $LETRA)P$(echo -e $RESETLETRA)ULSEAUDIO - (w,p) ... " AUD
 
 case "$AUD" in
  w|W) AUDIOD='PIPEWIRE'
@@ -787,7 +787,7 @@ fi
 zshinstall(){
  sleep 0.2
 
-echo -e "$ESPEPACMAN"
+echo -e "$ESPEPACMAN - INSTALAÇAO DO ZSH."
 install_software "zsh zsh-completions" &>> $INSTLOG & show_progress $!
 
 echo -e "$COK - ZSH INSTALADO."
@@ -798,14 +798,12 @@ fontes_doSistema(){
  sleep 0.2
 
 # wqy-microhei (koreano), cjk (japones)
-echo -e "$ESPEPACMAN"
+echo -e "$ESPEPACMAN - INSTALAÇAO DAS FONTES DO SISTEMA."
 install_software "ttf-dejavu noto-fonts-emoji gnu-free-fonts wqy-microhei noto-fonts-cjk xorg-fonts-75dpi xorg-fonts-100dpi xorg-fonts-encodings ttf-jetbrains-mono-nerd" &>> $INSTLOG & show_progress $!
-echo -e "$COK - FONTES DOS SISTEMA."
 
 if [ ! -f /usr/share/fonts/misc/siji.bdf ]; then
-echo -e "$ESPEPACMAN"
+echo -e "$ESPEPACMAN - INSTALAÇAO DA FONTE SIJI."
 install_software "siji-git" &>> $INSTLOG & show_progress $!
-echo -e "$COK - FONTE SIJI INSTALADA."
 fi
 
 }
@@ -856,7 +854,7 @@ echo -e "$CONFIGANDO"
 fi
 
 if [[ $BROWf = "firefox" ]]; then
-echo -e "$ESPEPACMAN"
+echo -e "$ESPEPACMAN - INSTALAÇAO DO FIREFOX."
 install_software "firefox firefox-i18n-pt-br" &>> $INSTLOG & show_progress $!
 
  echo -e "$COK - $BROWf INSTALADO."
@@ -871,11 +869,9 @@ copilador_config(){
 ncore=`lscpu | grep "^CPU(s)" | head -n 1 | cut -d: -f2 | tr -d " "`
 
 echo -e "$CAT - CONGIRURANDO MAKEFLAGS PARA $ncore PROCESSADORES ATIVOS DURANTE A COMPILAÇÃO."
-echo -e "$CAC - COLOQUE A SENHA."
 sudo sed -i "s/#MAKEFLAGS=\"-j2\"/MAKEFLAGS=\"-j$ncore\"/g" /etc/makepkg.conf
 
-
-echo -e "$CAT - COPILADOR CONFIGURADO PARA [$ncore] PROCESSADORES."
+echo -e "$COK - [$ncore] PROCESSADORES."
 
 }
 
@@ -892,14 +888,14 @@ temas(){
 
 # gruvbox tema
 if [ ! -d ~/.themes ]; then
-echo -e "$CONFIGANDO"
+echo -e "$CONFIGANDO - TEMA GRUVBOX."
 git clone https://github.com/jmattheis/gruvbox-dark-gtk ~/.themes/gruvbox-dark-gtk &>> $INSTLOG & show_progress $!
 else
  echo -e "$CWR - VOCÊ JÁ TEM O TEMA GRUVBOX-DARK-GTK."
 fi
 sleep 0.2
 if [ ! -d ~/.icons ]; then
-echo -e "$CONFIGANDO"
+echo -e "$CONFIGANDO - TEMA DOS ICONES EM GRUVBOX."
 git clone https://github.com/jmattheis/gruvbox-dark-icons-gtk ~/.icons/gruvbox-dark-icons-gtk &>> $INSTLOG & show_progress $!
 else
  echo -e "$CWR - VOCÊ JÁ TEM O TEMA GRUVBOX-DARK-ICONS-GTK."
@@ -985,13 +981,13 @@ echo -e "$ESPEPACMAN"
 install_software "neovim python-pynvim" &>> $INSTLOG & show_progress $!
 
  if [[ ! -d ~/.config/nvim ]]; then
-  echo -e "$CONFIGANDO"
+  echo -e "$CONFIGANDO - ESTADO ORIGINAL."
   git clone --depth 1 https://github.com/AstroNvim/AstroNvim ~/.config/nvim &>> $INSTLOG & show_progress $!
-  echo -e "$CONFIGANDO"
+  echo -e "$CONFIGANDO - PERSONALIZAÇAO."
   git clone https://github.com/quebravel/astronvim_config.git ~/.config/nvim/lua/user &>> $INSTLOG & show_progress $!
   (nvim  --headless -c 'quitall')
  else
-     read -rep "$(echo -e $CAC) - Já existe um diretório nvim você deseja reinstalar astronvim? - (s,n) ... " ASTRONV
+     read -rep "$(echo -e $CAC) - Já existe um diretório nvim, você deseja reinstalar astronvim? - (s,n) ... " ASTRONV
 
   case "$ASTRONV" in
    s|S)
