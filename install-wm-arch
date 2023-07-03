@@ -264,7 +264,7 @@ if [[ $WM_WAYLAND = "hyprland" ]]; then
     echo -e "$CONFIGANDO"
     sudo systemctl enable seatd.service &>> $INSTLOG
     sleep 0.2
-    sudo systemctl start seatd.service &>> $INSTLOG & show_progress $!
+    sudo systemctl start seatd.service &>> $INSTLOG
     echo -e "$COK - HYPRLAND INSTALADO."
 fi
 
