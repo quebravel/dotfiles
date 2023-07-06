@@ -244,12 +244,12 @@ label:focus {
 }
 
 #network {
-    background-color: @bright_green;
+    background-color: @mantle;
     border-radius: 0px 0px 0px 10px;
+    font-weight: bold;
     padding: 0px 10px 0px 10px;
     margin-left: 0px;
-    color: @mantle;
-    font-weight: normal;
+    color: @bright_green;
 }
 
 #network.disconnected {
