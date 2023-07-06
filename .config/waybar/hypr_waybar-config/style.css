@@ -294,29 +294,32 @@ label:focus {
 /* } */
 
 #mpd {
-    background-color: @yellow;
+    background-color: transparent;
     border-radius: 0px 0px 10px 0px;
     margin-left: 0px;
     padding: 0px 10px 0px 10px;
-    color: @base;
+    color: @yellow;
 }
 
 #mpd.disconnected {
-    background-color: @red;
+    background-color: transparent;
     border-radius: 0px 0px 10px 0px;
+    color: @red;
+    font-style: italic;
 }
 
 #mpd.stopped {
-    background-color: @overlay2;
+    background-color: transparent;
     border-radius: 0px 0px 10px 0px;
-    /* border-color: #ffffff; */
-    /* border-width: 2px; */
+    color: @overlay2;
+    font-style: italic;
 }
 
 #mpd.paused {
-    background-color: @blue;
+    background-color: transparent;
     border-radius: 0px 0px 10px 0px;
-    color: @text;
+    color: @blue;
+    font-style: italic;
 }
 
 #language {
