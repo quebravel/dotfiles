@@ -22,8 +22,8 @@
     background: alpha(@mantle, 0.88);
     /* background: rgba(30, 30, 46, 0.5); */
     color: @pink;
+    border-radius: 0px 0px 0px 0px;
     /* margin: 0px 0px; */
-    border-radius: 15px 15px 15px 15px;
 }
 
 window#waybar {
@@ -69,7 +69,7 @@ background-color: #FFFFFF;
 /* } */
 #workspaces {
     border-radius: 6px;
-    background-color: @mantle;
+    background-color: transparent;
     /* margin-left: 3px; */
     /* background-color: transparent; */
     /* border-radius: 3px; */
@@ -107,7 +107,7 @@ background-color: #FFFFFF;
     border-color: @peach
 }
 #workspaces button.persistent {
-    /* background: @blue; */
+    background: transparent;
     color: @overlay2;
     font-family: JetBrainsMono Nerd Font;
     font-style: italic;
@@ -207,13 +207,13 @@ background-color: #FFFFFF;
 
 #clock {
     background-color: alpha(@crust, 05);
-    color: @bright_green;
+    color: @mantle;
     margin-right: 0px;
     /* border-radius: 6px 20px 20px 6px; */
     /* border-right: 100px; */
     font-weight: bold;
     /* margin: 0px 5px; */
-    border-radius: 0px 0px 10px 0px;
+    /* border-radius: 0px 0px 10px 0px; */
     padding-left: 10px;
     padding-right: 10px;
     /* margin-right: 0px; */
@@ -244,8 +244,8 @@ label:focus {
 }
 
 #network {
-    background-color: @mantle;
-    border-radius: 0px 0px 0px 10px;
+    background-color: transparent;
+    border-radius: 0px 0px 0px 0px;
     font-weight: bold;
     padding: 0px 10px 0px 10px;
     margin-left: 0px;
