@@ -1,0 +1,7 @@
+lines = 15
+columns = 1
+width = 25%
+height = 50%
+allow_images = true
+mode = drun
+
