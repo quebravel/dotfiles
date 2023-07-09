@@ -555,6 +555,14 @@ arquivosdeConfiguracao(){
         cp --recursive --force ./.config/gammastep/ ~/.config/;
     fi
 
+    if [[ ! -d ~/.config/git ]]; then
+        mkdir --parents ~/.config/git/;
+        cp ./.config/git/config ~/.config/git/;
+    else
+        rm --recursive --force  ~/.config/git/;
+        cp --recursive --force ./.config/git/ ~/.config/;
+    fi
+
     echo -e "$COK - CONFIGURAÇOES DIVERSAS."
     
 } ### arquivosdeConfiguracao
