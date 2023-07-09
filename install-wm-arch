@@ -646,8 +646,8 @@ if [[ -f ~/.xinitrc ]]; then
     sed -i 's/\# export MPD_HOST\=\$HOME\/.config\/mpd\/socket/export MPD_HOST\=\$HOME\/.config\/mpd\/socket/g' $HOME/.xinitrc
     sed -i 's/# mpd --kill; mpd \&/mpd --kill; mpd \&/g' $HOME/.xinitrc
 elif [[ -f ~/.config/hypr/hyprland.conf ]]; then
-    sed -i '/exec-once = mpd --kill/s/^#//' $HOME/.config/hypr/hyprland.conf
-    sed -i '/exec-once = export MPD_HOST/s/^#//' $HOME/.config/hypr/hyprland.conf
+    sed -i '/exec-once = mpd --kill/s/^# //' $HOME/.config/hypr/hyprland.conf
+    sed -i '/exec-once = export MPD_HOST/s/^# //' $HOME/.config/hypr/hyprland.conf
 else
     echo "erro - nao foi encontrado o hyprland e xinitrc." &>> $INSTLOG
 fi
