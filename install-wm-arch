@@ -1058,8 +1058,8 @@ TERMINADO
 
 # chamar funções parte 1
 inicio
-driveVideo
 windowManger
+driveVideo
 gerenciardorAUR
 notebook_ger
 lancadorProgramas
