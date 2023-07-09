@@ -28,7 +28,8 @@ bindkey -v '^?' backward-delete-char
 # Yank to the system clipboard
 function vi-yank-xclip {
     zle vi-yank
-   echo "$CUTBUFFER" | xclip -selection "clipboard"
+   # echo "$CUTBUFFER" | xclip -selection "clipboard"
+   echo "$CUTBUFFER" | wl-copy
 }
 
 zle -N vi-yank-xclip
