@@ -710,7 +710,7 @@ esac
 if [[ $FILEMANAGER = RANGER ]]; then
 
 echo -en "$ESPEPACMAN"
-install_software "ranger ueberzug ffmpegthumbnailer" &>> $INSTLOG & show_progress $!
+install_software "ranger ueberzugpp ffmpegthumbnailer" &>> $INSTLOG & show_progress $!
 
     if [ ! -d ~/.config/ranger/ ]; then
      mkdir --parents ~/.config/ranger/;
