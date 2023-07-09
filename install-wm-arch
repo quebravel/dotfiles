@@ -52,7 +52,7 @@ install_software() {
 }
 install_software_pacman() {
     # instala pacotes com pacman
-    echo -e "$ESPEPACMAN - ATUALIZAÇAO DO SISTEMA."
+    # echo -en "$ESPEPACMAN - ATUALIZAÇAO DO SISTEMA."
     for PKGS in ${1}; do
     sudo pacman -S --noconfirm --needed "${PKGS}" &>> $INSTLOG & show_progress $!
     done
@@ -117,7 +117,7 @@ then
 fi
 
 # install base-devel if not installed
-echo -e "$ESPEPACMAN"
+echo -en "$ESPEPACMAN"
 install_software_pacman "base-devel wget git" &>> $INSTLOG & show_progress $!
 
 } ### inicio
@@ -171,17 +171,17 @@ esac
 
 # complemetos para os drivers
 if [ $DRI == "xf86-video-amdgpu" ]; then
-    echo -e "$ESPEPACMAN - AMDGPU."
+    echo -en "$ESPEPACMAN - AMDGPU."
     install_software_pacman "mesa-libgl mesa-vdpau libvdpau-va-gl vulkan-radeon" &>> $INSTLOG & show_progress $! # driver open-source (melhor)
     sudo cp ./xorg_conf/40-amdgpu.conf /usr/share/X11/xorg.conf.d/
 fi
 if [ $DRI == "xf86-video-intel" ]; then
-    echo -e "$ESPEPACMAN - INTEL."
+    echo -en "$ESPEPACMAN - INTEL."
     install_software_pacman "mesa-libgl libvdpau-va-gl vulkan-intel" &>> $INSTLOG & show_progress $! # driver open-source (melhor)
     sudo cp ./xorg_conf/20-intel.conf /usr/share/X11/xorg.conf.d/
 fi
 if [ $DRI == "xf86-video-nvidia" ]; then
-    echo -e "$ESPEPACMAN - NVIDIA."
+    echo -en "$ESPEPACMAN - NVIDIA."
     install_software_pacman "nvidia-utils libglvnd nvidia-settings lib32-nvidia-utils nvidia-dkmsa" &>> $INSTLOG & show_progress $! # tem que testa para ver ser funciona
     nvidia-xconfig --add-argb-glx-visuals --allow-glx-with-composite --composite --render-accel -o /usr/share/X11/xorg.conf.d/20-nvidia.conf
 fi
@@ -247,9 +247,9 @@ if [[ -z $WMs ]]; then
     echo ""
 else
     # insalando window manger
-    echo -e "$ESPEPACMAN - INSTALAÇAO DO $WMs."
+    echo -en "$ESPEPACMAN - INSTALAÇAO DO $WMs."
 install_software_pacman "$WMs $WMx $WMb" &>> $INSTLOG & show_progress $!
-    echo -e "$ESPEPACMAN - INSTALAÇAO DO XORG."
+    echo -en "$ESPEPACMAN - INSTALAÇAO DO XORG."
 install_software_pacman "xclip xdo mtools xdotool xsel feh xorg-xsetroot xorg-xset xorg-xrdb xorg-server xorg-xinit xorg-xinput libxinerama libxft nsxiv unclutter maim" &>> $INSTLOG & show_progress $!
 
 # &>> $INSTLOG & show_progress $!
@@ -257,63 +257,65 @@ echo -e "$COK - $WMs INSTALADO."
 fi
 
 if [[ $WM_WAYLAND = "hyprland" ]]; then
-    echo -e "$ESPEPACMAN - INSTALAÇAO DE HYPRLAND."
-    install_software_pacman $WM_WAYLAND 
-    install_software_pacman "wl-clipboard seatd swaybg waybar ttf-font-awesome" &>> $INSTLOG
+    echo -en "$ESPEPACMAN - INSTALAÇAO DE HYPRLAND."
+    install_software_pacman "$WM_WAYLAND"
+    install_software_pacman "wl-clipboard seatd swaybg waybar-hyprland-git ttf-font-awesome" &>> $INSTLOG
     sleep 0.2
-    echo -e "$CONFIGANDO"
+    echo -en "$CONFIGANDO"
     sudo systemctl enable seatd.service &>> $INSTLOG
     sleep 0.2
     sudo systemctl start seatd.service &>> $INSTLOG
     echo -e "$COK - HYPRLAND INSTALADO."
 fi
 
-    if [[ $WM_WAYLAND = "hyprland" ]]; then
-       rm --recursive --force ~/.config/{hypr,waybar}; 
-       cp -r ./.config/hypr ~/.config/;
-       mkdir -p ~/.config/waybar
-       cp -r ./.config/waybar/hypr_waybar-config/* ~/.config/waybar/
-       echo -e "$COK - CONFIGURACAO DO $WM_WAYLAND."
-    fi
+# AUR para hyprland
+if [[ $WM_WAYLAND = "hyprland" ]]; then
+echo -en "$ESPEPACMAN - INSTALAÇAO DE PROGRAMAS EXTRAS PARA WAYLAND."
+install_software "grimblast-git tofi" &>> $INSTLOG & show_progress $!
+# notify-send.sh
+# polkit-kde-agent
+fi
 
-    if [[ -z $WMs ]]; then
-        echo ""
-    elif [[ -d ~/.config/$WMs ]]; then
-        rm --recursive --force ~/.config/$WMs
-        cp -r ./.config/$WMs ~/.config/
-        echo -e "$COK - CONFIGURAÇÃO $WMs DETECTADA, BACKUP."
-    else
-        mkdir -p ~/.config/$WMs
-        cp -r ./.config/$WMs/* ~/.config/$WMs/
-        echo -e "$COK - CONFIGURAÇÃO DO $WMs."
-    fi
-    if [[ $WMx = "sxhkd" ]]; then
-        rm --recursive --force ~/.config/sxhkd/;
-        mkdir -p ~/.config/sxhkd/;
-        cp --recursive ./.config/sxhkd/* ~/.config/sxhkd;
-        echo -e "$COK - CONFIGURAÇÃO KEYBINDS DO BSPWM."
-    fi
-    # if [ -d ~/.config/polybar ]; then
-    #     rm --recursive --force ~/.config/polybar;
-    #     cp --recursive ./.config/polybar ~/.config/polybar;
-    # else
-    #     cp --recursive ./.config/polybar ~/.config/polybar;
-    #     echo "[ok]"
-    # fi
-    if [[ $WMb = "polybar" ]]; then
-        rm --recursive --force ~/.config/polybar;
-        mkdir -p ~/.config/polybar/;
-        cp --recursive ./.config/polybar/* ~/.config/polybar/;
-        echo -e "$COK - CONFIGURAÇÃO DO POLYBAR CONCLUIDA."
-    fi
+# Configurações
+if [[ $WM_WAYLAND = "hyprland" ]]; then
+    rm --recursive --force ~/.config/{hypr,waybar}; 
+    cp -r ./.config/hypr ~/.config/;
+    mkdir -p ~/.config/waybar
+    cp -r ./.config/waybar/hypr_waybar-config/* ~/.config/waybar/
+    echo -e "$COK - CONFIGURACAO DO $WM_WAYLAND."
+fi
 
-    if [[ $WMs = "bspwm" ]]; then
-        echo -e '#!/bin/bash\n\nuserresources=$HOME/.Xresources\nsysresources=/etc/X11/xinit/.Xresources\n\n# merge in defaults\n\nif [ -f $sysresources ]; then\n    xrdb -merge $sysresources\nfi\n\nif [ -f "$userresources" ]; then\n    xrdb -merge "$userresources"\nfi\n\n[ -f ~/.Xdefaults ] && xrdb -merge ~/.Xdefaults\n\nxsetroot -cursor_name left_ptr &\n\n# feh --bg-tile ~/Imagens/wallpaperz.png\n$HOME/.fehbg\n# $HOME/trigger_custom_refresh.sh &\n# wal -R\n\n# export MPD_HOST=$HOME/.config/mpd/socket\n# mpd --kill; mpd &\nunclutter --timeout 7 &\n\n# Set up an icon tray\n# trayer --edge top --align right --SetDockType true --SetPartialStrut true \ \n# --expand true --width 10 --transparent true --tint 0x5f5f5f --height 18 &\n\nif [ "$(command -v xset)" >/dev/null 2>&1 ];\nthen\n    #xset s off      	        #Disable screen saver blanking\n    #xset s 3600 3600 	        #Change blank time to 1 hour\n    #xset -dpms 	            #Turn off DPMS\n    xset s off -dpms 	        #Disable DPMS and prevent screen from blanking\n    #xset dpms force off 	    #Turn off screen immediately\n    #xset dpms force standby 	#Standby screen\n    #xset dpms force suspend 	#Suspend screen\nfi\n\n# numlockx &\n# pulseaudio -k\n# pulseaudio &\n\nsxhkd &\nexec bspwm\n\n# exec xmonad\n\n#vim:ft=sh' > ~/.xinitrc
-    fi
+if [[ -z $WMs ]]; then
+    echo ""
+elif [[ -d ~/.config/$WMs ]]; then
+    rm --recursive --force ~/.config/$WMs
+    cp -r ./.config/$WMs ~/.config/
+    echo -e "$COK - CONFIGURAÇÃO $WMs DETECTADA, BACKUP."
+else
+    mkdir -p ~/.config/$WMs
+    cp -r ./.config/$WMs/* ~/.config/$WMs/
+    echo -e "$COK - CONFIGURAÇÃO DO $WMs."
+fi
+if [[ $WMx = "sxhkd" ]]; then
+    rm --recursive --force ~/.config/sxhkd/;
+    mkdir -p ~/.config/sxhkd/;
+    cp --recursive ./.config/sxhkd/* ~/.config/sxhkd;
+    echo -e "$COK - CONFIGURAÇÃO KEYBINDS DO BSPWM."
+fi
+if [[ $WMb = "polybar" ]]; then
+    rm --recursive --force ~/.config/polybar;
+    mkdir -p ~/.config/polybar/;
+    cp --recursive ./.config/polybar/* ~/.config/polybar/;
+    echo -e "$COK - CONFIGURAÇÃO DO POLYBAR CONCLUIDA."
+fi
 
-    if [[ $WMs = "xmonad" ]]; then 
-        echo -e '#!/bin/bash\n\nuserresources=$HOME/.Xresources\nsysresources=/etc/X11/xinit/.Xresources\n\n# merge in defaults\n\nif [ -f $sysresources ]; then\n    xrdb -merge $sysresources\nfi\n\nif [ -f "$userresources" ]; then\n    xrdb -merge "$userresources"\nfi\n\n[ -f ~/.Xdefaults ] && xrdb -merge ~/.Xdefaults\n\nxsetroot -cursor_name left_ptr &\n\n# feh --bg-tile ~/Imagens/wallpaperz.png\n$HOME/.fehbg\n# $HOME/trigger_custom_refresh.sh &\n# wal -R\n\n# export MPD_HOST=$HOME/.config/mpd/socket\n# mpd --kill; mpd &\nunclutter --timeout 7 &\n\n# Set up an icon tray\n# trayer --edge top --align right --SetDockType true --SetPartialStrut true \ \n# --expand true --width 10 --transparent true --tint 0x5f5f5f --height 18 &\n\nif [ "$(command -v xset)" >/dev/null 2>&1 ];\nthen\n    #xset s off      	        #Disable screen saver blanking\n    #xset s 3600 3600 	        #Change blank time to 1 hour\n    #xset -dpms 	            #Turn off DPMS\n    xset s off -dpms 	        #Disable DPMS and prevent screen from blanking\n    #xset dpms force off 	    #Turn off screen immediately\n    #xset dpms force standby 	#Standby screen\n    #xset dpms force suspend 	#Suspend screen\nfi\n\n# numlockx &\n# pulseaudio -k\n# pulseaudio &\n\n# sxhkd &\n# exec bspwm\n\nexec xmonad\n\n#vim:ft=sh' > ~/.xinitrc
-    fi
+if [[ $WMs = "bspwm" ]]; then
+    echo -e '#!/bin/bash\n\nuserresources=$HOME/.Xresources\nsysresources=/etc/X11/xinit/.Xresources\n\n# merge in defaults\n\nif [ -f $sysresources ]; then\n    xrdb -merge $sysresources\nfi\n\nif [ -f "$userresources" ]; then\n    xrdb -merge "$userresources"\nfi\n\n[ -f ~/.Xdefaults ] && xrdb -merge ~/.Xdefaults\n\nxsetroot -cursor_name left_ptr &\n\n# feh --bg-tile ~/Imagens/wallpaperz.png\n$HOME/.fehbg\n# $HOME/trigger_custom_refresh.sh &\n# wal -R\n\n# export MPD_HOST=$HOME/.config/mpd/socket\n# mpd --kill; mpd &\nunclutter --timeout 7 &\n\n# Set up an icon tray\n# trayer --edge top --align right --SetDockType true --SetPartialStrut true \ \n# --expand true --width 10 --transparent true --tint 0x5f5f5f --height 18 &\n\nif [ "$(command -v xset)" >/dev/null 2>&1 ];\nthen\n    #xset s off      	        #Disable screen saver blanking\n    #xset s 3600 3600 	        #Change blank time to 1 hour\n    #xset -dpms 	            #Turn off DPMS\n    xset s off -dpms 	        #Disable DPMS and prevent screen from blanking\n    #xset dpms force off 	    #Turn off screen immediately\n    #xset dpms force standby 	#Standby screen\n    #xset dpms force suspend 	#Suspend screen\nfi\n\n# numlockx &\n# pulseaudio -k\n# pulseaudio &\n\nsxhkd &\nexec bspwm\n\n# exec xmonad\n\n#vim:ft=sh' > ~/.xinitrc
+fi
+
+if [[ $WMs = "xmonad" ]]; then 
+    echo -e '#!/bin/bash\n\nuserresources=$HOME/.Xresources\nsysresources=/etc/X11/xinit/.Xresources\n\n# merge in defaults\n\nif [ -f $sysresources ]; then\n    xrdb -merge $sysresources\nfi\n\nif [ -f "$userresources" ]; then\n    xrdb -merge "$userresources"\nfi\n\n[ -f ~/.Xdefaults ] && xrdb -merge ~/.Xdefaults\n\nxsetroot -cursor_name left_ptr &\n\n# feh --bg-tile ~/Imagens/wallpaperz.png\n$HOME/.fehbg\n# $HOME/trigger_custom_refresh.sh &\n# wal -R\n\n# export MPD_HOST=$HOME/.config/mpd/socket\n# mpd --kill; mpd &\nunclutter --timeout 7 &\n\n# Set up an icon tray\n# trayer --edge top --align right --SetDockType true --SetPartialStrut true \ \n# --expand true --width 10 --transparent true --tint 0x5f5f5f --height 18 &\n\nif [ "$(command -v xset)" >/dev/null 2>&1 ];\nthen\n    #xset s off      	        #Disable screen saver blanking\n    #xset s 3600 3600 	        #Change blank time to 1 hour\n    #xset -dpms 	            #Turn off DPMS\n    xset s off -dpms 	        #Disable DPMS and prevent screen from blanking\n    #xset dpms force off 	    #Turn off screen immediately\n    #xset dpms force standby 	#Standby screen\n    #xset dpms force suspend 	#Suspend screen\nfi\n\n# numlockx &\n# pulseaudio -k\n# pulseaudio &\n\n# sxhkd &\n# exec bspwm\n\nexec xmonad\n\n#vim:ft=sh' > ~/.xinitrc
+fi
 
 } ### windowManger
 
@@ -360,7 +362,7 @@ if [[ $HELPER = "paru" ]]; then
 	echo -e "$COK - $HELPER CONFIGURADO."
 fi
 
-echo -e "$ESPEPACMAN - $HELPER."
+echo -en "$ESPEPACMAN - $HELPER."
 install_software "alacritty exa mpv python-pynvim yt-dlp ntfs-3g xf86-input-evdev xf86-input-libinput zathura-pdf-poppler adwaita-icon-theme xcursor-vanilla-dmz-aa cmake xdg-user-dirs ffmpeg polkit gammastep" &>> $INSTLOG & show_progress $!
 # redshift \
 # nodejs \
@@ -371,17 +373,10 @@ install_software "alacritty exa mpv python-pynvim yt-dlp ntfs-3g xf86-input-evde
 # the_silver_searcher \
 
 if [[ ! -f /bin/picom ]]; then
-echo -e "$ESPEPACMAN - INSTALAÇAO DO PICOM."
+echo -en "$ESPEPACMAN - INSTALAÇAO DO PICOM."
 install_software "picom-jonaburg-git" &>> $INSTLOG & show_progress $!
 fi
 
-# AUR para hyprland
-if [[ $WM_WAYLAND = "hyprland" ]]; then
-echo -e "$ESPEPACMAN - INSTALAÇAO DE PROGRAMAS EXTRAS PARA WAYLAND."
-install_software "grimblast-git tofi" &>> $INSTLOG & show_progress $!
-# notify-send.sh
-# polkit-kde-agent
-fi
 
 }
 
@@ -402,9 +397,9 @@ read -rep "$(echo -e $CAC) - Este computador é um notebook? - (s,n) ... " NOTEB
 
 case $NOTEBOOK in
     s|S)
-    echo -e "$ESPEPACMAN"
+    echo -en "$ESPEPACMAN"
     install_software "acpi acpid xf86-input-synaptics" &>> $INSTLOG & show_progress $!
-    echo -e "$CONFIGANDO"
+    echo -en "$CONFIGANDO"
     sudo systemctl enable acpid.service &>> $INSTLOG & show_progress $!
     sudo cp ./xorg_conf/70-synaptics.conf /usr/share/X11/xorg.conf.d/
     if [[ $WMb = "polybar" ]]; then
@@ -573,7 +568,7 @@ read -rep "$(echo -e $CAC) - Deseja instalar um Display Manager LY? - (s,n) ... 
 
     case "$DMGR" in
     s|S)
-    echo -e "$ESPEPACMAN - INSTALAÇAO DO LY."
+    echo -en "$ESPEPACMAN - INSTALAÇAO DO LY."
     install_software "ly-git cmatrix" &>> $INSTLOG & show_progress $!
     # cominho do arquivo de configuração
     arquivo="/etc/ly/config.ini"
@@ -584,7 +579,6 @@ read -rep "$(echo -e $CAC) - Deseja instalar um Display Manager LY? - (s,n) ... 
         sudo sed -i 's/#animation = 0/animation = 1/g' $arquivo
         sudo sed -i 's/#xinitrc \= \~\/.xinitrc/xinitrc \= \~\/.xinitrc/g' $arquivo
         # transformando arquivo xinitrc em executavel bash
-        chmod +x ~/.xinitrc
         sudo systemctl enable ly.service
         sleep 0.2
         echo -e "$COK - LY INSTALADO."
@@ -598,6 +592,9 @@ read -rep "$(echo -e $CAC) - Deseja instalar um Display Manager LY? - (s,n) ... 
     ;;
     esac
 
+if [[ -f ~/.xinitrc ]]; then
+    chmod +x ~/.xinitrc
+fi
 
 } ### ly_config
 
@@ -618,7 +615,7 @@ PLAYMSC
  read -rep "$(echo -e $CAC) - Quer instalar o player de música? - (s,n) ... " PLMC
 case "$PLMC" in
  s|S) 
-echo -e "$ESPEPACMAN"
+echo -en "$ESPEPACMAN"
 install_software "ncmpcpp mpd mpc" &>> $INSTLOG & show_progress $!
 
 if [ ! -d ~/Músicas ]; then 
@@ -637,17 +634,23 @@ else
  cp ./.config/mpd/mpd.conf ~/.config/mpd/;
 fi
 
-echo -e "$CONFIGANDO"
+echo -en "$CONFIGANDO"
 sudo systemctl enable mpd &>> $INSTLOG & show_progress $!
 
-echo -e "$CONFIGANDO"
+echo -en "$CONFIGANDO"
 sudo systemctl start mpd &>> $INSTLOG & show_progress $!
 
 touch ~/.config/mpd/socket
 
-sed -i 's/\# export MPD_HOST\=\$HOME\/.config\/mpd\/socket/export MPD_HOST\=\$HOME\/.config\/mpd\/socket/g' $HOME/.xinitrc
-
-sed -i 's/# mpd --kill; mpd \&/mpd --kill; mpd \&/g' $HOME/.xinitrc
+if [[ -f ~/.xinitrc ]]; then
+    sed -i 's/\# export MPD_HOST\=\$HOME\/.config\/mpd\/socket/export MPD_HOST\=\$HOME\/.config\/mpd\/socket/g' $HOME/.xinitrc
+    sed -i 's/# mpd --kill; mpd \&/mpd --kill; mpd \&/g' $HOME/.xinitrc
+elif [[ -f ~/.config/hypr/hyprland.conf ]]; then
+    sed -i '/exec-once = mpd --kill/s/^#//' $HOME/.config/hypr/hyprland.conf
+    sed -i '/exec-once = export MPD_HOST/s/^#//' $HOME/.config/hypr/hyprland.conf
+else
+    echo "erro - nao foi encontrado o hyprland e xinitrc." &>> $INSTLOG
+fi
 
 export MPD_HOST=$HOME/.config/mpd/socket
 
@@ -691,7 +694,7 @@ esac
 
 if [[ $FILEMANAGER = RANGER ]]; then
 
-echo -e "$ESPEPACMAN"
+echo -en "$ESPEPACMAN"
 install_software "ranger ueberzug ffmpegthumbnailer" &>> $INSTLOG & show_progress $!
 
     if [ ! -d ~/.config/ranger/ ]; then
@@ -700,7 +703,7 @@ install_software "ranger ueberzug ffmpegthumbnailer" &>> $INSTLOG & show_progres
     if [ -f ~/.config/ranger/rc.conf ]; then
      echo -e "$COK - ARQUIVO RC.CONF."
     else
-     echo -e "$CONFIGANDO - RC."
+     echo -en "$CONFIGANDO - RC."
      ranger --copy-config=rc &>> $INSTLOG & show_progress $!
      sleep 0.2
      sed -i 's/set preview_images false/set preview_images true/g' $HOME/.config/ranger/rc.conf
@@ -715,7 +718,7 @@ install_software "ranger ueberzug ffmpegthumbnailer" &>> $INSTLOG & show_progres
     if [ -f ~/.config/ranger/scope.sh ]; then
      echo -e "$COK - ARQUIVO SCOPE.SH."
     else
-     echo -e "$CONFIGANDO - SCOPE."
+     echo -en "$CONFIGANDO - SCOPE."
      ranger --copy-config=scope &>> $INSTLOG & show_progress $!
      sleep 0.2
      sed -i '113,116s/#//' $HOME/.config/ranger/scope.sh
@@ -725,7 +728,7 @@ install_software "ranger ueberzug ffmpegthumbnailer" &>> $INSTLOG & show_progres
     if [ -f ~/.config/ranger/rifle.conf ]; then
      echo -e "$COK - ARQUIVO RIFLE.CONF."
     else
-     echo -e "$CONFIGANDO - RIFLE."
+     echo -en "$CONFIGANDO - RIFLE."
      ranger --copy-config=rifle &>> $INSTLOG & show_progress $!
      sed -i 's/mime ^audio|ogg$, terminal, has mplayer  = mplayer -- "$@"/mime ^audio|ogg$, terminal, has moc      = ncmpcpp -- "$@"/g' $HOME/.config/ranger/rifle.conf
      sleep 0.2
@@ -768,14 +771,14 @@ case "$AUD" in
 esac
 
 if [ $AUDIOD = PIPEWIRE ]; then
-  echo -e "$ESPEPACMAN"
+  echo -en "$ESPEPACMAN"
   install_software "pipewire pipewire-alsa pipewire-audio pipewire-pulse wireplumber" &>> $INSTLOG & show_progress $!
   # gst-plugin-pipewire
   # helvum \
   echo -e "$COK - $AUDIOD INSTALADO."
   echo -e "$CAT - Use <wpctl status> para detectar en Sinks: o númeor ID da saída de áudío\nexemplo:\nwpctl status\nSinks:\n33. Áudio interno Estéreo analógico  [vol: 1.20]\n53. Ellesmere HDMI Audio [Radeon RX 470/480 / 570/580/590] Digital Stereo (HDMI 6)\nwpctl set-default 53" >> notas.txt
 elif [ $AUDIOD = PULSEAUDIO ]; then
-  echo -e "$ESPEPACMAN"
+  echo -en "$ESPEPACMAN"
   install_software "alsa-utils pulseaudio" &>> $INSTLOG & show_progress $!
   # gst-plugins-{base,good,bad,ugly} \
   # gst-libav
@@ -787,7 +790,7 @@ fi
 zshinstall(){
  sleep 0.2
 
-echo -e "$ESPEPACMAN - INSTALAÇAO DO ZSH."
+echo -en "$ESPEPACMAN - INSTALAÇAO DO ZSH."
 install_software "zsh zsh-completions" &>> $INSTLOG & show_progress $!
 
 echo -e "$COK - ZSH INSTALADO."
@@ -798,11 +801,11 @@ fontes_doSistema(){
  sleep 0.2
 
 # wqy-microhei (koreano), cjk (japones)
-echo -e "$ESPEPACMAN - INSTALAÇAO DAS FONTES DO SISTEMA."
+echo -en "$ESPEPACMAN - INSTALAÇAO DAS FONTES DO SISTEMA."
 install_software "ttf-dejavu noto-fonts-emoji gnu-free-fonts wqy-microhei noto-fonts-cjk xorg-fonts-75dpi xorg-fonts-100dpi xorg-fonts-encodings ttf-jetbrains-mono-nerd" &>> $INSTLOG & show_progress $!
 
 if [ ! -f /usr/share/fonts/misc/siji.bdf ]; then
-echo -e "$ESPEPACMAN - INSTALAÇAO DA FONTE SIJI."
+echo -en "$ESPEPACMAN - INSTALAÇAO DA FONTE SIJI."
 install_software "siji-git" &>> $INSTLOG & show_progress $!
 fi
 
@@ -841,9 +844,9 @@ case "$BROWSER" in
 esac
 
 if [[ $BROWq = "qutebrowser" ]]; then
-echo -e "$ESPEPACMAN"
+echo -en "$ESPEPACMAN"
 install_software "qutebrowser python-adblock" &>> $INSTLOG & show_progress $!
-echo -e "$CONFIGANDO"
+echo -en "$CONFIGANDO"
 /usr/share/qutebrowser/scripts/dictcli.py install pt-BR &>> $INSTLOG & show_progress $!
 
  mkdir -p ~/.config/qutebrowser/;
@@ -854,7 +857,7 @@ echo -e "$CONFIGANDO"
 fi
 
 if [[ $BROWf = "firefox" ]]; then
-echo -e "$ESPEPACMAN - INSTALAÇAO DO FIREFOX."
+echo -en "$ESPEPACMAN - INSTALAÇAO DO FIREFOX."
 install_software "firefox firefox-i18n-pt-br" &>> $INSTLOG & show_progress $!
 
  echo -e "$COK - $BROWf INSTALADO."
@@ -888,14 +891,14 @@ temas(){
 
 # gruvbox tema
 if [ ! -d ~/.themes ]; then
-echo -e "$CONFIGANDO - TEMA GRUVBOX."
+echo -en "$CONFIGANDO - TEMA GRUVBOX."
 git clone https://github.com/jmattheis/gruvbox-dark-gtk ~/.themes/gruvbox-dark-gtk &>> $INSTLOG & show_progress $!
 else
  echo -e "$CWR - VOCÊ JÁ TEM O TEMA GRUVBOX-DARK-GTK."
 fi
 sleep 0.2
 if [ ! -d ~/.icons ]; then
-echo -e "$CONFIGANDO - TEMA DOS ICONES EM GRUVBOX."
+echo -en "$CONFIGANDO - TEMA DOS ICONES EM GRUVBOX."
 git clone https://github.com/jmattheis/gruvbox-dark-icons-gtk ~/.icons/gruvbox-dark-icons-gtk &>> $INSTLOG & show_progress $!
 else
  echo -e "$CWR - VOCÊ JÁ TEM O TEMA GRUVBOX-DARK-ICONS-GTK."
@@ -977,13 +980,13 @@ cat <<ASTRONVIM-DESENHO
 ASTRONVIM-DESENHO
 
 echo ""
-echo -e "$ESPEPACMAN"
+echo -en "$ESPEPACMAN"
 install_software "neovim python-pynvim" &>> $INSTLOG & show_progress $!
 
  if [[ ! -d ~/.config/nvim ]]; then
-  echo -e "$CONFIGANDO - ESTADO ORIGINAL."
+  echo -en "$CONFIGANDO - ESTADO ORIGINAL."
   git clone --depth 1 https://github.com/AstroNvim/AstroNvim ~/.config/nvim &>> $INSTLOG & show_progress $!
-  echo -e "$CONFIGANDO - PERSONALIZAÇAO."
+  echo -en "$CONFIGANDO - PERSONALIZAÇAO."
   git clone https://github.com/quebravel/astronvim_config.git ~/.config/nvim/lua/user &>> $INSTLOG & show_progress $!
   (nvim  --headless -c 'quitall')
  else
@@ -992,9 +995,9 @@ install_software "neovim python-pynvim" &>> $INSTLOG & show_progress $!
   case "$ASTRONV" in
    s|S)
     rm -rf ~/.config/nvim/;
-    echo -e "$CONFIGANDO"
+    echo -en "$CONFIGANDO"
     git clone --depth 1 https://github.com/AstroNvim/AstroNvim ~/.config/nvim &>> $INSTLOG & show_progress $!
-    echo -e "$CONFIGANDO"
+    echo -en "$CONFIGANDO"
     git clone https://github.com/quebravel/astronvim_config.git ~/.config/nvim/lua/user &>> $INSTLOG & show_progress $!
     (nvim  --headless -c 'quitall')
    ;;
@@ -1058,9 +1061,9 @@ TERMINADO
 
 # chamar funções parte 1
 inicio
+gerenciardorAUR
 windowManger
 driveVideo
-gerenciardorAUR
 notebook_ger
 lancadorProgramas
 arquivosdeConfiguracao
