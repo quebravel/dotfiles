@@ -1,6 +1,6 @@
 #!/bin/env bash
 
-dispositovo_opcoes=$(wpctl status | grep -m1 -A 5 "Sinks:" | head -n 10 | tr -d '│'" " | cut -d"*" -f2 | sed -n '/^[[:digit:]]/p' | cut -d\[ -f1 | cut -d. -f2| wofi -dmenu -s ~/.config/wofi/style_wpctl.css -c ~/.config/wofi/config.wpctl)
+dispositovo_opcoes=$(wpctl status | grep -m1 -A 5 "Sinks:" | head -n 10 | tr -d '│'" " | cut -d"*" -f2 | sed -n '/^[[:digit:]]/p' | cut -d\[ -f1 | wofi -dmenu -s ~/.config/wofi/style_wpctl.css -c ~/.config/wofi/config.wpctl)
 
 echo $dispositovo_opcoes
 
