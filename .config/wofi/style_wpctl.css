@@ -7,7 +7,7 @@
 #window {
   margin: 0px;
   /* border: 0px; */
-  background-color: #282828;
+  background-color: #44475a;
   border-radius: 10px;
   background-position: 10% 10%;
   border-width: 10px;
@@ -16,15 +16,15 @@
 #input {
   margin: 2px;
   border: transparent;
-  color: #ebdbb2;
-  background-color: #282828;
+  color: #282828;
+  background-color: #282a36;
   /* border-radius: 10px; */
 }
 
 #inner-box {
   margin: 0px;
   /* bord282828er: 2px solid yellow; */
-  background-color: #282828;
+  background-color: #44475a;
   padding-top: 10px;
   border-radius: 1rem;
 }
@@ -33,6 +33,7 @@
   margin: 0px;
   border-radius: 1rem;
   padding: 5px;
+  /* border: ; */
   /* background-color: green; */
 }
 
@@ -45,33 +46,23 @@
 
 #text {
   margin: 5px;
-  color: #ebdbb2;
+  color: #fff;
   /* border: 2px solid cyan; */
-  background-color: #282828;
+  background-color: #44475a;
 }
 
 #entry:selected {
-  color: #ebdbb2;
-  background-color: #83a958;
+  color: #bd93f9;
+  background-color: #bd93f9;
   border-radius: 10px;
 }
 #text:selected {
   color: #282828;
-  background-color: #83a958;
+  background-color: #bd93f9;
   border-radius: 10px;
 }
-#expander {
+expander {
   background-color: transparent;
-  color: #282828;
-  border-radius: 0px;
-}
-#unselected {
-  background-color: #282828;
+  color: #292929;
   border-radius: 10px;
-}
-#selected {
-  background-color: #83a958;
-}
-#img:selected {
-  background-color: #83a958;
 }

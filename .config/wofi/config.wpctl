@@ -1,0 +1,16 @@
+lines = 5
+columns = 1
+width = 20%
+height = 25%
+allow_images = false
+orientation=vertical
+normal_window=false
+hide_search = false
+key_down = J
+key_up = K
+key_left = H
+key_right = L
+gtk_dark = false
+key_hide_search = V
+hide_search = false
+prompt = pipewire saída de som

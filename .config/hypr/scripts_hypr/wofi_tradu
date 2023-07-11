@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# um=`echo -e "traduzir" | wofi -dmenu`
+um=$(wofi -dmenu)
+
+palavra=`trans -no-ansi -no-bidi -no-warn "$um" | sed -n 3,4p`
+
+if [ -z $um ]
+then
+    exit 1
+else
+    notify-send -u normal -t 60000 "Tradução" "$palavra"
+    # echo $palavra | wofi -dmenu -W 99% -H 10%
+fi
+

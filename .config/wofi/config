@@ -4,4 +4,14 @@ width = 25%
 height = 50%
 allow_images = true
 mode = drun
-
+key_expand = space
+key_down = J
+key_up = K
+key_left = H
+key_right = L
+gtk_dark = false
+filter_rate = 20
+key_hide_search = V
+hide_search = false
+prompt = programas
+normal_window = true
