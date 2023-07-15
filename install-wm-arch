@@ -271,7 +271,7 @@ fi
 # AUR para hyprland
 if [[ $WM_WAYLAND = "hyprland" ]]; then
 echo -en "$ESPEPACMAN - INSTALAÇAO DE PROGRAMAS EXTRAS PARA WAYLAND."
-install_software "grimblast-git tofi" &>> $INSTLOG & show_progress $!
+install_software "grimblast-git rofi crow-translate rofi-calc" &>> $INSTLOG & show_progress $!
 # notify-send.sh
 # polkit-kde-agent
 fi
