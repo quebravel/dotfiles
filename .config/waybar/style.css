@@ -39,6 +39,15 @@ window#waybar.chromium {
     border: none;
 }
 
+button:hover {
+    background: transparent;
+}
+
+button {
+    border: none;
+    background:transparent;
+}
+
 #workspaces button {
     padding: 0 5px;
     background-color: transparent;
