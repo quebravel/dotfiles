@@ -924,7 +924,12 @@ else
  mkdir -p ~/.config/gtk-3.0/;
  cp ./.config/gtk-3.0/* ~/.config/gtk-3.0/;
 fi
-
+if [[ ! -d ~/.local/share/icons/Grubox-Plus-Dark ]]; then
+    rm -rf ~/.local/share/icons/Grubox-Plus-Dark
+    git clone https://github.com/SylEleuth/gruvbox-plus-icon-pack.git ~/.local/share/icons/Grubox-Plus-Dark
+else
+    echo "" &>> /dev/null
+fi
 echo -e "$COK - TEMAS GRUVBOX GTK."
 
 }
