@@ -1,3 +1,4 @@
 #!/bin/sh
 
-wl-copy --primary < ~/token
+# ‐p, ‐‐primary, ‐o, ‐‐paste‐once | cola só uma vez
+wl-copy -po < ~/token
