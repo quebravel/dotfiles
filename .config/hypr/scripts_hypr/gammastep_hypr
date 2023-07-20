@@ -6,7 +6,7 @@ if [[ $1 = "toggle" ]]; then
 	if pgrep -x "gammastep" > /dev/null; then
 		kill -9 $(pgrep -x "gammastep");
 	else
-		gammastep -O ${GAMMASTEP_NIGHT:-3500} &
+		gammastep #-O ${GAMMASTEP_NIGHT:-3500} &
 	fi
 fi
 
