@@ -8,6 +8,7 @@ configuration {
   drun-display-format: "{name}";
   font: "JetBrainsMono Nerd Font Medium 12";
   modi: "drun";
+  show-icons: true;
 }
 
 @theme "/dev/null"
