@@ -7,7 +7,7 @@ configuration {
   display-window: "Windows:";
   drun-display-format: "{name}";
   font: "JetBrainsMono Nerd Font Medium 12";
-  modi: "drun";
+  modes: "drun";
   show-icons: true;
 }
 
