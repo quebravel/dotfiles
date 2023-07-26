@@ -1,42 +1,103 @@
+@import "gruvbox.css";
+
 * {
-    border: none;
-    border-radius: 3px;
+    /* reference the color by using @color-name */
+    /* color: @red; */
+    /* border: none; */
+    /* border-radius: 3px; */
     /* `otf-font-awesome` is required to be installed for icons */
-    font-family: Iosevka, monospace, Helvetica, Arial, sans-serif;
+    /* font-family: Iosevka, monospace, Helvetica, Arial, sans-serif; */
+    font-family: JetBrainsMono Nerd Font;
     font-size: 13px;
     min-height: 0;
+    margin:  0px 0px 0px 0px ;
+    /* padding: 0px  10px; */
+    /* padding-top: 2px; */
+    /* padding-bottom: 2px; */
+}
+
+
+#waybar {
+    /* background: alpha(@crust, 0.8); */
+    background: alpha(@mantle, 0.88);
+    /* background: rgba(30, 30, 46, 0.5); */
+    /* color: @pink; */
+    /* margin: 0px 0px; */
+    border-radius: 0px 0px 0px 0px;
 }
 
 window#waybar {
-    background-color: rgba(50,50, 115, 0.60);
-    /*border-bottom: 3px solid rgba(100, 114, 125, 0.5);*/
-    color: #ffffff;
-    transition-property: background-color;
-    transition-duration: .5s;
-    border-radius: 0;
-    margin: 2px 2px;
+    /* you can also GTK3 CSS functions! */
+    /* background-color: shade(@base, 0.9); */
+    /* border: 0px solid alpha(@crust, 0.3); */
+    /* border: none; */
+    color: @subtext1;
+    /* transition-property: background-color; */
+    /* transition-duration: .5s; */
+    /* border-radius: 4px; */
+    /* margin: 0px 1px; */
+    /* padding: 0px 1px; */
+    /* padding-top: 2px; */
+    /* padding-bottom: 2px; */
 }
 
-window#waybar.hidden {
-    opacity: 0.2;
+#window {
+    font-style: normal;
+    padding: 0px 10px 0px 10px;
 }
+
+/* window#waybar.hidden { */
+/*     opacity: 0.3; */
+/* } */
 
 /*
 window#waybar.empty {
-    background-color: transparent;
+background-color: transparent;
 }
 window#waybar.solo {
-    background-color: #FFFFFF;
+background-color: #FFFFFF;
 }*/
 
 
-window#waybar.termite {
-    background-color: #3F3F3F;
+/* window#waybar.kitty { */
+/*     background-color: @surface0; */
+/* } */
+
+/* window#waybar.qutebrowser { */
+/*     background-color: #2; */
+/*     border: none; */
+/* } */
+#workspaces {
+    border-radius: 0px;
+    background-color: transparent;
+    border-color: transparent;
+    /* margin-left: 3px; */
+    /* border-radius: 3px; */
+    /* margin-left: 1rem; */
+    /* margin-right: 0.3rem; */
 }
 
-window#waybar.chromium {
-    background-color: #000000;
+#workspaces button {
+    background-color: transparent;
+    color: @blue;
+    /* border-radius: 4px; */
+    padding: 0px 10px; /*largura do modulo*/
+    /* Use box-shadow instead of border so the text isn't offset */
+    /* box-shadow: inset 0 -3px transparent; */
+    margin: 0px 0px; /*crece largura alem do radio*/
+    border-color: transparent;
+
+}
+
+#workspaces button.active {
+    background-color: @surface0;
     border: none;
+    /* color: @crust;  */
+    /* border-radius: 16px; */
+    font-weight: bold;
+    color: @crust;
+    border-radius: 2px;
+    /* border-top: 1px solid @peach; */
 }
 
 button:hover {
@@ -44,186 +105,296 @@ button:hover {
 }
 
 button {
-    border: none;
-    background:transparent;
-}
-
-#workspaces button {
-    padding: 0 5px;
-    background-color: transparent;
-    color: #ffffff;
     /* Use box-shadow instead of border so the text isn't offset */
-    box-shadow: inset 0 -3px transparent;
-    margin: 5px 3px;
+    /* box-shadow: transparent; */
+    /* Avoid rounded borders under each button name */
+    border: 1px;
+    background: transparent;
+    border-top: 1px solid @overlay2;
+    /* border: #fff; */
+    /* border-radius: 0; */
 }
 
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
 #workspaces button:hover {
-    background: #00afaf;
-/*    box-shadow: inset 0 -3px #ffffff;*/
+    color: @text;
+    background-color: @peach;
+    border-color: @peach
+}
+#workspaces button.persistent {
+    background-color: transparent;
+    color: @overlay2;
+    font-family: JetBrainsMono Nerd Font;
+    font-style: italic;
+    border: none;
+    border-color: @overlay2;
 }
 
-#workspaces button.focused {
-    background-color: #64727d;
-   /* box-shadow: inset 0 -3px #ffffff;*/
+
+#workspaces button.visible {
+    background-color: @orange;
+    color: #fff;
+    /* border-bottom: 2px solid transparent; */
 }
 
 #workspaces button.urgent {
-    background-color: #eb4d4b;
+    background-color: @red;
+}
+#workspaces button.hidden {
+    /* background-color: @green; */
+    background: transparent;
+    color: transparent;
+    /* border: #fff; */
+    /* border-top: 5px solid #fff; */
+    /* border-color: #ddd; */
+    /* border-width: 1px; */
+    /* border-bottom: 2px solid transparent; */
 }
 
 #mode {
-    background-color: #64727D;
-    border-bottom: 3px solid #ffffff;
+    background-color: @mantle;
+    border: none;
+    /* border-bottom: 2px solid #ffffff; */
 }
 
 #clock,
-#battery,
-#cpu,
+/* #battery, */
+#custom-cava-internal,
+/* #cpu, */
 #memory,
 #temperature,
-#backlight,
+/* #backlight, */
 #network,
 #pulseaudio,
 #custom-media,
 #tray,
-#mode,
 #idle_inhibitor,
-#temp_bsd,
+/* #temp_bsd, */
 #weather,
 #disk,
 #onoffi,
+#keyboard-state,
+/* #meuclima, */
+/**/
+/* #meuclima { */
+/*     color: #ffffff; */
+/*     background: #000000; */
+/* } */
 
-#mpd {
-    padding: 0 10px;
-    margin: 5px 3px;
-    color: #ffffff;
+/* #mpd { */
+/*     padding: 0px 10px; */
+/*     margin-left: 10px; */
+/*     margin: 0px 5px; */
+/*     color: #ffffff; */
+/* } */
+
+/* #window, */
+
+/* .modules-left > widget:first-child > #workspaces { */
+/*     margin-left: 0; */
+/* } */
+/**/
+/* .modules-right > widget:last-child > #workspaces { */
+/*     margin-right: 0; */
+/* } */
+#temperature {
+    /* background: @subtext0; */
+    /* color: @base; */
+    background-color: transparent;
+    color: @surface2;
+    /* border-radius: 4px; */
+    padding: 0px 10px 0px 10px;
+    font-style: italic;
 }
-
-#window,
-#workspaces {
-    margin: 0px 3px;
-    /* background-color: #64727d; */
-}
-
-/* If workspaces is the leftmost module, omit left margin */
-.modules-left > widget:first-child > #workspaces {
-    margin-left: 0;
-}
-
-/* If workspaces is the rightmost module, omit right margin */
-.modules-right > widget:last-child > #workspaces {
-    margin-right: 0;
-}
-
 #disk {
-    background-color: #64727D;
-    margin: 5px 3px;
-    padding: 0 10px;
-    color: #fff;
+    /* background-color: @surface0; */
+    /* color: @mantle; */
+    background-color: transparent;
+    color: @surface2;
+    padding: 0px 10px 0px 10px;
+    font-style: italic;
+    /* margin: 0px 5px; */
+    /* padding: 0px 2px; */
+    /* border-radius: 4px; */
 }
 
 #custom-weather {
-    background-color: #64727D;
-    margin: 5px 3px;
-    padding: 0 10px;
+    background-color: #83a598;
+    /* margin: 0px 1px; */
+    padding: 0px 2px;
     color: #fff;
+    border-radius: 4px;
 }
 
-#custom-temp_bsd {
-    background-color: #64727D;
-    margin: 5px 3px;
-    padding: 0 10px;
-    color: #fff;
-}
+/* #custom-temp_bsd { */
+/*     background-color: #64727D; */
+/*     margin: 0px 3px; */
+/*     padding: 0 10px; */
+/*     color: #fff; */
+/* } */
 
 #clock {
-    background-color: #ff6600;
-    border-radius: 3px;
-    margin: 5px 3px;
+    /* background-color: alpha(@neutral_orange, 05); */
+    background-color: transparent;
+    color: @text;
+    margin-right: 0px;
+    /* border-radius: 6px 20px 20px 6px; */
+    /* border-right: 100px; */
+    font-weight: bold;
+    /* margin: 0px 5px; */
+    /* border-radius: 0px 0px 10px 0px; */
+    padding-left: 0px;
+    padding-right: 10px;
+    font-style: normal;
+    /* margin-right: 0px; */
+    /* margin-left: 0px; */
+    /* margin-top: 0px; */
+    /* margin-bottom: 0px; */
 }
 
 @keyframes blink {
     to {
         background-color: #ffffff;
-        color: #000000;
+        color: @crust;
     }
 }
 
 label:focus {
-    background-color: #000000;
+    background-color: @crust;
 }
 
 #memory {
-    background-color: #64727d;
-    color: #fff;
+    /* background-color: @subtext1; */
+    /* color: @base; */
+    background-color: transparent;
+    color: @surface2;
+    padding: 0px 10px 0px 10px;
+    font-style: italic;
+
+    /* border-radius: 4px; */
 }
 
 #network {
-    background-color: #2980b9;
+    background-color: transparent;
+    border-radius: 0px 0px 0px 0px;
+    /* font-weight: bold; */
+    padding: 0px 10px 0px 10px;
+    margin-left: 0px;
+    color: @surface1;
+    font-style: italic;
 }
 
 #network.disconnected {
     background-color: transparent;
+    border-radius: 4px;
+    font-style: italic;
 }
 
 #pulseaudio {
-    background-color: #64727d;
-    color: #fff;
+    /* background-color: @surface1; */
+    /* color: @crust; */
+    background-color: transparent;
+    color: @surface2;
+    border-radius: 0px 0px 0px 10px;
+    padding: 0px 10px 0px 10px;
+    font-style: italic;
 }
 
 #pulseaudio.muted {
-    background-color: #90b1b1;
-    color: #2a5c45;
+    background-color: @orange;
+    color: @surface0;
+    border-radius: 0px 0px 0px 10px;
+    font-style: italic;
 }
 
 #custom-media {
     background-color: #66cc99;
     color: #2a5c45;
     min-width: 100px;
+    border-radius: 4px;
 }
 
 #tray {
-    background-color: #2980b9;
+    background-color: transparent;
+    padding: 0px 10px 0px 10px;
 }
 
-#idle_inhibitor {
-    background-color: #2d3436;
-}
+/* #idle_inhibitor { */
+/*     background-color: #2d3436; */
+/* } */
 
-#idle_inhibitor.activated {
-    background-color: #ecf0f1;
-    color: #2d3436;
-}
+/* #idle_inhibitor.activated { */
+/*     background-color: #ecf0f1; */
+/*     color: #2d3436; */
+/* } */
 
 #mpd {
-    background-color: #66cc99;
-    color: #2a5c45;
+    background-color: transparent;
+    border-radius: 0px 0px 10px 0px;
+    margin-left: 0px;
+    padding: 0px 10px 0px 10px;
+    color: @text;
 }
 
 #mpd.disconnected {
-    background-color: #f53c3c;
+    background-color: transparent;
+    border-radius: 0px 0px 10px 0px;
+    color: @red;
+    font-style: italic;
 }
 
 #mpd.stopped {
-    background-color: #90b1b1;
+    background-color: transparent;
+    border-radius: 0px 0px 10px 0px;
+    color: @overlay2;
+    font-style: italic;
+    /* border-color: #ffffff; */
+    /* border-width: 2px; */
 }
 
 #mpd.paused {
-    background-color: #51a37a;
+    background-color: transparent;
+    border-radius: 0px 0px 10px 0px;
+    color: @blue;
+    font-style: italic;
 }
 
 #language {
-    background: #64727d;
-    color: #fff;
-    padding: 0 5px;
-    margin: 5px 3px;
-    min-width: 16px;
+    /* background: @text; */
+    /* background-color: transparent; */
+    background: alpha(@mantle, 0.60);
+    /* color: @base; */
+    color: @surface0;
+    padding: 0px 10px 0px 10px;
+    /* margin: 0px 3px; */
+    min-width: 10px;
+    border-radius: 0px 0px 0px 0px; 
+    margin-right: 0px;
+    /* border-width: 0px 6px 0px 0px;  */
+    /* border-radius: 6px; */
+    /* border-radius: 4px; */
 }
 
-#custom-onoffi {
-    background-color: #64727d;
-    color: #fff;
-    padding: 0 5px;
-    margin: 5px 3px;
+/* #custom-onoffi { */
+/*     color: @bright_green; */
+/*     padding: 0px 2px; */
+/*     border-radius: 4px; */
+/* } */
+
+#keyboard-state {
+    color: @surface2;
+    background-color: transparent;
+}
+#keyboard-state label {
+    color: @surface2;
+    background-color: transparent;
+}
+#keyboard-state label.locked {
+    color: @surface2;
+    background-color: transparent;
+}
+
+#custom-cava-internal {
+    color: @text;
+    background-color: transparent;
 }
