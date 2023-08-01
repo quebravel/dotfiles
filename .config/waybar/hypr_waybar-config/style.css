@@ -1,4 +1,5 @@
 @import "gruvbox.css";
+/* @import "mocha.css"; */
 
 * {
     /* reference the color by using @color-name */
@@ -8,7 +9,7 @@
     /* `otf-font-awesome` is required to be installed for icons */
     /* font-family: Iosevka, monospace, Helvetica, Arial, sans-serif; */
     font-family: JetBrainsMono Nerd Font;
-    font-size: 14px;
+    font-size: 13px;
     min-height: 0;
     margin:  0px 0px 0px 0px ;
     /* padding: 0px  10px; */
@@ -21,7 +22,7 @@
     /* background: alpha(@crust, 0.8); */
     background: alpha(@mantle, 0.88);
     /* background: rgba(30, 30, 46, 0.5); */
-    color: @pink;
+    /* color: @pink; */
     /* margin: 0px 0px; */
     border-radius: 0px 0px 0px 0px;
 }
@@ -90,15 +91,14 @@ background-color: #FFFFFF;
 }
 
 #workspaces button.active {
-    background-color: transparent;
-    /* background: alpha(@blue, 0.30); */
+    background-color: @surface0;
     border: none;
     /* color: @crust;  */
     /* border-radius: 16px; */
     font-weight: bold;
-    color: @text;
-    border-radius: 0px;
-    border-top: 1px solid @peach;
+    color: @crust;
+    border-radius: 2px;
+    /* border-top: 1px solid @peach; */
 }
 
 button:hover {
@@ -202,16 +202,18 @@ button {
     /* background: @subtext0; */
     /* color: @base; */
     background-color: transparent;
-    color: @surface0;
+    color: @surface2;
     /* border-radius: 4px; */
     padding: 0px 10px 0px 10px;
+    font-style: italic;
 }
 #disk {
     /* background-color: @surface0; */
     /* color: @mantle; */
     background-color: transparent;
-    color: @surface0;
+    color: @surface2;
     padding: 0px 10px 0px 10px;
+    font-style: italic;
     /* margin: 0px 5px; */
     /* padding: 0px 2px; */
     /* border-radius: 4px; */
@@ -244,6 +246,7 @@ button {
     /* border-radius: 0px 0px 10px 0px; */
     padding-left: 0px;
     padding-right: 10px;
+    font-style: normal;
     /* margin-right: 0px; */
     /* margin-left: 0px; */
     /* margin-top: 0px; */
@@ -265,8 +268,9 @@ label:focus {
     /* background-color: @subtext1; */
     /* color: @base; */
     background-color: transparent;
-    color: @surface0;
+    color: @surface2;
     padding: 0px 10px 0px 10px;
+    font-style: italic;
 
     /* border-radius: 4px; */
 }
@@ -278,26 +282,30 @@ label:focus {
     padding: 0px 10px 0px 10px;
     margin-left: 0px;
     color: @surface1;
+    font-style: italic;
 }
 
 #network.disconnected {
     background-color: transparent;
     border-radius: 4px;
+    font-style: italic;
 }
 
 #pulseaudio {
     /* background-color: @surface1; */
     /* color: @crust; */
     background-color: transparent;
-    color: @surface0;
+    color: @surface2;
     border-radius: 0px 0px 0px 10px;
     padding: 0px 10px 0px 10px;
+    font-style: italic;
 }
 
 #pulseaudio.muted {
     background-color: @orange;
     color: @surface0;
     border-radius: 0px 0px 0px 10px;
+    font-style: italic;
 }
 
 #custom-media {
@@ -326,7 +334,7 @@ label:focus {
     border-radius: 0px 0px 10px 0px;
     margin-left: 0px;
     padding: 0px 10px 0px 10px;
-    color: @yellow;
+    color: @text;
 }
 
 #mpd.disconnected {
@@ -373,6 +381,19 @@ label:focus {
 /*     padding: 0px 2px; */
 /*     border-radius: 4px; */
 /* } */
+
+#keyboard-state {
+    color: @surface2;
+    background-color: transparent;
+}
+#keyboard-state label {
+    color: @surface2;
+    background-color: transparent;
+}
+#keyboard-state label.locked {
+    color: @surface2;
+    background-color: transparent;
+}
 
 #custom-cava-internal {
     color: @text;

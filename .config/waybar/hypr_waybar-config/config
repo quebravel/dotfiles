@@ -1,7 +1,7 @@
 {
     "layer": "top" // Waybar at top layer
         , "position": "top" // Waybar position (top|bottom|left|right)
-        , "height": 20 // Waybar height (to be removed for auto height)
+        , "height": 25 // Waybar height (to be removed for auto height)
                        // "width": 90, // Waybar width // em branco = dinamico
         , "margin-right": 0
         , "margin-left": 0
@@ -9,9 +9,9 @@
         , "margin-bottom": 0
         , "spacing": 0
         // Choose the order of the modules
-        , "modules-left": ["mode",/*"custom/onoffi","custom/weather", */"network", "custom/media", "mpd"/*, "hyprland/window"*/]
+        , "modules-left": [/*"custom/onoffi","custom/weather", */"network", "custom/media", "mpd", "hyprland/window"]
         , "modules-center": ["wlr/workspaces"]
-        , "modules-right": ["hyprland/submap", "tray", /*"custom/cava-internal",*/ "pulseaudio", "disk", "memory", "temperature", /*"hyprland/language",*/ "clock"]
+        , "modules-right": ["hyprland/submap", "tray", "keyboard-state", /*"custom/cava-internal",*/ "pulseaudio", "disk", "memory", "temperature", /*"hyprland/language",*/ "clock"]
         // Modules configuration
         , "wlr/workspaces": {
             "on-click": "activate"
@@ -28,18 +28,19 @@
                 }
             , "format":"{icon}" //: {name}
         , "format-icons": {
-            "1": "01"
-            , "2": "02"
-            , "3": "03"
-            , "4": "04"
-            , "5": "05"
-            , "6": "06"
-            , "7": "07"
-            , "8": "08"
-            , "9": "09"
+            "1": "um1"
+            , "2": "do2"
+            , "3": "tr3"
+            , "4": "qu4"
+            , "5": "ci5"
+            , "6": "se6"
+            , "7": "se7"
+            , "8": "oi8"
+            , "9": "no9"
              // "urgent": ""
-            // , "active": "󰮯"
+            // , "active": ""
             // , "default": ""
+            // , "ocupado"; "󰧞"
         }
         // }
     , "wlr/mode": {
@@ -48,9 +49,9 @@
     , 
     }
     , "mpd": {
-        "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}({elapsedTime:%M:%S}/{totalTime:%M:%S}) {title}  ⸨{songPosition}|{queueLength}⸩ "
-            , "format-disconnected": "Disconnected "
-            , "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped "
+        "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}({elapsedTime:%M:%S}/{totalTime:%M:%S}) {title} {songPosition}|{queueLength} "
+            , "format-disconnected": "Disconectado "
+            , "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon} ncmpcpp "
             , "unknown-tag": "N/A"
             , "max-length": 50
             , "interval": 2
@@ -195,6 +196,18 @@
             , "format-icons": ["<span color='#fe8090'></span>", "<span color='#fe8090'></span>", "<span color='#fe8090'></span>"]
             , "scroll-step": 0.2
     }
+    , "keyboard-state": {
+            // "numlock": true,
+            "capslock": true,
+            "format": {
+                // "numlock": "N {icon}",
+                "capslock": "{icon} /caps", 
+            },
+            "format-icons": {
+                "locked": "<span color='#fe8090'></span>",
+                "unlocked": "<span color='#8ec07c'></span>"
+            }
+        }
  
 }
 
