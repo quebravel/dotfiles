@@ -10,10 +10,10 @@
         , "spacing": 0
         // Choose the order of the modules
         , "modules-left": [/*"custom/onoffi","custom/weather", */"network", "custom/media", "mpd", "hyprland/window"]
-        , "modules-center": ["wlr/workspaces"]
+        , "modules-center": ["hyprland/workspaces"]
         , "modules-right": ["hyprland/submap", "tray", "keyboard-state", /*"custom/cava-internal",*/ "pulseaudio", "disk", "memory", "temperature", /*"hyprland/language",*/ "clock"]
         // Modules configuration
-        , "wlr/workspaces": {
+        , "hyprland/workspaces": {
             "on-click": "activate"
                 , "persistent_workspaces": {
                     "1": []
