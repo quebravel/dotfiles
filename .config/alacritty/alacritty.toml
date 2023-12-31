@@ -1,0 +1,72 @@
+import = ["/home/jonatas/.config/alacritty/themes/gruvox_dark.toml"]
+
+ # import = ["/home/jonatas/.config/alacritty/themes/dracula.toml"]
+ # import = ["/home/jonatas/.config/alacritty/themes/gotham.yml"]
+ # import = ["/home/jonatas/.config/alacritty/themes/gruvbox_material.yml"]
+ # import = ["/home/jonatas/.config/alacritty/themes/wombat.yml"]
+ # import = ["/home/jonatas/.config/alacritty/themes/solarized_dark.yml"]
+ # import = ["/home/jonatas/.config/alacritty/themes/jellybeans.yml"]
+ # import = ["/home/jonatas/.config/alacritty/themes/ayu_mirage.yml"]
+ # import = ["/home/jonatas/.config/alacritty/themes/tokyonight_day.yml"]
+ # import = ["/home/jonatas/.config/alacritty/themes/tokyonight_night.yml"]
+
+[cursor]
+vi_mode_style = "Block"
+
+[cursor.style]
+blinking = "Off"
+shape = "Block"
+
+[font]
+size = 9.5
+
+[font.bold]
+family = "JetBrainsMono Nerd Font"
+style = "Bold"
+
+[font.italic]
+family = "JetBrainsMono Nerd Font"
+style = "Italic"
+
+[font.normal]
+family = "JetBrainsMono Nerd Font"
+style = "Medium"
+
+[[keyboard.bindings]]
+action = "ClearLogNotice"
+key = "X"
+mods = "Shift|Control"
+
+[[keyboard.bindings]]
+action = "ScrollLineUp"
+key = "K"
+mods = "Shift|Control"
+
+[[keyboard.bindings]]
+action = "ScrollLineDown"
+key = "J"
+mods = "Shift|Control"
+
+[[keyboard.bindings]]
+action = "ToggleViMode"
+key = "Escape"
+mode = "~Search"
+mods = "Alt"
+
+[[keyboard.bindings]]
+action = "Copy"
+key = "Y"
+mode = "Vi|~Search"
+
+[[keyboard.bindings]]
+action = "ClearSelection"
+key = "Y"
+mode = "Vi|~Search"
+
+[[keyboard.bindings]]
+action = "Paste"
+key = "P"
+mode = "Vi|~Search"
+
+[window]
+opacity = 0.9
