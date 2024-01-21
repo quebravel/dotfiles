@@ -246,7 +246,7 @@ esac
 if [[ -z $WMs ]]; then
     echo ""
 else
-    # insalando window manger
+    # instalando window manger
     echo -en "$ESPEPACMAN - INSTALAÇAO DO $WMs."
 install_software_pacman "$WMs $WMx $WMb" &>> $INSTLOG & show_progress $!
     echo -en "$ESPEPACMAN - INSTALAÇAO DO XORG."
@@ -259,7 +259,7 @@ fi
 if [[ $WM_WAYLAND = "hyprland" ]]; then
     echo -en "$ESPEPACMAN - INSTALAÇAO DE HYPRLAND."
     install_software_pacman "$WM_WAYLAND"
-    install_software_pacman "wl-clipboard seatd swaybg waybar-hyprland-git ttf-font-awesome" &>> $INSTLOG
+    install_software_pacman "wl-clipboard seatd swaybg ttf-font-awesome" &>> $INSTLOG
     sleep 0.2
     echo -en "$CONFIGANDO"
     sudo systemctl enable seatd.service &>> $INSTLOG
@@ -285,10 +285,11 @@ fi
 
 # Configurações
 if [[ $WM_WAYLAND = "hyprland" ]]; then
-    rm --recursive --force ~/.config/{hypr,waybar}; 
+    rm --recursive --force ~/.config/{hypr,waybar,rofi}; 
     cp -r ./.config/hypr ~/.config/;
     mkdir -p ~/.config/waybar
     cp -r ./.config/waybar/hypr_waybar-config/* ~/.config/waybar/
+    cp -r ./.config/rofi ~/config/;
     echo -e "$COK - CONFIGURACAO DO $WM_WAYLAND."
 fi
 
@@ -384,7 +385,11 @@ echo -en "$ESPEPACMAN - INSTALAÇAO DO PICOM."
 install_software "picom-jonaburg-git" &>> $INSTLOG & show_progress $!
 fi
 
-
+if [[ $WM_WAYLAND = "hyprland" ]]; then
+    install_software "wl-clipboard waybar-hyprland" &>> $INSTLOG & show_progress $!
+else
+    echo  ""
+fi
 }
 
 notebook_ger(){
