@@ -579,37 +579,42 @@ cat <<LOGINLY
 ░░░ ░░
 LOGINLY
 echo ""
-read -rep "$(echo -e $CAC) - Deseja instalar um Display Manager LY? - (s,n) ... " DMGR
+read -rep "$(echo -e $CAC) - Deseja instalar um Display Manager $(echo -e $LETRA)T$(echo -e $RESETLETRA)BSM ou $(echo -e $LETRA)L$(echo -e $RESETLETRA)Y? - (t,l,n) ... " DMGR
 
     case "$DMGR" in
-    s|S)
-    echo -en "$ESPEPACMAN - INSTALAÇAO DO LY."
-    install_software "ly-git cmatrix" &>> $INSTLOG & show_progress $!
-    # cominho do arquivo de configuração
-    arquivo="/etc/ly/config.ini"
+        t|T)
+            install_software "tbsm" &>> $INSTLOG & show_progress $!
+            echo "[[ $XDG_VTNR -le 2 ]] && tbsm" > ~/.zlogin
+        ;;
+        l|L)
 
-    if [[ -f $arquivo ]]; then
-        # abilitando opções 
-        sudo sed -i 's/#animate = false/animate = true/g' $arquivo
-        sudo sed -i 's/#animation = 0/animation = 1/g' $arquivo
-        sudo sed -i 's/#xinitrc \= \~\/.xinitrc/xinitrc \= \~\/.xinitrc/g' $arquivo
-        # transformando arquivo xinitrc em executavel bash
-        sudo systemctl enable ly.service
-        sleep 0.2
-        echo -e "$COK - LY INSTALADO."
-    else
-        echo -e "$CER - NÃO EXISTE O ARQUIVO DE CONFIGURACAO."
-    fi
-    ;;
+        echo -en "$ESPEPACMAN - INSTALAÇAO DO LY."
+        install_software "ly-git cmatrix" &>> $INSTLOG & show_progress $!
+        # cominho do arquivo de configuração
+        arquivo="/etc/ly/config.ini"
+
+        if [[ -f $arquivo ]]; then
+            # abilitando opções 
+            sudo sed -i 's/#animate = false/animate = true/g' $arquivo
+            sudo sed -i 's/#animation = 0/animation = 1/g' $arquivo
+            sudo sed -i 's/#xinitrc \= \~\/.xinitrc/xinitrc \= \~\/.xinitrc/g' $arquivo
+            # transformando arquivo xinitrc em executavel bash
+            sudo systemctl enable ly.service
+            sleep 0.2
+            echo -e "$COK - LY INSTALADO."
+        else
+            echo -e "$CER - NÃO EXISTE O ARQUIVO DE CONFIGURACAO."
+        fi
+        ;;
     n|N) echo -e "$CNT - NAO TERÁ DISPLAY MANAGER."
     ;;
     *) lyConfig
     ;;
     esac
 
-if [[ -f ~/.xinitrc ]]; then
-    chmod +x ~/.xinitrc
-fi
+    if [[ -f ~/.xinitrc ]]; then
+        chmod +x ~/.xinitrc
+    fi
 
 } ### ly_config
 
