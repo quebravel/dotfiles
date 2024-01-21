@@ -91,13 +91,13 @@ background-color: #FFFFFF;
 }
 
 #workspaces button.active {
-    background-color: @surface0;
+    background-color: transparent;
     border: none;
     /* color: @crust;  */
     /* border-radius: 16px; */
-    font-weight: bold;
-    color: @crust;
-    border-radius: 2px;
+    /* font-weight: bold; */
+    color: @peach;
+    /* border-radius: 2px; */
     /* border-top: 1px solid @peach; */
 }
 
@@ -109,9 +109,9 @@ button {
     /* Use box-shadow instead of border so the text isn't offset */
     /* box-shadow: transparent; */
     /* Avoid rounded borders under each button name */
-    border: 1px;
+    border: none;
     background: transparent;
-    border-top: 1px solid @overlay2;
+    border-top: 0px solid @overlay2;
     /* border: #fff; */
     /* border-radius: 0; */
 }
@@ -119,14 +119,14 @@ button {
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
 #workspaces button:hover {
     color: @text;
-    background-color: @peach;
+    background-color: transparent;
     border-color: @peach
 }
 #workspaces button.persistent {
     background-color: transparent;
     color: @overlay2;
     font-family: JetBrainsMono Nerd Font;
-    font-style: italic;
+    font-style: normal;
     border: none;
     border-color: @overlay2;
 }
