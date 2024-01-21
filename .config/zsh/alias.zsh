@@ -11,6 +11,7 @@ alias n="nvim"
 alias tmux='TERM=xterm-256color tmux'
 alias mkfs.ntfs='mkfs.ntfs --fast'
 alias lynx='lynx -cfg=~/lynx.cfg'
+alias update-grub='grub-mkconfig -o /boot/grub/grub.cfg'
 
 # atalhos
 alias nzshrc="nvim ~/.zshrc && source ~/.zshrc"
