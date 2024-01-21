@@ -15,34 +15,35 @@
         // Modules configuration
         , "hyprland/workspaces": {
             "on-click": "activate"
-                , "persistent_workspaces": {
-                    "1": []
-                        , "2": []
-                        , "3": []
-                        , "4": []
-                        , "5": []
-                        , "6": []
-                        , "7": []
-                        , "8": []
-                        , "9": []
-                }
+                // , "persistent_workspaces": {
+                //     "1": []
+                //         , "2": []
+                //         , "3": []
+                //         , "4": []
+                //         , "5": []
+                //         , "6": []
+                //         , "7": []
+                //         , "8": []
+                //         , "9": []
             , "format":"{icon}" //: {name}
+            , "on-scroll-up": "hyprctl dispatch workspace e+1"
+            , "on-scroll-down": "hyprctl dispatch workspace e-1"
         , "format-icons": {
-            "1": "um"
-            , "2": "dois"
-            , "3": "três"
-            , "4": "quatro"
-            , "5": "cinco"
-            , "6": "seis"
-            , "7": "sete"
-            , "8": "oito"
-            , "9": "nove"
-             // "urgent": ""
-            // , "active": "󰮯"
-            // , "default": ""
+            // "1": "um1"
+            // , "2": "do2"
+            // , "3": "tr3"
+            // , "4": "qu4"
+            // , "5": "ci5"
+            // , "6": "se6"
+            // , "7": "se7"
+            // , "8": "oi8"
+            // , "9": "no9"
+             "urgent": ""
+            , "active": ""
+            , "default": ""
+            , "ocupado": "󰧞"
         }
-        // }
-    , "wlr/mode": {
+    , "hyprland/mode": {
         "format": "<span style=\"italic\">{}</span>"
     }
     , 
