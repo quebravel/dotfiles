@@ -2,7 +2,7 @@
 
 pid=$(pgrep gammastep)
 
-if [[ $1 = "toggle" ]]; then
+if [[ $pid > 1 ]]; then
 	if pgrep -x "gammastep" > /dev/null; then
 		kill -9 $(pgrep -x "gammastep");
 	else
@@ -17,4 +17,3 @@ else
 	echo ""
 	echo "Nightlight is off"
 fi
-
