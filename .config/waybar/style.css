@@ -1,4 +1,5 @@
 @import "gruvbox.css";
+/* @import "mocha.css"; */
 
 * {
     /* reference the color by using @color-name */
@@ -90,13 +91,13 @@ background-color: #FFFFFF;
 }
 
 #workspaces button.active {
-    background-color: @surface0;
+    background-color: transparent;
     border: none;
     /* color: @crust;  */
     /* border-radius: 16px; */
-    font-weight: bold;
-    color: @crust;
-    border-radius: 2px;
+    /* font-weight: bold; */
+    color: @peach;
+    /* border-radius: 2px; */
     /* border-top: 1px solid @peach; */
 }
 
@@ -108,9 +109,9 @@ button {
     /* Use box-shadow instead of border so the text isn't offset */
     /* box-shadow: transparent; */
     /* Avoid rounded borders under each button name */
-    border: 1px;
+    border: none;
     background: transparent;
-    border-top: 1px solid @overlay2;
+    border-top: 0px solid @overlay2;
     /* border: #fff; */
     /* border-radius: 0; */
 }
@@ -118,14 +119,14 @@ button {
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
 #workspaces button:hover {
     color: @text;
-    background-color: @peach;
+    background-color: transparent;
     border-color: @peach
 }
 #workspaces button.persistent {
     background-color: transparent;
     color: @overlay2;
     font-family: JetBrainsMono Nerd Font;
-    font-style: italic;
+    font-style: normal;
     border: none;
     border-color: @overlay2;
 }
@@ -204,7 +205,7 @@ button {
     color: @surface2;
     /* border-radius: 4px; */
     padding: 0px 10px 0px 10px;
-    font-style: italic;
+    font-style: normal;
 }
 #disk {
     /* background-color: @surface0; */
@@ -212,7 +213,7 @@ button {
     background-color: transparent;
     color: @surface2;
     padding: 0px 10px 0px 10px;
-    font-style: italic;
+    font-style: normal;
     /* margin: 0px 5px; */
     /* padding: 0px 2px; */
     /* border-radius: 4px; */
@@ -269,7 +270,7 @@ label:focus {
     background-color: transparent;
     color: @surface2;
     padding: 0px 10px 0px 10px;
-    font-style: italic;
+    font-style: normal;
 
     /* border-radius: 4px; */
 }
@@ -281,30 +282,30 @@ label:focus {
     padding: 0px 10px 0px 10px;
     margin-left: 0px;
     color: @surface1;
-    font-style: italic;
+    font-style: normal;
 }
 
 #network.disconnected {
     background-color: transparent;
     border-radius: 4px;
-    font-style: italic;
+    font-style: normal;
 }
 
 #pulseaudio {
     /* background-color: @surface1; */
     /* color: @crust; */
-    background-color: transparent;
-    color: @surface2;
-    border-radius: 0px 0px 0px 10px;
+    background-color: @neutral_orange;
+    color: @text;
+    border-radius: 10px 10px 10px 10px;
     padding: 0px 10px 0px 10px;
-    font-style: italic;
+    font-style: normal;
 }
 
 #pulseaudio.muted {
     background-color: @orange;
     color: @surface0;
-    border-radius: 0px 0px 0px 10px;
-    font-style: italic;
+    border-radius: 0px 0px 0px 6px;
+    font-style: normal;
 }
 
 #custom-media {
@@ -340,14 +341,14 @@ label:focus {
     background-color: transparent;
     border-radius: 0px 0px 10px 0px;
     color: @red;
-    font-style: italic;
+    font-style: normal;
 }
 
 #mpd.stopped {
     background-color: transparent;
     border-radius: 0px 0px 10px 0px;
     color: @overlay2;
-    font-style: italic;
+    font-style: normal;
     /* border-color: #ffffff; */
     /* border-width: 2px; */
 }
@@ -356,7 +357,7 @@ label:focus {
     background-color: transparent;
     border-radius: 0px 0px 10px 0px;
     color: @blue;
-    font-style: italic;
+    font-style: normal;
 }
 
 #language {
