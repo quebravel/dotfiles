@@ -133,7 +133,7 @@ button {
 
 
 #workspaces button.visible {
-    background-color: @orange;
+    background-color: transparent;
     color: #fff;
     /* border-bottom: 2px solid transparent; */
 }
