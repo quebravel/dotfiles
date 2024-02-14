@@ -29,8 +29,9 @@ configuration {
 }
 
 window {
-  width: 30%;
+  width: 600;
   background-color: @bg;
+  border-radius: 7;
 }
 
 element {
