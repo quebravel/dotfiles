@@ -989,7 +989,7 @@ sleep 0.2
 if [[ -f ~/.zshrc ]]; then
 sed -i '/^\[\[ \!/d' $HOME/.zshrc
 echo "[[ ! -f ~/.config/zsh/custom_extra_config.zsh ]] || source ~/.config/zsh/custom_extra_config.zsh" >> $HOME/.zshrc
-sed -i '/(git)/s/git/git extract universalarchive/' $HOME/.zshrc
+sed -i '/(git)/s/git/git extract universalarchive systemd/' $HOME/.zshrc
 fi
 
 sleep 0.2
