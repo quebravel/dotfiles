@@ -30,3 +30,6 @@ autopair-init
 
 # Carregar configuração starshitp prompt. 
 # eval "$(starship init zsh)"
+
+# qutebrowser ser aberto por links no terminal
+# xdg-mime default org.qutebrowser.qutebrowser.desktop x-scheme-handler/https x-scheme-handler/http
