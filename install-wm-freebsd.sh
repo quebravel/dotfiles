@@ -54,10 +54,10 @@ EOL
 
     sleep 0.2
 
-    install_software_pkg "sudo neovim zsh zsh-completions ohmyzsh"
+    install_software_pkg "sudo neovim zsh zsh-completions"
 }
 config_zsh(){
-cp /usr/local/share/ohmyzsh/templates/zshrc.zsh-template ~/.zshrc
+sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 }
 inicio
 config_zsh
