@@ -58,8 +58,8 @@ EOL
 }
 
 config_sudo(){
-#sed -i '/%wheel ALL=(ALL:ALL) ALL/s/^#//' /usr/local/etc/sudoers
-sed -i S'/# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/g' /usr/local/etc/sudoers
+sed -i .orig '/%wheel ALL=(ALL:ALL) ALL/s/^#//' /usr/local/etc/sudoers
+rm /usr/local/etc/sudoers.orig
 }
 
 config_ohmyzsh(){
