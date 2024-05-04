@@ -20,27 +20,12 @@ FIN_INST="&>> $INSTLOG & show_progress $!"
 ESPEPACMAN="[\e[1;37mEXECUTANDO\e[0m"
 CONFIGANDO="[\e[1;37mCONFIGURANDO\e[0m"
 
-# barra de progresso
-show_progress() {
-    while ps | grep $1 &> /dev/null;
-    do
-        echo -n "."
-        sleep 2
-    done
-    echo -en "\e[1;32mPRONTO!\e[0m]\n"
-    sleep 2
-}
-
 install_software_pkg() {
     # instala pacotes com pkg
     for PKGS in ${1}; do
-    sudo pkg install "${PKGS}" &>> $INSTLOG & show_progress $!
+    pkg install -y "${PKGS}" #&>> $INSTLOG & show_progress $!
     done
 }
-
-
-
-
 
 # parte 1
 inicio(){
@@ -48,11 +33,11 @@ inicio(){
 
     clear
 
-    cat <<EOL
+cat <<EOL
 
-                    Script de preparacao para usar um wm no freebsd.
+                Script de preparacao para usar um wm no freebsd.
 
-    EOL
+EOL
 
     sleep 0.2
 
@@ -71,3 +56,4 @@ inicio(){
 
     install_software_pkg "sudo"
 }
+inicio
