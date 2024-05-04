@@ -59,6 +59,7 @@ EOL
 
 config_sudo(){
 sed -i .orig '/%wheel ALL=(ALL:ALL) ALL/s/^#//' /usr/local/etc/sudoers
+sed -i .orig '117s/^/jonatas ALL=(ALL) ALL/' /usr/local/etc/sudoers
 rm /usr/local/etc/sudoers.orig
 }
 
