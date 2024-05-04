@@ -57,7 +57,18 @@ EOL
     install_software_pkg "sudo neovim zsh zsh-completions"
 }
 config_zsh(){
-sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+ sleep 0.2
+
+if [[ ! -d ~/.oh-my-zsh ]]; then
+ # sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+    sleep 0.2
+    chsh -s $(which zsh)
+    echo -e "$COK - OH-MY-ZSH."
+else
+    echo -e "$CAT - JÁ EXISTE OH-MY-ZSH NO SISTEMA."
+fi
+
 }
 inicio
 config_zsh
