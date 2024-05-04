@@ -56,4 +56,9 @@ EOL
 
     install_software_pkg "sudo neovim zsh zsh-completions ohmyzsh"
 }
+config_zsh(){
+cp /usr/local/share/ohmyzsh/templates/zshrc.zsh-template ~/.zshrc
+}
 inicio
+config_zsh
+
