@@ -54,6 +54,6 @@ EOL
 
     sleep 0.2
 
-    install_software_pkg "sudo"
+    install_software_pkg "sudo neovim zsh zsh-completions ohmyzsh"
 }
 inicio
