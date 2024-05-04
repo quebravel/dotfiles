@@ -56,11 +56,15 @@ EOL
 
     install_software_pkg "sudo neovim zsh zsh-completions curl"
 }
+
+config_sudo(){
+sed -i '/%wheel ALL=(ALL:ALL) ALL/s/^#//' /etc/sudoers
+}
+
 config_ohmyzsh(){
  sleep 0.2
 
 if [[ ! -d ~/.oh-my-zsh ]]; then
- # sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
     sleep 0.2
     chsh -s $(which zsh)
@@ -107,5 +111,6 @@ echo -e "$COK - ZSH COM CONFIGURACAO EXTRA."
 }
 
 inicio
+config_sudo
 config_ohmyzsh
 alias_autopair
