@@ -54,7 +54,7 @@ EOL
 
     sleep 0.2
 
-    install_software_pkg "sudo neovim zsh zsh-completions"
+    install_software_pkg "sudo neovim zsh zsh-completions curl"
 }
 config_ohmyzsh(){
  sleep 0.2
