@@ -113,12 +113,12 @@ echo -e "$COK - ZSH COM CONFIGURACAO EXTRA."
 }
 
 config_rc(){
-sed -i .orig '10s/^/dbus_enable="YES"/' /etc/rc.conf
-sed -i .orig '11s/^/hald_enable="YES"/' /etc/rc.conf
-sed -i .orig '12s/^/fuse_load="YES"/' /etc/rc.conf
-sed -i .orig '13s/^/kld_list="/boot/modules/i915kms.ko"/' /etc/rc.conf
-sed -i .orig '14s/^/devfs_system_ruleset="devfsrules_common"/' /etc/rc.conf
-rm /etc/rc.conf.orig
+echo -e '
+dbus_enable="YES"
+hald_enable="YES"
+fuse_load="YES"
+kld_list="/boot/modules/i915kms.ko"
+devfs_system_ruleset="devfsrules_common"' >> /etc/rc.conf
 }
 
 inicio
