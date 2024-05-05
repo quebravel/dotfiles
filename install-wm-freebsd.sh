@@ -112,7 +112,17 @@ echo -e "$COK - ZSH COM CONFIGURACAO EXTRA."
 
 }
 
+config_rc(){
+sed -i .orig '10s/^/dbus_enable="YES"' /etc/rc.conf
+sed -i .orig '11s/^/hald_enable="YES"' /etc/rc.conf
+sed -i .orig '12s/^/fuse_load="YES"' /etc/rc.conf
+sed -i .orig '13s/^/kld_list="/boot/modules/i915kms.ko"' /etc/rc.conf
+sed -i .orig '14s/^/devfs_system_ruleset="devfsrules_common"' /etc/rc.conf
+rm /etc/rc.conf.orig
+}
+
 inicio
-config_sudo
-config_ohmyzsh
-alias_autopair
+#config_sudo
+config_rc
+#config_ohmyzsh
+#alias_autopair
