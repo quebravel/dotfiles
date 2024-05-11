@@ -45,6 +45,12 @@ alias pi="paru -S"
 alias prs="paru -Rs"
 alias pss="paru -Ss"
 
+# yay
+alias y="yay"
+alias yi="yay -S"
+alias yrs="yay -Rs"
+alias yss="yay -Ss"
+
 # Changing "ls" to "exa"
 alias la='exa -la --color-scale --color=always --group-directories-first --icons --git --header' # my preferred listing
 alias lau='exa -la --color-scale --color=always --group-directories-first --sort=modified --icons --git --header' # my preferred listing
