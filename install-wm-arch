@@ -219,19 +219,19 @@ read -rep "$(echo -e $CAC) - Qual gerenciador de janelas (window manager) vai se
 
 case $WME in 
 b|B)
-	WMs='bspwm'
-	WMx='sxhkd'
-	WMb='polybar'
+	WMs="bspwm"
+	WMx="sxhkd"
+	WMb="polybar"
 	;;
 
 x|X)
-	WMs='xmonad'
-	WMx='xmonad-contrib'
-	WMb='xmobar'
+	WMs="xmonad"
+	WMx="xmonad-contrib"
+	WMb="xmobar"
 	;;
 
 h|H)
-    WM_WAYLAND='hyprland'
+    WM_WAYLAND="hyprland"
     ;;
 
 p|P)
@@ -380,16 +380,17 @@ install_software "alacritty exa mpv python-pynvim yt-dlp ntfs-3g xf86-input-evde
 # curl \
 # the_silver_searcher \
 
-if [[ ! -f /bin/picom ]]; then
-echo -en "$ESPEPACMAN - INSTALAÇAO DO PICOM."
-install_software "picom-jonaburg-git" &>> $INSTLOG & show_progress $!
-fi
+# PACOTE NÃO EXISTE MAIS
+# if [[ ! -f /bin/picom ]]; then
+# echo -en "$ESPEPACMAN - INSTALAÇAO DO PICOM."
+# install_software "picom-jonaburg-git" &>> $INSTLOG & show_progress $!
+# fi
 
-if [[ $WM_WAYLAND = "hyprland" ]]; then
-    install_software "wl-clipboard waybar-hyprland" &>> $INSTLOG & show_progress $!
-else
-    echo  ""
-fi
+# if [[ $WM_WAYLAND = "hyprland" ]]; then
+#     install_software "wl-clipboard waybar" &>> $INSTLOG & show_progress $!
+# else
+#     echo  ""
+# fi
 }
 
 notebook_ger(){
@@ -1017,7 +1018,8 @@ install_software "neovim python-pynvim" &>> $INSTLOG & show_progress $!
 
  if [[ ! -d ~/.config/nvim ]]; then
   echo -en "$CONFIGANDO - ESTADO ORIGINAL."
-  git clone --depth 1 https://github.com/AstroNvim/AstroNvim ~/.config/nvim &>> $INSTLOG & show_progress $!
+  git clone --depth 1 https://github.com/AstroNvim/template ~/.config/nvim &>> $INSTLOG & show_progress $!
+  rm -rf ~/.config/nvim/.git
   echo -en "$CONFIGANDO - PERSONALIZAÇAO."
   git clone https://github.com/quebravel/astronvim_config.git ~/.config/nvim/lua/user &>> $INSTLOG & show_progress $!
   (nvim  --headless -c 'quitall')
@@ -1028,7 +1030,8 @@ install_software "neovim python-pynvim" &>> $INSTLOG & show_progress $!
    s|S)
     rm -rf ~/.config/nvim/;
     echo -en "$CONFIGANDO"
-    git clone --depth 1 https://github.com/AstroNvim/AstroNvim ~/.config/nvim &>> $INSTLOG & show_progress $!
+    git clone --depth 1 https://github.com/AstroNvim/template ~/.config/nvim &>> $INSTLOG & show_progress $!
+    rm -rf ~/.config/nvim/.git
     echo -en "$CONFIGANDO"
     git clone https://github.com/quebravel/astronvim_config.git ~/.config/nvim/lua/user &>> $INSTLOG & show_progress $!
     (nvim  --headless -c 'quitall')
