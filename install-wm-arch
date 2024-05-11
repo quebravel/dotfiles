@@ -288,7 +288,7 @@ if [[ $WM_WAYLAND = "hyprland" ]]; then
     cp -r ./.config/hypr ~/.config/;
     mkdir -p ~/.config/waybar
     cp -r ./.config/waybar/hypr_waybar-config/* ~/.config/waybar/
-    cp -r ./.config/rofi ~/config/;
+    cp -r ./.config/rofi ~/.config/;
     echo -e "$COK - CONFIGURACAO DO $WM_WAYLAND."
 fi
 
