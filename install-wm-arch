@@ -591,6 +591,7 @@ read -rep "$(echo -e $CAC) - Deseja instalar um Display Manager $(echo -e $LETRA
 	    echo -en "$ESPEPACMAN - INSTALAÇAO DO TBSM."
             install_software "tbsm" &>> $INSTLOG & show_progress $!
             echo "[[ $XDG_VTNR -le 2 ]] && tbsm" > ~/.zlogin
+            cp -r ./.config/tbsm/ ~/.config/
             echo -e "$COK - TBSM INSTALADO."
         ;;
         l|L)
