@@ -258,7 +258,7 @@ fi
 
 if [[ $WM_WAYLAND = "hyprland" ]]; then
     echo -en "$ESPEPACMAN - INSTALAÇAO DE HYPRLAND."
-    install_software_pacman "$WM_WAYLAND wl-clipboard seatd swaybg ttf-font-awesome" #&>> $INSTLOG
+    install_software_pacman "$WM_WAYLAND wl-clipboard seatd swaybg ttf-font-awesome waybar" #&>> $INSTLOG
     sleep 0.2
     echo -en "$CONFIGANDO"
     sudo systemctl enable seatd.service &>> $INSTLOG
