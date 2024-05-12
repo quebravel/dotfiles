@@ -99,10 +99,10 @@
                 , "on-scroll"     : 1
                 , "format": {
                                 "months":     "<span color='#ffead3'><b>{}</b></span>"
-                              , "days":       "<span color='#ecc6d9'><b>{}</b></span>"
+                              , "days":       "<span color='#ffffff'><b>{}</b></span>"
                               , "weeks":      "<span color='#99ffdd'><b>W{}</b></span>"
                               , "weekdays":   "<span color='#ffcc66'><b>{}</b></span>"
-                              , "today":      "<span color='#ff6699'><b><u>{}</u></b></span>"
+                              , "today":      "<span color='#ff6699'><b><i>{}</i></b></span>"
                               }
                     }
     }
@@ -125,7 +125,7 @@
     }
     , "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
-        "format": "{icon} {volume}%  \ue621"
+        "format": "{icon} {volume}%"
             , "format-bluetooth": "{volume}% {icon} {format_source}" // \udb80\udcaf <- bluetooth
             , "format-bluetooth-muted": "\udb81\udf5f{icon} {format_source}"
             , "format-muted": "\udb81\udd81 00%"
@@ -138,7 +138,7 @@
                     , "phone": ""
                     , "portable": ""
                     , "car": ""
-                    , "default": ["<span color='#f9f5d7'>\udb81\udd7f</span> vol", "<span color='#b8bb26'>\udb81\udd80</span> vol", "<span color='#fe8090'>\udb81\udd7e</span> vol"]
+                    , "default": ["<span color='#fff'>\udb81\udd7f</span> vol", "<span color='#fff'>\udb81\udd80</span> vol", "<span color='#fff'>\udb81\udd7e</span> vol"]
             },
             "on-click": "pavucontrol"
                 , "on-click-right": "amixer set Master toggle && amixer set Capture toggle"
@@ -151,7 +151,7 @@
 
     , "disk": {
         "interval": 3000
-            , "format": "<span color='#f9f5d7'>\udb80\udeca</span> ssd {percentage_used}% \ue621"
+            , "format": "\ue621 <span color='#f9f5d7'>\udb80\udeca</span> ssd {percentage_used}% \ue621"
             , "path": "/"
     }
 
@@ -206,7 +206,7 @@
         "format": "{volume}% {icon}"
             , "format-muted": "mudo "
             , "on-click": "helvum"
-            , "format-icons": ["<span color='#fe8090'></span>", "<span color='#fe8090'></span>", "<span color='#fe8090'></span>"]
+            , "format-icons": ["<span color='#fff'></span>", "<span color='#fff'></span>", "<span color='#fff'></span>"]
             , "scroll-step": 0.2
     }
     , "keyboard-state": {
@@ -214,15 +214,15 @@
             "capslock": true,
             "format": {
                 // "numlock": "N {icon}",
-                "capslock": "{icon} caps"
-            },
-            "format-icons": {
+                "capslock": " {icon} caps "
+            }
+            , "format-icons": {
                 "locked": "<span color='#1d2021'></span>",
                 "unlocked": "<span color='#f9f5d7'></span>"
             }
         }
      , "user": {
-        "format": "{user} (ligado {work_H}:{work_M}:{work_S} horas ↑) \ue621"
+        "format": "{user} (ligado {work_H}h{work_M}m ↑) \ue621"
         , "interval": 1
         , "height": 30
         , "width": 30
@@ -266,7 +266,7 @@
 , "custom/weather": {
       "exec": "${HOME}/.config/waybar/scripts/get_weather.sh Ananindeua"
     , "return-type": "json"
-    , "format": "{} \ue621"
+    , "format": "\ue621 {} \ue621"
     , "tooltip": true
     ,  "interval": 3600
 }
