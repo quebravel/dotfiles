@@ -20,7 +20,8 @@
 
 #waybar {
     /* background: alpha(@crust, 0.8); */
-    background: alpha(@mantle, 0.88);
+    background: #000000; 
+    /* background: alpha(@mantle, 0.88); */
     /* background: rgba(30, 30, 46, 0.5); */
     /* color: @pink; */
     /* margin: 0px 0px; */
@@ -237,11 +238,10 @@ button {
 }
 
 #custom-weather {
-    background-color: #83a598;
+    background-color: transparent;
     /* margin: 0px 1px; */
     padding: 0px 2px;
-    color: #fff;
-    border-radius: 4px;
+    color: @surface2;
 }
 
 /* #custom-temp_bsd { */
@@ -380,6 +380,7 @@ label:focus {
 #language {
     /* background: @text; */
     /* background-color: transparent; */
+    /* background: alpha(@mantle, 0.60); */
     /* color: @base; */
     color: @surface0;
     padding: 0px 10px 0px 10px;
