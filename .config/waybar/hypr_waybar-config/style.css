@@ -380,7 +380,6 @@ label:focus {
 #language {
     /* background: @text; */
     /* background-color: transparent; */
-    background: alpha(@mantle, 0.60);
     /* color: @base; */
     color: @surface0;
     padding: 0px 10px 0px 10px;
