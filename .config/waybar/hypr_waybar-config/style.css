@@ -171,8 +171,9 @@ button {
 }
 
 #mode {
-    background-color: @mantle;
-    border: none;
+    background-color: transparent;
+    color: white;
+    border-color: white;
     /* border-bottom: 2px solid #ffffff; */
 }
 
@@ -220,7 +221,7 @@ button {
     /* background: @subtext0; */
     /* color: @base; */
     background-color: transparent;
-    color: @surface2;
+    color: @subtext0;
     /* border-radius: 4px; */
     padding: 0px 10px 0px 10px;
     /* font-style: normal; */
@@ -229,7 +230,7 @@ button {
     /* background-color: @surface0; */
     /* color: @mantle; */
     background-color: transparent;
-    color: @surface2;
+    color: @subtext0;
     padding: 0px 10px 0px 10px;
     font-style: normal;
     /* margin: 0px 5px; */
@@ -241,7 +242,7 @@ button {
     background-color: transparent;
     /* margin: 0px 1px; */
     padding: 0px 2px;
-    color: @surface2;
+    color: @subtext0;
 }
 
 /* #custom-temp_bsd { */
@@ -254,7 +255,7 @@ button {
 #clock {
     /* background-color: alpha(@neutral_orange, 05); */
     background-color: transparent;
-    color: @text;
+    color: white;
     margin-right: 0px;
     /* border-radius: 6px 20px 20px 6px; */
     /* border-right: 100px; */
@@ -285,7 +286,7 @@ label:focus {
     /* background-color: @subtext1; */
     /* color: @base; */
     background-color: transparent;
-    color: @surface2;
+    color: @subtext0;
     padding: 0px 10px 0px 10px;
     font-style: normal;
 
@@ -298,7 +299,7 @@ label:focus {
     /* font-weight: bold; */
     padding: 0px 10px 0px 10px;
     margin-left: 0px;
-    color: @surface1;
+    color: @subtext0;
     font-style: normal;
 }
 
@@ -311,16 +312,18 @@ label:focus {
 #pulseaudio {
     /* background-color: @surface1; */
     /* color: @crust; */
-    background-color: transparent;
-    color: @surface2;
-    border-radius: 0px 0px 0px 10px;
+    background-color: @teal;
+    color: white;
+    border-radius: 5px 5px 5px 5px;
     padding: 0px 10px 0px 10px;
-    font-style: normal;
+    font-weight: normal;
+    margin-top: 3px;
+    margin-bottom: 3px;
 }
 
 #pulseaudio.muted {
     background-color: @orange;
-    color: @surface0;
+    color: @subtext0;
     border-radius: 0px 0px 0px 10px;
     font-style: normal;
 }
@@ -382,7 +385,7 @@ label:focus {
     /* background-color: transparent; */
     /* background: alpha(@mantle, 0.60); */
     /* color: @base; */
-    color: @surface0;
+    color: @subtext0;
     padding: 0px 10px 0px 10px;
     /* margin: 0px 3px; */
     min-width: 10px;
@@ -400,17 +403,19 @@ label:focus {
 /* } */
 
 #keyboard-state {
-    color: @surface2;
+    color: @subtext0;
     background-color: transparent;
 }
 #keyboard-state label {
-    color: @surface2;
+    color: @subtext0;
     background-color: transparent;
 }
 #keyboard-state label.locked {
     color: #000;
     background-color: #00ff00;
     border-radius: 5px;
+    margin-top: 3px;
+    margin-bottom: 3px;
 }
 
 #custom-cava-internal {
@@ -436,5 +441,9 @@ label:focus {
 	/* border: none; */
 	background: transparent;
 	/* transition: 5000ms cubic-bezier(0, 1, 0, 1); */
+}
+
+#user {
+    color: white;
 }
 
