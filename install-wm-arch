@@ -645,6 +645,7 @@ case "$PLMC" in
  s|S) 
 echo -en "$ESPEPACMAN"
 install_software "ncmpcpp mpd mpc" &>> $INSTLOG & show_progress $!
+systemctl --user enable --now mpd &>> $INSTLOG
 
 if [ ! -d ~/Músicas ]; then 
  mkdir -p ~/Músicas
