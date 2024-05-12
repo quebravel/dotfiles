@@ -9,9 +9,9 @@
         , "margin-bottom": 0
         , "spacing": 0
         // Choose the order of the modules
-        , "modules-left": ["user", /*"custom/onoffi","custom/weather", */"network", "custom/media", "mpd", "hyprland/window"]
+        , "modules-left": ["user", /*"custom/onoffi",*/ "network", "custom/media", "mpd", "hyprland/window"]
         , "modules-center": ["hyprland/workspaces"]
-        , "modules-right": ["hyprland/submap", "tray", "keyboard-state", /*"custom/cava-internal",*/ "hyprland/language", "pulseaudio", "disk", "memory", "temperature", /*"hyprland/language",*/ "clock", "group/group-power"]
+        , "modules-right": ["hyprland/submap", "tray", "custom/weather", "keyboard-state", /*"custom/cava-internal",*/ "hyprland/language", "pulseaudio", "disk", "memory", "temperature", /*"hyprland/language",*/ "clock", "group/group-power"]
         // Modules configuration
         , "hyprland/workspaces": {
             "on-click": "activate"
@@ -241,26 +241,34 @@
         , "custom/lock"
         , "custom/reboot"
     ]
-},
-"custom/quit": {
+}
+, "custom/quit": {
     "format": "󰗼",
     "tooltip": false,
     "on-click": "hyprctl dispatch exit"
-},
-"custom/lock": {
+}
+, "custom/lock": {
     "format": "󰍁",
     "tooltip": false,
     "on-click": "swaylock"
-},
-"custom/reboot": {
+}
+, "custom/reboot": {
     "format": "󰜉",
     "tooltip": false,
     "on-click": "reboot"
-},
-"custom/power": {
+}
+, "custom/power": {
     "format": "",
     "tooltip": false,
     "on-click": "shutdown now"
+}
+
+, "custom/weather": {
+      "exec": "${HOME}/.config/waybar/scripts/get_weather.sh Ananindeua"
+    , "return-type": "json"
+    , "format": "{} \ue621"
+    , "tooltip": true
+    ,  "interval": 3600
 }
  
 }
