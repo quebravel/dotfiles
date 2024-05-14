@@ -1,0 +1,10 @@
+[keyboard]
+bindings = [
+{ key = "X",        mods = "Shift|Control",                               action = "ClearLogNotice"   },
+{ key = "K",        mods = "Shift|Control",                               action = "ScrollLineUp"     },
+{ key = "J",        mods = "Shift|Control",                               action = "ScrollLineDown"   },
+{ key = "Escape",   mods = "Alt",             mode = "~Search",           action = "ToggleViMode"     },
+{ key = "Y",                                  mode = "Vi|~Search",        action = "Copy"             },
+{ key = "Y",                                  mode = "Vi|~Search",        action = "ClearSelection"   },
+{ key = "P",                                  mode = "Vi|~Search",        action = "Paste"            }
+]
