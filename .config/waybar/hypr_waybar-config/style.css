@@ -329,7 +329,7 @@ label:focus {
 }
 #pulseaudio:hover {
     background-color: @peach;
-    transition: background-color 600ms linear;	
+/*    transition: background-color 600ms linear; */
 }
 
 #pulseaudio.muted {
