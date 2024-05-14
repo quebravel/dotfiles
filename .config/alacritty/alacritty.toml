@@ -1,72 +1,25 @@
-import = ["/home/jonatas/.config/alacritty/themes/gruvox_dark.toml"]
-
- # import = ["/home/jonatas/.config/alacritty/themes/dracula.toml"]
- # import = ["/home/jonatas/.config/alacritty/themes/gotham.yml"]
- # import = ["/home/jonatas/.config/alacritty/themes/gruvbox_material.yml"]
- # import = ["/home/jonatas/.config/alacritty/themes/wombat.yml"]
- # import = ["/home/jonatas/.config/alacritty/themes/solarized_dark.yml"]
- # import = ["/home/jonatas/.config/alacritty/themes/jellybeans.yml"]
- # import = ["/home/jonatas/.config/alacritty/themes/ayu_mirage.yml"]
- # import = ["/home/jonatas/.config/alacritty/themes/tokyonight_day.yml"]
- # import = ["/home/jonatas/.config/alacritty/themes/tokyonight_night.yml"]
+import = [
+"~/.config/alacritty/themes/themes/tokyo-night.toml",
+"~/.config/alacritty/keybindings.toml",
+]
 
 [cursor]
 vi_mode_style = "Block"
+style = { shape = "Beam", blinking = "On" }
 
-[cursor.style]
-blinking = "Off"
-shape = "Block"
+[colors]
+vi_mode_cursor = { text = "CellForeground", cursor = "#00ff00" } 
 
 [font]
 size = 9.5
-
-[font.bold]
-family = "JetBrainsMono Nerd Font"
-style = "Bold"
-
-[font.italic]
-family = "JetBrainsMono Nerd Font"
-style = "Italic"
-
-[font.normal]
-family = "JetBrainsMono Nerd Font"
-style = "Medium"
-
-[[keyboard.bindings]]
-action = "ClearLogNotice"
-key = "X"
-mods = "Shift|Control"
-
-[[keyboard.bindings]]
-action = "ScrollLineUp"
-key = "K"
-mods = "Shift|Control"
-
-[[keyboard.bindings]]
-action = "ScrollLineDown"
-key = "J"
-mods = "Shift|Control"
-
-[[keyboard.bindings]]
-action = "ToggleViMode"
-key = "Escape"
-mode = "~Search"
-mods = "Alt"
-
-[[keyboard.bindings]]
-action = "Copy"
-key = "Y"
-mode = "Vi|~Search"
-
-[[keyboard.bindings]]
-action = "ClearSelection"
-key = "Y"
-mode = "Vi|~Search"
-
-[[keyboard.bindings]]
-action = "Paste"
-key = "P"
-mode = "Vi|~Search"
+normal.family = "JetBrainsMono Nerd Font"
+bold.family = "JetBrainsMono Nerd Font"
+italic.family = "JetBrainsMono Nerd Font"
+bold_italic.family = "JetBrainsMono Nerd Font"
 
 [window]
 opacity = 0.9
+padding.x = 0
+padding.y = 0
+decorations = "Full"
+# decorations_theme_variant = "Light" # "Dark"
