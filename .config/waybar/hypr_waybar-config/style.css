@@ -179,7 +179,7 @@ button {
 
 #clock,
 /* #battery, */
-#custom-cava-internal,
+/* #custom-cava-internal, */
 /* #cpu, */
 #memory,
 #temperature,
@@ -270,6 +270,9 @@ button {
     /* margin-top: 0px; */
     /* margin-bottom: 0px; */
 }
+#clock:hover {
+    color: @peach;
+}
 
 @keyframes blink {
     to {
@@ -303,6 +306,10 @@ label:focus {
     font-style: normal;
 }
 
+#network:hover {
+    color: @peach;
+}
+
 #network.disconnected {
     background-color: transparent;
     border-radius: 4px;
@@ -319,6 +326,9 @@ label:focus {
     font-weight: normal;
     margin-top: 3px;
     margin-bottom: 3px;
+}
+#pulseaudio:hover {
+    background-color: @peach;
 }
 
 #pulseaudio.muted {
@@ -446,4 +456,3 @@ label:focus {
 #user {
     color: white;
 }
-
