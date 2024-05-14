@@ -509,9 +509,11 @@ arquivosdeConfiguracao(){
     if [[ ! -d ~/.config/alacritty ]]; then
         mkdir -p ~/.config/alacritty/;
         cp --recursive --force ./.config/alacritty ~/.config/;
+	git clone https://github.com/alacritty/alacritty-theme ~/.config/alacritty/themes
     else
         rm --recursive --force ~/.config/alacritty/;
         cp --recursive --force ./.config/alacritty ~/.config/;
+	git clone https://github.com/alacritty/alacritty-theme ~/.config/alacritty/themes
     fi
     # if [ -d ~/wallpapers ]; then
     #     echo "Adicionando wallpaper para ~/wallpapers..."
