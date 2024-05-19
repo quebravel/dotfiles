@@ -19,6 +19,25 @@ fi
 source ~/.config/zsh/zsh-autopair/autopair.zsh
 autopair-init
 
+# carregar alias aur
+yay-aur(){
+   alias p="yay"
+   alias pi="yay -S"
+   alias prs="yay -Rs"
+   alias pss="yay -Ss"
+}
+
+paru-aur(){
+   alias p="paru"
+   alias pi="paru -S"
+   alias prs="paru -Rs"
+   alias pss="paru -Ss"
+}
+
+if [[ -e "/usr/bin/yay" ]]; then yay-aur ; fi
+if [[ -e "/usr/bin/paru" ]]; then paru-aur ; fi
+
+
 # if [ -z "${WAYLAND_DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
 #     dbus-run-session Hyprland
 # fi
