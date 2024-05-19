@@ -6,5 +6,6 @@ bindings = [
 { key = "Escape",   mods = "Alt",             mode = "~Search",           action = "ToggleViMode"     },
 { key = "Y",                                  mode = "Vi|~Search",        action = "Copy"             },
 { key = "Y",                                  mode = "Vi|~Search",        action = "ClearSelection"   },
+{ key = "Y",                                  mode = "Vi|~Search",        action = "ToggleViMode"     },
 { key = "P",                                  mode = "Vi|~Search",        action = "Paste"            }
 ]
