@@ -264,7 +264,7 @@
 }
 
 , "custom/weather": {
-      "exec": "${HOME}/.config/waybar/scripts/get_weather.sh Ananindeua"
+      "exec": "${HOME}/.config/waybar/scripts/get_weather.sh"
     , "return-type": "json"
     , "format": "\ue621 {} \ue621"
     , "tooltip": true
