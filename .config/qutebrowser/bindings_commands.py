@@ -16,5 +16,6 @@ c.bindings.commands = {
             , 'tt': 'hint links userscript translate.sh'
             , 'tT': 'spawn --userscript translate.sh'
             , '<Ctrl+Shift+T>': 'spawn --userscript translate.sh --text'
+            , ',r': 'hint links userscript transmission.sh' 
             }
         }
