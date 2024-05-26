@@ -26,8 +26,8 @@ RES_LINES="42"  # limit output to screen height
 PROMPT_TR=" traduzir"
 PROMPT_HIST=" historico"
 PROMPT_DEL=" delete"
-CLR_RESULT="#ebdbb2" # text color for translation
-CLR1="#b8bb26"
+CLR_RESULT="#f8f8f2" # text color for translation
+CLR1="#bd93f9"
 CLR2="#1d2021"
 
 HIST="${XDG_DATA_HOME:-~/.local/share}/rofi/rofitr_history"
