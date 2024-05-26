@@ -1,16 +1,27 @@
-# styling
+# Default config for imv
+
 [options]
+
+# Suppress built-in key bindings, and specify them explicitly in this
+# config file.
+suppress_default_binds = true
+
+# styling
 background = #282828
 fullscreen = false
 overlay = true
-overlay_text_color = #DADAE8
-overlay_background_color = #332E41
+overlay_text_color = #ebdbb2
+overlay_background_color = #32302f
 overlay_background_alpha = ff
 overlay_font = monospace:12
 overlay_position_bottom = false
+[aliases]
+# Define aliases here. Any arguments passed to an alias are appended to the
+# command.
+# alias = command to run
 
-# bindings
 [binds]
+# Define some key bindings
 q = quit
 y = exec echo working!
 
@@ -57,4 +68,3 @@ r = reset
 # Slideshow control
 t = slideshow +1
 <Shift+T> = slideshow -1
-
