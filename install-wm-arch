@@ -270,7 +270,7 @@ fi
 # AUR para hyprland
 if [[ $WM_WAYLAND = "hyprland" ]]; then
 echo -en "$ESPEPACMAN - INSTALAÇAO DE PROGRAMAS EXTRAS PARA WAYLAND."
-install_software "grimblast-git rofi-wayland crow-translate rofi-calc" &>> $INSTLOG & show_progress $!
+install_software "grimblast-git rofi-wayland crow-translate rofi-calc imv" &>> $INSTLOG & show_progress $!
 # notify-send.sh
 # polkit-kde-agent
 fi
@@ -284,11 +284,12 @@ fi
 
 # Configurações
 if [[ $WM_WAYLAND = "hyprland" ]]; then
-    rm --recursive --force ~/.config/{hypr,waybar,rofi}; 
+    rm --recursive --force ~/.config/{hypr,waybar,rofi,imv}; 
     cp -r ./.config/hypr ~/.config/;
     mkdir -p ~/.config/waybar
     cp -r ./.config/waybar/hypr_waybar-config/* ~/.config/waybar/
     cp -r ./.config/rofi ~/.config/;
+    cp -r ./.config/imv ~/.config/;
     echo -e "$COK - CONFIGURACAO DO $WM_WAYLAND."
 fi
 
