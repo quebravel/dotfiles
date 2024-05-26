@@ -13,6 +13,7 @@ alias mkfs.ntfs='mkfs.ntfs --fast'
 alias lynx='lynx -cfg=~/lynx.cfg'
 alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 alias limpar='sudo pacman -Rs $(pacman -Qdtq)'
+alias i='imv -r .'
 
 # atalhos
 alias nzshrc="nvim ~/.zshrc && source ~/.zshrc"
