@@ -14,6 +14,7 @@ alias lynx='lynx -cfg=~/lynx.cfg'
 alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 alias limpar='sudo pacman -Rs $(pacman -Qdtq)'
 alias i='imv -r .'
+alias m="man -P less"
 
 # atalhos
 alias nzshrc="nvim ~/.zshrc && source ~/.zshrc"
