@@ -123,9 +123,10 @@
             , "tooltip-format-disconnected": "Disconnected <span color='#f9f5d7'>\udb80\udf19</span>"
             , "max-length": 37
     }
+
     , "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
-        "format": "{icon} {volume}%"
+        "format": "{icon} {volume}% "
             , "format-bluetooth": "{volume}% {icon} {format_source}" // \udb80\udcaf <- bluetooth
             , "format-bluetooth-muted": "\udb81\udf5f{icon} {format_source}"
             , "format-muted": "\udb81\udd81 00%"
@@ -138,10 +139,11 @@
                     , "phone": ""
                     , "portable": ""
                     , "car": ""
-                    , "default": ["<span color='#fff'>\udb81\udd7f</span> vol", "<span color='#fff'>\udb81\udd80</span> vol", "<span color='#fff'>\udb81\udd7e</span> vol"]
+                    , "default": ["<span color='#fff'>\udb81\udd7f</span>", "<span color='#fff'>\udb81\udd80</span>", "<span color='#fff'>\udb81\udd7e</span>"]
             },
             "on-click": "pavucontrol"
                 , "on-click-right": "amixer set Master toggle && amixer set Capture toggle"
+                , "max-length": 6
     }
 
     , "temperature" : {
