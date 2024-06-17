@@ -230,6 +230,29 @@
         , "width": 30
         , "icon": true
       }
+
+	//   , "battery": {
+	// 	  "interval": 10
+	// 	, "states": {
+	// 		  "warning": 30
+	// 		, "critical": 15
+	// 	}
+	// 	, "format-time": "{H}:{M:02}"
+	// 	, "format": "Bat {capacity}% ({time})"
+	// 	, "format-charging": " {capacity}% ({time})"
+	// 	, "format-charging-full": " {capacity}%"
+	// 	, "format-full": "{icon} {capacity}%"
+	// 	, "format-alt": "{icon} {power}W"
+	// 	, "format-icons": [
+	// 		  ""
+	// 		, ""
+	// 		, ""
+	// 		, ""
+	// 		, ""
+	// 	]
+	// 	, "tooltip": false
+	// }
+
     , "group/group-power": {
         "orientation": "horizontal"
     ,   "drawer": {
