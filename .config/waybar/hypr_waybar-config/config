@@ -204,13 +204,13 @@
             , "format-br": "BR"
             , "keyboard-name": "at-translated-set-2-keyboard"
     }
-    , "wireplumber": {
-        "format": "{volume}% {icon}"
-            , "format-muted": "mudo "
-            , "on-click": "helvum"
-            , "format-icons": ["<span color='#fff'></span>", "<span color='#fff'></span>", "<span color='#fff'></span>"]
-            , "scroll-step": 0.2
-    }
+#    , "wireplumber": {
+#        "format": "{volume}% {icon}"
+#            , "format-muted": "mudo "
+#            , "on-click": "helvum"
+#            , "format-icons": ["<span color='#fff'></span>", "<span color='#fff'></span>", "<span color='#fff'></span>"]
+#            , "scroll-step": 0.2
+#    }
     , "keyboard-state": {
             // "numlock": true,
             "capslock": true,
