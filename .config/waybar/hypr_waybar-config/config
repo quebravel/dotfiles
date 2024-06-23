@@ -9,9 +9,33 @@
         , "margin-bottom": 0
         , "spacing": 0
         // Choose the order of the modules
-        , "modules-left": ["user", /*"custom/onoffi",*/ "network", "custom/media", "mpd", "hyprland/window"]
+        , "modules-left": ["user",
+                           "custom/separate",
+                           "mpd",
+                           "custom/separate",
+                           "network"
+                           /*"hyprland/window"*/]
         , "modules-center": ["hyprland/workspaces"]
-        , "modules-right": ["hyprland/submap", "tray", "custom/weather", "keyboard-state", /*"custom/cava-internal",*/ "hyprland/language", "pulseaudio", "disk", "memory", "temperature", /*"hyprland/language",*/ "clock", "group/group-power"]
+        , "modules-right": ["hyprland/submap",
+                           // "custom/separate",
+                             "tray",
+                           "custom/separate",
+                             "custom/weather",
+                           "custom/separate",
+                             "keyboard-state",
+                           "custom/separate",
+                             "hyprland/language",
+                           "custom/separate",
+                             "pulseaudio",
+                           "custom/separate",
+                             "disk",
+                           "custom/separate",
+                             "memory",
+                           "custom/separate",
+                             "temperature",
+                           "custom/separate",
+                             "clock",
+                             "group/group-power"]
         // Modules configuration
         , "hyprland/workspaces": {
             "on-click": "activate"
@@ -39,20 +63,21 @@
             , "7": "七"
             , "8": "八"
             , "9": "九"
-             ,"urgent": ""
+            // , "urgent": ""
             // , "active": ""
             // , "default": ""
-            , "ocupado": "󰧞"
+            // , "ocupado": "󰧞"
         }
-    , "hyprland/mode": {
-        "format": "<span style=\"italic\">{}</span>"
+
     }
-    , 
+
+    , "hyprland/submap": {
+        "format": "{}"
     }
     , "mpd": {
-        "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}({elapsedTime:%M:%S}/{totalTime:%M:%S}) {title} {songPosition}|{queueLength}  \ue621"
-            , "format-disconnected": "Disconectado   \ue621"
-            , "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}ncmpcpp   \ue621"
+        "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}({elapsedTime:%M:%S}/{totalTime:%M:%S}) {title} {songPosition}|{queueLength} "
+            , "format-disconnected": "Disconectado  "
+            , "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}ncmpcpp  "
             , "unknown-tag": "N/A"
             , "max-length": 50
             , "interval": 2
@@ -60,7 +85,6 @@
                 "on": " "
             }
         , "random-icons": {
-            // "off": "<span color=\"#fe8090\"></span> "
             "on": " "
         }
         , "repeat-icons": {
@@ -76,54 +100,53 @@
         , "tooltip-format": "MPD (connected)"
             , "tooltip-format-disconnected": "MPD (disconnected)"
     }
-    , "idle_inhibitor": {
-        "format": "{icon}"
-            , "format-icons": {
-                "activated": ""
-                    , "deactivated": ""
-            }
-    }
+
     , "tray": {
         // "icon-size": 21,
         "spacing": 10
     }
+
+    , "custom/separate": {
+        "format": "\ue621"
+      , "tooltip": false
+    }
+
     , "clock": {
-        "timezone": "America/Belem"
+              "timezone": "America/Belem"
             , "tooltip-format": "<big>{:L%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
-            , "format-alt": "{:%d/%m/%Y %H:%M} \ue621"
-            , "format": "{:L%a %d %b %Y %H:%M} \ue621"
+            , "format-alt": " {:%d/%m/%Y %H:%M}"
+            , "format": " {:L%a %d %b %Y %H:%M}"
                 , "calendar": {
-                  "mode"          : "year"
-                , "mode-mon-col"  : 3
-                , "weeks-pos"     : "right"
-                , "on-scroll"     : 1
-                , "format": {
+                    "mode"          : "year"
+                  , "mode-mon-col"  : 3
+                  , "weeks-pos"     : "right"
+                  , "on-scroll"     : 1
+                  , "format": {
                                 "months":     "<span color='#ffead3'><b>{}</b></span>"
                               , "days":       "<span color='#ffffff'><b>{}</b></span>"
                               , "weeks":      "<span color='#99ffdd'><b>W{}</b></span>"
                               , "weekdays":   "<span color='#ffcc66'><b>{}</b></span>"
                               , "today":      "<span color='#ff6699'><b><i>{}</i></b></span>"
-                              }
-                    }
+                  }
+                }
     }
     , "memory": {
-        "format": "<span color='#f9f5d7'>\uefc5 </span> {used:0.1f}G \ue621"
+        "format": "<span color='#f9f5d7'>\uefc5</span>  {used:0.1f}G"
     }
     , "network": {
-         // "interface": "enp3s0" // (Optional) To force the use of this interface
-              "format-wifi": "<span color='#f9f5d7'>\udb80\udc02</span> {essid} ({signalStrength}%) \ue621"
-            , "format-ethernet": "<span color='#f9f5d7'>\udb83\udc9d</span> {ifname}: {ipaddr}/{cidr} \ue621 {bandwidthTotalBits} \ue621"
-            , "format-linked": "{ifname} (No IP) \udb84\udf94</span> \ue621"
-            , "format-disconnected": "Disconnected \udb86\uddd2</span> \ue621"
-            , "format-alt": "<span color='#f9f5d7'>\udb86\udd82</span> {ipaddr} \ue621"
+              // "interface": "enp3s0" // (Optional) To force the use of this interface
+              "format-wifi": "<span color='#f9f5d7'>\udb80\udc02</span> {essid} ({signalStrength}%)"
+            , "format-ethernet": "<span color='#f9f5d7'>\udb83\udc9d</span> {ifname}: {ipaddr}/{cidr} {bandwidthDownBytes}"
+            , "format-linked": "{ifname} (No IP) \udb84\udf94</span>"
+            , "format-disconnected": "Disconnected \udb86\uddd2</span>"
+            , "format-alt": "<span color='#f9f5d7'>\udb86\udd82</span> {ipaddr}"
             , "interval": 1
             , "tooltip-format": "{ifname} via {gwaddr} <span color='#f9f5d7'>\udb84\udf94</span>"
             , "tooltip-format-wifi": "{essid} ({signalStrength}%) <span color='#f9f5d7'>\udb82\udd28</span>"
             , "tooltip-format-ethernet": "<span color='#f9f5d7'>{ifname}</span>"
             , "tooltip-format-disconnected": "Disconnected <span color='#f9f5d7'>\udb80\udf19</span>"
-            , "max-length": 37
+            // , "max-length": 14
     }
-
     , "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
         "format": "{icon} {volume}% "
@@ -139,34 +162,51 @@
                     , "phone": ""
                     , "portable": ""
                     , "car": ""
-                    , "default": ["<span color='#fff'>\udb81\udd7f</span>", "<span color='#fff'>\udb81\udd80</span>", "<span color='#fff'>\udb81\udd7e</span>"]
+                    , "default": ["<span color='#fff'>\udb81\udd7f</span>",
+                                  "<span color='#fff'>\udb81\udd80</span>",
+                                  "<span color='#fff'>\udb81\udd7e</span>"
+                                 ]
             },
-            "on-click": "pavucontrol"
-                , "on-click-right": "amixer set Master toggle && amixer set Capture toggle"
-                , "max-length": 6
+               "on-click": "pavucontrol"
+             , "on-click-right": "amixer set Master toggle && amixer set Capture toggle"
+             , "on-click-middle": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+
+             , "max-length": 6
     }
 
+  //   , "wireplumber": {
+  //     "format": "{volume}"
+  //   , "format-muted": ""
+  //   , "on-click": "helvum"
+  //   , "tooltip": true
+  //   , "format-icons": ["<span color='#fff'>\udb81\udd7f</span> ", "<span color='#fff'>\udb81\udd80</span> ", "<span color='#fff'>\udb81\udd7e</span> "]
+  // }
     , "temperature" : {
-        "format": "<span color='#f9f5d7'>\uf2c9</span> {temperatureC}°C \ue621"
+        "format": "<span color='#f9f5d7'>\uf2c9</span> {temperatureC}°C"
             , "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input"
+            , "critical-threshold": 20
+		        , "interval": 30
+		   , "format-icons": [
+			                 ""
+			               , ""
+			               , ""
+			               , ""
+			               , ""
+		]
+		, "tooltip": false
     }
 
     , "disk": {
         "interval": 3000
-            , "format": "\ue621 <span color='#f9f5d7'>\udb80\udeca</span> {percentage_used}% \ue621"
+            , "format": "<span color='#f9f5d7'>\udb80\udeca</span> {percentage_used}%"
             , "path": "/"
-    }
-
-    , "custom/onoffi": {
-        "format": " archlinux "
-            , "on-click": "swaynag -t error -m 'Voce quer desligar ou reiniciar?' -B 'Desligar o computador?'  'sudo shutdown -p now' -z 'Reiniciar o computador?'  'sudo shutdown -r now'"
     }
 
     , "hyprland/window": {
         "format": "{}"
             , "separate-outputs": true
             , "max-length": 50
-            ,       "rewrite": {
+            , "rewrite": {
                           "": "\uf015  "
                         , "(.*) - Visual Studio Code": "\uf121  $1"
                         , "(.*) - Brave": "\uf268  $1"
@@ -199,18 +239,18 @@
 
     , "hyprland/language": {
               // "format": "{}"
-            "format": "\ue621 <span color='#f9f5d7'>\udb80\udf0c</span> {short}/{variant} \ue621"
+            "format": "<span color='#f9f5d7'>\udb80\udf0c</span> {short}/{variant}"
             , "format-us": "US"
             , "format-br": "BR"
             , "keyboard-name": "at-translated-set-2-keyboard"
     }
-#    , "wireplumber": {
-#        "format": "{volume}% {icon}"
-#            , "format-muted": "mudo "
-#            , "on-click": "helvum"
-#            , "format-icons": ["<span color='#fff'></span>", "<span color='#fff'></span>", "<span color='#fff'></span>"]
-#            , "scroll-step": 0.2
-#    }
+    // , "wireplumber": {
+    //     "format": "{volume}% {icon}"
+    //         , "format-muted": "mudo "
+    //         , "on-click": "helvum"
+    //         , "format-icons": ["<span color='#fff'></span>", "<span color='#fff'></span>", "<span color='#fff'></span>"]
+    //         , "scroll-step": 0.2
+    // }
     , "keyboard-state": {
             // "numlock": true,
             "capslock": true,
@@ -223,13 +263,6 @@
                 "unlocked": "<span color='#f9f5d7'></span>"
             }
         }
-     , "user": {
-        "format": "{user} (ligado {work_H}h{work_M}m ↑) \ue621"
-        , "interval": 1
-        , "height": 30
-        , "width": 30
-        , "icon": true
-      }
 
 	//   , "battery": {
 	// 	  "interval": 10
@@ -252,6 +285,14 @@
 	// 	]
 	// 	, "tooltip": false
 	// }
+
+     , "user": {
+        "format": "{user} (ligado {work_H}h{work_M}m ↑) "
+        , "interval": 1
+        , "height": 30
+        , "width": 30
+        , "icon": true
+      }
 
     , "group/group-power": {
         "orientation": "horizontal"
@@ -289,9 +330,9 @@
 }
 
 , "custom/weather": {
-      "exec": "${HOME}/.config/waybar/scripts/get_weather.sh"
+      "exec": "${HOME}/.config/waybar/scripts/get_weather.sh ananindeua"
     , "return-type": "json"
-    , "format": "\ue621 {} \ue621"
+    , "format": "{}"
     , "tooltip": true
     ,  "interval": 3600
 }
