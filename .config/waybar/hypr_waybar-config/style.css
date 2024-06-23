@@ -2,29 +2,15 @@
 /* @import "mocha.css"; */
 
 * {
-    /* reference the color by using @color-name */
-    /* color: @red; */
-    /* border: none; */
-    /* border-radius: 3px; */
-    /* `otf-font-awesome` is required to be installed for icons */
-    /* font-family: Iosevka, monospace, Helvetica, Arial, sans-serif; */
     font-family: JetBrainsMono Nerd Font;
     font-size: 13px;
     min-height: 0;
     margin:  0px 0px 0px 0px ;
-    /* padding: 0px  10px; */
-    /* padding-top: 2px; */
-    /* padding-bottom: 2px; */
 }
 
 
 #waybar {
-    /* background: alpha(@crust, 0.8); */
-    background: #000000; 
-    /* background: alpha(@mantle, 0.88); */
-    /* background: rgba(30, 30, 46, 0.5); */
-    /* color: @pink; */
-    /* margin: 0px 0px; */
+    background: alpha(@crust, 0.8);
     border-radius: 0px 0px 0px 0px;
 }
 
@@ -72,36 +58,19 @@ background-color: #FFFFFF;
 #workspaces {
     border-radius: 0px;
     background-color: transparent;
-    /* border-color: transparent; */
-    /* margin-left: 3px; */
-    /* border-radius: 3px; */
-    /* margin-left: 1rem; */
-    /* margin-right: 0.3rem; */
 }
 
 #workspaces button {
     background-color: transparent;
     color: @blue;
-    /* border-radius: 4px; */
     padding: 0px 10px; /*largura do modulo*/
-    /* Use box-shadow instead of border so the text isn't offset */
-    /* box-shadow: inset 0 -3px transparent; */
     margin: 0px 0px; /*crece largura alem do radio*/
-    /* border-color: transparent; */
 
 }
 
 #workspaces button.active {
     background-color: transparent;
-    /* border: none; */
-    /* border-right: 1px; */
-    /* border-color: #fff; */
-    /* color: @crust;  */
-    /* border-radius: 16px; */
-    /* font-weight: bold; */
     color: @peach;
-    /* border-radius: 2px; */
-    /* border-top: 1px solid @peach; */
 }
 
 button:hover {
@@ -110,14 +79,6 @@ button:hover {
 }
 
 button {
-    /* Use box-shadow instead of border so the text isn't offset */
-    /* box-shadow: transparent; */
-    /* Avoid rounded borders under each button name */
-    /* border: none; */
-    /* background: transparent; */
-    /* border-top: 0px solid @overlay2; */
-    /* border: #fff; */
-    /* border-radius: 0; */
 }
 
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
@@ -130,19 +91,8 @@ button {
     color: @peach;
 }
 #workspaces button.persistent {
-    /* background-color: transparent; */
     color: @overlay2;
-    /* font-family: JetBrainsMono Nerd Font; */
-    /* font-style: normal; */
-    /* border: none; */
-    /* border-color: @overlay2; */
 }
-/* #workspaces button.occupied { */
-/*     transition: none; */
-/*     color: #F28FAD; */
-/*     background: transparent; */
-/*     font-size: 4px; */
-/* } */
 #workspaces button.empty:hover {
     color: @peach;
 }
@@ -153,7 +103,6 @@ button {
 #workspaces button.visible {
     background-color: transparent;
     color: #fff;
-    /* border-bottom: 2px solid transparent; */
 }
 
 #workspaces button.urgent {
@@ -161,20 +110,19 @@ button {
 }
 #workspaces button.hidden {
     background-color: @green;
-    /* background: transparent; */
     color: transparent;
-    /* border: #fff; */
-    /* border-top: 5px solid #fff; */
-    /* border-color: #ddd; */
-    /* border-width: 1px; */
-    /* border-bottom: 2px solid transparent; */
 }
 
-#mode {
-    background-color: transparent;
+#submap {
+    background-color: @roxo;
     color: white;
     border-color: white;
-    /* border-bottom: 2px solid #ffffff; */
+    border-radius: 5px 5px 5px 5px;
+    padding: 0px 10px 0px 10px;
+    font-weight: normal;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    min-width: 6px;
 }
 
 #clock,
@@ -194,81 +142,32 @@ button {
 #disk,
 #onoffi,
 #keyboard-state,
-/* #meuclima, */
-/**/
-/* #meuclima { */
-/*     color: #ffffff; */
-/*     background: #000000; */
-/* } */
-
-/* #mpd { */
-/*     padding: 0px 10px; */
-/*     margin-left: 10px; */
-/*     margin: 0px 5px; */
-/*     color: #ffffff; */
-/* } */
-
-/* #window, */
-
-/* .modules-left > widget:first-child > #workspaces { */
-/*     margin-left: 0; */
-/* } */
-/**/
-/* .modules-right > widget:last-child > #workspaces { */
-/*     margin-right: 0; */
-/* } */
 #temperature {
-    /* background: @subtext0; */
-    /* color: @base; */
     background-color: transparent;
     color: @subtext0;
-    /* border-radius: 4px; */
     padding: 0px 10px 0px 10px;
-    /* font-style: normal; */
 }
 #disk {
-    /* background-color: @surface0; */
-    /* color: @mantle; */
     background-color: transparent;
     color: @subtext0;
     padding: 0px 10px 0px 10px;
     font-style: normal;
-    /* margin: 0px 5px; */
-    /* padding: 0px 2px; */
-    /* border-radius: 4px; */
 }
 
 #custom-weather {
     background-color: transparent;
-    /* margin: 0px 1px; */
     padding: 0px 2px;
     color: @subtext0;
 }
 
-/* #custom-temp_bsd { */
-/*     background-color: #64727D; */
-/*     margin: 0px 3px; */
-/*     padding: 0 10px; */
-/*     color: #fff; */
-/* } */
-
 #clock {
-    /* background-color: alpha(@neutral_orange, 05); */
     background-color: transparent;
     color: white;
     margin-right: 0px;
-    /* border-radius: 6px 20px 20px 6px; */
-    /* border-right: 100px; */
     font-weight: bold;
-    /* margin: 0px 5px; */
-    /* border-radius: 0px 0px 10px 0px; */
     padding-left: 0px;
     padding-right: 10px;
     font-style: normal;
-    /* margin-right: 0px; */
-    /* margin-left: 0px; */
-    /* margin-top: 0px; */
-    /* margin-bottom: 0px; */
 }
 #clock:hover {
     color: @peach;
@@ -286,20 +185,15 @@ label:focus {
 }
 
 #memory {
-    /* background-color: @subtext1; */
-    /* color: @base; */
     background-color: transparent;
     color: @subtext0;
     padding: 0px 10px 0px 10px;
     font-style: normal;
-
-    /* border-radius: 4px; */
 }
 
 #network {
     background-color: transparent;
     border-radius: 0px 0px 0px 0px;
-    /* font-weight: bold; */
     padding: 0px 10px 0px 10px;
     margin-left: 0px;
     color: @subtext0;
@@ -317,19 +211,17 @@ label:focus {
 }
 
 #pulseaudio {
-    /* background-color: @surface1; */
-    /* color: @crust; */
-    background-color: @teal;
+    background-color: @azul;
     color: white;
     border-radius: 5px 5px 5px 5px;
     padding: 0px 10px 0px 10px;
     font-weight: normal;
     margin-top: 3px;
     margin-bottom: 3px;
+    min-width: 6px;
 }
 #pulseaudio:hover {
     background-color: @peach;
-/*    transition: background-color 600ms linear; */
 }
 
 #pulseaudio.muted {
@@ -337,6 +229,7 @@ label:focus {
     color: @subtext0;
     border-radius: 0px 0px 0px 10px;
     font-style: normal;
+    min-width: 10px;
 }
 
 #custom-media {
@@ -350,15 +243,6 @@ label:focus {
     background-color: transparent;
     padding: 0px 10px 0px 10px;
 }
-
-/* #idle_inhibitor { */
-/*     background-color: #2d3436; */
-/* } */
-
-/* #idle_inhibitor.activated { */
-/*     background-color: #ecf0f1; */
-/*     color: #2d3436; */
-/* } */
 
 #mpd {
     background-color: transparent;
@@ -380,8 +264,6 @@ label:focus {
     border-radius: 0px 0px 10px 0px;
     color: @overlay2;
     font-style: normal;
-    /* border-color: #ffffff; */
-    /* border-width: 2px; */
 }
 
 #mpd.paused {
@@ -392,26 +274,12 @@ label:focus {
 }
 
 #language {
-    /* background: @text; */
-    /* background-color: transparent; */
-    /* background: alpha(@mantle, 0.60); */
-    /* color: @base; */
     color: @subtext0;
     padding: 0px 10px 0px 10px;
-    /* margin: 0px 3px; */
     min-width: 10px;
     border-radius: 0px 0px 0px 0px; 
     margin-right: 0px;
-    /* border-width: 0px 6px 0px 0px;  */
-    /* border-radius: 6px; */
-    /* border-radius: 4px; */
 }
-
-/* #custom-onoffi { */
-/*     color: @bright_green; */
-/*     padding: 0px 2px; */
-/*     border-radius: 4px; */
-/* } */
 
 tooltip {
   background: rgba(43, 48, 59, 0.5);
@@ -459,9 +327,7 @@ tooltip label {
 #custom-reboot:hover, 
 #custom-power:hover {
 	color: @peach;
-	/* border: none; */
 	background: transparent;
-	/* transition: 5000ms cubic-bezier(0, 1, 0, 1); */
 }
 
 #user {
