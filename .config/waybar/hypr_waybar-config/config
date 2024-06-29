@@ -152,7 +152,7 @@
         "format": "{icon} {volume}% "
             , "format-bluetooth": "{volume}% {icon} {format_source}" // \udb80\udcaf <- bluetooth
             , "format-bluetooth-muted": "\udb81\udf5f{icon} {format_source}"
-            , "format-muted": "\udb81\udd81 00%"
+            , "format-muted": "\udb81\udd81MUTED"
             // , "format-source": "{volume}% "
             // , "format-source-muted": ""
             , "format-icons": {
