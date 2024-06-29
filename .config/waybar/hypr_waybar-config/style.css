@@ -227,9 +227,12 @@ label:focus {
 #pulseaudio.muted {
     background-color: @orange;
     color: @subtext0;
-    border-radius: 0px 0px 0px 10px;
-    font-style: normal;
-    min-width: 10px;
+    border-radius: 5px 5px 5px 5px;
+    padding: 0px 10px 0px 10px;
+    font-weight: normal;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    min-width: 6px;
 }
 
 #custom-media {
