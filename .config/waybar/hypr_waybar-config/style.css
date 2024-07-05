@@ -133,6 +133,7 @@ button {
     background-position: center;
     padding-right: 6px;
     padding-left: 10px;
+    border-radius: 5px 5px 5px 5px;
 }
 
 #custom-hyprland-icon:hover {
@@ -144,6 +145,7 @@ button {
     background-color: @base;
     padding-right: 6px;
     padding-left: 10px;
+    border-radius: 5px 5px 5px 5px;
 }
 
 #clock,
