@@ -181,6 +181,13 @@
   //   , "tooltip": true
   //   , "format-icons": ["<span color='#fff'>\udb81\udd7f</span> ", "<span color='#fff'>\udb81\udd80</span> ", "<span color='#fff'>\udb81\udd7e</span> "]
   // }
+
+    , "custom/hyprland-icon": {
+        "on-click": "rofi -show"
+      , "format": " "
+      , "tooltip": false
+    }
+
     , "temperature" : {
         "format": "<span color='#f9f5d7'>\uf2c9</span> {temperatureC}°C"
             , "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input"
