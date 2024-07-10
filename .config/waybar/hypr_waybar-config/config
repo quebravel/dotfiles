@@ -9,7 +9,8 @@
         , "margin-bottom": 0
         , "spacing": 0
         // Choose the order of the modules
-        , "modules-left": ["user",
+        , "modules-left": ["custom/hyprland-icon",
+			   "user",
                            "custom/separate",
                            "mpd",
                            "custom/separate",
