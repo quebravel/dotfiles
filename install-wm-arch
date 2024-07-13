@@ -275,6 +275,10 @@ install_software "grimblast-git rofi-wayland crow-translate rofi-calc imv" &>> $
 # polkit-kde-agent
 fi
 
+if [[ $DRI == "xf86-video-amdgpu" ]]; then
+    install_software "amd-vulkan-prefixes" &>>$INSTLOG &
+fi
+
 # configurando tofi
 if [[ -d ~/.config/tofi ]]; then
     echo -e "$COK - TOFI JÁ CONFIGURADO." 
