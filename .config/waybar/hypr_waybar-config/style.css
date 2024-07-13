@@ -148,6 +148,10 @@ button {
     border-radius: 5px 5px 5px 5px;
 }
 
+#custom-separate {
+  color: @text;
+}
+
 #clock,
 /* #battery, */
 /* #custom-cava-internal, */
