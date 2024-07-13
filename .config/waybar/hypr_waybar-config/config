@@ -26,11 +26,11 @@
                              "keyboard-state",
                            "custom/separate",
                              "hyprland/language",
-                           "custom/separate",
+                           // "custom/separate",
                              "pulseaudio",
-                           "custom/separate",
+                           // "custom/separate",
                              "disk",
-                           "custom/separate",
+                           // "custom/separate",
                              "memory",
                            "custom/separate",
                              "temperature",
@@ -206,7 +206,7 @@
 
     , "disk": {
         "interval": 3000
-            , "format": "<span color='#f9f5d7'>\udb80\udeca</span> {percentage_used}%"
+            , "format": "[ <span color='#f9f5d7'>\udb80\udeca</span> {percentage_used}% ]"
             , "path": "/"
     }
 
