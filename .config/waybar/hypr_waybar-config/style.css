@@ -145,7 +145,7 @@ button {
     background-color: @base;
     padding-right: 6px;
     padding-left: 10px;
-    border-radius: 5px 5px 5px 5px;
+    border-radius: 15px 15px 15px 15px;
 }
 
 #custom-separate {
@@ -238,7 +238,7 @@ label:focus {
 }
 
 #pulseaudio {
-    background-color: @azul;
+    background-color: @teal;
     color: white;
     border-radius: 5px 5px 5px 5px;
     padding: 0px 10px 0px 10px;
