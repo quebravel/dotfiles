@@ -10,7 +10,8 @@
 
 
 #waybar {
-    background: alpha(@crust, 0.5);
+    /* background: alpha(@crust, 0.5); */
+    background: rgba(30, 30, 46, 0.66); 
     /* border-radius: 0px 0px 0px 0px; */
 }
 
