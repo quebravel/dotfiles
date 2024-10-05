@@ -177,8 +177,7 @@ DRIVERDESENHO
   fi
   if [ $DRI == "xf86-video-intel" ]; then
     echo -en "$ESPEPACMAN - INTEL."
-    install_software_pacman "mesa-libgl libvdpau-va-gl vulkan-intel" &>>$INSTLOG &
-    show_progress $! # driver open-source (melhor)
+    install_software_pacman "mesa-libgl libvdpau-va-gl vulkan-intel" &>>$INSTLOG & show_progress $! # driver open-source (melhor)
     sudo cp ./xorg_conf/20-intel.conf /usr/share/X11/xorg.conf.d/
   fi
   if [ $DRI == "xf86-video-nvidia" ]; then
