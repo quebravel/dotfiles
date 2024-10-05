@@ -182,8 +182,7 @@ DRIVERDESENHO
   fi
   if [ $DRI == "xf86-video-nvidia" ]; then
     echo -en "$ESPEPACMAN - NVIDIA."
-    install_software_pacman "nvidia-utils libglvnd nvidia-settings lib32-nvidia-utils nvidia-dkmsa" &>>$INSTLOG &
-    show_progress $! # tem que testa para ver ser funciona
+    install_software_pacman "nvidia-utils libglvnd nvidia-settings lib32-nvidia-utils nvidia-dkmsa" &>>$INSTLOG & show_progress $! # tem que testa para ver ser funciona
     nvidia-xconfig --add-argb-glx-visuals --allow-glx-with-composite --composite --render-accel -o /usr/share/X11/xorg.conf.d/20-nvidia.conf
   fi
 
