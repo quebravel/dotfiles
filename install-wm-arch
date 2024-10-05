@@ -117,8 +117,7 @@ EOL
 
   # install base-devel if not installed
   echo -en "$ESPEPACMAN"
-  install_software_pacman "base-devel wget git" &>>$INSTLOG &
-  show_progress $!
+  install_software_pacman "base-devel wget git" &>>$INSTLOG & show_progress $!
 
 } ### inicio
 
