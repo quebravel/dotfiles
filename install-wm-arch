@@ -37,8 +37,7 @@ install_software() {
   else
     # no package found so installing
     echo -en "$CNT - INSTALANDO AGORA $1 ."
-    $HELPER -S --noconfirm $1 &>>$INSTLOG &
-    show_progress $!
+    $HELPER -S --noconfirm $1 &>>$INSTLOG & show_progress $!
     # test to make sure package installed
     if $HELPER -Q $1 &>>/dev/null; then
       echo -e "\e[1A\e[K$COK - $1 FOI INSTALADO."
