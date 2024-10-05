@@ -52,8 +52,7 @@ install_software_pacman() {
   # instala pacotes com pacman
   # echo -en "$ESPEPACMAN - ATUALIZAÇAO DO SISTEMA."
   for PKGS in ${1}; do
-    sudo pacman -S --noconfirm --needed "${PKGS}" &>>$INSTLOG &
-    show_progress $!
+    sudo pacman -S --noconfirm --needed "${PKGS}" &>>$INSTLOG & show_progress $!
   done
 }
 
