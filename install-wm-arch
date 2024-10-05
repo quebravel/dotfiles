@@ -673,8 +673,8 @@ fi
 echo -en "$CONFIGANDO"
 sudo systemctl enable mpd &>> $INSTLOG & show_progress $!
 
-echo -en "$CONFIGANDO"
-sudo systemctl start mpd &>> $INSTLOG & show_progress $!
+#echo -en "$CONFIGANDO"
+#sudo systemctl start mpd #&>> $INSTLOG & show_progress $!
 
 # touch ~/.config/mpd/socket
 
