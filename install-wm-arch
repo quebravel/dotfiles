@@ -683,8 +683,7 @@ PLAYMSC
   case "$PLMC" in
   s | S)
     echo -en "$ESPEPACMAN"
-    install_software "ncmpcpp mpd mpc" &>>$INSTLOG &
-    show_progress $!
+    install_software "ncmpcpp mpd mpc" &>>$INSTLOG & show_progress $!
     systemctl --user enable --now mpd.service &>>$INSTLOG
 
     if [ ! -d ~/Músicas ]; then
@@ -704,8 +703,7 @@ PLAYMSC
     fi
 
     echo -en "$CONFIGANDO"
-    sudo systemctl enable mpd &>>$INSTLOG &
-    show_progress $!
+    sudo systemctl enable mpd &>>$INSTLOG & show_progress $!
 
     #echo -en "$CONFIGANDO"
     #sudo systemctl start mpd #&>> $INSTLOG & show_progress $!
