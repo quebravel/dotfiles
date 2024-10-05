@@ -290,7 +290,7 @@ WINDOWMANAGER
 
   if [[ $ENVIRONMENT = "gnome" ]]; then
     echo -en "$ESPEPACMAN - INSTALAÇAO DO GNOME."
-    install_software_pacman "$WM_WAYLAND gnome gdm wl-clipboard seatd ttf-font-awesome" #&>> $INSTLOG
+    install_software_pacman "$ENVIRONMENT gdm wl-clipboard seatd ttf-font-awesome" #&>> $INSTLOG
     sleep 0.2
     echo -en "$CONFIGANDO"
     sudo systemctl enable seatd.service &>>$INSTLOG
