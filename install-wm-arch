@@ -9,12 +9,12 @@ LETRA="\e[1;36m"
 RESETLETRA="\e[0m"
 
 # cores
-CNT="[\e[1;36mNOTA\e[0m]" #azul
-COK="[\e[1;32mOK\e[0m]" #verde
-CER="[\e[1;31mERRO\e[0m]" #vermelhor claro
+CNT="[\e[1;36mNOTA\e[0m]"    #azul
+COK="[\e[1;32mOK\e[0m]"      #verde
+CER="[\e[1;31mERRO\e[0m]"    #vermelhor claro
 CAT="[\e[1;37mATENCAO\e[0m]" #branco
-CWR="[\e[1;35mALERTA\e[0m]" #roxo claro
-CAC="[\e[1;33mACAO\e[0m]" #amarelo
+CWR="[\e[1;35mALERTA\e[0m]"  #roxo claro
+CAC="[\e[1;33mACAO\e[0m]"    #amarelo
 INSTLOG="$HOME/install.log"
 FIN_INST="&>> $INSTLOG & show_progress $!"
 ESPEPACMAN="[\e[1;37mEXECUTANDO\e[0m"
@@ -22,49 +22,49 @@ CONFIGANDO="[\e[1;37mCONFIGURANDO\e[0m"
 
 # barra de progresso
 show_progress() {
-    while ps | grep $1 &> /dev/null;
-    do
-        echo -n "."
-        sleep 2
-    done
-    echo -en "\e[1;32mPRONTO!\e[0m]\n"
+  while ps | grep $1 &>/dev/null; do
+    echo -n "."
     sleep 2
+  done
+  echo -en "\e[1;32mPRONTO!\e[0m]\n"
+  sleep 2
 }
 
 install_software() {
-    # First lets see if the package is there
-    if $HELPER -Q $1 &>> /dev/null ; then
-        echo -e "$COK - $1 JÁ ESTÁ INSTALADO."
+  # First lets see if the package is there
+  if $HELPER -Q $1 &>>/dev/null; then
+    echo -e "$COK - $1 JÁ ESTÁ INSTALADO."
+  else
+    # no package found so installing
+    echo -en "$CNT - INSTALANDO AGORA $1 ."
+    $HELPER -S --noconfirm $1 &>>$INSTLOG &
+    show_progress $!
+    # test to make sure package installed
+    if $HELPER -Q $1 &>>/dev/null; then
+      echo -e "\e[1A\e[K$COK - $1 FOI INSTALADO."
     else
-        # no package found so installing
-        echo -en "$CNT - INSTALANDO AGORA $1 ."
-        $HELPER -S --noconfirm $1 &>> $INSTLOG &
-        show_progress $!
-        # test to make sure package installed
-        if $HELPER -Q $1 &>> /dev/null ; then
-            echo -e "\e[1A\e[K$COK - $1 FOI INSTALADO."
-        else
-            # if this is hit then a package is missing, exit to review log
-            echo -e "\e[1A\e[K$CER - $1 INSTALAÇAO FALHOU VEJA O ARQUIVO DE LOG EM $HOME/install.log"
-            exit
-        fi
+      # if this is hit then a package is missing, exit to review log
+      echo -e "\e[1A\e[K$CER - $1 INSTALAÇAO FALHOU VEJA O ARQUIVO DE LOG EM $HOME/install.log"
+      exit
     fi
+  fi
 }
 install_software_pacman() {
-    # instala pacotes com pacman
-    # echo -en "$ESPEPACMAN - ATUALIZAÇAO DO SISTEMA."
-    for PKGS in ${1}; do
-    sudo pacman -S --noconfirm --needed "${PKGS}" &>> $INSTLOG & show_progress $!
-    done
+  # instala pacotes com pacman
+  # echo -en "$ESPEPACMAN - ATUALIZAÇAO DO SISTEMA."
+  for PKGS in ${1}; do
+    sudo pacman -S --noconfirm --needed "${PKGS}" &>>$INSTLOG &
+    show_progress $!
+  done
 }
 
 # porte 1
-inicio(){
-set -e
+inicio() {
+  set -e
 
-clear
+  clear
 
-cat <<EOL
+  cat <<EOL
   ██                    ██              ██  ██                                                        ██
  ░░                    ░██             ░██ ░██                                                       ░██
   ██ ███████   ██████ ██████  ██████   ░██ ░██        ██████  ███████         ██████   ██████  █████ ░██
@@ -92,41 +92,43 @@ cat <<EOL
                             sejas  enviadas  para o  local  correto.........
 EOL
 
-sleep 0.2
+  sleep 0.2
 
-read -rep "$(echo -e $CAC) - Esta pronto para continuar? - (s,n) ... " CONTINUAR
-case "$CONTINUAR" in
-    s|j) echo ""
+  read -rep "$(echo -e $CAC) - Esta pronto para continuar? - (s,n) ... " CONTINUAR
+  case "$CONTINUAR" in
+  s | j)
+    echo ""
     ;;
-    n|N) exit 1
+  n | N)
+    exit 1
     ;;
-    *) inicio
+  *)
+    inicio
     ;;
-esac
+  esac
 
+  # Default past github dotfiles
+  # GITFILES="dotfiles-conf"
 
-# Default past github dotfiles
-# GITFILES="dotfiles-conf"
-
-# does full system update
-echo -e "$CAC - FAZENDO UMA ATUALIZAÇÃO DO SISTEMA, PODE ACONTECER QUE COISAS QUEBREM SE NÃO FOR A VERSÃO MAIS RECENTE."
-echo -e $ESPEPACMAN
-if ! sudo pacman --noconfirm -Syu
-then
+  # does full system update
+  echo -e "$CAC - FAZENDO UMA ATUALIZAÇÃO DO SISTEMA, PODE ACONTECER QUE COISAS QUEBREM SE NÃO FOR A VERSÃO MAIS RECENTE."
+  echo -e $ESPEPACMAN
+  if ! sudo pacman --noconfirm -Syu; then
     echo -e "$CER - ERRO NA ATUALIZAÇAO."
-fi
+  fi
 
-# install base-devel if not installed
-echo -en "$ESPEPACMAN"
-install_software_pacman "base-devel wget git" &>> $INSTLOG & show_progress $!
+  # install base-devel if not installed
+  echo -en "$ESPEPACMAN"
+  install_software_pacman "base-devel wget git" &>>$INSTLOG &
+  show_progress $!
 
 } ### inicio
 
-driveVideo(){
-# choose video driver
-    sleep 0.2
+driveVideo() {
+  # choose video driver
+  sleep 0.2
 
-cat <<DRIVERDESENHO
+  cat <<DRIVERDESENHO
       ██        ██                                     ██      ██
      ░██       ░░                                     ░░      ░██
      ░██ ██████ ██ ██    ██  █████  ██████    ██    ██ ██     ░██  █████   ██████
@@ -137,73 +139,76 @@ cat <<DRIVERDESENHO
  ░░░░░░ ░░░    ░░    ░░     ░░░░░░ ░░░          ░░    ░░  ░░░░░░  ░░░░░░  ░░░░░░
 DRIVERDESENHO
 
-echo ""
-read -rep "$(echo -e $CAC) - Driver da sua placa de vídeo: $(echo -e $LETRA)I$(echo -e $RESETLETRA)NTEL, $(echo -e $LETRA)A$(echo -e $RESETLETRA)MDGPU, $(echo -e $LETRA)N$(echo -e $RESETLETRA)VIDIA ou $(echo -e $LETRA)M$(echo -e $RESETLETRA)aquinaVirtual - (i,a,n,m) ... "  VIDEO
+  echo ""
+  read -rep "$(echo -e $CAC) - Driver da sua placa de vídeo: $(echo -e $LETRA)I$(echo -e $RESETLETRA)NTEL, $(echo -e $LETRA)A$(echo -e $RESETLETRA)MDGPU, $(echo -e $LETRA)N$(echo -e $RESETLETRA)VIDIA ou $(echo -e $LETRA)M$(echo -e $RESETLETRA)aquinaVirtual - (i,a,n,m) ... " VIDEO
 
-case $VIDEO in 
-i|I)
-	DRI='xf86-video-intel'
-	;;
+  case $VIDEO in
+  i | I)
+    DRI='xf86-video-intel'
+    ;;
 
-a|A)
-	DRI='xf86-video-amdgpu'
-	;;
+  a | A)
+    DRI='xf86-video-amdgpu'
+    ;;
 
-n|N)
+  n | N)
     DRI='xf86-video-nvidia'
     ;;
 
-m|M)
-	DRI="NAO"
-	echo -e "$CAT - VOCE ESTA USANDO UMA MAQUINA VITUAL." 
-	;;
-*) driveVideo
+  m | M)
+    DRI="NAO"
+    echo -e "$CAT - VOCE ESTA USANDO UMA MAQUINA VITUAL."
+    ;;
+  *)
+    driveVideo
 
-	;;
-esac
+    ;;
+  esac
 
-# install xorg if not installed
-# if [[ -z $DRI ]]; then
-#     echo ""
-# else
-#     install_software_pacman $DRI &>> /dev/null
-# fi
+  # install xorg if not installed
+  # if [[ -z $DRI ]]; then
+  #     echo ""
+  # else
+  #     install_software_pacman $DRI &>> /dev/null
+  # fi
 
-# complemetos para os drivers
-if [ $DRI == "xf86-video-amdgpu" ]; then
+  # complemetos para os drivers
+  if [ $DRI == "xf86-video-amdgpu" ]; then
     echo -en "$ESPEPACMAN - AMDGPU."
-    install_software_pacman "mesa-libgl mesa-vdpau libvdpau-va-gl vulkan-radeon" &>> $INSTLOG & show_progress $! # driver open-source (melhor)
+    install_software_pacman "mesa-libgl mesa-vdpau libvdpau-va-gl vulkan-radeon" &>>$INSTLOG &
+    show_progress $! # driver open-source (melhor)
     sudo cp ./xorg_conf/40-amdgpu.conf /usr/share/X11/xorg.conf.d/
-fi
-if [ $DRI == "xf86-video-intel" ]; then
+  fi
+  if [ $DRI == "xf86-video-intel" ]; then
     echo -en "$ESPEPACMAN - INTEL."
-    install_software_pacman "mesa-libgl libvdpau-va-gl vulkan-intel" &>> $INSTLOG & show_progress $! # driver open-source (melhor)
+    install_software_pacman "mesa-libgl libvdpau-va-gl vulkan-intel" &>>$INSTLOG &
+    show_progress $! # driver open-source (melhor)
     sudo cp ./xorg_conf/20-intel.conf /usr/share/X11/xorg.conf.d/
-fi
-if [ $DRI == "xf86-video-nvidia" ]; then
+  fi
+  if [ $DRI == "xf86-video-nvidia" ]; then
     echo -en "$ESPEPACMAN - NVIDIA."
-    install_software_pacman "nvidia-utils libglvnd nvidia-settings lib32-nvidia-utils nvidia-dkmsa" &>> $INSTLOG & show_progress $! # tem que testa para ver ser funciona
+    install_software_pacman "nvidia-utils libglvnd nvidia-settings lib32-nvidia-utils nvidia-dkmsa" &>>$INSTLOG &
+    show_progress $! # tem que testa para ver ser funciona
     nvidia-xconfig --add-argb-glx-visuals --allow-glx-with-composite --composite --render-accel -o /usr/share/X11/xorg.conf.d/20-nvidia.conf
-fi
+  fi
 
-# adicionando modulos
-# if [ "$(ls /boot | grep hardened -c)" -gt "0" ]; then
-# 	mkinitcpio -p linux-hardened
-# elif [ "$(ls /boot | grep lts -c)" -gt "0" ]; then
-# 	mkinitcpio -p linux-lts
-# elif [ "$(ls /boot | grep zen -c)" -gt "0" ]; then
-# 	mkinitcpio -p linux-zen
-# else
-# 	mkinitcpio -p linux
-# fi
-
+  # adicionando modulos
+  # if [ "$(ls /boot | grep hardened -c)" -gt "0" ]; then
+  # 	mkinitcpio -p linux-hardened
+  # elif [ "$(ls /boot | grep lts -c)" -gt "0" ]; then
+  # 	mkinitcpio -p linux-lts
+  # elif [ "$(ls /boot | grep zen -c)" -gt "0" ]; then
+  # 	mkinitcpio -p linux-zen
+  # else
+  # 	mkinitcpio -p linux
+  # fi
 
 } ### driveVideo
 
-windowManger(){
-    sleep 0.2
+windowManger() {
+  sleep 0.2
 
-cat <<WINDOWMANAGER 
+  cat <<WINDOWMANAGER
             ██               ██
            ░░               ░██                                                                 █████
  ███     ██ ██ ███████      ░██  ██████  ███     ██   ██████████   ██████   ███████   ██████   ██░░░██  █████  ██████
@@ -214,126 +219,147 @@ cat <<WINDOWMANAGER
 ░░░    ░░░ ░░ ░░░   ░░  ░░░░░░  ░░░░░░  ░░░    ░░░   ░░░  ░░  ░░  ░░░░░░░░ ░░░   ░░  ░░░░░░░░  ░░░░░   ░░░░░░ ░░░
 WINDOWMANAGER
 
-echo ""
-read -rep "$(echo -e $CAC) - Qual gerenciador de janelas (window manager) vai ser desta vez? $(echo -e $LETRA)B$(echo -e $RESETLETRA)SPWM, $(echo -e $LETRA)X$(echo -e $RESETLETRA)MONAD, $(echo -e $LETRA)H$(echo -e $RESETLETRA)YPRLAND, $(echo -e $LETRA)P$(echo -e $RESETLETRA)ular - (b,x,h,p) ... " WME
+  echo ""
+  read -rep "$(echo -e $CAC) - Qual gerenciador de janelas (window manager) vai ser desta vez? $(echo -e $LETRA)B$(echo -e $RESETLETRA)SPWM, $(echo -e $LETRA)X$(echo -e $RESETLETRA)MONAD, $(echo -e $LETRA)H$(echo -e $RESETLETRA)YPRLAND, $(echo -e $LETRA)G$(echo -e $RESETLETRA)NOME, $(echo -e $LETRA)P$(echo -e $RESETLETRA)ular - (b,x,h,g,p) ... " WME
 
-case $WME in 
-b|B)
-	WMs="bspwm"
-	WMx="sxhkd"
-	WMb="polybar"
-	;;
+  case $WME in
+  b | B)
+    WMs="bspwm"
+    WMx="sxhkd"
+    WMb="polybar"
+    ;;
 
-x|X)
-	WMs="xmonad"
-	WMx="xmonad-contrib"
-	WMb="xmobar"
-	;;
+  x | X)
+    WMs="xmonad"
+    WMx="xmonad-contrib"
+    WMb="xmobar"
+    ;;
 
-h|H)
+  h | H)
     WM_WAYLAND="hyprland"
     ;;
 
-p|P)
-	echo ""
-	;;
+  g | G)
+    ENVIRONMENT="gnome"
+    ;;
 
-*) windowManger
-	;;
-esac
-
-# teste para saber se a variavel esta vazia
-if [[ -z $WMs ]]; then
+  p | P)
     echo ""
-else
+    ;;
+
+  *)
+    windowManger
+    ;;
+  esac
+
+  # teste para saber se a variavel esta vazia
+  if [[ -z $WMs ]]; then
+    echo ""
+  else
     # instalando window manger
     echo -en "$ESPEPACMAN - INSTALAÇAO DO $WMs."
-install_software_pacman "$WMs $WMx $WMb" &>> $INSTLOG & show_progress $!
+    install_software_pacman "$WMs $WMx $WMb" &>>$INSTLOG &
+    show_progress $!
     echo -en "$ESPEPACMAN - INSTALAÇAO DO XORG."
-install_software_pacman "xclip xdo mtools xdotool xsel feh xorg-xsetroot xorg-xset xorg-xrdb xorg-server xorg-xinit xorg-xinput libxinerama libxft nsxiv unclutter maim" &>> $INSTLOG & show_progress $!
+    install_software_pacman "xclip xdo mtools xdotool xsel feh xorg-xsetroot xorg-xset xorg-xrdb xorg-server xorg-xinit xorg-xinput libxinerama libxft nsxiv unclutter maim" &>>$INSTLOG &
+    show_progress $!
 
-# &>> $INSTLOG & show_progress $!
-echo -e "$COK - $WMs INSTALADO."
-fi
+    # &>> $INSTLOG & show_progress $!
+    echo -e "$COK - $WMs INSTALADO."
+  fi
 
-if [[ $WM_WAYLAND = "hyprland" ]]; then
+  if [[ $WM_WAYLAND = "hyprland" ]]; then
     echo -en "$ESPEPACMAN - INSTALAÇAO DE HYPRLAND."
     install_software_pacman "$WM_WAYLAND wl-clipboard seatd swaybg ttf-font-awesome waybar" #&>> $INSTLOG
     sleep 0.2
     echo -en "$CONFIGANDO"
-    sudo systemctl enable seatd.service &>> $INSTLOG
+    sudo systemctl enable seatd.service &>>$INSTLOG
     sleep 0.2
-    sudo systemctl start seatd.service &>> $INSTLOG
+    sudo systemctl start seatd.service &>>$INSTLOG
     echo -e "$COK - HYPRLAND INSTALADO."
-fi
+  fi
 
-# AUR para hyprland
-if [[ $WM_WAYLAND = "hyprland" ]]; then
-echo -en "$ESPEPACMAN - INSTALAÇAO DE PROGRAMAS EXTRAS PARA WAYLAND."
-install_software "grimblast-git rofi-wayland crow-translate rofi-calc imv" &>> $INSTLOG & show_progress $!
-# notify-send.sh
-# polkit-kde-agent
-fi
+  # AUR para hyprland
+  if [[ $WM_WAYLAND = "hyprland" ]]; then
+    echo -en "$ESPEPACMAN - INSTALAÇAO DE PROGRAMAS EXTRAS PARA WAYLAND."
+    install_software "grimblast-git rofi-wayland crow-translate rofi-calc imv" &>>$INSTLOG &
+    show_progress $!
+  # notify-send.sh
+  # polkit-kde-agent
+  fi
 
-if [[ $DRI == "xf86-video-amdgpu" ]]; then
+  if [[ $ENVIRONMENT = "gnome" ]]; then
+    echo -en "$ESPEPACMAN - INSTALAÇAO DO GNOME."
+    install_software_pacman "$WM_WAYLAND gnome gdm wl-clipboard seatd ttf-font-awesome" #&>> $INSTLOG
+    sleep 0.2
+    echo -en "$CONFIGANDO"
+    sudo systemctl enable seatd.service &>>$INSTLOG
+    sleep 0.2
+    sudo systemctl start seatd.service &>>$INSTLOG
+    sleep 0.2
+    sudo systemctl enable gdm &>>$INSTLOG
+    echo -e "$COK - GNOME INSTALADO."
+  fi
+
+  if [[ $DRI == "xf86-video-amdgpu" ]]; then
     install_software "amd-vulkan-prefixes" &>>$INSTLOG &
-fi
+  fi
 
-# configurando tofi
-if [[ -d ~/.config/tofi ]]; then
-    echo -e "$COK - TOFI JÁ CONFIGURADO." 
-else
+  # configurando tofi
+  if [[ -d ~/.config/tofi ]]; then
+    echo -e "$COK - TOFI JÁ CONFIGURADO."
+  else
     cp -r ./.config/tofi ~/.config/
-fi
+  fi
 
-# Configurações
-if [[ $WM_WAYLAND = "hyprland" ]]; then
-    rm --recursive --force ~/.config/{hypr,waybar,rofi,imv}; 
-    cp -r ./.config/hypr ~/.config/;
+  # Configurações
+  if [[ $WM_WAYLAND = "hyprland" ]]; then
+    rm --recursive --force ~/.config/{hypr,waybar,rofi,imv}
+    cp -r ./.config/hypr ~/.config/
     mkdir -p ~/.config/waybar
     cp -r ./.config/waybar/hypr_waybar-config/* ~/.config/waybar/
-    cp -r ./.config/rofi ~/.config/;
-    cp -r ./.config/imv ~/.config/;
+    cp -r ./.config/rofi ~/.config/
+    cp -r ./.config/imv ~/.config/
     echo -e "$COK - CONFIGURACAO DO $WM_WAYLAND."
-fi
+  fi
 
-if [[ -z $WMs ]]; then
+  if [[ -z $WMs ]]; then
     echo ""
-elif [[ -d ~/.config/$WMs ]]; then
+  elif [[ -d ~/.config/$WMs ]]; then
     rm --recursive --force ~/.config/$WMs
     cp -r ./.config/$WMs ~/.config/
     echo -e "$COK - CONFIGURAÇÃO $WMs DETECTADA, BACKUP."
-else
+  else
     mkdir -p ~/.config/$WMs
     cp -r ./.config/$WMs/* ~/.config/$WMs/
     echo -e "$COK - CONFIGURAÇÃO DO $WMs."
-fi
-if [[ $WMx = "sxhkd" ]]; then
-    rm --recursive --force ~/.config/sxhkd/;
-    mkdir -p ~/.config/sxhkd/;
-    cp --recursive ./.config/sxhkd/* ~/.config/sxhkd;
+  fi
+  if [[ $WMx = "sxhkd" ]]; then
+    rm --recursive --force ~/.config/sxhkd/
+    mkdir -p ~/.config/sxhkd/
+    cp --recursive ./.config/sxhkd/* ~/.config/sxhkd
     echo -e "$COK - CONFIGURAÇÃO KEYBINDS DO BSPWM."
-fi
-if [[ $WMb = "polybar" ]]; then
-    rm --recursive --force ~/.config/polybar;
-    mkdir -p ~/.config/polybar/;
-    cp --recursive ./.config/polybar/* ~/.config/polybar/;
+  fi
+  if [[ $WMb = "polybar" ]]; then
+    rm --recursive --force ~/.config/polybar
+    mkdir -p ~/.config/polybar/
+    cp --recursive ./.config/polybar/* ~/.config/polybar/
     echo -e "$COK - CONFIGURAÇÃO DO POLYBAR CONCLUIDA."
-fi
+  fi
 
-if [[ $WMs = "bspwm" ]]; then
-    echo -e '#!/bin/bash\n\nuserresources=$HOME/.Xresources\nsysresources=/etc/X11/xinit/.Xresources\n\n# merge in defaults\n\nif [ -f $sysresources ]; then\n    xrdb -merge $sysresources\nfi\n\nif [ -f "$userresources" ]; then\n    xrdb -merge "$userresources"\nfi\n\n[ -f ~/.Xdefaults ] && xrdb -merge ~/.Xdefaults\n\nxsetroot -cursor_name left_ptr &\n\n# feh --bg-tile ~/Imagens/wallpaperz.png\n$HOME/.fehbg\n# $HOME/trigger_custom_refresh.sh &\n# wal -R\n\n# export MPD_HOST=$HOME/.config/mpd/socket\n# mpd --kill; mpd &\nunclutter --timeout 7 &\n\n# Set up an icon tray\n# trayer --edge top --align right --SetDockType true --SetPartialStrut true \ \n# --expand true --width 10 --transparent true --tint 0x5f5f5f --height 18 &\n\nif [ "$(command -v xset)" >/dev/null 2>&1 ];\nthen\n    #xset s off      	        #Disable screen saver blanking\n    #xset s 3600 3600 	        #Change blank time to 1 hour\n    #xset -dpms 	            #Turn off DPMS\n    xset s off -dpms 	        #Disable DPMS and prevent screen from blanking\n    #xset dpms force off 	    #Turn off screen immediately\n    #xset dpms force standby 	#Standby screen\n    #xset dpms force suspend 	#Suspend screen\nfi\n\n# numlockx &\n# pulseaudio -k\n# pulseaudio &\n\nsxhkd &\nexec bspwm\n\n# exec xmonad\n\n#vim:ft=sh' > ~/.xinitrc
-fi
+  if [[ $WMs = "bspwm" ]]; then
+    echo -e '#!/bin/bash\n\nuserresources=$HOME/.Xresources\nsysresources=/etc/X11/xinit/.Xresources\n\n# merge in defaults\n\nif [ -f $sysresources ]; then\n    xrdb -merge $sysresources\nfi\n\nif [ -f "$userresources" ]; then\n    xrdb -merge "$userresources"\nfi\n\n[ -f ~/.Xdefaults ] && xrdb -merge ~/.Xdefaults\n\nxsetroot -cursor_name left_ptr &\n\n# feh --bg-tile ~/Imagens/wallpaperz.png\n$HOME/.fehbg\n# $HOME/trigger_custom_refresh.sh &\n# wal -R\n\n# export MPD_HOST=$HOME/.config/mpd/socket\n# mpd --kill; mpd &\nunclutter --timeout 7 &\n\n# Set up an icon tray\n# trayer --edge top --align right --SetDockType true --SetPartialStrut true \ \n# --expand true --width 10 --transparent true --tint 0x5f5f5f --height 18 &\n\nif [ "$(command -v xset)" >/dev/null 2>&1 ];\nthen\n    #xset s off      	        #Disable screen saver blanking\n    #xset s 3600 3600 	        #Change blank time to 1 hour\n    #xset -dpms 	            #Turn off DPMS\n    xset s off -dpms 	        #Disable DPMS and prevent screen from blanking\n    #xset dpms force off 	    #Turn off screen immediately\n    #xset dpms force standby 	#Standby screen\n    #xset dpms force suspend 	#Suspend screen\nfi\n\n# numlockx &\n# pulseaudio -k\n# pulseaudio &\n\nsxhkd &\nexec bspwm\n\n# exec xmonad\n\n#vim:ft=sh' >~/.xinitrc
+  fi
 
-if [[ $WMs = "xmonad" ]]; then 
-    echo -e '#!/bin/bash\n\nuserresources=$HOME/.Xresources\nsysresources=/etc/X11/xinit/.Xresources\n\n# merge in defaults\n\nif [ -f $sysresources ]; then\n    xrdb -merge $sysresources\nfi\n\nif [ -f "$userresources" ]; then\n    xrdb -merge "$userresources"\nfi\n\n[ -f ~/.Xdefaults ] && xrdb -merge ~/.Xdefaults\n\nxsetroot -cursor_name left_ptr &\n\n# feh --bg-tile ~/Imagens/wallpaperz.png\n$HOME/.fehbg\n# $HOME/trigger_custom_refresh.sh &\n# wal -R\n\n# export MPD_HOST=$HOME/.config/mpd/socket\n# mpd --kill; mpd &\nunclutter --timeout 7 &\n\n# Set up an icon tray\n# trayer --edge top --align right --SetDockType true --SetPartialStrut true \ \n# --expand true --width 10 --transparent true --tint 0x5f5f5f --height 18 &\n\nif [ "$(command -v xset)" >/dev/null 2>&1 ];\nthen\n    #xset s off      	        #Disable screen saver blanking\n    #xset s 3600 3600 	        #Change blank time to 1 hour\n    #xset -dpms 	            #Turn off DPMS\n    xset s off -dpms 	        #Disable DPMS and prevent screen from blanking\n    #xset dpms force off 	    #Turn off screen immediately\n    #xset dpms force standby 	#Standby screen\n    #xset dpms force suspend 	#Suspend screen\nfi\n\n# numlockx &\n# pulseaudio -k\n# pulseaudio &\n\n# sxhkd &\n# exec bspwm\n\nexec xmonad\n\n#vim:ft=sh' > ~/.xinitrc
-fi
+  if [[ $WMs = "xmonad" ]]; then
+    echo -e '#!/bin/bash\n\nuserresources=$HOME/.Xresources\nsysresources=/etc/X11/xinit/.Xresources\n\n# merge in defaults\n\nif [ -f $sysresources ]; then\n    xrdb -merge $sysresources\nfi\n\nif [ -f "$userresources" ]; then\n    xrdb -merge "$userresources"\nfi\n\n[ -f ~/.Xdefaults ] && xrdb -merge ~/.Xdefaults\n\nxsetroot -cursor_name left_ptr &\n\n# feh --bg-tile ~/Imagens/wallpaperz.png\n$HOME/.fehbg\n# $HOME/trigger_custom_refresh.sh &\n# wal -R\n\n# export MPD_HOST=$HOME/.config/mpd/socket\n# mpd --kill; mpd &\nunclutter --timeout 7 &\n\n# Set up an icon tray\n# trayer --edge top --align right --SetDockType true --SetPartialStrut true \ \n# --expand true --width 10 --transparent true --tint 0x5f5f5f --height 18 &\n\nif [ "$(command -v xset)" >/dev/null 2>&1 ];\nthen\n    #xset s off      	        #Disable screen saver blanking\n    #xset s 3600 3600 	        #Change blank time to 1 hour\n    #xset -dpms 	            #Turn off DPMS\n    xset s off -dpms 	        #Disable DPMS and prevent screen from blanking\n    #xset dpms force off 	    #Turn off screen immediately\n    #xset dpms force standby 	#Standby screen\n    #xset dpms force suspend 	#Suspend screen\nfi\n\n# numlockx &\n# pulseaudio -k\n# pulseaudio &\n\n# sxhkd &\n# exec bspwm\n\nexec xmonad\n\n#vim:ft=sh' >~/.xinitrc
+  fi
 
 } ### windowManger
 
-gerenciardorAUR(){
-    sleep 0.2
-cat <<GERENCIADORAUR
+gerenciardorAUR() {
+  sleep 0.2
+  cat <<GERENCIADORAUR
   ██████   ██   ██ ██████
  ░░░░░░██ ░██  ░██░░██░░█
   ███████ ░██  ░██ ░██ ░
@@ -341,65 +367,66 @@ cat <<GERENCIADORAUR
 ░░████████░░██████░███
  ░░░░░░░░  ░░░░░░ ░░░
 GERENCIADORAUR
-    echo ""
-    read -rep "$(echo -e $CAC) - Qual é o ajudante AUR de sua escolha? Precisamos de um ajudante AUR é essencial!!! $(echo -e $LETRA)P$(echo -e $RESETLETRA)ARU ou $(echo -e $LETRA)Y$(echo -e $RESETLETRA)AY - (p,y) ... " NUM
+  echo ""
+  read -rep "$(echo -e $CAC) - Qual é o ajudante AUR de sua escolha? Precisamos de um ajudante AUR é essencial!!! $(echo -e $LETRA)P$(echo -e $RESETLETRA)ARU ou $(echo -e $LETRA)Y$(echo -e $RESETLETRA)AY - (p,y) ... " NUM
 
-case $NUM in
-    p|P)
-        HELPER="paru"
-        ;;
-    y|Y)
-        HELPER="yay"
-        ;;
-    *)
-        HELPER="yay"
-        ;;
-esac
+  case $NUM in
+  p | P)
+    HELPER="paru"
+    ;;
+  y | Y)
+    HELPER="yay"
+    ;;
+  *)
+    HELPER="yay"
+    ;;
+  esac
 
-if [[ -e "/sbin/$HELPER" ]]; then 
+  if [[ -e "/sbin/$HELPER" ]]; then
     echo -e "$COK - AJUDANTE AUR JÁ ESTA INSTALADO."
-elif [[ -d ~/.srcs/$HELPER ]]; then
+  elif [[ -d ~/.srcs/$HELPER ]]; then
     echo -e "$CNT - VOU INSTALAR O $HELPER AGORA PARA VOCÊ ANTES DE CONTINUAR."
-	(cd ~/.srcs/$HELPER/ && makepkg -si )
-	echo -e "$COK - $HELPER INSTALADO."
-else
+    (cd ~/.srcs/$HELPER/ && makepkg -si)
+    echo -e "$COK - $HELPER INSTALADO."
+  else
     echo -e "$CNT - VOU INSTALAR O $HELPER AGORA PARA VOCÊ ANTES DE CONTINUAR."
-	git clone https://aur.archlinux.org/$HELPER.git ~/.srcs/$HELPER
-	(cd ~/.srcs/$HELPER/ && makepkg -si )
-	echo -e "$COK - $HELPER INSTALADO."
-fi
+    git clone https://aur.archlinux.org/$HELPER.git ~/.srcs/$HELPER
+    (cd ~/.srcs/$HELPER/ && makepkg -si)
+    echo -e "$COK - $HELPER INSTALADO."
+  fi
 
-if [[ $HELPER = "paru" ]]; then
+  if [[ $HELPER = "paru" ]]; then
     sudo sed -i 's/#BottomUp/BottomUp/g' /etc/paru.conf
-	echo -e "$COK - $HELPER CONFIGURADO."
-fi
+    echo -e "$COK - $HELPER CONFIGURADO."
+  fi
 
-echo -en "$ESPEPACMAN - $HELPER."
-install_software "alacritty exa mpv python-pynvim yt-dlp ntfs-3g xf86-input-evdev xf86-input-libinput zathura-pdf-poppler adwaita-icon-theme xcursor-vanilla-dmz-aa cmake xdg-user-dirs ffmpeg polkit gammastep man-pages man-db less" &>> $INSTLOG & show_progress $!
-# redshift \
-# nodejs \
-# herbe-git \
-# python-pip \
-# bpytop \
-# curl \
-# the_silver_searcher \
+  echo -en "$ESPEPACMAN - $HELPER."
+  install_software "alacritty exa mpv python-pynvim yt-dlp ntfs-3g xf86-input-evdev xf86-input-libinput zathura-pdf-poppler adwaita-icon-theme xcursor-vanilla-dmz-aa cmake xdg-user-dirs ffmpeg polkit gammastep man-pages man-db less" &>>$INSTLOG &
+  show_progress $!
+  # redshift \
+  # nodejs \
+  # herbe-git \
+  # python-pip \
+  # bpytop \
+  # curl \
+  # the_silver_searcher \
 
-# PACOTE NÃO EXISTE MAIS
-# if [[ ! -f /bin/picom ]]; then
-# echo -en "$ESPEPACMAN - INSTALAÇAO DO PICOM."
-# install_software "picom-jonaburg-git" &>> $INSTLOG & show_progress $!
-# fi
+  # PACOTE NÃO EXISTE MAIS
+  # if [[ ! -f /bin/picom ]]; then
+  # echo -en "$ESPEPACMAN - INSTALAÇAO DO PICOM."
+  # install_software "picom-jonaburg-git" &>> $INSTLOG & show_progress $!
+  # fi
 
-# if [[ $WM_WAYLAND = "hyprland" ]]; then
-#     install_software "wl-clipboard waybar" &>> $INSTLOG & show_progress $!
-# else
-#     echo  ""
-# fi
+  # if [[ $WM_WAYLAND = "hyprland" ]]; then
+  #     install_software "wl-clipboard waybar" &>> $INSTLOG & show_progress $!
+  # else
+  #     echo  ""
+  # fi
 }
 
-notebook_ger(){
-    sleep 0.2
-cat <<LAPTOP
+notebook_ger() {
+  sleep 0.2
+  cat <<LAPTOP
                      ██           ██                        ██
                     ░██          ░██                       ░██
  ███████   ██████  ██████  █████ ░██       ██████   ██████ ░██  ██
@@ -409,38 +436,40 @@ cat <<LAPTOP
  ███  ░██░░██████   ░░██ ░░██████░██████ ░░██████ ░░██████ ░██░░██
 ░░░   ░░  ░░░░░░     ░░   ░░░░░░ ░░░░░    ░░░░░░   ░░░░░░  ░░  ░░
 LAPTOP
-echo ""
-read -rep "$(echo -e $CAC) - Este computador é um notebook? - (s,n) ... " NOTEBOOK
+  echo ""
+  read -rep "$(echo -e $CAC) - Este computador é um notebook? - (s,n) ... " NOTEBOOK
 
-case $NOTEBOOK in
-    s|S)
+  case $NOTEBOOK in
+  s | S)
     echo -en "$ESPEPACMAN"
-    install_software "acpi acpid xf86-input-synaptics" &>> $INSTLOG & show_progress $!
+    install_software "acpi acpid xf86-input-synaptics" &>>$INSTLOG &
+    show_progress $!
     echo -en "$CONFIGANDO"
-    sudo systemctl enable acpid.service &>> $INSTLOG & show_progress $!
+    sudo systemctl enable acpid.service &>>$INSTLOG &
+    show_progress $!
     sudo cp ./xorg_conf/70-synaptics.conf /usr/share/X11/xorg.conf.d/
     if [[ $WMb = "polybar" ]]; then
-        sed -i 's/FILE-6/#FILE-6/' $HOME/.config/bspwm/bspwmrc
-        sed -i 's/ws-icon-5 \= FILE-6\;0110-6/\;ws-icon-5 \= FILE-6\;0110-6/' $HOME/.config/polybar/{config.ini,center.config.ini}
-        sed -i 's/ws-icon-6 \= EDIT-7\;0111-7/\;ws-icon-6 \= EDIT-7\;0111-7/' $HOME/.config/polybar/{config.ini,center.config.ini}
-        sed -i 's/ws-icon-7 \= GAME-8\;1000-8/\;ws-icon-7 \= GAME-8\;1000-8/' $HOME/.config/polybar/{config.ini,center.config.ini}
-        sed -i 's/ws-icon-8 \= MAIL-9\;1001-9/\;ws-icon-8 \= MAIL-9\;1001-9/' $HOME/.config/polybar/{config.ini,center.config.ini}
-        sed -i 's/ws-icon-9 \= MPD-10\;0000-0/\;ws-icon-9 \= MPD-10\;0000-0/' $HOME/.config/polybar/{config.ini,center.config.ini}
+      sed -i 's/FILE-6/#FILE-6/' $HOME/.config/bspwm/bspwmrc
+      sed -i 's/ws-icon-5 \= FILE-6\;0110-6/\;ws-icon-5 \= FILE-6\;0110-6/' $HOME/.config/polybar/{config.ini,center.config.ini}
+      sed -i 's/ws-icon-6 \= EDIT-7\;0111-7/\;ws-icon-6 \= EDIT-7\;0111-7/' $HOME/.config/polybar/{config.ini,center.config.ini}
+      sed -i 's/ws-icon-7 \= GAME-8\;1000-8/\;ws-icon-7 \= GAME-8\;1000-8/' $HOME/.config/polybar/{config.ini,center.config.ini}
+      sed -i 's/ws-icon-8 \= MAIL-9\;1001-9/\;ws-icon-8 \= MAIL-9\;1001-9/' $HOME/.config/polybar/{config.ini,center.config.ini}
+      sed -i 's/ws-icon-9 \= MPD-10\;0000-0/\;ws-icon-9 \= MPD-10\;0000-0/' $HOME/.config/polybar/{config.ini,center.config.ini}
     else
-        echo -e "$COK - CONFIGURACAO DO POLYBAR PARA NOTEBOOK."
+      echo -e "$COK - CONFIGURACAO DO POLYBAR PARA NOTEBOOK."
     fi
     echo -e "$COK - CONFIGURACAO PAR NOTEBOOK."
     ;;
-    n|N)
+  n | N)
     echo -e "$CNT - ESTE É UM DESKTOP."
     ;;
-esac
+  esac
 
 }
 
-lancadorProgramas(){
-    sleep 0.2
-cat << DMENUDESENHO
+lancadorProgramas() {
+  sleep 0.2
+  cat <<DMENUDESENHO
       ██                                       ████
      ░██                                      █░░░ █
      ░██ ██████████   █████  ███████  ██   ██░    ░█
@@ -451,137 +480,136 @@ cat << DMENUDESENHO
  ░░░░░░ ░░░  ░░  ░░  ░░░░░░ ░░░   ░░  ░░░░░░ ░░░░░░
 DMENUDESENHO
 
-mkdir -p ~/.config/
-if [[ $WM_WAYLAND = "hyprland" ]]; then
+  mkdir -p ~/.config/
+  if [[ $WM_WAYLAND = "hyprland" ]]; then
     echo -e "$CAT - WAYLAND DETECTADO DMENU2 NAO SERA INSTALADO."
-else
-if [[ -d ~/.srcs ]]; then
-    echo -e "$COK - PASTA SRCS.";
-else
-    mkdir -p ~/.srcs
-    echo -e "$COK - PASTA SRCS.";
-fi
-
-if [[ -e "/usr/local/bin/dmenu_run" ]]; then 
-    echo -e "$COK - DMENU2 JÁ ESTAVA INSTALADO."
-    elif [ -d ~/.srcs/dmenu2 ]; then
-        echo -e "$COK - PASTA DMENU2 EXITE."
-        (tar zxf ~/.srcs/dmenu2/dmenu2-0.2.1.tar.gz -C ~/.srcs/dmenu2  && cd ~/.srcs/dmenu2/dmenu2-0.2.1/ && sudo make clean install)
-        echo -e "$COK - DMENU2 INSTALADO."
+  else
+    if [[ -d ~/.srcs ]]; then
+      echo -e "$COK - PASTA SRCS."
     else
-        mkdir -p ~/.srcs
-        echo ""
-        read -rep "$(echo -e $CAC) - Voce quer instalar o dmenu2? - (s,n) ... " DM2
-        case $DM2 in
-        s|S)
-            if [[ -d ~/.srcs/dmenu2-1 ]]; then
-                echo -e "$CNT - DETECTADO PASTA PARA COMPILAR DMENU2, INSTALANDO..."
-                (tar zxf ~/.srcs/dmenu2-1/dmenu2-0.2.1.tar.gz -C ~/.srcs/dmenu2-1/ && cd ~/.srcs/dmenu2-1/dmenu2-0.2.1/ && sudo make clean install)
-                echo -e "$COK - DMENU2 INSTALADO."
-            else 
-                echo -e "$CNT - CLONANDO DMENU2..."
-                git -C ~/.srcs clone https://github.com/quebravel/dmenu2-1.git
-                echo -e "$CNT INSTALANDO DMENU2..."
-                (tar zxf ~/.srcs/dmenu2-1/dmenu2-0.2.1.tar.gz -C ~/.srcs/dmenu2-1/  && cd ~/.srcs/dmenu2-1/dmenu2-0.2.1/ && sudo make clean install)
-                echo -e "$COK - DMENU2 INSTALADO."
-            fi
-              echo -e "$COK - DMENU2 INSTALADO."
-              ;;
-        n|N)
-              if ! (cd ~/.srcs/dmenu2-1/dmenu2-0.2.1 && sudo make uninstall && sudo make clean) &>> /dev/null
-              then
-                  echo -e "$CNT - DMENU2 NAO SERÁ INSTALADO."
-              fi
-              ;;
-          *) lancadorProgramas
-        esac
+      mkdir -p ~/.srcs
+      echo -e "$COK - PASTA SRCS."
     fi
-fi
+
+    if [[ -e "/usr/local/bin/dmenu_run" ]]; then
+      echo -e "$COK - DMENU2 JÁ ESTAVA INSTALADO."
+    elif [ -d ~/.srcs/dmenu2 ]; then
+      echo -e "$COK - PASTA DMENU2 EXITE."
+      (tar zxf ~/.srcs/dmenu2/dmenu2-0.2.1.tar.gz -C ~/.srcs/dmenu2 && cd ~/.srcs/dmenu2/dmenu2-0.2.1/ && sudo make clean install)
+      echo -e "$COK - DMENU2 INSTALADO."
+    else
+      mkdir -p ~/.srcs
+      echo ""
+      read -rep "$(echo -e $CAC) - Voce quer instalar o dmenu2? - (s,n) ... " DM2
+      case $DM2 in
+      s | S)
+        if [[ -d ~/.srcs/dmenu2-1 ]]; then
+          echo -e "$CNT - DETECTADO PASTA PARA COMPILAR DMENU2, INSTALANDO..."
+          (tar zxf ~/.srcs/dmenu2-1/dmenu2-0.2.1.tar.gz -C ~/.srcs/dmenu2-1/ && cd ~/.srcs/dmenu2-1/dmenu2-0.2.1/ && sudo make clean install)
+          echo -e "$COK - DMENU2 INSTALADO."
+        else
+          echo -e "$CNT - CLONANDO DMENU2..."
+          git -C ~/.srcs clone https://github.com/quebravel/dmenu2-1.git
+          echo -e "$CNT INSTALANDO DMENU2..."
+          (tar zxf ~/.srcs/dmenu2-1/dmenu2-0.2.1.tar.gz -C ~/.srcs/dmenu2-1/ && cd ~/.srcs/dmenu2-1/dmenu2-0.2.1/ && sudo make clean install)
+          echo -e "$COK - DMENU2 INSTALADO."
+        fi
+        echo -e "$COK - DMENU2 INSTALADO."
+        ;;
+      n | N)
+        if ! (cd ~/.srcs/dmenu2-1/dmenu2-0.2.1 && sudo make uninstall && sudo make clean) &>>/dev/null; then
+          echo -e "$CNT - DMENU2 NAO SERÁ INSTALADO."
+        fi
+        ;;
+      *) lancadorProgramas ;;
+      esac
+    fi
+  fi
 }
 
-arquivosdeConfiguracao(){
-    sleep 0.2
+arquivosdeConfiguracao() {
+  sleep 0.2
 
-    if [[ ! -d ~/.config/picom ]]; then
-        mkdir --parents ~/.config/picom/;
-        cp --force ./.config/picom/* ~/.config/picom/;
-    else
-        rm --recursive --force ~/.config/picom/;
-        mkdir --parents ~/.config/picom/;
-        cp --force ./.config/picom/* ~/.config/picom/;
-    fi
+  if [[ ! -d ~/.config/picom ]]; then
+    mkdir --parents ~/.config/picom/
+    cp --force ./.config/picom/* ~/.config/picom/
+  else
+    rm --recursive --force ~/.config/picom/
+    mkdir --parents ~/.config/picom/
+    cp --force ./.config/picom/* ~/.config/picom/
+  fi
 
-    if [[ ! -d ~/.config/alacritty ]]; then
-        mkdir -p ~/.config/alacritty/;
-        cp --recursive --force ./.config/alacritty ~/.config/;
-	git clone https://github.com/alacritty/alacritty-theme ~/.config/alacritty/themes
-    else
-        rm --recursive --force ~/.config/alacritty/;
-        cp --recursive --force ./.config/alacritty ~/.config/;
-	git clone https://github.com/alacritty/alacritty-theme ~/.config/alacritty/themes
-    fi
-    # if [ -d ~/wallpapers ]; then
-    #     echo "Adicionando wallpaper para ~/wallpapers..."
-    #     cp ./wallpapers/* ~/wallpapers/;
-    # else
-    #     echo "Installing wallpaper..."
-    #     mkdir ~/wallpapers && cp -r ./wallpapers/* ~/wallpapers/;
-    # fi
-    if [[ ! -d ~/.config/mpv ]]; then
-        mkdir --parents ~/.config/mpv;
-        cp ./.config/mpv/* ~/.config/mpv/;
-    else
-        rm --recursive --force ~/.config/mpv/*
-        cp --recursive --force ./.config/mpv/* ~/.config/mpv/;
-    fi
+  if [[ ! -d ~/.config/alacritty ]]; then
+    mkdir -p ~/.config/alacritty/
+    cp --recursive --force ./.config/alacritty ~/.config/
+    git clone https://github.com/alacritty/alacritty-theme ~/.config/alacritty/themes
+  else
+    rm --recursive --force ~/.config/alacritty/
+    cp --recursive --force ./.config/alacritty ~/.config/
+    git clone https://github.com/alacritty/alacritty-theme ~/.config/alacritty/themes
+  fi
+  # if [ -d ~/wallpapers ]; then
+  #     echo "Adicionando wallpaper para ~/wallpapers..."
+  #     cp ./wallpapers/* ~/wallpapers/;
+  # else
+  #     echo "Installing wallpaper..."
+  #     mkdir ~/wallpapers && cp -r ./wallpapers/* ~/wallpapers/;
+  # fi
+  if [[ ! -d ~/.config/mpv ]]; then
+    mkdir --parents ~/.config/mpv
+    cp ./.config/mpv/* ~/.config/mpv/
+  else
+    rm --recursive --force ~/.config/mpv/*
+    cp --recursive --force ./.config/mpv/* ~/.config/mpv/
+  fi
 
-    if [[ ! -d ~/.config/zathura ]]; then
-        mkdir --parents ~/.config/zathura/;
-        cp ./.config/zathura/zathurarc ~/.config/zathura/;
-    else
-        rm --force ~/.config/zathura/zathurarc;
-        cp ./.config/zathura/zathurarc ~/.config/zathura/;
-    fi
+  if [[ ! -d ~/.config/zathura ]]; then
+    mkdir --parents ~/.config/zathura/
+    cp ./.config/zathura/zathurarc ~/.config/zathura/
+  else
+    rm --force ~/.config/zathura/zathurarc
+    cp ./.config/zathura/zathurarc ~/.config/zathura/
+  fi
 
-    if [[ ! -d ~/.config/sxiv ]]; then
-        mkdir --parents ~/.config/sxiv/;
-        cp --recursive --force ./.config/sxiv/* ~/.config/sxiv/;
-    else
-        rm --recursive --force  ~/.config/sxiv/;
-        cp --recursive --force ./.config/sxiv/* ~/.config/;
-    fi
+  if [[ ! -d ~/.config/sxiv ]]; then
+    mkdir --parents ~/.config/sxiv/
+    cp --recursive --force ./.config/sxiv/* ~/.config/sxiv/
+  else
+    rm --recursive --force ~/.config/sxiv/
+    cp --recursive --force ./.config/sxiv/* ~/.config/
+  fi
 
-    # if [ ! -d ~/.config/redshift ]; then
-    #     mkdir --parents ~/.config/redshift/;
-    #     cp --recursive --force ./.config/redshift/* ~/.config/redshift/;
-    # else
-    #     rm --recursive --force  ~/.config/redshift/;
-    #     cp --recursive --force ./.config/redshift/ ~/.config/;
-    # fi
+  # if [ ! -d ~/.config/redshift ]; then
+  #     mkdir --parents ~/.config/redshift/;
+  #     cp --recursive --force ./.config/redshift/* ~/.config/redshift/;
+  # else
+  #     rm --recursive --force  ~/.config/redshift/;
+  #     cp --recursive --force ./.config/redshift/ ~/.config/;
+  # fi
 
-    if [[ ! -d ~/.config/gammastep ]]; then
-        mkdir --parents ~/.config/gammastep/;
-        cp --recursive --force ./.config/gammastep/* ~/.config/gammastep/;
-    else
-        rm --recursive --force  ~/.config/gammastep/;
-        cp --recursive --force ./.config/gammastep/ ~/.config/;
-    fi
+  if [[ ! -d ~/.config/gammastep ]]; then
+    mkdir --parents ~/.config/gammastep/
+    cp --recursive --force ./.config/gammastep/* ~/.config/gammastep/
+  else
+    rm --recursive --force ~/.config/gammastep/
+    cp --recursive --force ./.config/gammastep/ ~/.config/
+  fi
 
-    if [[ ! -d ~/.config/git ]]; then
-        mkdir --parents ~/.config/git/;
-        cp ./.config/git/config ~/.config/git/;
-    else
-        rm --recursive --force  ~/.config/git/;
-        cp --recursive --force ./.config/git/ ~/.config/;
-    fi
+  if [[ ! -d ~/.config/git ]]; then
+    mkdir --parents ~/.config/git/
+    cp ./.config/git/config ~/.config/git/
+  else
+    rm --recursive --force ~/.config/git/
+    cp --recursive --force ./.config/git/ ~/.config/
+  fi
 
-    echo -e "$COK - CONFIGURAÇOES DIVERSAS."
-    
+  echo -e "$COK - CONFIGURAÇOES DIVERSAS."
+
 } ### arquivosdeConfiguracao
 
-lyConfig(){
- sleep 0.2
-cat <<LOGINLY
+lyConfig() {
+  sleep 0.2
+  cat <<LOGINLY
 ░██  ██   ██
 ░██ ░░██ ██
 ░██  ░░███
@@ -590,54 +618,58 @@ cat <<LOGINLY
 ░███ ██
 ░░░ ░░
 LOGINLY
-echo ""
-read -rep "$(echo -e $CAC) - Deseja instalar um Display Manager $(echo -e $LETRA)T$(echo -e $RESETLETRA)BSM ou $(echo -e $LETRA)L$(echo -e $RESETLETRA)Y? - (t,l,n) ... " DMGR
+  echo ""
+  read -rep "$(echo -e $CAC) - Deseja instalar um Display Manager $(echo -e $LETRA)T$(echo -e $RESETLETRA)BSM ou $(echo -e $LETRA)L$(echo -e $RESETLETRA)Y? - (t,l,n) ... " DMGR
 
-    case "$DMGR" in
-        t|T)
-	    echo -en "$ESPEPACMAN - INSTALAÇAO DO TBSM."
-            install_software "tbsm" &>> $INSTLOG & show_progress $!
-            echo "[[ $XDG_VTNR -le 2 ]] && tbsm" > ~/.zlogin
-            cp -r ./.config/tbsm/ ~/.config/
-            echo -e "$COK - TBSM INSTALADO."
-        ;;
-        l|L)
-
-        echo -en "$ESPEPACMAN - INSTALAÇAO DO LY."
-        install_software "ly-git cmatrix" &>> $INSTLOG & show_progress $!
-        # cominho do arquivo de configuração
-        arquivo="/etc/ly/config.ini"
-
-        if [[ -f $arquivo ]]; then
-            # abilitando opções 
-            sudo sed -i 's/#animate = false/animate = true/g' $arquivo
-            sudo sed -i 's/#animation = 0/animation = 1/g' $arquivo
-            sudo sed -i 's/#xinitrc \= \~\/.xinitrc/xinitrc \= \~\/.xinitrc/g' $arquivo
-            # transformando arquivo xinitrc em executavel bash
-            sudo systemctl enable ly.service
-            sleep 0.2
-            echo -e "$COK - LY INSTALADO."
-        else
-            echo -e "$CER - NÃO EXISTE O ARQUIVO DE CONFIGURACAO."
-        fi
-        ;;
-    n|N) echo -e "$CNT - NAO TERÁ DISPLAY MANAGER."
+  case "$DMGR" in
+  t | T)
+    echo -en "$ESPEPACMAN - INSTALAÇAO DO TBSM."
+    install_software "tbsm" &>>$INSTLOG &
+    show_progress $!
+    echo "[[ $XDG_VTNR -le 2 ]] && tbsm" >~/.zlogin
+    cp -r ./.config/tbsm/ ~/.config/
+    echo -e "$COK - TBSM INSTALADO."
     ;;
-    *) lyConfig
-    ;;
-    esac
+  l | L)
 
-    if [[ -f ~/.xinitrc ]]; then
-        chmod +x ~/.xinitrc
+    echo -en "$ESPEPACMAN - INSTALAÇAO DO LY."
+    install_software "ly-git cmatrix" &>>$INSTLOG &
+    show_progress $!
+    # cominho do arquivo de configuração
+    arquivo="/etc/ly/config.ini"
+
+    if [[ -f $arquivo ]]; then
+      # abilitando opções
+      sudo sed -i 's/#animate = false/animate = true/g' $arquivo
+      sudo sed -i 's/#animation = 0/animation = 1/g' $arquivo
+      sudo sed -i 's/#xinitrc \= \~\/.xinitrc/xinitrc \= \~\/.xinitrc/g' $arquivo
+      # transformando arquivo xinitrc em executavel bash
+      sudo systemctl enable ly.service
+      sleep 0.2
+      echo -e "$COK - LY INSTALADO."
+    else
+      echo -e "$CER - NÃO EXISTE O ARQUIVO DE CONFIGURACAO."
     fi
+    ;;
+  n | N)
+    echo -e "$CNT - NAO TERÁ DISPLAY MANAGER."
+    ;;
+  *)
+    lyConfig
+    ;;
+  esac
+
+  if [[ -f ~/.xinitrc ]]; then
+    chmod +x ~/.xinitrc
+  fi
 
 } ### ly_config
 
 # parte 2
 
-playermusica(){
- sleep 0.2
- cat <<PLAYMSC
+playermusica() {
+  sleep 0.2
+  cat <<PLAYMSC
                               ██████          ██████  ██████
  ███████   █████  ██████████ ░██░░░██  █████ ░██░░░██░██░░░██
 ░░██░░░██ ██░░░██░░██░░██░░██░██  ░██ ██░░░██░██  ░██░██  ░██
@@ -646,68 +678,72 @@ playermusica(){
  ███  ░██░░█████  ███ ░██ ░██░██     ░░█████ ░██     ░██
 ░░░   ░░  ░░░░░  ░░░  ░░  ░░ ░░       ░░░░░  ░░      ░░
 PLAYMSC
- echo ""
- read -rep "$(echo -e $CAC) - Quer instalar o player de música? - (s,n) ... " PLMC
-case "$PLMC" in
- s|S) 
-echo -en "$ESPEPACMAN"
-install_software "ncmpcpp mpd mpc" &>> $INSTLOG & show_progress $!
-systemctl --user enable --now mpd.service &>> $INSTLOG
+  echo ""
+  read -rep "$(echo -e $CAC) - Quer instalar o player de música? - (s,n) ... " PLMC
+  case "$PLMC" in
+  s | S)
+    echo -en "$ESPEPACMAN"
+    install_software "ncmpcpp mpd mpc" &>>$INSTLOG &
+    show_progress $!
+    systemctl --user enable --now mpd.service &>>$INSTLOG
 
-if [ ! -d ~/Músicas ]; then 
- mkdir -p ~/Músicas
-fi
-if [ ! -d ~/.config/ncmpcpp ]; then
- mkdir --parents ~/.config/ncmpcpp/;
- cp ./.config/ncmpcpp/* ~/.config/ncmpcpp/;
-else
- cp ./.config/ncmpcpp/* ~/.config/ncmpcpp/;
-fi
-if [ ! -d ~/.config/mpd ]; then
- mkdir --parents ~/.config/mpd/;
- cp ./.config/mpd/mpd.conf ~/.config/mpd/;
-else
- cp ./.config/mpd/mpd.conf ~/.config/mpd/;
-fi
+    if [ ! -d ~/Músicas ]; then
+      mkdir -p ~/Músicas
+    fi
+    if [ ! -d ~/.config/ncmpcpp ]; then
+      mkdir --parents ~/.config/ncmpcpp/
+      cp ./.config/ncmpcpp/* ~/.config/ncmpcpp/
+    else
+      cp ./.config/ncmpcpp/* ~/.config/ncmpcpp/
+    fi
+    if [ ! -d ~/.config/mpd ]; then
+      mkdir --parents ~/.config/mpd/
+      cp ./.config/mpd/mpd.conf ~/.config/mpd/
+    else
+      cp ./.config/mpd/mpd.conf ~/.config/mpd/
+    fi
 
-echo -en "$CONFIGANDO"
-sudo systemctl enable mpd &>> $INSTLOG & show_progress $!
+    echo -en "$CONFIGANDO"
+    sudo systemctl enable mpd &>>$INSTLOG &
+    show_progress $!
 
-#echo -en "$CONFIGANDO"
-#sudo systemctl start mpd #&>> $INSTLOG & show_progress $!
+    #echo -en "$CONFIGANDO"
+    #sudo systemctl start mpd #&>> $INSTLOG & show_progress $!
 
-# touch ~/.config/mpd/socket
+    # touch ~/.config/mpd/socket
 
-# if [[ -f ~/.xinitrc ]]; then
-#     sed -i 's/\# export MPD_HOST\=\$HOME\/.config\/mpd\/socket/export MPD_HOST\=\$HOME\/.config\/mpd\/socket/g' $HOME/.xinitrc
-#     sed -i 's/# mpd --kill; mpd \&/mpd --kill; mpd \&/g' $HOME/.xinitrc
-# elif [[ -f ~/.config/hypr/hyprland.conf ]]; then
-#     sed -i '/exec-once = mpd --kill/s/^# //' $HOME/.config/hypr/hyprland.conf
-#     sed -i '/exec-once = export MPD_HOST/s/^# //' $HOME/.config/hypr/hyprland.conf
-# else
-#     echo "erro - nao foi encontrado o hyprland e xinitrc." &>> $INSTLOG
-# fi
+    # if [[ -f ~/.xinitrc ]]; then
+    #     sed -i 's/\# export MPD_HOST\=\$HOME\/.config\/mpd\/socket/export MPD_HOST\=\$HOME\/.config\/mpd\/socket/g' $HOME/.xinitrc
+    #     sed -i 's/# mpd --kill; mpd \&/mpd --kill; mpd \&/g' $HOME/.xinitrc
+    # elif [[ -f ~/.config/hypr/hyprland.conf ]]; then
+    #     sed -i '/exec-once = mpd --kill/s/^# //' $HOME/.config/hypr/hyprland.conf
+    #     sed -i '/exec-once = export MPD_HOST/s/^# //' $HOME/.config/hypr/hyprland.conf
+    # else
+    #     echo "erro - nao foi encontrado o hyprland e xinitrc." &>> $INSTLOG
+    # fi
 
-# export MPD_HOST=$HOME/.config/mpd/socket
-sudo rm /etc/mpd.conf
+    # export MPD_HOST=$HOME/.config/mpd/socket
+    sudo rm /etc/mpd.conf
 
-echo -e "$COK - MPD MPC NCMPCPP."
+    echo -e "$COK - MPD MPC NCMPCPP."
 
-echo -e "$CAT - REINICIE O SYSTEMA PARA DAR INICIO AO MPD."
+    echo -e "$CAT - REINICIE O SYSTEMA PARA DAR INICIO AO MPD."
 
- ;;
- n|N) echo -e "$CNT - NCMPCPP NAO SERÁ INSTALADO."
- ;;
- *) playermusica
- ;;
-esac
+    ;;
+  n | N)
+    echo -e "$CNT - NCMPCPP NAO SERÁ INSTALADO."
+    ;;
+  *)
+    playermusica
+    ;;
+  esac
 
 }
 
-rangerfm(){
- sleep 0.2
+rangerfm() {
+  sleep 0.2
 
-cat << RANGER-DESENHO
+  cat <<RANGER-DESENHO
                             █████
  ██████  ██████   ███████  ██░░░██  █████  ██████
 ░░██░░█ ░░░░░░██ ░░██░░░██░██  ░██ ██░░░██░░██░░█
@@ -717,75 +753,82 @@ cat << RANGER-DESENHO
 ░░░     ░░░░░░░░ ░░░   ░░  ░░░░░   ░░░░░░ ░░░
 RANGER-DESENHO
 
-echo ""
-read -rep "$(echo -e $CAC) - Quer uma gerenciador de arquivos para terminal? - (s,n) ... " RAG
+  echo ""
+  read -rep "$(echo -e $CAC) - Quer uma gerenciador de arquivos para terminal? - (s,n) ... " RAG
 
-case "$RAG" in
- s|S) FILEMANAGER='RANGER'
- ;;
- n|N) echo -e "$CNT - RANGER NAO SERÁ INSTALADO."
- ;;
- *) rangerfm
- ;;
-esac
+  case "$RAG" in
+  s | S)
+    FILEMANAGER='RANGER'
+    ;;
+  n | N)
+    echo -e "$CNT - RANGER NAO SERÁ INSTALADO."
+    ;;
+  *)
+    rangerfm
+    ;;
+  esac
 
-if [[ $FILEMANAGER = RANGER ]]; then
+  if [[ $FILEMANAGER = RANGER ]]; then
 
-echo -en "$ESPEPACMAN"
-install_software "ranger ueberzugpp ffmpegthumbnailer" &>> $INSTLOG & show_progress $!
+    echo -en "$ESPEPACMAN"
+    install_software "ranger ueberzugpp ffmpegthumbnailer" &>>$INSTLOG &
+    show_progress $!
 
     if [ ! -d ~/.config/ranger/ ]; then
-     mkdir --parents ~/.config/ranger/;
+      mkdir --parents ~/.config/ranger/
     fi
     if [ -f ~/.config/ranger/rc.conf ]; then
-     echo -e "$COK - ARQUIVO RC.CONF."
+      echo -e "$COK - ARQUIVO RC.CONF."
     else
-     echo -en "$CONFIGANDO - RC."
-     ranger --copy-config=rc &>> $INSTLOG & show_progress $!
-     sleep 0.2
-     sed -i 's/set preview_images false/set preview_images true/g' $HOME/.config/ranger/rc.conf
-     sleep 0.2
-     sed -i 's/set draw_borders none/set draw_borders both/g' $HOME/.config/ranger/rc.conf
-     sleep 0.2
-     sed -i 's/set preview_images_method w3m/set preview_images_method ueberzug/g' $HOME/.config/ranger/rc.conf
-     sleep 0.2
-     sed -i 's/#set preview_script ~\/.config\/ranger\/scope.sh/set preview_script ~\/.config\/ranger\/scope.sh/g' $HOME/.config/ranger/rc.conf
-     # sed -i 's/set sort natural/set sort ctime/g' ~/.config/ranger/rc.conf
+      echo -en "$CONFIGANDO - RC."
+      ranger --copy-config=rc &>>$INSTLOG &
+      show_progress $!
+      sleep 0.2
+      sed -i 's/set preview_images false/set preview_images true/g' $HOME/.config/ranger/rc.conf
+      sleep 0.2
+      sed -i 's/set draw_borders none/set draw_borders both/g' $HOME/.config/ranger/rc.conf
+      sleep 0.2
+      sed -i 's/set preview_images_method w3m/set preview_images_method ueberzug/g' $HOME/.config/ranger/rc.conf
+      sleep 0.2
+      sed -i 's/#set preview_script ~\/.config\/ranger\/scope.sh/set preview_script ~\/.config\/ranger\/scope.sh/g' $HOME/.config/ranger/rc.conf
+      # sed -i 's/set sort natural/set sort ctime/g' ~/.config/ranger/rc.conf
     fi
     if [ -f ~/.config/ranger/scope.sh ]; then
-     echo -e "$COK - ARQUIVO SCOPE.SH."
+      echo -e "$COK - ARQUIVO SCOPE.SH."
     else
-     echo -en "$CONFIGANDO - SCOPE."
-     ranger --copy-config=scope &>> $INSTLOG & show_progress $!
-     sleep 0.2
-     sed -i '113,116s/#//' $HOME/.config/ranger/scope.sh
-     sleep 0.2
-     sed -i '157,160s/#//' $HOME/.config/ranger/scope.sh
+      echo -en "$CONFIGANDO - SCOPE."
+      ranger --copy-config=scope &>>$INSTLOG &
+      show_progress $!
+      sleep 0.2
+      sed -i '113,116s/#//' $HOME/.config/ranger/scope.sh
+      sleep 0.2
+      sed -i '157,160s/#//' $HOME/.config/ranger/scope.sh
     fi
     if [ -f ~/.config/ranger/rifle.conf ]; then
-     echo -e "$COK - ARQUIVO RIFLE.CONF."
+      echo -e "$COK - ARQUIVO RIFLE.CONF."
     else
-     echo -en "$CONFIGANDO - RIFLE."
-     ranger --copy-config=rifle &>> $INSTLOG & show_progress $!
-     sed -i 's/mime ^audio|ogg$, terminal, has mplayer  = mplayer -- "$@"/mime ^audio|ogg$, terminal, has moc      = ncmpcpp -- "$@"/g' $HOME/.config/ranger/rifle.conf
-     sleep 0.2
-     sed -i '/label wallpaper, number 15, mime ^image, has feh, X = wal -i "$1"/d' $HOME/.config/ranger/rifle.conf
-     sleep 0.2
-     sed -i 's/label wallpaper, number 14, mime ^image, has feh, X = feh --bg-fill "$1"/label wallpaper, number 14, mime ^image, has feh, X = feh --bg-fill "$1"\nlabel wallpaper, number 15, mime ^image, has feh, X = wal -i "$1"/g' $HOME/.config/ranger/rifle.conf
+      echo -en "$CONFIGANDO - RIFLE."
+      ranger --copy-config=rifle &>>$INSTLOG &
+      show_progress $!
+      sed -i 's/mime ^audio|ogg$, terminal, has mplayer  = mplayer -- "$@"/mime ^audio|ogg$, terminal, has moc      = ncmpcpp -- "$@"/g' $HOME/.config/ranger/rifle.conf
+      sleep 0.2
+      sed -i '/label wallpaper, number 15, mime ^image, has feh, X = wal -i "$1"/d' $HOME/.config/ranger/rifle.conf
+      sleep 0.2
+      sed -i 's/label wallpaper, number 14, mime ^image, has feh, X = feh --bg-fill "$1"/label wallpaper, number 14, mime ^image, has feh, X = feh --bg-fill "$1"\nlabel wallpaper, number 15, mime ^image, has feh, X = wal -i "$1"/g' $HOME/.config/ranger/rifle.conf
     fi
 
     # ranger --version
     ranger_versao=$(ranger --version | grep ranger | cut -d: -f2 | sed s/^" "//g | tr a-z A-Z)
     echo -e "$COK - $ranger_versao INSTALADO."
 
-fi
+  fi
 
 }
 
-audio_config(){
- sleep 0.2
+audio_config() {
+  sleep 0.2
 
-cat <<AUDIOCONF
+  cat <<AUDIOCONF
                         ██ ██
                        ░██░░
   ██████   ██   ██     ░██ ██  ██████
@@ -795,63 +838,71 @@ cat <<AUDIOCONF
 ░░████████░░██████░░██████░██░░██████
  ░░░░░░░░  ░░░░░░  ░░░░░░ ░░  ░░░░░░
 AUDIOCONF
- echo ""
- read -rep "$(echo -e $CAC) - Qual controlador de audio?  PIPE$(echo -e $LETRA)W$(echo -e $RESETLETRA)IRE ou $(echo -e $LETRA)P$(echo -e $RESETLETRA)ULSEAUDIO - (w,p) ... " AUD
+  echo ""
+  read -rep "$(echo -e $CAC) - Qual controlador de audio?  PIPE$(echo -e $LETRA)W$(echo -e $RESETLETRA)IRE ou $(echo -e $LETRA)P$(echo -e $RESETLETRA)ULSEAUDIO - (w,p) ... " AUD
 
-case "$AUD" in
- w|W) AUDIOD='PIPEWIRE'
-  ;;
- p|P) AUDIOD='PULSEAUDIO'
-  ;;
- *) audio_config
-  ;;
-esac
+  case "$AUD" in
+  w | W)
+    AUDIOD='PIPEWIRE'
+    ;;
+  p | P)
+    AUDIOD='PULSEAUDIO'
+    ;;
+  *)
+    audio_config
+    ;;
+  esac
 
-if [ $AUDIOD = PIPEWIRE ]; then
-  echo -en "$ESPEPACMAN"
-  install_software "pipewire pipewire-alsa pipewire-audio pipewire-pulse wireplumber" &>> $INSTLOG & show_progress $!
-  # gst-plugin-pipewire
-  # helvum \
-  echo -e "$COK - $AUDIOD INSTALADO."
-  echo -e "$CAT - Use <wpctl status> para detectar en Sinks: o númeor ID da saída de áudío\nexemplo:\nwpctl status\nSinks:\n33. Áudio interno Estéreo analógico  [vol: 1.20]\n53. Ellesmere HDMI Audio [Radeon RX 470/480 / 570/580/590] Digital Stereo (HDMI 6)\nwpctl set-default 53" >> notas.txt
-elif [ $AUDIOD = PULSEAUDIO ]; then
-  echo -en "$ESPEPACMAN"
-  install_software "alsa-utils pulseaudio" &>> $INSTLOG & show_progress $!
-  # gst-plugins-{base,good,bad,ugly} \
-  # gst-libav
-  echo -e "$COK - $AUDIOD INSTALADO."
-fi
-
-}
-
-zshinstall(){
- sleep 0.2
-
-echo -en "$ESPEPACMAN - INSTALAÇAO DO ZSH."
-install_software "zsh zsh-completions" &>> $INSTLOG & show_progress $!
-
-echo -e "$COK - ZSH INSTALADO."
+  if [ $AUDIOD = PIPEWIRE ]; then
+    echo -en "$ESPEPACMAN"
+    install_software "pipewire pipewire-alsa pipewire-audio pipewire-pulse wireplumber" &>>$INSTLOG &
+    show_progress $!
+    # gst-plugin-pipewire
+    # helvum \
+    echo -e "$COK - $AUDIOD INSTALADO."
+    echo -e "$CAT - Use <wpctl status> para detectar en Sinks: o númeor ID da saída de áudío\nexemplo:\nwpctl status\nSinks:\n33. Áudio interno Estéreo analógico  [vol: 1.20]\n53. Ellesmere HDMI Audio [Radeon RX 470/480 / 570/580/590] Digital Stereo (HDMI 6)\nwpctl set-default 53" >>notas.txt
+  elif [ $AUDIOD = PULSEAUDIO ]; then
+    echo -en "$ESPEPACMAN"
+    install_software "alsa-utils pulseaudio" &>>$INSTLOG &
+    show_progress $!
+    # gst-plugins-{base,good,bad,ugly} \
+    # gst-libav
+    echo -e "$COK - $AUDIOD INSTALADO."
+  fi
 
 }
 
-fontes_doSistema(){
- sleep 0.2
+zshinstall() {
+  sleep 0.2
 
-# wqy-microhei (koreano), cjk (japones)
-echo -en "$ESPEPACMAN - INSTALAÇAO DAS FONTES DO SISTEMA."
-install_software "ttf-dejavu noto-fonts-emoji gnu-free-fonts wqy-microhei noto-fonts-cjk xorg-fonts-75dpi xorg-fonts-100dpi xorg-fonts-encodings ttf-jetbrains-mono-nerd" &>> $INSTLOG & show_progress $!
+  echo -en "$ESPEPACMAN - INSTALAÇAO DO ZSH."
+  install_software "zsh zsh-completions" &>>$INSTLOG &
+  show_progress $!
 
-if [ ! -f /usr/share/fonts/misc/siji.bdf ]; then
-echo -en "$ESPEPACMAN - INSTALAÇAO DA FONTE SIJI."
-install_software "siji-git" &>> $INSTLOG & show_progress $!
-fi
+  echo -e "$COK - ZSH INSTALADO."
 
 }
 
-navegador(){
- sleep 0.2
+fontes_doSistema() {
+  sleep 0.2
 
-cat <<NAVEGADOR-DESENHO
+  # wqy-microhei (koreano), cjk (japones)
+  echo -en "$ESPEPACMAN - INSTALAÇAO DAS FONTES DO SISTEMA."
+  install_software "ttf-dejavu noto-fonts-emoji gnu-free-fonts wqy-microhei noto-fonts-cjk xorg-fonts-75dpi xorg-fonts-100dpi xorg-fonts-encodings ttf-jetbrains-mono-nerd" &>>$INSTLOG &
+  show_progress $!
+
+  if [ ! -f /usr/share/fonts/misc/siji.bdf ]; then
+    echo -en "$ESPEPACMAN - INSTALAÇAO DA FONTE SIJI."
+    install_software "siji-git" &>>$INSTLOG &
+    show_progress $!
+  fi
+
+}
+
+navegador() {
+  sleep 0.2
+
+  cat <<NAVEGADOR-DESENHO
  ██
 ░██
 ░██      ██████  ██████  ███     ██  ██████  █████  ██████
@@ -862,158 +913,166 @@ cat <<NAVEGADOR-DESENHO
 ░░░░░   ░░░     ░░░░░░  ░░░    ░░░ ░░░░░░   ░░░░░░ ░░░
 NAVEGADOR-DESENHO
 
-echo ""
-read -rep "$(echo -e $CAC) - Qual navegador preferido? - $(echo -e $LETRA)Q$(echo -e $RESETLETRA)UTEBROWSER, $(echo -e $LETRA)F$(echo -e $RESETLETRA)IREFOX, $(echo -e $LETRA)A$(echo -e $RESETLETRA)mbos ou $(echo -e $LETRA)P$(echo -e $RESETLETRA)ular - (q,f,a,p) ... " BROWSER
+  echo ""
+  read -rep "$(echo -e $CAC) - Qual navegador preferido? - $(echo -e $LETRA)Q$(echo -e $RESETLETRA)UTEBROWSER, $(echo -e $LETRA)F$(echo -e $RESETLETRA)IREFOX, $(echo -e $LETRA)A$(echo -e $RESETLETRA)mbos ou $(echo -e $LETRA)P$(echo -e $RESETLETRA)ular - (q,f,a,p) ... " BROWSER
 
-case "$BROWSER" in
- q|Q) BROWq="qutebrowser"
- ;;
- f|F) BROWf="firefox"
- ;;
- a|A)
-      BROWq="qutebrowser"
-      BROWf="firefox"
- ;;
- p|P) echo -e "$CNT - NAO SERÁ INSTALADO NENHUM NAVEGADOR."
- ;;
- *) navegador
- ;;
-esac
+  case "$BROWSER" in
+  q | Q)
+    BROWq="qutebrowser"
+    ;;
+  f | F)
+    BROWf="firefox"
+    ;;
+  a | A)
+    BROWq="qutebrowser"
+    BROWf="firefox"
+    ;;
+  p | P)
+    echo -e "$CNT - NAO SERÁ INSTALADO NENHUM NAVEGADOR."
+    ;;
+  *)
+    navegador
+    ;;
+  esac
 
-if [[ $BROWq = "qutebrowser" ]]; then
-echo -en "$ESPEPACMAN"
-install_software "qutebrowser python-adblock" &>> $INSTLOG & show_progress $!
-echo -en "$CONFIGANDO"
-/usr/share/qutebrowser/scripts/dictcli.py install pt-BR &>> $INSTLOG & show_progress $!
+  if [[ $BROWq = "qutebrowser" ]]; then
+    echo -en "$ESPEPACMAN"
+    install_software "qutebrowser python-adblock" &>>$INSTLOG &
+    show_progress $!
+    echo -en "$CONFIGANDO"
+    /usr/share/qutebrowser/scripts/dictcli.py install pt-BR &>>$INSTLOG &
+    show_progress $!
 
- mkdir -p ~/.config/qutebrowser/;
- cp -r ./.config/qutebrowser/* ~/.config/qutebrowser/;
- chmod +x ~/.config/qutebrowser/greasemonkey/*
+    mkdir -p ~/.config/qutebrowser/
+    cp -r ./.config/qutebrowser/* ~/.config/qutebrowser/
+    chmod +x ~/.config/qutebrowser/greasemonkey/*
 
- echo -e "$COK - $BROWq INSTALADO."
-fi
+    echo -e "$COK - $BROWq INSTALADO."
+  fi
 
-if [[ $BROWf = "firefox" ]]; then
-echo -en "$ESPEPACMAN - INSTALAÇAO DO FIREFOX."
-install_software "firefox firefox-i18n-pt-br" &>> $INSTLOG & show_progress $!
+  if [[ $BROWf = "firefox" ]]; then
+    echo -en "$ESPEPACMAN - INSTALAÇAO DO FIREFOX."
+    install_software "firefox firefox-i18n-pt-br" &>>$INSTLOG &
+    show_progress $!
 
- echo -e "$COK - $BROWf INSTALADO."
-fi
-
-}
-
-copilador_config(){
- sleep 0.2
-
-# processador 
-ncore=`lscpu | grep "^CPU(s)" | head -n 1 | cut -d: -f2 | tr -d " "`
-
-echo -e "$CAT - CONGIRURANDO MAKEFLAGS PARA $ncore PROCESSADORES ATIVOS DURANTE A COMPILAÇÃO."
-sudo sed -i "s/#MAKEFLAGS=\"-j2\"/MAKEFLAGS=\"-j$ncore\"/g" /etc/makepkg.conf
-
-echo -e "$COK - [$ncore] PROCESSADORES."
+    echo -e "$COK - $BROWf INSTALADO."
+  fi
 
 }
 
-pastas_config(){
- sleep 0.2
+copilador_config() {
+  sleep 0.2
 
-if [[ -f /usr/bin/xdg-user-dirs-update ]]; then
-xdg-user-dirs-update
-fi
+  # processador
+  ncore=$(lscpu | grep "^CPU(s)" | head -n 1 | cut -d: -f2 | tr -d " ")
+
+  echo -e "$CAT - CONGIRURANDO MAKEFLAGS PARA $ncore PROCESSADORES ATIVOS DURANTE A COMPILAÇÃO."
+  sudo sed -i "s/#MAKEFLAGS=\"-j2\"/MAKEFLAGS=\"-j$ncore\"/g" /etc/makepkg.conf
+
+  echo -e "$COK - [$ncore] PROCESSADORES."
+
 }
 
-temas(){
- sleep 0.2
+pastas_config() {
+  sleep 0.2
 
-# gruvbox tema
-if [ ! -d ~/.themes ]; then
-echo -en "$CONFIGANDO - TEMA GRUVBOX."
-git clone https://github.com/jmattheis/gruvbox-dark-gtk ~/.themes/gruvbox-dark-gtk &>> $INSTLOG & show_progress $!
-# (git clone https://github.com/Fausto-Korpsvart/Gruvbox-GTK-Theme.git) && (./Gruvbox-GTK-Theme/themes/install.sh) &>> $INSTLOG & show_progress $!
-# (mkdir -p ~/.config/gtk-3.0/)
-# (cp -r ~/.themes/Gruvbox-Dark/gtk-3.0/* ~/.config/gtk-3.0/)
-else
- echo -e "$CWR - VOCÊ JÁ TEM O TEMA GRUVBOX-DARK-GTK."
-fi
-sleep 0.2
-if [ ! -d ~/.icons ]; then
-echo -en "$CONFIGANDO - TEMA DOS ICONES EM GRUVBOX."
-git clone https://github.com/jmattheis/gruvbox-dark-icons-gtk ~/.icons/gruvbox-dark-icons-gtk &>> $INSTLOG & show_progress $!
-else
- echo -e "$CWR - VOCÊ JÁ TEM O TEMA GRUVBOX-DARK-ICONS-GTK."
-fi
-if [ -d ~/.config/gtk-3.0 ]; then
- cp ./.config/gtk-3.0/* ~/.config/gtk-3.0/;
-else
- mkdir -p ~/.config/gtk-3.0/;
- cp ./.config/gtk-3.0/* ~/.config/gtk-3.0/;
-fi
-if [[ ! -d ~/.local/share/icons/Grubox-Plus-Dark ]]; then
+  if [[ -f /usr/bin/xdg-user-dirs-update ]]; then
+    xdg-user-dirs-update
+  fi
+}
+
+temas() {
+  sleep 0.2
+
+  # gruvbox tema
+  if [ ! -d ~/.themes ]; then
+    echo -en "$CONFIGANDO - TEMA GRUVBOX."
+    git clone https://github.com/jmattheis/gruvbox-dark-gtk ~/.themes/gruvbox-dark-gtk &>>$INSTLOG &
+    show_progress $!
+  # (git clone https://github.com/Fausto-Korpsvart/Gruvbox-GTK-Theme.git) && (./Gruvbox-GTK-Theme/themes/install.sh) &>> $INSTLOG & show_progress $!
+  # (mkdir -p ~/.config/gtk-3.0/)
+  # (cp -r ~/.themes/Gruvbox-Dark/gtk-3.0/* ~/.config/gtk-3.0/)
+  else
+    echo -e "$CWR - VOCÊ JÁ TEM O TEMA GRUVBOX-DARK-GTK."
+  fi
+  sleep 0.2
+  if [ ! -d ~/.icons ]; then
+    echo -en "$CONFIGANDO - TEMA DOS ICONES EM GRUVBOX."
+    git clone https://github.com/jmattheis/gruvbox-dark-icons-gtk ~/.icons/gruvbox-dark-icons-gtk &>>$INSTLOG &
+    show_progress $!
+  else
+    echo -e "$CWR - VOCÊ JÁ TEM O TEMA GRUVBOX-DARK-ICONS-GTK."
+  fi
+  if [ -d ~/.config/gtk-3.0 ]; then
+    cp ./.config/gtk-3.0/* ~/.config/gtk-3.0/
+  else
+    mkdir -p ~/.config/gtk-3.0/
+    cp ./.config/gtk-3.0/* ~/.config/gtk-3.0/
+  fi
+  if [[ ! -d ~/.local/share/icons/Grubox-Plus-Dark ]]; then
     rm -rf ~/.local/share/icons/Grubox-Plus-Dark
     git clone https://github.com/SylEleuth/gruvbox-plus-icon-pack.git ~/.local/share/icons/Grubox-Plus-Dark
-else
-    echo "" &>> /dev/null
-fi
-echo -e "$COK - TEMAS GRUVBOX GTK."
+  else
+    echo "" &>>/dev/null
+  fi
+  echo -e "$COK - TEMAS GRUVBOX GTK."
 
 }
 
-ohmyzsh(){
- sleep 0.2
+ohmyzsh() {
+  sleep 0.2
 
-if [[ ! -d ~/.oh-my-zsh ]]; then
- # sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  if [[ ! -d ~/.oh-my-zsh ]]; then
+    # sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
     sleep 0.2
     chsh -s $(which zsh)
     echo -e "$COK - OH-MY-ZSH."
-else
+  else
     echo -e "$CAT - JÁ EXISTE OH-MY-ZSH NO SISTEMA."
-fi
+  fi
 
 }
 
-alias_autopair(){
- sleep 0.2
+alias_autopair() {
+  sleep 0.2
 
-# zsh alias, autopair
-if [[ ! -f ~/.config/zsh/alias.zsh ]]; then
- mkdir --parents ~/.config/zsh/;
- cp ./.config/zsh/alias.zsh ~/.config/zsh/;
- echo -e "$COK - ZSH ALIAS."
-fi
+  # zsh alias, autopair
+  if [[ ! -f ~/.config/zsh/alias.zsh ]]; then
+    mkdir --parents ~/.config/zsh/
+    cp ./.config/zsh/alias.zsh ~/.config/zsh/
+    echo -e "$COK - ZSH ALIAS."
+  fi
 
-if [[ ! -f ~/.config/zsh/vim-mode.zsh ]]; then
- mkdir --parents  ~/.config/zsh/;
- cp ./.config/zsh/vim-mode.zsh ~/.config/zsh/;
- echo -e "$COK - PLUGIN ZSH VI-MODE."
-fi
+  if [[ ! -f ~/.config/zsh/vim-mode.zsh ]]; then
+    mkdir --parents ~/.config/zsh/
+    cp ./.config/zsh/vim-mode.zsh ~/.config/zsh/
+    echo -e "$COK - PLUGIN ZSH VI-MODE."
+  fi
 
-if [[ ! -f ~/.config/zsh/custom_extra_config.zsh ]]; then
- mkdir --parents  ~/.config/zsh/;
- cp ./.config/zsh/custom_extra_config.zsh ~/.config/zsh/;
- echo -e "$COK - PLUGIN ZSH EXTRAS."
-fi
+  if [[ ! -f ~/.config/zsh/custom_extra_config.zsh ]]; then
+    mkdir --parents ~/.config/zsh/
+    cp ./.config/zsh/custom_extra_config.zsh ~/.config/zsh/
+    echo -e "$COK - PLUGIN ZSH EXTRAS."
+  fi
 
+  sleep 0.2
 
-sleep 0.2
+  if [[ -f ~/.zshrc ]]; then
+    sed -i '/^\[\[ \!/d' $HOME/.zshrc
+    echo "[[ ! -f ~/.config/zsh/custom_extra_config.zsh ]] || source ~/.config/zsh/custom_extra_config.zsh" >>$HOME/.zshrc
+    sed -i '/(git)/s/git/git extract universalarchive systemd/' $HOME/.zshrc
+  fi
 
-if [[ -f ~/.zshrc ]]; then
-sed -i '/^\[\[ \!/d' $HOME/.zshrc
-echo "[[ ! -f ~/.config/zsh/custom_extra_config.zsh ]] || source ~/.config/zsh/custom_extra_config.zsh" >> $HOME/.zshrc
-sed -i '/(git)/s/git/git extract universalarchive systemd/' $HOME/.zshrc
-fi
-
-sleep 0.2
-echo -e "$COK - ZSH COM CONFIGURACAO EXTRA."
+  sleep 0.2
+  echo -e "$COK - ZSH COM CONFIGURACAO EXTRA."
 
 }
 
-editordeTexto(){
- sleep 0.2
+editordeTexto() {
+  sleep 0.2
 
-cat <<ASTRONVIM-DESENHO
+  cat <<ASTRONVIM-DESENHO
                      ██                                       ██
                     ░██                                      ░░
   ██████    ██████ ██████ ██████  ██████    ███████  ██    ██ ██ ██████████
@@ -1024,47 +1083,54 @@ cat <<ASTRONVIM-DESENHO
  ░░░░░░░░ ░░░░░░     ░░  ░░░     ░░░░░░    ░░░   ░░    ░░    ░░ ░░░  ░░  ░░
 ASTRONVIM-DESENHO
 
-echo ""
-echo -en "$ESPEPACMAN"
-install_software "neovim python-pynvim" &>> $INSTLOG & show_progress $!
+  echo ""
+  echo -en "$ESPEPACMAN"
+  install_software "neovim python-pynvim" &>>$INSTLOG &
+  show_progress $!
 
- if [[ ! -d ~/.config/nvim ]]; then
-  echo -en "$CONFIGANDO - ESTADO ORIGINAL."
-  git clone --depth 1 https://github.com/AstroNvim/template ~/.config/nvim &>> $INSTLOG & show_progress $!
-  rm -rf ~/.config/nvim/.git
-  echo -en "$CONFIGANDO - PERSONALIZAÇAO."
-  git clone https://github.com/quebravel/astronvim_config.git ~/.config/nvim/lua/user &>> $INSTLOG & show_progress $!
-  (nvim  --headless -c 'quitall')
- else
-     read -rep "$(echo -e $CAC) - Já existe um diretório nvim, você deseja reinstalar astronvim? - (s,n) ... " ASTRONV
-
-  case "$ASTRONV" in
-   s|S)
-    rm -rf ~/.config/nvim/;
-    echo -en "$CONFIGANDO"
-    git clone --depth 1 https://github.com/AstroNvim/template ~/.config/nvim &>> $INSTLOG & show_progress $!
+  if [[ ! -d ~/.config/nvim ]]; then
+    echo -en "$CONFIGANDO - ESTADO ORIGINAL."
+    git clone --depth 1 https://github.com/AstroNvim/template ~/.config/nvim &>>$INSTLOG &
+    show_progress $!
     rm -rf ~/.config/nvim/.git
-    echo -en "$CONFIGANDO"
-    git clone https://github.com/quebravel/astronvim_config.git ~/.config/nvim/lua/user &>> $INSTLOG & show_progress $!
-    (nvim  --headless -c 'quitall')
-   ;;
-   n|N) echo -e "$CNT - ASTRONVIM NAO SERÁ REINSTALADO."
-   ;;
-   *) editordeTexto
-   ;;
-  esac 
- fi
+    echo -en "$CONFIGANDO - PERSONALIZAÇAO."
+    git clone https://github.com/quebravel/astronvim_config.git ~/.config/nvim/lua/user &>>$INSTLOG &
+    show_progress $!
+    (nvim --headless -c 'quitall')
+  else
+    read -rep "$(echo -e $CAC) - Já existe um diretório nvim, você deseja reinstalar astronvim? - (s,n) ... " ASTRONV
 
- echo -e "$COK - ASTRONVIM INSTALADO."
+    case "$ASTRONV" in
+    s | S)
+      rm -rf ~/.config/nvim/
+      echo -en "$CONFIGANDO"
+      git clone --depth 1 https://github.com/AstroNvim/template ~/.config/nvim &>>$INSTLOG &
+      show_progress $!
+      rm -rf ~/.config/nvim/.git
+      echo -en "$CONFIGANDO"
+      git clone https://github.com/quebravel/astronvim_config.git ~/.config/nvim/lua/user &>>$INSTLOG &
+      show_progress $!
+      (nvim --headless -c 'quitall')
+      ;;
+    n | N)
+      echo -e "$CNT - ASTRONVIM NAO SERÁ REINSTALADO."
+      ;;
+    *)
+      editordeTexto
+      ;;
+    esac
+  fi
+
+  echo -e "$COK - ASTRONVIM INSTALADO."
 
 }
 
-layout_teclado(){
+layout_teclado() {
 
-if [[ $WM_WAYLAND = "hyprland" ]]; then
+  if [[ $WM_WAYLAND = "hyprland" ]]; then
     echo -e "$CNT - FOI INSTALADO O $WM_WAYLAND NAO SERÁ CONFIGURADO O TECLADO."
-else
-cat << TECLADO-DESENHO
+  else
+    cat <<TECLADO-DESENHO
  ██                      ██                                     ██
 ░██              ██   ██░██                                    ░██
 ░██  ██  █████  ░░██ ██ ░██       ██████   ██████   ██████     ░██
@@ -1079,22 +1145,23 @@ TECLADO-DESENHO
     read -rep "$(echo -e $CAC) - Qual o layout do seu teclado no xorg? - $(echo -e $LETRA)B$(echo -e $RESETLETRA)R-ABNT2 ou $(echo -e $LETRA)U$(echo -e $RESETLETRA)S-INTL - (b,u) ... " LAYOUTTECLADO
 
     case "$LAYOUTTECLADO" in
-        b|B)
-            sudo cp ./xorg_conf/31-keyboard-abnt2.conf /usr/share/X11/xorg.conf.d/
-            echo -e "$COK - TECLADO CONFIGURADO PARA BR-ABNT2."
-        ;;
-        u|U) 
-            sudo cp ./xorg_conf/30-keyboard-us-intl.conf /usr/share/X11/xorg.conf.d/
-            echo -e "$COK - TECLADO CONFIGURADO PARA US-INTL."
-        ;;
-        *) layout_teclado
-        ;;
+    b | B)
+      sudo cp ./xorg_conf/31-keyboard-abnt2.conf /usr/share/X11/xorg.conf.d/
+      echo -e "$COK - TECLADO CONFIGURADO PARA BR-ABNT2."
+      ;;
+    u | U)
+      sudo cp ./xorg_conf/30-keyboard-us-intl.conf /usr/share/X11/xorg.conf.d/
+      echo -e "$COK - TECLADO CONFIGURADO PARA US-INTL."
+      ;;
+    *)
+      layout_teclado
+      ;;
     esac
-fi
+  fi
 }
 
-finalizado(){
-cat << TERMINADO
+finalizado() {
+  cat <<TERMINADO
    ████ ██                     ██ ██                       ██
   ░██░ ░░                     ░██░░                       ░██
  ██████ ██ ███████   ██████   ░██ ██ ██████  ██████       ░██  ██████
