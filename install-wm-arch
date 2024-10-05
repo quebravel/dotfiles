@@ -172,8 +172,7 @@ DRIVERDESENHO
   # complemetos para os drivers
   if [ $DRI == "xf86-video-amdgpu" ]; then
     echo -en "$ESPEPACMAN - AMDGPU."
-    install_software_pacman "mesa-libgl mesa-vdpau libvdpau-va-gl vulkan-radeon" &>>$INSTLOG &
-    show_progress $! # driver open-source (melhor)
+    install_software_pacman "mesa-libgl mesa-vdpau libvdpau-va-gl vulkan-radeon" &>>$INSTLOG & show_progress $! # driver open-source (melhor)
     sudo cp ./xorg_conf/40-amdgpu.conf /usr/share/X11/xorg.conf.d/
   fi
   if [ $DRI == "xf86-video-intel" ]; then
