@@ -252,11 +252,9 @@ WINDOWMANAGER
   else
     # instalando window manger
     echo -en "$ESPEPACMAN - INSTALAÇAO DO $WMs."
-    install_software_pacman "$WMs $WMx $WMb" &>>$INSTLOG &
-    show_progress $!
+    install_software_pacman "$WMs $WMx $WMb" &>>$INSTLOG & show_progress $!
     echo -en "$ESPEPACMAN - INSTALAÇAO DO XORG."
-    install_software_pacman "xclip xdo mtools xdotool xsel feh xorg-xsetroot xorg-xset xorg-xrdb xorg-server xorg-xinit xorg-xinput libxinerama libxft nsxiv unclutter maim" &>>$INSTLOG &
-    show_progress $!
+    install_software_pacman "xclip xdo mtools xdotool xsel feh xorg-xsetroot xorg-xset xorg-xrdb xorg-server xorg-xinit xorg-xinput libxinerama libxft nsxiv unclutter maim" &>>$INSTLOG & show_progress $!
 
     # &>> $INSTLOG & show_progress $!
     echo -e "$COK - $WMs INSTALADO."
@@ -276,8 +274,7 @@ WINDOWMANAGER
   # AUR para hyprland
   if [[ $WM_WAYLAND = "hyprland" ]]; then
     echo -en "$ESPEPACMAN - INSTALAÇAO DE PROGRAMAS EXTRAS PARA WAYLAND."
-    install_software "grimblast-git rofi-wayland crow-translate rofi-calc imv" &>>$INSTLOG &
-    show_progress $!
+    install_software "grimblast-git rofi-wayland crow-translate rofi-calc imv" &>>$INSTLOG & show_progress $!
   # notify-send.sh
   # polkit-kde-agent
   fi
@@ -395,8 +392,7 @@ GERENCIADORAUR
   fi
 
   echo -en "$ESPEPACMAN - $HELPER."
-  install_software "alacritty exa mpv python-pynvim yt-dlp ntfs-3g xf86-input-evdev xf86-input-libinput zathura-pdf-poppler adwaita-icon-theme xcursor-vanilla-dmz-aa cmake xdg-user-dirs ffmpeg polkit gammastep man-pages man-db less" &>>$INSTLOG &
-  show_progress $!
+  install_software "alacritty exa mpv python-pynvim yt-dlp ntfs-3g xf86-input-evdev xf86-input-libinput zathura-pdf-poppler adwaita-icon-theme xcursor-vanilla-dmz-aa cmake xdg-user-dirs ffmpeg polkit gammastep man-pages man-db less" &>>$INSTLOG & show_progress $!
   # redshift \
   # nodejs \
   # herbe-git \
@@ -436,11 +432,9 @@ LAPTOP
   case $NOTEBOOK in
   s | S)
     echo -en "$ESPEPACMAN"
-    install_software "acpi acpid xf86-input-synaptics" &>>$INSTLOG &
-    show_progress $!
+    install_software "acpi acpid xf86-input-synaptics" &>>$INSTLOG & show_progress $!
     echo -en "$CONFIGANDO"
-    sudo systemctl enable acpid.service &>>$INSTLOG &
-    show_progress $!
+    sudo systemctl enable acpid.service &>>$INSTLOG & show_progress $!
     sudo cp ./xorg_conf/70-synaptics.conf /usr/share/X11/xorg.conf.d/
     if [[ $WMb = "polybar" ]]; then
       sed -i 's/FILE-6/#FILE-6/' $HOME/.config/bspwm/bspwmrc
@@ -618,8 +612,7 @@ LOGINLY
   case "$DMGR" in
   t | T)
     echo -en "$ESPEPACMAN - INSTALAÇAO DO TBSM."
-    install_software "tbsm" &>>$INSTLOG &
-    show_progress $!
+    install_software "tbsm" &>>$INSTLOG & show_progress $!
     echo "[[ $XDG_VTNR -le 2 ]] && tbsm" >~/.zlogin
     cp -r ./.config/tbsm/ ~/.config/
     echo -e "$COK - TBSM INSTALADO."
@@ -627,8 +620,7 @@ LOGINLY
   l | L)
 
     echo -en "$ESPEPACMAN - INSTALAÇAO DO LY."
-    install_software "ly-git cmatrix" &>>$INSTLOG &
-    show_progress $!
+    install_software "ly-git cmatrix" &>>$INSTLOG & show_progress $!
     # cominho do arquivo de configuração
     arquivo="/etc/ly/config.ini"
 
@@ -763,8 +755,7 @@ RANGER-DESENHO
   if [[ $FILEMANAGER = RANGER ]]; then
 
     echo -en "$ESPEPACMAN"
-    install_software "ranger ueberzugpp ffmpegthumbnailer" &>>$INSTLOG &
-    show_progress $!
+    install_software "ranger ueberzugpp ffmpegthumbnailer" &>>$INSTLOG & show_progress $!
 
     if [ ! -d ~/.config/ranger/ ]; then
       mkdir --parents ~/.config/ranger/
@@ -773,8 +764,7 @@ RANGER-DESENHO
       echo -e "$COK - ARQUIVO RC.CONF."
     else
       echo -en "$CONFIGANDO - RC."
-      ranger --copy-config=rc &>>$INSTLOG &
-      show_progress $!
+      ranger --copy-config=rc &>>$INSTLOG & show_progress $!
       sleep 0.2
       sed -i 's/set preview_images false/set preview_images true/g' $HOME/.config/ranger/rc.conf
       sleep 0.2
@@ -789,8 +779,7 @@ RANGER-DESENHO
       echo -e "$COK - ARQUIVO SCOPE.SH."
     else
       echo -en "$CONFIGANDO - SCOPE."
-      ranger --copy-config=scope &>>$INSTLOG &
-      show_progress $!
+      ranger --copy-config=scope &>>$INSTLOG & show_progress $!
       sleep 0.2
       sed -i '113,116s/#//' $HOME/.config/ranger/scope.sh
       sleep 0.2
@@ -800,8 +789,7 @@ RANGER-DESENHO
       echo -e "$COK - ARQUIVO RIFLE.CONF."
     else
       echo -en "$CONFIGANDO - RIFLE."
-      ranger --copy-config=rifle &>>$INSTLOG &
-      show_progress $!
+      ranger --copy-config=rifle &>>$INSTLOG & show_progress $!
       sed -i 's/mime ^audio|ogg$, terminal, has mplayer  = mplayer -- "$@"/mime ^audio|ogg$, terminal, has moc      = ncmpcpp -- "$@"/g' $HOME/.config/ranger/rifle.conf
       sleep 0.2
       sed -i '/label wallpaper, number 15, mime ^image, has feh, X = wal -i "$1"/d' $HOME/.config/ranger/rifle.conf
@@ -847,16 +835,14 @@ AUDIOCONF
 
   if [ $AUDIOD = PIPEWIRE ]; then
     echo -en "$ESPEPACMAN"
-    install_software "pipewire pipewire-alsa pipewire-audio pipewire-pulse wireplumber" &>>$INSTLOG &
-    show_progress $!
+    install_software "pipewire pipewire-alsa pipewire-audio pipewire-pulse wireplumber" &>>$INSTLOG & show_progress $!
     # gst-plugin-pipewire
     # helvum \
     echo -e "$COK - $AUDIOD INSTALADO."
     echo -e "$CAT - Use <wpctl status> para detectar en Sinks: o númeor ID da saída de áudío\nexemplo:\nwpctl status\nSinks:\n33. Áudio interno Estéreo analógico  [vol: 1.20]\n53. Ellesmere HDMI Audio [Radeon RX 470/480 / 570/580/590] Digital Stereo (HDMI 6)\nwpctl set-default 53" >>notas.txt
   elif [ $AUDIOD = PULSEAUDIO ]; then
     echo -en "$ESPEPACMAN"
-    install_software "alsa-utils pulseaudio" &>>$INSTLOG &
-    show_progress $!
+    install_software "alsa-utils pulseaudio" &>>$INSTLOG & show_progress $!
     # gst-plugins-{base,good,bad,ugly} \
     # gst-libav
     echo -e "$COK - $AUDIOD INSTALADO."
@@ -868,8 +854,7 @@ zshinstall() {
   sleep 0.2
 
   echo -en "$ESPEPACMAN - INSTALAÇAO DO ZSH."
-  install_software "zsh zsh-completions" &>>$INSTLOG &
-  show_progress $!
+  install_software "zsh zsh-completions" &>>$INSTLOG & show_progress $!
 
   echo -e "$COK - ZSH INSTALADO."
 
@@ -880,13 +865,11 @@ fontes_doSistema() {
 
   # wqy-microhei (koreano), cjk (japones)
   echo -en "$ESPEPACMAN - INSTALAÇAO DAS FONTES DO SISTEMA."
-  install_software "ttf-dejavu noto-fonts-emoji gnu-free-fonts wqy-microhei noto-fonts-cjk xorg-fonts-75dpi xorg-fonts-100dpi xorg-fonts-encodings ttf-jetbrains-mono-nerd" &>>$INSTLOG &
-  show_progress $!
+  install_software "ttf-dejavu noto-fonts-emoji gnu-free-fonts wqy-microhei noto-fonts-cjk xorg-fonts-75dpi xorg-fonts-100dpi xorg-fonts-encodings ttf-jetbrains-mono-nerd" &>>$INSTLOG & show_progress $!
 
   if [ ! -f /usr/share/fonts/misc/siji.bdf ]; then
     echo -en "$ESPEPACMAN - INSTALAÇAO DA FONTE SIJI."
-    install_software "siji-git" &>>$INSTLOG &
-    show_progress $!
+    install_software "siji-git" &>>$INSTLOG & show_progress $!
   fi
 
 }
@@ -929,11 +912,9 @@ NAVEGADOR-DESENHO
 
   if [[ $BROWq = "qutebrowser" ]]; then
     echo -en "$ESPEPACMAN"
-    install_software "qutebrowser python-adblock" &>>$INSTLOG &
-    show_progress $!
+    install_software "qutebrowser python-adblock" &>>$INSTLOG & show_progress $!
     echo -en "$CONFIGANDO"
-    /usr/share/qutebrowser/scripts/dictcli.py install pt-BR &>>$INSTLOG &
-    show_progress $!
+    /usr/share/qutebrowser/scripts/dictcli.py install pt-BR &>>$INSTLOG & show_progress $!
 
     mkdir -p ~/.config/qutebrowser/
     cp -r ./.config/qutebrowser/* ~/.config/qutebrowser/
@@ -944,8 +925,7 @@ NAVEGADOR-DESENHO
 
   if [[ $BROWf = "firefox" ]]; then
     echo -en "$ESPEPACMAN - INSTALAÇAO DO FIREFOX."
-    install_software "firefox firefox-i18n-pt-br" &>>$INSTLOG &
-    show_progress $!
+    install_software "firefox firefox-i18n-pt-br" &>>$INSTLOG & show_progress $!
 
     echo -e "$COK - $BROWf INSTALADO."
   fi
@@ -979,8 +959,7 @@ temas() {
   # gruvbox tema
   if [ ! -d ~/.themes ]; then
     echo -en "$CONFIGANDO - TEMA GRUVBOX."
-    git clone https://github.com/jmattheis/gruvbox-dark-gtk ~/.themes/gruvbox-dark-gtk &>>$INSTLOG &
-    show_progress $!
+    git clone https://github.com/jmattheis/gruvbox-dark-gtk ~/.themes/gruvbox-dark-gtk &>>$INSTLOG & show_progress $!
   # (git clone https://github.com/Fausto-Korpsvart/Gruvbox-GTK-Theme.git) && (./Gruvbox-GTK-Theme/themes/install.sh) &>> $INSTLOG & show_progress $!
   # (mkdir -p ~/.config/gtk-3.0/)
   # (cp -r ~/.themes/Gruvbox-Dark/gtk-3.0/* ~/.config/gtk-3.0/)
@@ -990,8 +969,7 @@ temas() {
   sleep 0.2
   if [ ! -d ~/.icons ]; then
     echo -en "$CONFIGANDO - TEMA DOS ICONES EM GRUVBOX."
-    git clone https://github.com/jmattheis/gruvbox-dark-icons-gtk ~/.icons/gruvbox-dark-icons-gtk &>>$INSTLOG &
-    show_progress $!
+    git clone https://github.com/jmattheis/gruvbox-dark-icons-gtk ~/.icons/gruvbox-dark-icons-gtk &>>$INSTLOG & show_progress $!
   else
     echo -e "$CWR - VOCÊ JÁ TEM O TEMA GRUVBOX-DARK-ICONS-GTK."
   fi
@@ -1077,17 +1055,14 @@ ASTRONVIM-DESENHO
 
   echo ""
   echo -en "$ESPEPACMAN"
-  install_software "neovim python-pynvim" &>>$INSTLOG &
-  show_progress $!
+  install_software "neovim python-pynvim" &>>$INSTLOG & show_progress $!
 
   if [[ ! -d ~/.config/nvim ]]; then
     echo -en "$CONFIGANDO - ESTADO ORIGINAL."
-    git clone --depth 1 https://github.com/AstroNvim/template ~/.config/nvim &>>$INSTLOG &
-    show_progress $!
+    git clone --depth 1 https://github.com/AstroNvim/template ~/.config/nvim &>>$INSTLOG & show_progress $!
     rm -rf ~/.config/nvim/.git
     echo -en "$CONFIGANDO - PERSONALIZAÇAO."
-    git clone https://github.com/quebravel/astronvim_config.git ~/.config/nvim/lua/user &>>$INSTLOG &
-    show_progress $!
+    git clone https://github.com/quebravel/astronvim_config.git ~/.config/nvim/lua/user &>>$INSTLOG & show_progress $!
     (nvim --headless -c 'quitall')
   else
     read -rep "$(echo -e $CAC) - Já existe um diretório nvim, você deseja reinstalar astronvim? - (s,n) ... " ASTRONV
@@ -1096,12 +1071,10 @@ ASTRONVIM-DESENHO
     s | S)
       rm -rf ~/.config/nvim/
       echo -en "$CONFIGANDO"
-      git clone --depth 1 https://github.com/AstroNvim/template ~/.config/nvim &>>$INSTLOG &
-      show_progress $!
+      git clone --depth 1 https://github.com/AstroNvim/template ~/.config/nvim &>>$INSTLOG & show_progress $!
       rm -rf ~/.config/nvim/.git
       echo -en "$CONFIGANDO"
-      git clone https://github.com/quebravel/astronvim_config.git ~/.config/nvim/lua/user &>>$INSTLOG &
-      show_progress $!
+      git clone https://github.com/quebravel/astronvim_config.git ~/.config/nvim/lua/user &>>$INSTLOG & show_progress $!
       (nvim --headless -c 'quitall')
       ;;
     n | N)
