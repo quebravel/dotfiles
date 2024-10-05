@@ -352,7 +352,7 @@ case $NUM in
         HELPER="yay"
         ;;
     *)
-        HELPER="paru"
+        HELPER="yay"
         ;;
 esac
 
