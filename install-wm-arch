@@ -824,7 +824,7 @@ PLAYMSC
     # fi
 
     # export MPD_HOST=$HOME/.config/mpd/socket
-    sudo rm -p /etc/mpd.conf
+    sudo rm -f /etc/mpd.conf
 
     echo -e "$COK - MPD MPC NCMPCPP."
 
