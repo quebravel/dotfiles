@@ -284,9 +284,9 @@ WINDOWMANAGER
     install_software_pacman "gnome gdm wl-clipboard seatd ttf-font-awesome" #&>> $INSTLOG
     sleep 0.2
     echo -en "$CONFIGANDO"
-    sudo systemctl enable seatd.service &>>$INSTLOG
+    sudo systemctl enable seatd &>>$INSTLOG
     sleep 0.2
-    sudo systemctl start seatd.service &>>$INSTLOG
+    sudo systemctl start seatd &>>$INSTLOG
     sleep 0.2
     sudo systemctl enable gdm &>>$INSTLOG
     echo -e "$COK - GNOME INSTALADO."
