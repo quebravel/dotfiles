@@ -1,4 +1,4 @@
-import = [
+general.import = [
 "~/.config/alacritty/themes/themes/tokyo-night.toml",
 "~/.config/alacritty/keybindings.toml",
 ]
