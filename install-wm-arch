@@ -297,11 +297,11 @@ WINDOWMANAGER
   fi
 
   # configurando tofi
-  if [[ -d ~/.config/tofi ]]; then
-    echo -e "$COK - TOFI JÁ CONFIGURADO."
-  else
-    cp -r ./.config/tofi ~/.config/
-  fi
+  # if [[ -d ~/.config/tofi ]]; then
+  #   echo -e "$COK - TOFI JÁ CONFIGURADO."
+  # else
+  #   cp -r ./.config/tofi ~/.config/
+  # fi
 
   # Configurações
   if [[ $WM_WAYLAND = "hyprland" ]]; then
