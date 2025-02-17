@@ -214,7 +214,7 @@ windowManger() {
 WINDOWMANAGER
 
   echo ""
-  read -rep "$(echo -e $CAC) - Qual gerenciador de janelas (window manager) vai ser desta vez? $(echo -e $LETRA)B$(echo -e $RESETLETRA)SPWM, $(echo -e $LETRA)X$(echo -e $RESETLETRA)MONAD, $(echo -e $LETRA)H$(echo -e $RESETLETRA)YPRLAND, $(echo -e $LETRA)G$(echo -e $RESETLETRA)NOME, $(echo -e $LETRA)P$(echo -e $RESETLETRA)ular - (b,x,h,g,p) ... " WME
+  read -rep "$(echo -e $CAC) - Qual gerenciador de janelas (window manager) vai ser desta vez? $(echo -e $LETRA)B$(echo -e $RESETLETRA)SPWM, $(echo -e $LETRA)X$(echo -e $RESETLETRA)MONAD, $(echo -e $LETRA)H$(echo -e $RESETLETRA)YPRLAND, $(echo -e $LETRA)G$(echo -e $RESETLETRA)NOME, $(echo -e $LETRA)K$(echo -e $RESETLETRA)DE, $(echo -e $LETRA)P$(echo -e $RESETLETRA)ular - (b,x,h,g,p) ... " WME
 
   case $WME in
   b | B)
@@ -235,6 +235,10 @@ WINDOWMANAGER
 
   g | G)
     ENVIRONMENT="gnome"
+    ;;
+
+  k | K)
+    ENVIRONMENTK="plasma"
     ;;
 
   p | P)
@@ -289,6 +293,19 @@ WINDOWMANAGER
     sudo systemctl start seatd &>>$INSTLOG
     sleep 0.2
     sudo systemctl enable gdm &>>$INSTLOG
+    echo -e "$COK - GNOME INSTALADO."
+  fi
+
+  if [[ $ENVIRONMENTK = "plama" ]]; then
+    echo -en "$ESPEPACMAN - INSTALAÇAO DO GNOME."
+    install_software_pacman "plasma-meta sddm wl-clipboard seatd ttf-font-awesome" #&>> $INSTLOG
+    sleep 0.2
+    echo -en "$CONFIGANDO"
+    sudo systemctl enable seatd &>>$INSTLOG
+    sleep 0.2
+    sudo systemctl start seatd &>>$INSTLOG
+    sleep 0.2
+    sudo systemctl enable sddm &>>$INSTLOG
     echo -e "$COK - GNOME INSTALADO."
   fi
 
