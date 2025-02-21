@@ -624,7 +624,7 @@ lyConfig() {
 ░░░ ░░
 LOGINLY
   echo ""
-  read -rep "$(echo -e $CAC) - Deseja instalar um Display Manager $(echo -e $LETRA)T$(echo -e $RESETLETRA)BSM ou $(echo -e $LETRA)L$(echo -e $RESETLETRA)Y? - (t,l,n) ... " DMGR
+  read -rep "$(echo -e $CAC) - Deseja instalar um Display Manager $(echo -e $LETRA)T$(echo -e $RESETLETRA)BSM ou $(echo -e $LETRA)L$(echo -e $RESETLETRA)Y ou $(echo -e $LETRA)G$(echo -e $RESETLETRA)REETD? - (t,l,g,n) ... " DMGR
 
   case "$DMGR" in
   t | T)
@@ -653,6 +653,14 @@ LOGINLY
     else
       echo -e "$CER - NÃO EXISTE O ARQUIVO DE CONFIGURACAO."
     fi
+    ;;
+  g | G)
+    echo -en "$ESPEPACMAN - INSTALAÇAO DO GREETD."
+    sudo pacman -S greetd greetd-tuigreet
+    sudo sed -i '0,/command/s//\# command/' /etc/greetd/config.toml
+    sudo sed -i '/# command/i\command \= \"tuigreet \-\-cmd Hyprland\"' /etc/greetd/config.toml
+    sudo systemctl enable greetd.service
+    echo -e "$COK - GREETD INSTALADO."
     ;;
   n | N)
     echo -e "$CNT - NAO TERÁ DISPLAY MANAGER."
