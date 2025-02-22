@@ -409,7 +409,7 @@ GERENCIADORAUR
   fi
 
   echo -en "$ESPEPACMAN - $HELPER."
-  install_software "alacritty exa mpv python-pynvim yt-dlp ntfs-3g xf86-input-evdev xf86-input-libinput zathura-pdf-poppler adwaita-icon-theme xcursor-vanilla-dmz-aa cmake xdg-user-dirs ffmpeg polkit gammastep man-pages man-db less" &>>$INSTLOG & show_progress $!
+  install_software "alacritty exa mpv python-pynvim yt-dlp ntfs-3g xf86-input-evdev xf86-input-libinput zathura-pdf-poppler adwaita-icon-theme xcursor-vanilla-dmz-aa cmake xdg-user-dirs ffmpeg polkit wl-gammarelay man-pages man-db less" &>>$INSTLOG & show_progress $!
   # redshift \
   # nodejs \
   # herbe-git \
