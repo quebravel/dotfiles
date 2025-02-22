@@ -364,3 +364,31 @@ tooltip label {
 #user {
     color: white;
 }
+#custom-wl-gammarelay-temperature {
+    background-color: @orange;
+    color: @text;
+    border-radius: 5px 5px 5px 5px;
+    padding: 0px 10px 0px 10px;
+    font-weight: normal;
+    margin-top: 3px;
+    margin-left: 3px;
+    margin-right: 3px;
+    margin-bottom: 3px;
+    min-width: 6px;
+}
+#custom-wl-gammarelay-temperature:hover {
+    background: @peach
+}
+#custom-wl-gammarelay-brightness {
+    background-color: @text;
+    color: @crust;
+    border-radius: 5px 5px 5px 5px;
+    padding: 0px 10px 0px 10px;
+    font-weight: normal;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    min-width: 6px;
+}
+#custom-wl-gammarelay-brightness:hover {
+    background: @peach
+}
