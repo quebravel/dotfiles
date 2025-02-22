@@ -14,7 +14,10 @@
                            "custom/separate",
                            "mpd",
                            "custom/separate",
-                           "network"
+                           "network",
+                           "custom/separate",
+                           "custom/wl-gammarelay-temperature",
+                           "custom/wl-gammarelay-brightness"
                            /*"hyprland/window"*/]
         , "modules-center": ["hyprland/workspaces"]
         , "modules-right": ["hyprland/submap",
@@ -344,7 +347,20 @@
     , "tooltip": true
     ,  "interval": 3600
 }
- 
+
+, "custom/wl-gammarelay-temperature": {
+      "format": " {}"
+    , "exec": "wl-gammarelay --subscribe Temperature"
+    , "on-scroll-up": "busctl --user -- call rs.wl-gammarelay / rs.wl.gammarelay UpdateTemperature n +100"
+    , "on-scroll-down": "busctl --user -- call rs.wl-gammarelay / rs.wl.gammarelay UpdateTemperature n -100"
+  }
+, "custom/wl-gammarelay-brightness": {
+    "format": " {}"
+    , "exec": "wl-gammarelay --subscribe Brightness"
+    , "on-scroll-up": "busctl --user -- call rs.wl-gammarelay / rs.wl.gammarelay UpdateBrightness d +0.02"
+    , "on-scroll-down": "busctl --user -- call rs.wl-gammarelay / rs.wl.gammarelay UpdateBrightness d -0.02"
+  }
+
 }
 
 # vim:ft=java
