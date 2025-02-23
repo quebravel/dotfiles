@@ -55,7 +55,6 @@ background-color: #FFFFFF;
     color: @blue;
     padding: 0px 10px; /*largura do modulo*/
     margin: 0px 0px; /*crece largura alem do radio*/
-
 }
 
 #workspaces button.active {
