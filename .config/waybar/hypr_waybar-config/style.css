@@ -74,12 +74,14 @@ background-color: #FFFFFF;
     color: @peach;
 }
 
-button:hover {
+button {
+    all: unset;
     background: transparent;
-    color: @peach;
+    border-radius: 0px;
 }
 
-button {
+button:hover {
+    all: unset;
 }
 
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
