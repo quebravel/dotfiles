@@ -345,7 +345,8 @@
     , "return-type": "json"
     , "format": "{}"
     , "tooltip": true
-    ,  "interval": 3600
+    , "interval": 3600
+    , "max-length": 10
 }
 
 , "custom/wl-gammarelay-temperature": {
