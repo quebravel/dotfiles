@@ -48,6 +48,7 @@ background-color: #FFFFFF;
 #workspaces {
     border-radius: 0px;
     background-color: transparent;
+    font-weight: bold;
 }
 
 #workspaces button {
