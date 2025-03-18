@@ -1,0 +1,7 @@
+[[1;37mATENCAO[0m] - Use <wpctl status> para detectar en Sinks: o númeor ID da saída de áudío
+exemplo:
+wpctl status
+Sinks:
+33. Áudio interno Estéreo analógico  [vol: 1.20]
+53. Ellesmere HDMI Audio [Radeon RX 470/480 / 570/580/590] Digital Stereo (HDMI 6)
+wpctl set-default 53
