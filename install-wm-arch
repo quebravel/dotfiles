@@ -375,21 +375,10 @@ gerenciardorAUR() {
 ░░████████░░██████░███
  ░░░░░░░░  ░░░░░░ ░░░
 GERENCIADORAUR
-  echo ""
-  read -rep "$(echo -e $CAC) - Qual é o ajudante AUR de sua escolha? Precisamos de um ajudante AUR é essencial!!! $(echo -e $LETRA)P$(echo -e $RESETLETRA)ARU ou $(echo -e $LETRA)Y$(echo -e $RESETLETRA)AY - (p,y) ... " NUM
 
-  case $NUM in
-  p | P)
-    HELPER="paru"
-    ;;
-  y | Y)
-    HELPER="yay"
-    ;;
-  *)
-    HELPER="yay"
-    ;;
-  esac
 
+
+  paru_install() {
   if [[ -e "/sbin/$HELPER" ]]; then
     echo -e "$COK - AJUDANTE AUR JÁ ESTA INSTALADO."
   elif [[ -d ~/.srcs/$HELPER ]]; then
@@ -402,6 +391,41 @@ GERENCIADORAUR
     (cd ~/.srcs/$HELPER/ && makepkg -si)
     echo -e "$COK - $HELPER INSTALADO."
   fi
+  }
+
+  yay_install() {
+  if [[ -e "/sbin/$HELPER" ]]; then
+    echo -e "$COK - AJUDANTE AUR JÁ ESTA INSTALADO."
+  elif [[ -d "~/.srcs/yay-bin" ]]; then
+    echo -e "$CNT - VOU INSTALAR O $HELPER AGORA PARA VOCÊ ANTES DE CONTINUAR."
+    (cd ~/.srcs/yay-bin/ && makepkg -si)
+    echo -e "$COK - $HELPER INSTALADO."
+  else
+    echo -e "$CNT - VOU INSTALAR O $HELPER AGORA PARA VOCÊ ANTES DE CONTINUAR."
+    git clone https://aur.archlinux.org/yay-bin.git ~/.srcs/yay-bin
+    (cd ~/.srcs/yay-bin/ && makepkg -si)
+    echo -e "$COK - $HELPER INSTALADO."
+  fi
+  }
+
+  echo ""
+  read -rep "$(echo -e $CAC) - Qual é o ajudante AUR de sua escolha? Precisamos de um ajudante AUR é essencial!!! $(echo -e $LETRA)P$(echo -e $RESETLETRA)ARU ou $(echo -e $LETRA)Y$(echo -e $RESETLETRA)AY - (p,y) ... " NUM
+
+  case $NUM in
+  p | P)
+    HELPER="paru"
+    paru_install
+    ;;
+  y | Y)
+    HELPER="yay"
+    yay_install
+    ;;
+  *)
+    HELPER="yay"
+    yay_install
+    ;;
+  esac
+
 
   if [[ $HELPER = "paru" ]]; then
     sudo sed -i 's/#BottomUp/BottomUp/g' /etc/paru.conf
@@ -1204,8 +1228,8 @@ ASTRONVIM-DESENHO
     git clone --depth 1 https://github.com/AstroNvim/template ~/.config/nvim &>>$INSTLOG & show_progress $!
     rm -rf ~/.config/nvim/.git
     echo -en "$CONFIGANDO - PERSONALIZAÇAO."
-    wget https://raw.githubusercontent.com/quebravel/astronvim_config/refs/heads/main/mappings.lua -q ~/.config/nvim/lua/plugins/ &>>$INSTLOG & show_progress $!
-    wget https://raw.githubusercontent.com/quebravel/astronvim_config/refs/heads/main/options.lua -q ~/.config/nvim/lua/plugins/ &>>$INSTLOG & show_progress $!
+    wget https://raw.githubusercontent.com/quebravel/astronvim_config/refs/heads/main/mappings.lua -q ~/.config/nvim/lua/plugins/
+    wget https://raw.githubusercontent.com/quebravel/astronvim_config/refs/heads/main/options.lua -q ~/.config/nvim/lua/plugins/
     (nvim --headless -c 'quitall')
   else
     read -rep "$(echo -e $CAC) - Já existe um diretório nvim, você deseja reinstalar astronvim? - (s,n) ... " ASTRONV
