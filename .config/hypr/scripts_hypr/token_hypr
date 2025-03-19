@@ -2,3 +2,6 @@
 
 # ‐p, ‐‐primary, ‐o, ‐‐paste‐once | cola só uma vez
 wl-copy -po < ~/token
+
+# super + shift + V
+# shift + FN + insert
