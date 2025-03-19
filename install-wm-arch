@@ -172,7 +172,7 @@ DRIVERDESENHO
   # complemetos para os drivers
   if [ $DRI == "xf86-video-amdgpu" ]; then
     echo -en "$ESPEPACMAN - AMDGPU."
-    install_software_pacman "mesa-libgl mesa-vdpau libvdpau-va-gl vulkan-radeon" &>>$INSTLOG & show_progress $! # driver open-source (melhor)
+    install_software_pacman "xf86-video-amdgpu mesa-libgl mesa-vdpau libvdpau-va-gl vulkan-radeon" &>>$INSTLOG & show_progress $! # driver open-source (melhor)
     sudo cp ./xorg_conf/40-amdgpu.conf /usr/share/X11/xorg.conf.d/
   fi
   if [ $DRI == "xf86-video-intel" ]; then
@@ -214,9 +214,13 @@ windowManger() {
 WINDOWMANAGER
 
   echo ""
-  read -rep "$(echo -e $CAC) - Qual gerenciador de janelas (window manager) vai ser desta vez? $(echo -e $LETRA)B$(echo -e $RESETLETRA)SPWM, $(echo -e $LETRA)X$(echo -e $RESETLETRA)MONAD, $(echo -e $LETRA)H$(echo -e $RESETLETRA)YPRLAND, $(echo -e $LETRA)G$(echo -e $RESETLETRA)NOME, $(echo -e $LETRA)K$(echo -e $RESETLETRA)DE, $(echo -e $LETRA)P$(echo -e $RESETLETRA)ular - (b,x,h,g,p) ... " WME
+  read -rep "$(echo -e $CAC) - Qual gerenciador de janelas (window manager) vai ser desta vez? $(echo -e $LETRA)A$(echo -e $RESETLETRA)WESOME, $(echo -e $LETRA)B$(echo -e $RESETLETRA)SPWM, $(echo -e $LETRA)X$(echo -e $RESETLETRA)MONAD, $(echo -e $LETRA)H$(echo -e $RESETLETRA)YPRLAND, $(echo -e $LETRA)G$(echo -e $RESETLETRA)NOME, $(echo -e $LETRA)K$(echo -e $RESETLETRA)DE, $(echo -e $LETRA)P$(echo -e $RESETLETRA)ular - (b,x,h,g,p) ... " WME
 
   case $WME in
+  a | A)
+    WMawesome="awesome"
+    ;;
+
   b | B)
     WMs="bspwm"
     WMx="sxhkd"
@@ -249,6 +253,19 @@ WINDOWMANAGER
     windowManger
     ;;
   esac
+
+  if [[ -z $WMawesome ]]; then
+    echo ""
+  else
+    # instalando window manger
+    echo -en "$ESPEPACMAN - INSTALAÇAO DO $WMawesome."
+    install_software_pacman "$WMawesome" &>>$INSTLOG & show_progress $!
+    echo -en "$ESPEPACMAN - INSTALAÇAO DO XORG."
+    install_software_pacman "alsa-utils xclip xdo mtools xdotool xsel feh xorg-xsetroot xorg-xset xorg-xrdb xorg-server xorg-xinit xorg-xinput libxinerama libxft nsxiv unclutter maim" &>>$INSTLOG & show_progress $!
+
+    # &>> $INSTLOG & show_progress $!
+    echo -e "$COK - $WMs INSTALADO."
+  fi
 
   # teste para saber se a variavel esta vazia
   if [[ -z $WMs ]]; then
@@ -355,12 +372,29 @@ WINDOWMANAGER
     echo -e "$COK - CONFIGURAÇÃO DO POLYBAR CONCLUIDA."
   fi
 
+  if [[ $WMawesome = "awesome" ]]; then
+    rm --recursive --force ~/.config/awesome/
+    git clone --recurse-submodules -j8 https://github.com/quebravel/awesome.git ~/.config/awesome/
+    git clone https://github.com/horst3180/arc-icon-theme --depth 1 ~/arc-icon-theme/
+    (cd ~/arc-icon-theme && ./autogen.sh --prefix=/usr && sudo make install)
+    (rm --recursive --force ~/arc-icon-theme/)
+    wget https://raw.githubusercontent.com/rxi/json.lua/refs/heads/master/json.lua -P ~/.config/awesome/
+  fi
+  
+  if [[ $WMawesome = "awesome" ]]; then
+    echo -e '#!/bin/bash\n\nuserresources=$HOME/.Xresources\nsysresources=/etc/X11/xinit/.Xresources\n\n# merge in defaults\n\nif [ -f $sysresources ]; then\n    xrdb -merge $sysresources\nfi\n\nif [ -f "$userresources" ]; then\n    xrdb -merge "$userresources"\nfi\n\n[ -f ~/.Xdefaults ] && xrdb -merge ~/.Xdefaults\n\nxsetroot -cursor_name left_ptr &\n\n# feh --bg-tile ~/Imagens/wallpaperz.png\n$HOME/.fehbg\n# $HOME/trigger_custom_refresh.sh &\n# wal -R\n\n# export MPD_HOST=$HOME/.config/mpd/socket\n# mpd --kill; mpd &\nunclutter --timeout 7 &\n\n# Set up an icon tray\n# trayer --edge top --align right --SetDockType true --SetPartialStrut true \ \n# --expand true --width 10 --transparent true --tint 0x5f5f5f --height 18 &\n\nif [ "$(command -v xset)" >/dev/null 2>&1 ];\nthen\n    #xset s off      	        #Disable screen saver blanking\n    #xset s 3600 3600 	        #Change blank time to 1 hour\n    #xset -dpms 	            #Turn off DPMS\n    xset s off -dpms 	        #Disable DPMS and prevent screen from blanking\n    #xset dpms force off 	    #Turn off screen immediately\n    #xset dpms force standby 	#Standby screen\n    #xset dpms force suspend 	#Suspend screen\nfi\n\n# numlockx &\n# pulseaudio -k\n# pulseaudio &\n\n# sxhkd &\n# exec bspwm\n\n# exec xmonad \nexec awesome\n\n#vim:ft=sh' >~/.xinitrc
+  fi
+
   if [[ $WMs = "bspwm" ]]; then
     echo -e '#!/bin/bash\n\nuserresources=$HOME/.Xresources\nsysresources=/etc/X11/xinit/.Xresources\n\n# merge in defaults\n\nif [ -f $sysresources ]; then\n    xrdb -merge $sysresources\nfi\n\nif [ -f "$userresources" ]; then\n    xrdb -merge "$userresources"\nfi\n\n[ -f ~/.Xdefaults ] && xrdb -merge ~/.Xdefaults\n\nxsetroot -cursor_name left_ptr &\n\n# feh --bg-tile ~/Imagens/wallpaperz.png\n$HOME/.fehbg\n# $HOME/trigger_custom_refresh.sh &\n# wal -R\n\n# export MPD_HOST=$HOME/.config/mpd/socket\n# mpd --kill; mpd &\nunclutter --timeout 7 &\n\n# Set up an icon tray\n# trayer --edge top --align right --SetDockType true --SetPartialStrut true \ \n# --expand true --width 10 --transparent true --tint 0x5f5f5f --height 18 &\n\nif [ "$(command -v xset)" >/dev/null 2>&1 ];\nthen\n    #xset s off      	        #Disable screen saver blanking\n    #xset s 3600 3600 	        #Change blank time to 1 hour\n    #xset -dpms 	            #Turn off DPMS\n    xset s off -dpms 	        #Disable DPMS and prevent screen from blanking\n    #xset dpms force off 	    #Turn off screen immediately\n    #xset dpms force standby 	#Standby screen\n    #xset dpms force suspend 	#Suspend screen\nfi\n\n# numlockx &\n# pulseaudio -k\n# pulseaudio &\n\nsxhkd &\nexec bspwm\n\n# exec xmonad\n\n#vim:ft=sh' >~/.xinitrc
   fi
 
   if [[ $WMs = "xmonad" ]]; then
     echo -e '#!/bin/bash\n\nuserresources=$HOME/.Xresources\nsysresources=/etc/X11/xinit/.Xresources\n\n# merge in defaults\n\nif [ -f $sysresources ]; then\n    xrdb -merge $sysresources\nfi\n\nif [ -f "$userresources" ]; then\n    xrdb -merge "$userresources"\nfi\n\n[ -f ~/.Xdefaults ] && xrdb -merge ~/.Xdefaults\n\nxsetroot -cursor_name left_ptr &\n\n# feh --bg-tile ~/Imagens/wallpaperz.png\n$HOME/.fehbg\n# $HOME/trigger_custom_refresh.sh &\n# wal -R\n\n# export MPD_HOST=$HOME/.config/mpd/socket\n# mpd --kill; mpd &\nunclutter --timeout 7 &\n\n# Set up an icon tray\n# trayer --edge top --align right --SetDockType true --SetPartialStrut true \ \n# --expand true --width 10 --transparent true --tint 0x5f5f5f --height 18 &\n\nif [ "$(command -v xset)" >/dev/null 2>&1 ];\nthen\n    #xset s off      	        #Disable screen saver blanking\n    #xset s 3600 3600 	        #Change blank time to 1 hour\n    #xset -dpms 	            #Turn off DPMS\n    xset s off -dpms 	        #Disable DPMS and prevent screen from blanking\n    #xset dpms force off 	    #Turn off screen immediately\n    #xset dpms force standby 	#Standby screen\n    #xset dpms force suspend 	#Suspend screen\nfi\n\n# numlockx &\n# pulseaudio -k\n# pulseaudio &\n\n# sxhkd &\n# exec bspwm\n\nexec xmonad\n\n#vim:ft=sh' >~/.xinitrc
+  fi
+
+  if [[ -f ~/.xinitrc ]]; then
+    chmod +x ~/.xinitrc
   fi
 
 } ### windowManger
