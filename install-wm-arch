@@ -1326,6 +1326,11 @@ TECLADO-DESENHO
   fi
 }
 
+dedsec() {
+  git clone --depth 1 https://github.com/VandalByte/dedsec-grub2-theme.git ~/dedsec-grub2-theme
+  (cd ~/dedsec-grub2-theme && sudo python3 dedsec-theme.py --install)
+}
+
 finalizado() {
   cat <<TERMINADO
    ████ ██                     ██ ██                       ██
@@ -1363,4 +1368,5 @@ ohmyzsh
 alias_autopair
 editordeTexto
 layout_teclado
+dedsec
 finalizado
