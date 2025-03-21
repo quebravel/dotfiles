@@ -275,7 +275,7 @@ WINDOWMANAGER
     echo -en "$ESPEPACMAN - INSTALAÇAO DO $WMs."
     install_software_pacman "$WMs $WMx $WMb" &>>$INSTLOG & show_progress $!
     echo -en "$ESPEPACMAN - INSTALAÇAO DO XORG."
-    install_software_pacman "xclip xdo mtools xdotool xsel feh xorg-xsetroot xorg-xset xorg-xrdb xorg-server xorg-xinit xorg-xinput libxinerama libxft nsxiv unclutter maim" &>>$INSTLOG & show_progress $!
+    install_software_pacman "alsa-utils xclip xdo mtools xdotool xsel feh xorg-xsetroot xorg-xset xorg-xrdb xorg-server xorg-xinit xorg-xinput libxinerama libxft nsxiv unclutter maim" &>>$INSTLOG & show_progress $!
 
     # &>> $INSTLOG & show_progress $!
     echo -e "$COK - $WMs INSTALADO."
@@ -379,6 +379,7 @@ WINDOWMANAGER
     (cd ~/arc-icon-theme && ./autogen.sh --prefix=/usr && sudo make install)
     (rm --recursive --force ~/arc-icon-theme/)
     wget https://raw.githubusercontent.com/rxi/json.lua/refs/heads/master/json.lua -P ~/.config/awesome/
+    cp ./.Xresources ~/
   fi
   
   if [[ $WMawesome = "awesome" ]]; then
@@ -716,8 +717,23 @@ LOGINLY
     echo -en "$ESPEPACMAN - INSTALAÇAO DO GREETD."
     sudo pacman -S greetd greetd-tuigreet
     sudo sed -i '0,/command/s//\# command/' /etc/greetd/config.toml
-    sudo sed -i '/# command/i\command \= \"tuigreet \-\-cmd Hyprland\"' /etc/greetd/config.toml
+
+    if [[ $WMawesome == "awesome" ]]; then
+      sudo sed -i '/# command/i\command \= \"tuigreet \-\-cmd startx\"' /etc/greetd/config.toml
+    elif [[ $WMs == "bspwm" ]]; then
+      sudo sed -i '/# command/i\command \= \"tuigreet \-\-cmd startx\"' /etc/greetd/config.toml
+    elif [[ $WMs == "xmonad" ]]; then
+      sudo sed -i '/# command/i\command \= \"tuigreet \-\-cmd startx\"' /etc/greetd/config.toml
+    elif [[ $WM_WAYLAND == "hyprland" ]]; then
+      sudo sed -i '/# command/i\command \= \"tuigreet \-\-cmd Hyprland\"' /etc/greetd/config.toml
+    elif [[ $ENVIRONMENT == "gnome" ]]; then
+      sudo sed -i '/# command/i\command \= \"tuigreet \-\-cmd startx\"' /etc/greetd/config.toml
+    elif [[ $ENVIRONMENTK == "plasma" ]]; then
+      sudo sed -i '/# command/i\command \= \"tuigreet \-\-cmd plasma\"' /etc/greetd/config.toml
+    fi
+
     sudo systemctl enable greetd.service
+
     echo -e "$COK - GREETD INSTALADO."
     ;;
   n | N)
