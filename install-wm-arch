@@ -263,6 +263,11 @@ WINDOWMANAGER
     echo -en "$ESPEPACMAN - INSTALAÇAO DO XORG."
     install_software_pacman "alsa-utils xclip xdo mtools xdotool xsel feh xorg-xsetroot xorg-xset xorg-xrdb xorg-server xorg-xinit xorg-xinput libxinerama libxft nsxiv unclutter maim" &>>$INSTLOG & show_progress $!
 
+    if ! pacman -Q alsa-utils xclip xdo mtools xdotool xsel feh xorg-xsetroot xorg-xset xorg-xrdb xorg-server xorg-xinit xorg-xinput libxinerama libxft nsxiv unclutter maim
+    then
+      sudo pacman -S --needed --noconfirm --noprogressbar alsa-utils xclip xdo mtools xdotool xsel feh xorg-xsetroot xorg-xset xorg-xrdb xorg-server xorg-xinit xorg-xinput libxinerama libxft nsxiv unclutter maim
+    fi
+
     # &>> $INSTLOG & show_progress $!
     echo -e "$COK - $WMs INSTALADO."
   fi
