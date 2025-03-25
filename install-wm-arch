@@ -791,7 +791,7 @@ PLAYMSC
     #music_directory    "~/music"
 
     sed -i '0,/#music_directory/s//music_directory/' ~/.config/mpd/mpd.conf
-    sed -i 's/~\/music/~\/Music/g' ~/.config/mpd/mpd.conf
+    sed -i 's/~\/music/~\/Músicas/g' ~/.config/mpd/mpd.conf
 
     #playlist_directory   "~/.mpd/playlists"
 
@@ -901,7 +901,7 @@ PLAYMSC
 
     #mpd_music_dir = ~/music
 
-    sed -i 's/#mpd_music_dir = ~\/music/mpd_music_dir = ~\/Music/g' ~/.config/ncmpcpp/config
+    sed -i 's/#mpd_music_dir = ~\/music/mpd_music_dir = ~\/Músicas/g' ~/.config/ncmpcpp/config
 
     #mpd_crossfade_time = 5
 
