@@ -61,6 +61,7 @@ zle -N zle-line-init
 echo -ne '\e[5 q' # Use beam shape cursor on startup.
 preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 
+# copy or paste wayland version
 function x11-clip-wrap-widgets() {
     # NB: Assume we are the first wrapper and that we only wrap native widgets
     # See zsh-autosuggestions.zsh for a more generic and more robust wrapper
@@ -89,6 +90,34 @@ function x11-clip-wrap-widgets() {
     done
 }
 
+# copy or paste xorg version
+# function x11-clip-wrap-widgets() {
+#     # NB: Assume we are the first wrapper and that we only wrap native widgets
+#     # See zsh-autosuggestions.zsh for a more generic and more robust wrapper
+#     local copy_or_paste=$1
+#     shift
+#
+#     for widget in $@; do
+#         # Ugh, zsh doesn't have closures
+#         if [[ $copy_or_paste == "copy" ]]; then
+#             eval "
+#             function _x11-clip-wrapped-$widget() {
+#                 zle .$widget
+#                 xclip -in -selection clipboard <<<\$CUTBUFFER
+#             }
+#             "
+#         else
+#             eval "
+#             function _x11-clip-wrapped-$widget() {
+#                 CUTBUFFER=\$(xclip -out -selection clipboard)
+#                 zle .$widget
+#             }
+#             "
+#         fi
+#
+#         zle -N $widget _x11-clip-wrapped-$widget
+#     done
+# }
 
 local copy_widgets=(
     vi-yank vi-yank-eol vi-delete vi-backward-kill-word vi-change-whole-line
