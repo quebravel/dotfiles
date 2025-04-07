@@ -15,6 +15,7 @@ alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 alias limpar='sudo pacman -Rs $(pacman -Qdtq)'
 alias i='imv -r .'
 alias m="man -P less"
+alias atualizar-data-hora='sudo date -s "$(wget --method=HEAD -qSO- --max-redirect=0 google.com 2>&1 | sed -n "s/^ *Date: *//p")"'
 
 # atalhos
 alias nzshrc="nvim ~/.zshrc && source ~/.zshrc"
