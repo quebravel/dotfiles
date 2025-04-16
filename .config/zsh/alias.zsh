@@ -27,6 +27,7 @@ alias nxmonad="nvim ~/.config/xmonad/xmonad.hs"
 alias nalacri="nvim ~/.config/alacritty/alacritty.toml"
 alias nwaybar='nvim ~/.config/waybar/config'
 alias nhypr="nvim ~/.config/hypr/hyprland.conf"
+alias nawesome="nvim ~/.config/awesome/{rc.lua,mytheme.lua}"
 
 # xbps
 # alias xi="sudo xbps-install -S"
