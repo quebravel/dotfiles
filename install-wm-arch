@@ -1284,9 +1284,11 @@ ASTRONVIM-DESENHO
     git clone --depth 1 https://github.com/AstroNvim/template ~/.config/nvim &>>$INSTLOG & show_progress $!
     rm -rf ~/.config/nvim/.git
     echo -en "$CONFIGANDO - PERSONALIZAÇAO."
+    sleep 1 # keybinds
     wget https://raw.githubusercontent.com/quebravel/astronvim_config/refs/heads/main/mappings.lua -q ~/.config/nvim/lua/plugins/
+    sleep 1 # options
     wget https://raw.githubusercontent.com/quebravel/astronvim_config/refs/heads/main/options.lua -q ~/.config/nvim/lua/plugins/
-    (nvim --headless -c 'quitall')
+    #(nvim --headless -c 'quitall')
   else
     read -rep "$(echo -e $CAC) - Já existe um diretório nvim, você deseja reinstalar astronvim? - (s,n) ... " ASTRONV
 
