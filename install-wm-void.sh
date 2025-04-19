@@ -4,7 +4,7 @@
 # fork script of https://github.com/SolDoesTech/HyprV4/blob/2cf439c27475a32fd00e816a1fde82a5804efe2a/set-hypr
 
 # cores letras de seleçao
-LETRA="\e[1;36m"
+LETRA="\e[1;32m"
 RESETLETRA="\e[0m"
 
 # cores
