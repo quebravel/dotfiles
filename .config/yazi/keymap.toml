@@ -1,6 +1,6 @@
 # A TOML linter such as https://taplo.tamasfe.dev/ can use this schema to validate your config.
 # If you encounter any issues, please make an issue at https://github.com/yazi-rs/schemas.
-"$schema" = "https://yazi-rs.github.io/schemas/keymap.json"
+# "$schema" = "https://yazi-rs.github.io/schemas/keymap.json"
 
 [manager]
 
@@ -124,8 +124,14 @@ keymap = [
 	{ on = [ "g", "c" ],       run = "cd ~/.config",     desc = "Go to the config directory" },
 	{ on = [ "g", "d" ],       run = "cd ~/Downloads",   desc = "Go to the downloads directory" },
 	{ on = [ "g", "<Space>" ], run = "cd --interactive", desc = "Go to a directory interactively" },
-	{ on = [ "g", "i" ], run = "shell --confirm  'imv $1'", desc = "Abrir com imv" },
-	{ on = [ "W" ], run = "shell --confirm  'swww img $1 --transition-type wipe --transition-angle 30'", desc = "Trocar wallpaper" },
+	{ on = [ "g", "m" ],       run = "cd /run/media/",   desc = "Vai para diretório de media" },
+	{ on = [ "g", "i" ],       run = "cd ~/Imagens/",    desc = "Vai para diretório de Imagens" },
+
+	# Execs
+	{ on = [ "e", "w" ], 			 run = "shell --confirm  'swww img $1 --transition-type wipe --transition-angle 30'", desc = "Executa swww" },
+	{ on = [ "e", "i" ], 			 run = "shell --confirm  'imv $1'", desc = "Executa imv" },
+	{ on = [ "e", "f", "f" ],	 run = "shell --confirm  'feh --bg-fill $1'", desc = "Executa feh --bg-fill" },
+	{ on = [ "e", "f", "e" ],	 run = "shell --confirm  'feh --bg-scale $1'", desc = "Executa feh --bg-scale" },
 
 	# Tabs
 	{ on = "t", run = "tab_create --current", desc = "Create a new tab with CWD" },
@@ -304,3 +310,4 @@ keymap = [
 	# Filtering
 	{ on = "f", run = "filter", desc = "Apply a filter for the help items" },
 ]
+
