@@ -117,7 +117,7 @@ EOL
 
   # install base-devel if not installed
   echo -en "$ESPEPACMAN"
-  install_software_pacman "base-devel wget git" &>>$INSTLOG & show_progress $!
+  install_software_pacman "base-devel wget git curl" &>>$INSTLOG & show_progress $!
 
 } ### inicio
 
@@ -1319,9 +1319,9 @@ ASTRONVIM-DESENHO
   fi
     echo -en "$CONFIGANDO - PERSONALIZAÇAO."
     sleep 1 # keybinds
-    wget https://raw.githubusercontent.com/quebravel/astronvim_config/refs/heads/main/mappings.lua -q ~/.config/nvim/lua/plugins/
+    curl https://raw.githubusercontent.com/quebravel/astronvim_config/refs/heads/main/mappings.lua -o ~/.config/nvim/lua/plugins/mappings.lua
     sleep 1 # options
-    wget https://raw.githubusercontent.com/quebravel/astronvim_config/refs/heads/main/options.lua -q ~/.config/nvim/lua/plugins/
+    curl https://raw.githubusercontent.com/quebravel/astronvim_config/refs/heads/main/options.lua -o ~/.config/nvim/lua/plugins/options.lua
 
   echo -e "$COK - ASTRONVIM INSTALADO."
 
