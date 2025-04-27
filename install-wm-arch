@@ -1294,7 +1294,7 @@ ASTRONVIM-DESENHO
   if [[ ! -d ~/.config/nvim ]]; then
     echo -en "$CONFIGANDO - ESTADO ORIGINAL."
     git clone --depth 1 https://github.com/AstroNvim/template ~/.config/nvim &>>$INSTLOG & show_progress $!
-    #rm -rf ~/.config/nvim/.git
+    rm -rf ~/.config/nvim/.git
     #(nvim --headless -c 'quitall')
   else
     read -rep "$(echo -e $CAC) - Já existe um diretório nvim, você deseja reinstalar astronvim? - (s,n) ... " ASTRONV
@@ -1305,9 +1305,7 @@ ASTRONVIM-DESENHO
       echo -en "$CONFIGANDO"
       git clone --depth 1 https://github.com/AstroNvim/template ~/.config/nvim &>>$INSTLOG & show_progress $!
       rm -rf ~/.config/nvim/.git
-      echo -en "$CONFIGANDO"
-      git clone https://github.com/quebravel/astronvim_config.git ~/.config/nvim/lua/user &>>$INSTLOG & show_progress $!
-      (nvim --headless -c 'quitall')
+      #(nvim --headless -c 'quitall')
       ;;
     n | N)
       echo -e "$CNT - ASTRONVIM NAO SERÁ REINSTALADO."
