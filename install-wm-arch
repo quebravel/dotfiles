@@ -50,7 +50,6 @@ install_software() {
 }
 install_software_pacman() {
   # instala pacotes com pacman
-  echo -en "$ESPEPACMAN"
   for PKGS in ${1}; do
     sudo pacman -S --noconfirm --needed "${PKGS}" &>>$INSTLOG & show_progress $!
   done
@@ -63,21 +62,21 @@ inicio() {
   clear
 
   cat <<EOL
-                          ██       Bem vindo!......................................
-                         ░██       Este instalador e configurador foi feito como um
-  ██████   ██████  █████ ░██       projeto pessoal para fazer uma instalação rapida
- ░░░░░░██ ░░██░░█ ██░░░██░██████   e  precisa  das  minhas configurações prediletas
-  ███████  ░██ ░ ░██  ░░ ░██░░░██  dos principais programas que utilizo em meu arch
- ██░░░░██  ░██   ░██   ██░██  ░██  linux.
-░░████████░███   ░░█████ ░██  ░██
- ░░░░░░░░ ░░░     ░░░░░  ░░   ░░   Por  favor  sinta-se  a  vontade para utilizar e
-                                   modificar  de  acordo  com  suas preferencias de
- ██       ██ ████     ████         configuração.
-░██      ░██░██░██   ██░██
-░██   █  ░██░██░░██ ██ ░██         Para utilizar este  script você deve esta logado
-░██  ███ ░██░██ ░░███  ░██         como  um usuario não  root  para que  as  pastas
-░██ ██░██░██░██  ░░█   ░██         sejas  enviadas  para o  local  correto.........
-░████ ░░████░██   ░    ░██
+                          ██       
+                         ░██       Bem vindo!......................................
+  ██████   ██████  █████ ░██       Este instalador e configurador foi feito como um
+ ░░░░░░██ ░░██░░█ ██░░░██░██████   projeto pessoal para fazer uma instalação rapida
+  ███████  ░██ ░ ░██  ░░ ░██░░░██  e  precisa  das  minhas configurações prediletas
+ ██░░░░██  ░██   ░██   ██░██  ░██  dos principais programas que utilizo em meu arch
+░░████████░███   ░░█████ ░██  ░██  linux.                                          
+ ░░░░░░░░ ░░░     ░░░░░  ░░   ░░                                                   
+                                   Por  favor  sinta-se  a  vontade para utilizar e
+ ██       ██ ████     ████         modificar  de  acordo  com  suas preferencias de
+░██      ░██░██░██   ██░██         configuração.                                   
+░██   █  ░██░██░░██ ██ ░██                                                         
+░██  ███ ░██░██ ░░███  ░██         Para utilizar este  script você deve esta logado
+░██ ██░██░██░██  ░░█   ░██         como  um usuario não  root  para que  as  pastas
+░████ ░░████░██   ░    ░██         sejas  enviadas  para o  local  correto.........
 ░██░   ░░░██░██        ░██
 ░░       ░░ ░░         ░░
 
@@ -1375,7 +1374,7 @@ extras() {
   sudo sh -c "echo nameserver 8.8.4.4 >> /etc/resolv.conf"
   sudo sh -c "chattr +i /etc/resolv.conf"
 
-    echo -e "$COK - CONFIGURADO."
+    echo -e "$COK - DNS CONFIGURADO."
 }
 
 finalizado() {
