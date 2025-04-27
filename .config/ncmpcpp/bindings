@@ -16,6 +16,11 @@ def_key "j"
 def_key "k"
     scroll_up
 
+def_key "f"
+  seek_forward
+def_key "b"
+  seek_backward
+
 def_key "ctrl-u"
     page_up
 #push_characters "kkkkkkkkkkkkkkk"
