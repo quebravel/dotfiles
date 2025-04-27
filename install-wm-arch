@@ -1354,8 +1354,16 @@ TECLADO-DESENHO
 }
 
 dedsec() {
-  git clone --depth 1 https://github.com/VandalByte/dedsec-grub2-theme.git ~/dedsec-grub2-theme
-  (cd ~/dedsec-grub2-theme && sudo python3 dedsec-theme.py --install)
+  if ! git clone --depth 1 https://github.com/VandalByte/dedsec-grub2-theme.git ~/dedsec-grub2-theme ; then
+    (cd ~/dedsec-grub2-theme && sudo python3 dedsec-theme.py --uninstall)
+    (cd ~/dedsec-grub2-theme && sudo python3 dedsec-theme.py --install)
+  else
+    rm -rf ~/dedsec-grub2-theme/
+    git clone --depth 1 https://github.com/VandalByte/dedsec-grub2-theme.git ~/dedsec-grub2-theme
+    (cd ~/dedsec-grub2-theme && sudo python3 dedsec-theme.py --install)
+  fi
+
+
 }
 
 extras() {
