@@ -721,7 +721,8 @@ LOGINLY
     ;;
   g | G)
     echo -en "$ESPEPACMAN - INSTALAÇAO DO GREETD."
-    sudo pacman -S greetd greetd-tuigreet
+    install_software_pacman "greetd greetd-tuigreet" &>>$INSTLOG & show_progress $!
+    install_software_pacman "greetd greetd-tuigreet" &>>$INSTLOG & show_progress $!
     sudo sed -i '0,/command/s//\# command/' /etc/greetd/config.toml
 
     if [[ $WMawesome == "awesome" ]]; then
@@ -738,7 +739,7 @@ LOGINLY
       sudo sed -i '/# command/i\command \= \"tuigreet \-\-cmd plasma\"' /etc/greetd/config.toml
     fi
 
-    sudo systemctl enable greetd.service
+    sudo systemctl enable greetd.service &>>$INSTLOG
 
     echo -e "$COK - GREETD INSTALADO."
     ;;
@@ -960,11 +961,14 @@ rangerfm() {
 RANGER-DESENHO
 
   echo ""
-  read -rep "$(echo -e $CAC) - Quer uma gerenciador de arquivos para terminal? - (s,n) ... " RAG
+  read -rep "$(echo -e $CAC) - Qual gerenciador de arquivos para terminal? $(echo -e $LETRA)R$(echo -e $RESETLETRA)ANGER, $(echo -e $LETRA)Y$(echo -e $RESETLETRA)AZI - (r,y,n) ... " RAG
 
   case "$RAG" in
   s | S)
     FILEMANAGER='RANGER'
+    ;;
+  y | Y)
+    FILEMANAGER='YAZI'
     ;;
   n | N)
     echo -e "$CNT - RANGER NAO SERÁ INSTALADO."
@@ -1024,6 +1028,12 @@ RANGER-DESENHO
     echo -e "$COK - $ranger_versao INSTALADO."
 
   fi
+if [[ $FILEMANAGER = YAZI ]]; then
+  install_software_pacman "yazi ffmpeg 7zip jq poppler fd ripgrep zoxide imagemagick" &>>$INSTLOG & show_progress $!
+  cp --recursive --force ./.config/yazi ~/.config/
+else
+  echo ""
+fi
 
 }
 
