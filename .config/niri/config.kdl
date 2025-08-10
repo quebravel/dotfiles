@@ -203,7 +203,7 @@ layout {
     // You can enable drop shadows for windows.
     shadow {
         // Uncomment the next line to enable shadows.
-        // on
+        on
 
         // By default, the shadow draws only around its window, and not behind it.
         // Uncomment this setting to make the shadow draw behind its window.
@@ -234,7 +234,7 @@ layout {
         offset x=0 y=5
 
         // You can also change the shadow color and opacity.
-        color "#0007"
+        color "#121212"
     }
 
     // Struts shrink the area occupied by windows, similarly to layer-shell panels.
@@ -257,6 +257,7 @@ layout {
 
 // This line starts waybar, a commonly used bar for Wayland compositors.
 spawn-at-startup "waybar"
+spawn-at-startup "swaybg -m fill -i ~/Imagens/frieren.png"
 
 // Uncomment this line to ask the clients to omit their client-side decorations if possible.
 // If the client will specifically ask for CSD, the request will be honored.
