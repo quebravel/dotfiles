@@ -62,6 +62,7 @@ pdf_zathura = [
 	]
 feh_open = [
 	{ run = 'feh --zoom 40 --scale-down "$1"', desc = "feh", block = true, for = "unix" },
+ 	{ run = 'imv . "$1"', desc = "imv", block = true, for = "unix" },
 	]
 
 [open]
