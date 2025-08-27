@@ -37,6 +37,15 @@ paru-aur(){
 if [[ -e "/usr/bin/yay" ]]; then yay-aur ; fi
 if [[ -e "/usr/bin/paru" ]]; then paru-aur ; fi
 
+# yazi
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		builtin cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
 
 # if [ -z "${WAYLAND_DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
 #     dbus-run-session Hyprland
