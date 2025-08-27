@@ -180,7 +180,12 @@ windowManger() {
 WINDOWMANAGER
 
   echo ""
-  read -rep "$(echo -e $CAC) - Qual gerenciador de janelas (window manager) vai ser desta vez? $(echo -e $LETRA)A$(echo -e $RESETLETRA)WESOME, $(echo -e $LETRA)B$(echo -e $RESETLETRA)SPWM, $(echo -e $LETRA)X$(echo -e $RESETLETRA)MONAD, $(echo -e $LETRA)P$(echo -e $RESETLETRA)ular - (b,x,h,p) ... " WME
+  read -rep "$(echo -e $CAC) - Qual gerenciador de janelas (window manager) vai ser desta vez? 
+  $(echo -e $LETRA)A$(echo -e $RESETLETRA)WESOME, 
+  $(echo -e $LETRA)B$(echo -e $RESETLETRA)SPWM, 
+  $(echo -e $LETRA)X$(echo -e $RESETLETRA)MONAD,
+  $(echo -e $LETRA)N$(echo -e $RESETLETRA)IRI,
+  $(echo -e $LETRA)P$(echo -e $RESETLETRA)ular - (b,x,h,n,p) ... " WME
 
   case $WME in
   a | A)
@@ -199,6 +204,10 @@ WINDOWMANAGER
     WMb="xmobar"
 
     ;;
+
+  n | N)
+    WMs="niri"
+    WMb="Waybar"
 
   p | P)
     echo ""
@@ -261,6 +270,25 @@ WINDOWMANAGER
     echo ""
   fi
 
+  # niri
+  if [[ $WMs == "niri" ]]; then
+    # instalando window manger xmonad
+    echo -en "$ESPEPACMAN - INSTALAÇAO DO $WMs."
+    install_software_xbps "niri Waybar wl-clipboard seatd imv yazi kitty fuzzel" &>>$INSTLOG & show_progress $!
+
+    cabal install --lib xmonad xmonad-contrib X11
+    cabal install xmonad 
+
+    echo -en "$ESPEPACMAN - INSTALAÇAO DO XORG."
+    install_software_xbps "alsa-utils xclip xdo mtools xdotool xsel feh xorg-xsetroot xorg-xset xorg-xrdb xorg-minimal libxinerama libxft nsxiv unclutter maim" &>>$INSTLOG & show_progress $!
+
+    # &>> $INSTLOG & show_progress $!
+    echo -e "$COK - $WMs INSTALADO."
+  else
+    echo ""
+  fi
+
+  # configurações
   if [[ -z $WMs ]]; then
     echo ""
   elif [[ -d ~/.config/$WMs ]]; then
@@ -284,6 +312,12 @@ WINDOWMANAGER
     cp --recursive ./.config/polybar/* ~/.config/polybar/
     echo -e "$COK - CONFIGURAÇÃO DO POLYBAR CONCLUIDA."
   fi
+  if [[ $WMb = "Waybar" ]]; then
+    rm --recursive --force ~/.config/waybar
+    mkdir -p ~/.config/waybar/
+    cp --recursive ./.config/waybar/* ~/.config/waybar/
+    echo -e "$COK - CONFIGURAÇÃO DO POLYBAR CONCLUIDA."
+  fi
 
   if [[ $WMawesome = "awesome" ]]; then
     rm --recursive --force ~/.config/awesome/
@@ -295,6 +329,7 @@ WINDOWMANAGER
     cp ./.Xresources ~/
     cp --recursive ./.config/picom/ ~/.config/
   fi
+
   
   if [[ $WMawesome = "awesome" ]]; then
     echo -e '#!/bin/bash\n\n[ -f ~/.Xresources ] && xrdb -merge ~/.Xresources\n\nxsetroot -cursor_name left_ptr &\n\n# feh --bg-tile ~/Imagens/wallpaperz.png\n# $HOME/.fehbg\n# $HOME/trigger_custom_refresh.sh &\n# wal -R\n\n# export MPD_HOST=$HOME/.config/mpd/socket\n# mpd --kill; mpd &\n# unclutter --timeout 7 &\n\n# Set up an icon tray\n# trayer --edge top --align right --SetDockType true --SetPartialStrut true \ \n# --expand true --width 10 --transparent true --tint 0x5f5f5f --height 18 &\n\nif [ "$(command -v xset)" >/dev/null 2>&1 ];\nthen\n    #xset s off      	        #Disable screen saver blanking\n    #xset s 3600 3600 	        #Change blank time to 1 hour\n    #xset -dpms 	            #Turn off DPMS\n    xset s off -dpms 	        #Disable DPMS and prevent screen from blanking\n    #xset dpms force off 	    #Turn off screen immediately\n    #xset dpms force standby 	#Standby screen\n    #xset dpms force suspend 	#Suspend screen\nfi\n\n# numlockx &\n# pulseaudio -k\n# pulseaudio &\n\nexec awesome\n\n#vim:ft=sh' > ~/.xinitrc
