@@ -19,6 +19,12 @@ input type:keyboard {
     xkb_variant intl
 }
 
+input type:touchpad {
+    dwt enabled
+    tap enabled
+    middle_emulation enabled
+}
+
 seat seat0 xcursor_theme Adwaita 24
 
 # Start programs
