@@ -1,6 +1,6 @@
 #! /bin/sh
 
-chosen=$(printf "  Desligar\n  Reiniciar\n󱂅 󰗽 Log Out" | fuzzel -d)
+chosen=$(printf "  Desligar\n  Reiniciar\n󱂅 󰗽 Log Out" | fuzzel -d --placeholder=" Sair")
 
 case "$chosen" in
 	"  Desligar") poweroff ;;
