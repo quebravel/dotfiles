@@ -50,12 +50,12 @@ alias nawesome="nvim ~/.config/awesome/{rc.lua,mytheme.lua}"
 # alias pss="paru -Ss"
 
 # Changing "ls" to "exa"
-alias la='exa -la --color-scale --color=always --group-directories-first --icons --git --header' # my preferred listing
-alias lau='exa -la --color-scale --color=always --group-directories-first --sort=modified --icons --git --header' # my preferred listing
-alias ls='exa -a --color-scale --color=always --group-directories-first --icons'  # all files and dirs
-alias ll='exa -l --color-scale --color=always --group-directories-first --icons'  # long format
-alias lt='exa -aT --color-scale --color=always --group-directories-first --icons' # tree listing
-alias l.='exa -a --color-scale | egrep "^\."'
+alias la='eza -la --color-scale --color=always --group-directories-first --icons=always --git --header' # my preferred listing
+alias lau='eza -la --color-scale --color=always --group-directories-first --sort=modified --icons=always --git --header' # my preferred listing
+alias ls='eza -a --color-scale --color=always --group-directories-first --icons=always'  # all files and dirs
+alias ll='eza -l --color-scale --color=always --group-directories-first --icons=always'  # long format
+alias lt='eza -aT --color-scale --color=always --group-directories-first --icons=always' # tree listing
+alias l.='eza -a --color-scale | egrep "^\."'
 
 # youtube-dl
 alias yta-best="yt-dlp --extract-audio --audio-format best "
