@@ -47,14 +47,14 @@ inicio() {
 
  cat <<EOL
 
-        ██                    ██              ██  ██                                         ██      ██
-░       ░                    ░██             ░██ ░██                                        ░░      ░██
-        ██ ███████   ██████ ██████  ██████   ░██ ░██    ██████  ███████    ██    ██  ██████  ██     ░██
-░       ██░░██░░░██ ██░░░░ ░░░██░  ░░░░░░██  ░██ ░██   ██░░░░██░░██░░░██  ░██   ░██ ██░░░░██░██  ██████
-░       ██ ░██  ░██░░█████   ░██    ███████  ░██ ░██  ░██   ░██ ░██  ░██  ░░██ ░██ ░██   ░██░██ ██░░░██
-░       ██ ░██  ░██ ░░░░░██  ░██   ██░░░░██  ░██ ░██  ░██   ░██ ░██  ░██   ░░████  ░██   ░██░██░██  ░██
-░       ██ ███  ░██ ██████   ░░██ ░░████████ ███ ███  ░░██████  ███  ░██    ░░██   ░░██████ ░██░░██████
-░       ░ ░░░   ░░ ░░░░░░     ░░   ░░░░░░░░ ░░░ ░░░    ░░░░░░  ░░░   ░░      ░░     ░░░░░░  ░░  ░░░░░░
+      ██                    ██              ██  ██                                         ██      ██
+     ░░                    ░██             ░██ ░██                                        ░░      ░██
+      ██ ███████   ██████ ██████  ██████   ░██ ░██    ██████  ███████    ██    ██  ██████  ██     ░██
+     ░██░░██░░░██ ██░░░░ ░░░██░  ░░░░░░██  ░██ ░██   ██░░░░██░░██░░░██  ░██   ░██ ██░░░░██░██  ██████
+     ░██ ░██  ░██░░█████   ░██    ███████  ░██ ░██  ░██   ░██ ░██  ░██  ░░██ ░██ ░██   ░██░██ ██░░░██
+     ░██ ░██  ░██ ░░░░░██  ░██   ██░░░░██  ░██ ░██  ░██   ░██ ░██  ░██   ░░████  ░██   ░██░██░██  ░██
+     ░██ ███  ░██ ██████   ░░██ ░░████████ ███ ███  ░░██████  ███  ░██    ░░██   ░░██████ ░██░░██████
+     ░░ ░░░   ░░ ░░░░░░     ░░   ░░░░░░░░ ░░░ ░░░    ░░░░░░  ░░░   ░░      ░░     ░░░░░░  ░░  ░░░░░░
 
                             Bem vindo!......................................
                             Este instalador e configurador foi feito como um
@@ -88,19 +88,20 @@ EOL
   esac
 
   # Default past github dotfiles
-  # GITFILES="dotfiles-conf"
+  # GITFILES="dotfiles"
 
-  # does full system update
+  # atualizar repositório e pacotes.
   echo -e "$CAC - FAZENDO UMA ATUALIZAÇÃO DO SISTEMA, PODE ACONTECER QUE AS COISAS QUEBREM SE NÃO FOR A VERSÃO MAIS RECENTE."
   echo -e $ESPEPACMAN
-  if ! sudo  xbps-install -Sy; then
+  if ! sudo xbps-install -Syu; then
     echo -e "$CER - ERRO NA ATUALIZAÇAO."
   fi
 
-  # install base-devel if not installed
+  # instalar base-devel.
   echo -en "$ESPEPACMAN"
-  install_software_xbps "base-devel wget git void-repo-nonfree void-repo-multilib void-repo-multilib-nonfree" &>>$INSTLOG & show_progress $!
-
+  install_software_xbps "base-devel wget curl git void-repo-nonfree void-repo-multilib void-repo-multilib-nonfree" #&>>$INSTLOG & show_progress $!
+  # atualizar repositório nonfree, multilib e multilib-nonfree.
+  sudo xbps-install -Syu
 } ### fim inicio
 
 driveVideo() {
@@ -148,13 +149,22 @@ DRIVERDESENHO
   # complemetos para os drivers
   if [ $DRI == "xf86-video-amdgpu" ]; then
     echo -en "$ESPEPACMAN - AMDGPU."
-    install_software_xbps "xf86-video-amdgpu mesa mesa-32bit mesa-vdpau libvdpau-va-gl mesa-vulkan-radeon mesa-vulkan-radeon-32bit" &>>$INSTLOG & show_progress $! # driver open-source (melhor)
-    sudo cp ./xorg_conf/40-amdgpu.conf /usr/share/X11/xorg.conf.d/
+    # drivers 64bits
+    install_software_xbps "linux-firmware-amd mesa-dri vulkan-loader amdvlk xf86-video-amdgpu mesa-vaapi mesa-vdpau libvdpau-va-gl" #&>>$INSTLOG & show_progress $! # para placas AMD mais antigas intalar xf86-video-radeon, mesa-vulkan-radeon
+
+    # drivers 32bits 
+    install_software_xbps "mesa-dri-32bit vulkan-loader-32bit amdvlk-32bit mesa-vaapi-32bit mesa-vdpau-32bit libvdpau-va-gl-32bit" #&>>$INSTLOG & show_progress $! # para placas AMD mais antigas intalar xf86-video-radeon-32bit, mesa-vulkan-radeon-32bit
+
+    # sudo cp ./xorg_conf/40-amdgpu.conf /usr/share/X11/xorg.conf.d/
   fi
   if [ $DRI == "xf86-video-intel" ]; then
     echo -en "$ESPEPACMAN - INTEL."
-    install_software_xbps "mesa-libgallium mesa-libgallium-32bit libvdpau-va-gl mesa mesa-vulkan-intel mesa-32bit mesa-vulkan-intel-32bit" &>>$INSTLOG & show_progress $! # driver open-source (melhor)
-    sudo cp ./xorg_conf/20-intel.conf /usr/share/X11/xorg.conf.d/
+    # drivers 64bits
+    install_software_xbps "linux-firmware-intel mesa-dri vulkan-loader xf86-video-intel mesa-vulkan-intel intel-video-accel mesa-libgallium libvdpau-va-gl" #&>>$INSTLOG & show_progress $!
+    # drivers 32bits 
+    install_software_xbps "mesa-dri vulkan-loader mesa-vulkan-intel intel-video-accel  mesa-libgallium libvdpau-va-gl" #&>>$INSTLOG & show_progress $!
+    # sudo cp ./xorg_conf/20-intel.conf /usr/share/X11/xorg.conf.d/
+    echo -en "$CWR - obs: VERIFIQUE SE SEU CPU É BROADWELL OU  COFFEE LAKE para outras configurações."
   fi
   if [ $DRI == "xf86-video-nvidia" ]; then
     echo -en "$ESPEPACMAN - NVIDIA."
@@ -181,33 +191,14 @@ WINDOWMANAGER
 
   echo ""
   read -rep "$(echo -e $CAC) - Qual gerenciador de janelas (window manager) vai ser desta vez? 
-  $(echo -e $LETRA)A$(echo -e $RESETLETRA)WESOME, 
-  $(echo -e $LETRA)B$(echo -e $RESETLETRA)SPWM, 
-  $(echo -e $LETRA)X$(echo -e $RESETLETRA)MONAD,
   $(echo -e $LETRA)N$(echo -e $RESETLETRA)IRI,
-  $(echo -e $LETRA)P$(echo -e $RESETLETRA)ular - (b,x,h,n,p) ... " WME
+  $(echo -e $LETRA)P$(echo -e $RESETLETRA)ular - (n,p) ... " WME
 
   case $WME in
-  a | A)
-    WMawesome="awesome"
-    ;;
-
-  b | B)
-    WMs="bspwm"
-    WMx="sxhkd"
-    WMb="polybar"
-    ;;
-
-  x | X)
-    WMs="xmonad"
-    WMx="xmonad-contrib"
-    WMb="xmobar"
-
-    ;;
-
   n | N)
-    WMs="niri"
-    WMb="Waybar"
+    WM="niri"
+    WMB="Waybar"
+    ;;
 
   p | P)
     echo ""
@@ -218,140 +209,43 @@ WINDOWMANAGER
     ;;
   esac
 
-  if [[ -z $WMawesome ]]; then
-    echo ""
-  else
-    # instalando window manger awesome
-    echo -en "$ESPEPACMAN - INSTALAÇAO DO $WMawesome."
-    install_software_xbps "$WMawesome" &>>$INSTLOG & show_progress $!
-    echo -en "$ESPEPACMAN - INSTALAÇAO DO XORG."
-    install_software_xbps "picom pasystray alsa-utils xclip xdo mtools xdotool xsel feh xorg-xsetroot xorg-xset xorg-xrdb xorg-minimal libxinerama libxft nsxiv unclutter maim" &>>$INSTLOG & show_progress $!
-
-    # config network
-    install_software_xbps "gammastep-indicator network-manager-applet" &>>$INSTLOG & show_progress $!
-
-    # config icon/widget
-    (git clone https://github.com/horst3180/arc-icon-theme --depth 1 ~/arc-icon-theme && cd ~/arc-icon-theme && ./autogen.sh --prefix=/usr sudo make install && rm -rf ~/arc-icon-theme)
-
-    wget https://raw.githubusercontent.com/rxi/json.lua/refs/heads/master/json.lua -P ~/.config/awesome/
-
-    # &>> $INSTLOG & show_progress $!
-    echo -e "$COK - $WMs INSTALADO."
-  fi
-
-  # xmonad
-  if [[ $WMs == "xmonad" ]]; then
-    # instalando window manger xmonad
-    echo -en "$ESPEPACMAN - INSTALAÇAO DO $WMs."
-    install_software_xbps "libX11-devel libXScrnSaver-devel libXft-devel libXinerama-devel libXrandr-devel cabal-install xmobar" &>>$INSTLOG & show_progress $!
-
-    cabal install --lib xmonad xmonad-contrib X11
-    cabal install xmonad 
-
-    echo -en "$ESPEPACMAN - INSTALAÇAO DO XORG."
-    install_software_xbps "alsa-utils xclip xdo mtools xdotool xsel feh xorg-xsetroot xorg-xset xorg-xrdb xorg-minimal libxinerama libxft nsxiv unclutter maim" &>>$INSTLOG & show_progress $!
-
-    # &>> $INSTLOG & show_progress $!
-    echo -e "$COK - $WMs INSTALADO."
-  else
-    echo ""
-  fi
-
-  if [[ $WMs = "bspwm" ]]; then
-    # instalando window manger
-    echo -en "$ESPEPACMAN - INSTALAÇAO DO $WMs."
-    install_software_pacman "bspwm sxhkd polybar" &>>$INSTLOG & show_progress $!
-    echo -en "$ESPEPACMAN - INSTALAÇAO DO XORG."
-    install_software_pacman "alsa-utils xclip xdo mtools xdotool xsel feh xorg-xsetroot xorg-xset xorg-xrdb xorg-minimal libxinerama libxft nsxiv unclutter maim" &>>$INSTLOG & show_progress $!
-
-    # &>> $INSTLOG & show_progress $!
-    echo -e "$COK - $WMs INSTALADO."
-  else
-    echo ""
-  fi
-
   # niri
-  if [[ $WMs == "niri" ]]; then
+  if [[ $WM == "niri" ]]; then
     # instalando window manger xmonad
-    echo -en "$ESPEPACMAN - INSTALAÇAO DO $WMs."
-    install_software_xbps "niri Waybar wl-clipboard seatd imv yazi kitty fuzzel" &>>$INSTLOG & show_progress $!
+    echo -en "$ESPEPACMAN - INSTALAÇAO DO $WM."
 
-    cabal install --lib xmonad xmonad-contrib X11
-    cabal install xmonad 
+    install_software_xbps "niri Waybar wl-clipboard elogind imv yazi alacritty fuzzel" #&>>$INSTLOG & show_progress $!
 
-    echo -en "$ESPEPACMAN - INSTALAÇAO DO XORG."
-    install_software_xbps "alsa-utils xclip xdo mtools xdotool xsel feh xorg-xsetroot xorg-xset xorg-xrdb xorg-minimal libxinerama libxft nsxiv unclutter maim" &>>$INSTLOG & show_progress $!
-
-    # &>> $INSTLOG & show_progress $!
-    echo -e "$COK - $WMs INSTALADO."
+    echo -e "$COK - $WM INSTALADO."
   else
     echo ""
   fi
 
   # configurações
-  if [[ -z $WMs ]]; then
+  if [[ -z $WM ]]; then
     echo ""
-  elif [[ -d ~/.config/$WMs ]]; then
-    rm --recursive --force ~/.config/$WMs
-    cp -r ./.config/$WMs ~/.config/
-    echo -e "$COK - CONFIGURAÇÃO $WMs DETECTADA, BACKUP."
+  elif [[ -d ~/.config/$WM ]]; then
+    rm --recursive --force ~/.config/$WM
+    cp -r ./.config/$WM ~/.config/
+    echo -e "$COK - CONFIGURAÇÃO $WM DETECTADA, BACKUP."
   else
-    mkdir -p ~/.config/$WMs
-    cp -r ./.config/$WMs/* ~/.config/$WMs/
-    echo -e "$COK - CONFIGURAÇÃO DO $WMs."
+    mkdir -p ~/.config/$WM
+    cp -r ./.config/$WM/* ~/.config/$WM/
+    echo -e "$COK - CONFIGURAÇÃO DO $WM."
   fi
-  if [[ $WMx = "sxhkd" ]]; then
-    rm --recursive --force ~/.config/sxhkd/
-    mkdir -p ~/.config/sxhkd/
-    cp --recursive ./.config/sxhkd/* ~/.config/sxhkd
-    echo -e "$COK - CONFIGURAÇÃO KEYBINDS DO BSPWM."
-  fi
-  if [[ $WMb = "polybar" ]]; then
-    rm --recursive --force ~/.config/polybar
-    mkdir -p ~/.config/polybar/
-    cp --recursive ./.config/polybar/* ~/.config/polybar/
-    echo -e "$COK - CONFIGURAÇÃO DO POLYBAR CONCLUIDA."
-  fi
-  if [[ $WMb = "Waybar" ]]; then
+  if [[ $WMB = "Waybar" ]]; then
     rm --recursive --force ~/.config/waybar
     mkdir -p ~/.config/waybar/
     cp --recursive ./.config/waybar/* ~/.config/waybar/
     echo -e "$COK - CONFIGURAÇÃO DO POLYBAR CONCLUIDA."
   fi
 
-  if [[ $WMawesome = "awesome" ]]; then
-    rm --recursive --force ~/.config/awesome/
-    git clone --recurse-submodules -j8 https://github.com/quebravel/awesome.git ~/.config/awesome/
-    git clone https://github.com/horst3180/arc-icon-theme --depth 1 ~/arc-icon-theme/
-    (cd ~/arc-icon-theme && ./autogen.sh --prefix=/usr && sudo make install)
-    (rm --recursive --force ~/arc-icon-theme/)
-    wget https://raw.githubusercontent.com/rxi/json.lua/refs/heads/master/json.lua -P ~/.config/awesome/
-    cp ./.Xresources ~/
-    cp --recursive ./.config/picom/ ~/.config/
-  fi
-
-  
-  if [[ $WMawesome = "awesome" ]]; then
-    echo -e '#!/bin/bash\n\n[ -f ~/.Xresources ] && xrdb -merge ~/.Xresources\n\nxsetroot -cursor_name left_ptr &\n\n# feh --bg-tile ~/Imagens/wallpaperz.png\n# $HOME/.fehbg\n# $HOME/trigger_custom_refresh.sh &\n# wal -R\n\n# export MPD_HOST=$HOME/.config/mpd/socket\n# mpd --kill; mpd &\n# unclutter --timeout 7 &\n\n# Set up an icon tray\n# trayer --edge top --align right --SetDockType true --SetPartialStrut true \ \n# --expand true --width 10 --transparent true --tint 0x5f5f5f --height 18 &\n\nif [ "$(command -v xset)" >/dev/null 2>&1 ];\nthen\n    #xset s off      	        #Disable screen saver blanking\n    #xset s 3600 3600 	        #Change blank time to 1 hour\n    #xset -dpms 	            #Turn off DPMS\n    xset s off -dpms 	        #Disable DPMS and prevent screen from blanking\n    #xset dpms force off 	    #Turn off screen immediately\n    #xset dpms force standby 	#Standby screen\n    #xset dpms force suspend 	#Suspend screen\nfi\n\n# numlockx &\n# pulseaudio -k\n# pulseaudio &\n\nexec awesome\n\n#vim:ft=sh' > ~/.xinitrc
-  fi
-
-  if [[ $WMs = "bspwm" ]]; then
-    echo -e '#!/bin/bash\n\nxsetroot -cursor_name left_ptr &\n\n# feh --bg-tile ~/Imagens/wallpaperz.png\n$HOME/.fehbg\n# $HOME/trigger_custom_refresh.sh &\n# wal -R\n\n# export MPD_HOST=$HOME/.config/mpd/socket\n# mpd --kill; mpd &\nunclutter --timeout 7 &\n\n# Set up an icon tray\n# trayer --edge top --align right --SetDockType true --SetPartialStrut true \ \n# --expand true --width 10 --transparent true --tint 0x5f5f5f --height 18 &\n\nif [ "$(command -v xset)" >/dev/null 2>&1 ];\nthen\n    #xset s off      	        #Disable screen saver blanking\n    #xset s 3600 3600 	        #Change blank time to 1 hour\n    #xset -dpms 	            #Turn off DPMS\n    xset s off -dpms 	        #Disable DPMS and prevent screen from blanking\n    #xset dpms force off 	    #Turn off screen immediately\n    #xset dpms force standby 	#Standby screen\n    #xset dpms force suspend 	#Suspend screen\nfi\n\n# numlockx &\n# pulseaudio -k\n# pulseaudio &\n\nsxhkd &\nexec bspwm\n\n\n#vim:ft=sh' > ~/.xinitrc
-  fi
-
-  if [[ $WMs = "xmonad" ]]; then
-    echo -e '#!/bin/bash\n\nxsetroot -cursor_name left_ptr &\n\n# feh --bg-tile ~/Imagens/wallpaperz.png\n$HOME/.fehbg\n# $HOME/trigger_custom_refresh.sh &\n# wal -R\n\n# export MPD_HOST=$HOME/.config/mpd/socket\n# mpd --kill; mpd &\nunclutter --timeout 7 &\n\n# Set up an icon tray\n# trayer --edge top --align right --SetDockType true --SetPartialStrut true \ \n# --expand true --width 10 --transparent true --tint 0x5f5f5f --height 18 &\n\nif [ "$(command -v xset)" >/dev/null 2>&1 ];\nthen\n    #xset s off      	        #Disable screen saver blanking\n    #xset s 3600 3600 	        #Change blank time to 1 hour\n    #xset -dpms 	            #Turn off DPMS\n    xset s off -dpms 	        #Disable DPMS and prevent screen from blanking\n    #xset dpms force off 	    #Turn off screen immediately\n    #xset dpms force standby 	#Standby screen\n    #xset dpms force suspend 	#Suspend screen\nfi\n\n# numlockx &\n# pulseaudio -k\n# pulseaudio &\n\nexec xmonad\n\n#vim:ft=sh' > ~/.xinitrc
-  fi
-
-  if [[ -f ~/.xinitrc ]]; then
-    chmod +x ~/.xinitrc
-  fi
 
 } ### windowManger
 
 
 
 ### inicializadores de funcao
-# inicio
-# driveVideo
-windowManger
+inicio
+driveVideo
+#windowManger
