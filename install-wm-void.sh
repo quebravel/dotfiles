@@ -3,6 +3,9 @@
 # fork script of https://github.com/Axarva/dotfiles-2.0/tree/main
 # fork script of https://github.com/SolDoesTech/HyprV4/blob/2cf439c27475a32fd00e816a1fde82a5804efe2a/set-hypr
 
+#TODO setar variaveis do wayland
+# https://docs.voidlinux.org/config/graphical-session/wayland.html#wayland <-
+
 # cores letras de seleçao
 LETRA="\e[1;32m"
 RESETLETRA="\e[0m"
@@ -160,9 +163,9 @@ DRIVERDESENHO
   if [ $DRI == "xf86-video-intel" ]; then
     echo -en "$ESPEPACMAN - INTEL."
     # drivers 64bits
-    install_software_xbps "linux-firmware-intel mesa-dri vulkan-loader xf86-video-intel mesa-vulkan-intel intel-video-accel mesa-libgallium libvdpau-va-gl" #&>>$INSTLOG & show_progress $!
+    install_software_xbps "linux-firmware-intel mesa-dri vulkan-loader xf86-video-intel mesa-vulkan-intel intel-video-accel libvdpau-va-gl" #&>>$INSTLOG & show_progress $! # cpu mais antigas instalar mesa-libgallium
     # drivers 32bits 
-    install_software_xbps "mesa-dri vulkan-loader mesa-vulkan-intel intel-video-accel  mesa-libgallium libvdpau-va-gl" #&>>$INSTLOG & show_progress $!
+    install_software_xbps "mesa-dri-32bit vulkan-loader-32bit mesa-vulkan-intel-32bit libvdpau-va-gl-32bit" #&>>$INSTLOG & show_progress $!
     # sudo cp ./xorg_conf/20-intel.conf /usr/share/X11/xorg.conf.d/
     echo -en "$CWR - obs: VERIFIQUE SE SEU CPU É BROADWELL OU  COFFEE LAKE para outras configurações."
   fi
@@ -215,6 +218,8 @@ WINDOWMANAGER
     echo -en "$ESPEPACMAN - INSTALAÇAO DO $WM."
 
     install_software_xbps "niri Waybar wl-clipboard elogind imv yazi alacritty fuzzel" #&>>$INSTLOG & show_progress $!
+    # pacotes wayland
+    install_software_xbps "wayland xorg-server-xwayland qt6-wayland"
 
     echo -e "$COK - $WM INSTALADO."
   else
