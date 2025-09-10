@@ -1,37 +1,5 @@
 #!/bin/env bash
-
-# fork script of https://github.com/Axarva/dotfiles-2.0/tree/main
-# fork script of https://github.com/SolDoesTech/HyprV4/blob/2cf439c27475a32fd00e816a1fde82a5804efe2a/set-hypr
-
-#TODO setar variaveis do wayland
-# https://docs.voidlinux.org/config/graphical-session/wayland.html#wayland <-
-
-# cores letras de seleçao
-LETRA="\e[1;32m"
-RESETLETRA="\e[0m"
-
-# cores
-CNT="[\e[1;36mNOTA\e[0m]"    #azul -cnt
-COK="[\e[1;32mOK\e[0m]"      #verde -cok
-CER="[\e[1;31mERRO\e[0m]"    #vermelhor claro -cer
-CAT="[\e[1;37mATENCAO\e[0m]" #branco -cat
-CWR="[\e[1;35mALERTA\e[0m]"  #roxo claro -cwr
-CAC="[\e[1;33mACAO\e[0m]"    #amarelo -cac
-INSTLOG="$HOME/install.log"
-FIN_INST="&>> $INSTLOG & show_progress $!"
-ESPEPACMAN="[\e[1;37mEXECUTANDO\e[0m"
-CONFIGANDO="[\e[1;37mCONFIGURANDO\e[0m"
-
-# barra de progresso
-show_progress() {
-  while ps | grep $1 &>/dev/null; do
-    echo -n "."
-    sleep 2
-  done
-  echo -en "\e[1;32mPRONTO!\e[0m]\n"
-  sleep 2
-}
-
+# fork script of https://github.com/Axarva/dotfiles-2.0/tree/main fork script of https://github.com/SolDoesTech/HyprV4/blob/2cf439c27475a32fd00e816a1fde82a5804efe2a/set-hypr #ADD setar variaveis do wayland # https://docs.voidlinux.org/config/graphical-session/wayland.html#wayland <- # cores letras de seleçao LETRA="\e[1;32m" RESETLETRA="\e[0m" # cores CNT="[\e[1;36mNOTA\e[0m]"    #azul -cnt COK="[\e[1;32mOK\e[0m]"      #verde -cok CER="[\e[1;31mERRO\e[0m]"    #vermelhor claro -cer CAT="[\e[1;37mATENCAO\e[0m]" #branco -cat CWR="[\e[1;35mALERTA\e[0m]"  #roxo claro -cwr CAC="[\e[1;33mACAO\e[0m]"    #amarelo -cac INSTLOG="$HOME/install.log" FIN_INST="&>> $INSTLOG & show_progress $!" ESPEPACMAN="[\e[1;37mEXECUTANDO\e[0m" CONFIGANDO="[\e[1;37mCONFIGURANDO\e[0m" # barra de progresso show_progress() { while ps | grep $1 &>/dev/null; do echo -n "." sleep 2 done echo -en "\e[1;32mPRONTO!\e[0m]\n" sleep 2 }
 install_software_xbps() {
   # instala pacotes com xbps-install
   # echo -en "$ESPEPACMAN - ATUALIZAÇAO DO SISTEMA."
@@ -79,7 +47,7 @@ EOL
 
   read -rep "$(echo -e $CAC) - Esta pronto para continuar? - (s,n) ... " CONTINUAR
   case "$CONTINUAR" in
-  s | j)
+  s | S)
     echo ""
     ;;
   n | N)
@@ -201,6 +169,7 @@ WINDOWMANAGER
   n | N)
     WM="niri"
     WMB="Waybar"
+    WAYLAND_ONOFF="on"
     ;;
 
   p | P)
@@ -212,12 +181,18 @@ WINDOWMANAGER
     ;;
   esac
 
+  if [[ $WAYLAND_ONOFF == "on" ]]; then
+      # variaveis wayland
+      for VARIAVES_SISTEMA in "\n" QT_QPA_PLATFORM=\'wayland\' ELM_DISPLAY=\'wl\' SDL_VIDEODRIVER=\'wayland\' MOZ_ENABLE_WAYLAND=\'1\'; do
+        sudo echo -e $VARIAVES_SISTEMA >> /etc/environment
+  done
+
   # niri
   if [[ $WM == "niri" ]]; then
     # instalando window manger xmonad
     echo -en "$ESPEPACMAN - INSTALAÇAO DO $WM."
 
-    install_software_xbps "niri Waybar wl-clipboard elogind imv yazi alacritty fuzzel" #&>>$INSTLOG & show_progress $!
+    install_software_xbps "niri Waybar wl-clipboard elogind imv yazi alacritty fuzzel polkit" #&>>$INSTLOG & show_progress $!
     # pacotes wayland
     install_software_xbps "wayland xorg-server-xwayland qt6-wayland"
 
@@ -226,7 +201,16 @@ WINDOWMANAGER
     echo ""
   fi
 
-  # configurações
+  # para notebook
+  if ! cat /sys/class/power_supply/BAT0/capacity &>> /dev/null ; then
+    echo "NÃO É UM NOTEBOOK!"
+  else
+    echo "É UM NOTEBOOK!"
+    install_software_xbps "acpi"
+    sudo ln -sfv /etc/sv/acpid /var/service
+  fi
+
+  # configurações wm
   if [[ -z $WM ]]; then
     echo ""
   elif [[ -d ~/.config/$WM ]]; then
@@ -245,12 +229,149 @@ WINDOWMANAGER
     echo -e "$COK - CONFIGURAÇÃO DO POLYBAR CONCLUIDA."
   fi
 
+  # adicionando serviços no runit
+  services_runit(){
+  for SERVICE in dbus polkit; do
+    sudo ln -sfv /etc/sv/$SERVICE /var/service
+  done
+}
 
 } ### windowManger
 
+# arquivos de programas padrão ->
+arquivosdeConfiguracao() {
+  sleep 0.2
+
+  if [[ ! -d ~/.config/alacritty ]]; then
+    mkdir -p ~/.config/alacritty/
+    cp --recursive --force ./.config/alacritty ~/.config/
+    git clone https://github.com/alacritty/alacritty-theme ~/.config/alacritty/themes
+  else
+    rm --recursive --force ~/.config/alacritty/
+    cp --recursive --force ./.config/alacritty ~/.config/
+    git clone https://github.com/alacritty/alacritty-theme ~/.config/alacritty/themes
+  fi
+  if [ -d ~/wallpapers ]; then
+      echo "Adicionando wallpaper para ~/wallpapers..."
+      cp ./wallpapers/* ~/wallpapers/;
+  else
+      echo "git clone wallpaper..."
+      # mkdir ~/wallpapers && cp -r ./wallpapers/* ~/wallpapers/;
+      git clone https://github.com/quebravel/wallpapers ~/wallpapers
+  fi
+  if [[ ! -d ~/.config/mpv ]]; then
+    mkdir --parents ~/.config/mpv
+    cp ./.config/mpv/* ~/.config/mpv/
+  else
+    rm --recursive --force ~/.config/mpv/*
+    cp --recursive --force ./.config/mpv/* ~/.config/mpv/
+  fi
+
+  if [[ ! -d ~/.config/zathura ]]; then
+    mkdir --parents ~/.config/zathura/
+    cp ./.config/zathura/zathurarc ~/.config/zathura/
+  else
+    rm --force ~/.config/zathura/zathurarc
+    cp ./.config/zathura/zathurarc ~/.config/zathura/
+  fi
+
+  if [[ ! -d ~/.config/gammastep ]]; then
+    mkdir --parents ~/.config/gammastep/
+    cp --recursive --force ./.config/gammastep/* ~/.config/gammastep/
+  else
+    rm --recursive --force ~/.config/gammastep/
+    cp --recursive --force ./.config/gammastep/ ~/.config/
+  fi
+
+  if [[ ! -d ~/.config/git ]]; then
+    mkdir --parents ~/.config/git/
+    cp ./.config/git/config ~/.config/git/
+  else
+    rm --recursive --force ~/.config/git/
+    cp --recursive --force ./.config/git/ ~/.config/
+  fi
+
+  echo -e "$COK - CONFIGURAÇOES DIVERSAS."
+
+} ### arquivosdeConfiguracao <-
+
+# gerenciador de login ->
+displayManager(){
+
+  sleep 0.2
+  cat <<LOGINLY
+      ██ ██                  ██
+     ░██░░          ██████  ░██            ██   ██                                             █████
+     ░██ ██  ██████░██░░░██ ░██  ██████   ░░██ ██    ██████████   ██████   ███████   ██████   ██░░░██  █████  ██████
+  ██████░██ ██░░░░ ░██  ░██ ░██ ░░░░░░██   ░░███    ░░██░░██░░██ ░░░░░░██ ░░██░░░██ ░░░░░░██ ░██  ░██ ██░░░██░░██░░█
+ ██░░░██░██░░█████ ░██████  ░██  ███████    ░██      ░██ ░██ ░██  ███████  ░██  ░██  ███████ ░░██████░███████ ░██ ░
+░██  ░██░██ ░░░░░██░██░░░   ░██ ██░░░░██    ██       ░██ ░██ ░██ ██░░░░██  ░██  ░██ ██░░░░██  ░░░░░██░██░░░░  ░██
+░░██████░██ ██████ ░██      ███░░████████  ██        ███ ░██ ░██░░████████ ███  ░██░░████████  █████ ░░██████░███
+ ░░░░░░ ░░ ░░░░░░  ░░      ░░░  ░░░░░░░░  ░░        ░░░  ░░  ░░  ░░░░░░░░ ░░░   ░░  ░░░░░░░░  ░░░░░   ░░░░░░ ░░░
+LOGINLY
+  echo ""
+  read -rep "$(echo -e $CAC) - Deseja instalar um Display Manager $(echo -e $LETRA)T$(echo -e $RESETLETRA)BSM ou $(echo -e $LETRA)G$(echo -e $RESETLETRA)REETD? - (t,g,n) ... " DMGR
+
+  case "$DMGR" in
+  t | T)
+    echo -en "$ESPEPACMAN - INSTALAÇAO DO TBSM."
+    install_software_xbps "tbsm" #&>>$INSTLOG & show_progress $!
+    echo "[[ $XDG_VTNR -le 2 ]] && tbsm" >~/.zlogin
+    cp -r ./.config/tbsm/ ~/.config/
+    echo -e "$COK - TBSM INSTALADO."
+    ;;
+  g | G)
+    echo -en "$ESPEPACMAN - INSTALAÇAO DO GREETD."
+    install_software_xbps "greetd tuigreet" #&>>$INSTLOG & show_progress $!
+    # install_software_xbps "greetd tuigreet" &>>$INSTLOG & show_progress $!
+    sudo sed -i '0,/command/s//\# command/' /etc/greetd/config.toml
+
+    sudo ln -s /etc/sv/greetd /var/service/ #&>>$INSTLOG
+
+    echo -e "$COK - GREETD INSTALADO."
+    ;;
+  n | N)
+    echo -e "$CNT - NAO TERÁ DISPLAY MANAGER."
+    ;;
+  *)
+    displayManager
+    ;;
+  esac
+
+  if [[ -f ~/.xinitrc ]]; then
+    chmod +x ~/.xinitrc
+  fi
+} #gerenciador de login <-
+
+# zsh ->
+zshinstall() {
+  sleep 0.2
+
+  echo -en "$ESPEPACMAN - INSTALAÇAO DO ZSH."
+  install_software_xbps "zsh zsh-completions" #&>>$INSTLOG & show_progress $!
+
+  echo -e "$COK - ZSH INSTALADO."
+
+} # zsh <-
+
+
+# fonts ->
+fontes_doSistema() {
+  sleep 0.2
+
+  # wqy-microhei (koreano), cjk (japones)
+  echo -en "$ESPEPACMAN - INSTALAÇAO DAS FONTES DO SISTEMA."
+  install_software_xbps "dejavu-fonts-ttf noto-fonts-emoji noto-fonts-cjk wqy-microhei xorg-fonts encodings" #&>>$INSTLOG & show_progress $!
+
+} # fonts <-
 
 
 ### inicializadores de funcao
 inicio
 driveVideo
-#windowManger
+windowManger
+services_runit
+arquivosdeConfiguracao
+displayManager
+zshinstall
+fontes_doSistema
