@@ -236,8 +236,9 @@ WINDOWMANAGER
     echo "NÃO É UM NOTEBOOK!"
   else
     echo "É UM NOTEBOOK!"
-    install_software_xbps "acpi"
+    install_software_xbps "acpi tlp"
     sudo ln -sfv /etc/sv/acpid /var/service
+    sudo ln -sfv /etc/sv/tlp /var/service
   fi
 
   # configurações wm
