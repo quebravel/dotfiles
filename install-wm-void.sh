@@ -215,6 +215,14 @@ WINDOWMANAGER
       for VARIAVES_SISTEMA in "\n" QT_QPA_PLATFORM=\'wayland\' ELM_DISPLAY=\'wl\' SDL_VIDEODRIVER=\'wayland\' MOZ_ENABLE_WAYLAND=\'1\'; do
         sudo echo -e $VARIAVES_SISTEMA >> /etc/environment
       done
+      sleep 0.2
+      # pacotes wayland
+      install_software_xbps "wayland xorg-server-xwayland qt6-wayland xdg-user-dirs"
+      sleep 0.2
+
+      if [[ -f /usr/bin/xdg-user-dirs-update ]]; then
+        xdg-user-dirs-update
+      fi
   fi
 
   # niri
@@ -223,8 +231,6 @@ WINDOWMANAGER
     echo -en "$ESPEPACMAN - INSTALAÇAO DO $WM."
 
     install_software_xbps "niri Waybar wl-clipboard elogind imv yazi alacritty fuzzel polkit" #&>>$INSTLOG & show_progress $!
-    # pacotes wayland
-    install_software_xbps "wayland xorg-server-xwayland qt6-wayland"
 
     echo -e "$COK - $WM INSTALADO."
   else
@@ -372,6 +378,147 @@ fontes_doSistema() {
 
 } # fonts <-
 
+# navegador ->
+navegador() {
+  sleep 0.2
+
+  cat <<NAVEGADOR-DESENHO
+ ██
+░██
+░██      ██████  ██████  ███     ██  ██████  █████  ██████
+░██████ ░░██░░█ ██░░░░██░░██  █ ░██ ██░░░░  ██░░░██░░██░░█
+░██░░░██ ░██ ░ ░██   ░██ ░██ ███░██░░█████ ░███████ ░██ ░
+░██  ░██ ░██   ░██   ░██ ░████░████ ░░░░░██░██░░░░  ░██
+░██████ ░███   ░░██████  ███░ ░░░██ ██████ ░░██████░███
+░░░░░   ░░░     ░░░░░░  ░░░    ░░░ ░░░░░░   ░░░░░░ ░░░
+NAVEGADOR-DESENHO
+
+  echo ""
+  read -rep "$(echo -e $CAC) - Qual navegador preferido? - $(echo -e $LETRA)Q$(echo -e $RESETLETRA)UTEBROWSER, $(echo -e $LETRA)F$(echo -e $RESETLETRA)IREFOX, $(echo -e $LETRA)A$(echo -e $RESETLETRA)mbos ou $(echo -e $LETRA)P$(echo -e $RESETLETRA)ular - (q,f,a,p) ... " BROWSER
+
+  case "$BROWSER" in
+  q | Q)
+    BROWq="qutebrowser"
+    ;;
+  f | F)
+    BROWf="firefox"
+    ;;
+  a | A)
+    BROWq="qutebrowser"
+    BROWf="firefox"
+    ;;
+  p | P)
+    echo -e "$CNT - NAO SERÁ INSTALADO NENHUM NAVEGADOR."
+    ;;
+  *)
+    navegador
+    ;;
+  esac
+
+  if [[ $BROWq = "qutebrowser" ]]; then
+    echo -en "$ESPEPACMAN"
+    install_software_xbps "qutebrowser python-adblock" #&>>$INSTLOG & show_progress $!
+    echo -en "$CONFIGANDO"
+    /usr/share/qutebrowser/scripts/dictcli.py install pt-BR #&>>$INSTLOG & show_progress $!
+
+    mkdir -p ~/.config/qutebrowser/
+    cp -r ./.config/qutebrowser/* ~/.config/qutebrowser/
+    chmod +x ~/.config/qutebrowser/greasemonkey/*
+
+    echo -e "$COK - $BROWq INSTALADO."
+  fi
+
+  if [[ $BROWf = "firefox" ]]; then
+    echo -en "$ESPEPACMAN - INSTALAÇAO DO FIREFOX."
+    install_software_xbps "firefox firefox-i18n-pt-BR" #&>>$INSTLOG & show_progress $!
+
+    echo -e "$COK - $BROWf INSTALADO."
+  fi
+
+} # navegador <-
+
+# tema gtk ->
+temas() {
+  sleep 0.2
+
+  # gruvbox tema
+  if [ ! -d ~/.themes ]; then
+    echo -en "$CONFIGANDO - TEMA GRUVBOX."
+    git clone https://github.com/jmattheis/gruvbox-dark-gtk ~/.themes/gruvbox-dark-gtk #&>>$INSTLOG & show_progress $!
+  # (git clone https://github.com/Fausto-Korpsvart/Gruvbox-GTK-Theme.git) && (./Gruvbox-GTK-Theme/themes/install.sh) &>> $INSTLOG & show_progress $!
+  # (mkdir -p ~/.config/gtk-3.0/)
+  # (cp -r ~/.themes/Gruvbox-Dark/gtk-3.0/* ~/.config/gtk-3.0/)
+  else
+    echo -e "$CWR - VOCÊ JÁ TEM O TEMA GRUVBOX-DARK-GTK."
+  fi
+  sleep 0.2
+  if [ ! -d ~/.icons ]; then
+    echo -en "$CONFIGANDO - TEMA DOS ICONES EM GRUVBOX."
+    git clone https://github.com/jmattheis/gruvbox-dark-icons-gtk ~/.icons/gruvbox-dark-icons-gtk #&>>$INSTLOG & show_progress $!
+  else
+    echo -e "$CWR - VOCÊ JÁ TEM O TEMA GRUVBOX-DARK-ICONS-GTK."
+  fi
+  if [ -d ~/.config/gtk-3.0 ]; then
+    cp ./.config/gtk-3.0/* ~/.config/gtk-3.0/
+  else
+    mkdir -p ~/.config/gtk-3.0/
+    cp ./.config/gtk-3.0/* ~/.config/gtk-3.0/
+  fi
+  if [[ ! -d ~/.local/share/icons/Grubox-Plus-Dark ]]; then
+    rm -rf ~/.local/share/icons/Grubox-Plus-Dark
+    git clone https://github.com/SylEleuth/gruvbox-plus-icon-pack.git ~/.local/share/icons/Grubox-Plus-Dark
+  else
+    echo "" &>>/dev/null
+  fi
+  echo -e "$COK - TEMAS GRUVBOX GTK."
+
+} # tema gtk <-
+
+# audio ->
+audio_config() {
+  sleep 0.2
+
+  cat <<AUDIOCONF
+                        ██ ██
+                       ░██░░
+  ██████   ██   ██     ░██ ██  ██████
+ ░░░░░░██ ░██  ░██  ██████░██ ██░░░░██
+  ███████ ░██  ░██ ██░░░██░██░██   ░██
+ ██░░░░██ ░██  ░██░██  ░██░██░██   ░██
+░░████████░░██████░░██████░██░░██████
+ ░░░░░░░░  ░░░░░░  ░░░░░░ ░░  ░░░░░░
+AUDIOCONF
+  echo ""
+  read -rep "$(echo -e $CAC) - Qual controlador de audio?  PIPE$(echo -e $LETRA)W$(echo -e $RESETLETRA)IRE ou $(echo -e $LETRA)P$(echo -e $RESETLETRA)ULSEAUDIO - (w,p) ... " AUD
+
+  case "$AUD" in
+  w | W)
+    AUDIOD='PIPEWIRE'
+    ;;
+  p | P)
+    AUDIOD='PULSEAUDIO'
+    ;;
+  *)
+    audio_config
+    ;;
+  esac
+
+  if [ $AUDIOD = PIPEWIRE ]; then
+    echo -en "$ESPEPACMAN"
+    install_software_xbps "pipewire alsa-pipewire wireplumber" &>>$INSTLOG & show_progress $!
+    # gst-plugin-pipewire
+    # helvum \
+    echo -e "$COK - $AUDIOD INSTALADO."
+    echo -e "$CAT - Use <wpctl status> para detectar en Sinks: o númeor ID da saída de áudío\nexemplo:\nwpctl status\nSinks:\n33. Áudio interno Estéreo analógico  [vol: 1.20]\n53. Ellesmere HDMI Audio [Radeon RX 470/480 / 570/580/590] Digital Stereo (HDMI 6)\nwpctl set-default 53" >>notas.txt
+  elif [ $AUDIOD = PULSEAUDIO ]; then
+    echo -en "$ESPEPACMAN"
+    install_software_xbps "alsa-utils pulseaudio" &>>$INSTLOG & show_progress $!
+    # gst-plugins-{base,good,bad,ugly} \
+    # gst-libav
+    echo -e "$COK - $AUDIOD INSTALADO."
+  fi
+
+} # audio <-
 
 ### inicializadores de funcao
 inicio
@@ -382,3 +529,6 @@ arquivosdeConfiguracao
 displayManager
 zshinstall
 fontes_doSistema
+navegador
+temas
+audio_config
