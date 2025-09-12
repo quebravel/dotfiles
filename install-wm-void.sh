@@ -212,7 +212,7 @@ WINDOWMANAGER
   if [[ $WAYLAND_ONOFF == "on" ]]; then
       # variaveis wayland
       for VARIAVES_SISTEMA in "\n" QT_QPA_PLATFORM=\'wayland\' ELM_DISPLAY=\'wl\' SDL_VIDEODRIVER=\'wayland\' MOZ_ENABLE_WAYLAND=\'1\'; do
-        sudo echo -e $VARIAVES_SISTEMA | sudo tee -a /etc/environment
+        sudo echo -e $VARIAVES_SISTEMA | sudo tee /etc/environment
       done
       sleep 0.2
       # pacotes wayland
@@ -262,7 +262,7 @@ WINDOWMANAGER
     rm --recursive --force ~/.config/waybar
     mkdir -p ~/.config/waybar/
     cp --recursive ./.config/waybar/* ~/.config/waybar/
-    echo -e "$COK - CONFIGURAÇÃO DO POLYBAR CONCLUIDA."
+    echo -e "$COK - CONFIGURAÇÃO DO WAYBAR CONCLUIDA."
   fi
 
   # adicionando serviços no runit
@@ -343,7 +343,7 @@ LOGINLY
     fi
 
 
-    sudo ln -s /etc/sv/greetd /var/service/ #&>>$INSTLOG
+    # sudo ln -s /etc/sv/greetd /var/service/ #&>>$INSTLOG # na hora que adiciona ele se ativa
 
     echo -e "$COK - GREETD INSTALADO."
     ;;
@@ -421,7 +421,7 @@ NAVEGADOR-DESENHO
 
   if [[ $BROWq = "qutebrowser" ]]; then
     echo -en "$ESPEPACMAN"
-    install_software_xbps "qutebrowser python-adblock" #&>>$INSTLOG & show_progress $!
+    install_software_xbps "qutebrowser python3-adblock" #&>>$INSTLOG & show_progress $!
     echo -en "$CONFIGANDO"
     /usr/share/qutebrowser/scripts/dictcli.py install pt-BR #&>>$INSTLOG & show_progress $!
 
@@ -611,7 +611,7 @@ RANGER-DESENHO
 
   fi
 if [[ $FILEMANAGER = YAZI ]]; then
-  install_software_xbps "yazi ffmpeg 7zip jq poppler fd ripgrep zoxide imageMagick" #&>>$INSTLOG & show_progress $!
+  install_software_xbps "yazi ffmpeg 7zip jq poppler fd ripgrep zoxide ImageMagick" #&>>$INSTLOG & show_progress $!
   cp --recursive --force ./.config/yazi ~/.config/
 else
   echo ""
@@ -647,7 +647,8 @@ PLAYMSC
     sudo rm -f /etc/mpd.conf
 
     mkdir -p ~/.config/mpd
-    cp /usr/share/doc/mpd/mpdconf.example ~/.config/mpd/mpd.conf
+    # cp /usr/share/doc/mpd/mpdconf.example ~/.config/mpd/mpd.conf
+    curl https://raw.githubusercontent.com/MusicPlayerDaemon/MPD/refs/heads/master/doc/mpdconf.example -o ~/.config/mpd/mpd.conf
     #music_directory    "~/music"
     sed -i '0,/#music_directory/s//music_directory/' ~/.config/mpd/mpd.conf
     sed -i 's/~\/music/~\/Músicas/g' ~/.config/mpd/mpd.conf
