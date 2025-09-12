@@ -33,7 +33,7 @@ install_software_xbps() {
   # instala pacotes com xbps-install
   # echo -en "$ESPEPACMAN - ATUALIZAÇAO DO SISTEMA."
   for PKGS in ${1}; do
-    sudo xbps-install -Sy "${PKGS}" &>>$INSTLOG & show_progress $!
+    sudo xbps-install -y "${PKGS}" #&>>$INSTLOG & show_progress $!
   done
 }
 
@@ -191,8 +191,7 @@ WINDOWMANAGER
 
   echo ""
   read -rep "$(echo -e $CAC) - Qual gerenciador de janelas (window manager) vai ser desta vez? 
-  $(echo -e $LETRA)N$(echo -e $RESETLETRA)IRI,
-  $(echo -e $LETRA)P$(echo -e $RESETLETRA)ular - (n,p) ... " WME
+  $(echo -e $LETRA)N$(echo -e $RESETLETRA)IRI, $(echo -e $LETRA)P$(echo -e $RESETLETRA)ular - (n,p) ... " WME
 
   case $WME in
   n | N)
@@ -213,7 +212,7 @@ WINDOWMANAGER
   if [[ $WAYLAND_ONOFF == "on" ]]; then
       # variaveis wayland
       for VARIAVES_SISTEMA in "\n" QT_QPA_PLATFORM=\'wayland\' ELM_DISPLAY=\'wl\' SDL_VIDEODRIVER=\'wayland\' MOZ_ENABLE_WAYLAND=\'1\'; do
-        sudo echo -e $VARIAVES_SISTEMA >> /etc/environment
+        sudo echo -e $VARIAVES_SISTEMA | sudo tee -a /etc/environment
       done
       sleep 0.2
       # pacotes wayland
