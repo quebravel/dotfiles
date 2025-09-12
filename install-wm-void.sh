@@ -168,7 +168,7 @@ DRIVERDESENHO
   fi
   if [ $DRI == "xf86-video-nvidia" ]; then
     echo -en "$ESPEPACMAN - NVIDIA."
-    install_software_xbps "nvidia" &>>$INSTLOG & show_progress $! # tem que testa para ver ser funciona
+    install_software_xbps "nvidia" #&>>$INSTLOG & show_progress $! # tem que testa para ver ser funciona
     # nvidia-xconfig --add-argb-glx-visuals --allow-glx-with-composite --composite --render-accel -o /usr/share/X11/xorg.conf.d/20-nvidia.conf
   fi
 
@@ -336,8 +336,13 @@ LOGINLY
   g | G)
     echo -en "$ESPEPACMAN - INSTALAÇAO DO GREETD."
     install_software_xbps "greetd tuigreet" #&>>$INSTLOG & show_progress $!
-    # install_software_xbps "greetd tuigreet" &>>$INSTLOG & show_progress $!
+
     sudo sed -i '0,/command/s//\# command/' /etc/greetd/config.toml
+
+    if [[ $WM == "niri" ]]; then
+      sudo sed -i '/# command/i\command \= \"tuigreet \-\-cmd niri\"' /etc/greetd/config.toml
+    fi
+
 
     sudo ln -s /etc/sv/greetd /var/service/ #&>>$INSTLOG
 
@@ -505,20 +510,367 @@ AUDIOCONF
 
   if [ $AUDIOD = PIPEWIRE ]; then
     echo -en "$ESPEPACMAN"
-    install_software_xbps "pipewire alsa-pipewire wireplumber" &>>$INSTLOG & show_progress $!
-    # gst-plugin-pipewire
-    # helvum \
+    install_software_xbps "pipewire pipewire-devel alsa-pipewire wireplumber" #&>>$INSTLOG & show_progress $!
+
+    sudo mkdir -p /etc/alsa/conf.d
+    sudo ln -s /usr/share/alsa/alsa.conf.d/50-pipewire.conf /etc/alsa/conf.d
+    sudo ln -s /usr/share/alsa/alsa.conf.d/99-pipewire-default.conf /etc/alsa/conf.d
+
     echo -e "$COK - $AUDIOD INSTALADO."
     echo -e "$CAT - Use <wpctl status> para detectar en Sinks: o númeor ID da saída de áudío\nexemplo:\nwpctl status\nSinks:\n33. Áudio interno Estéreo analógico  [vol: 1.20]\n53. Ellesmere HDMI Audio [Radeon RX 470/480 / 570/580/590] Digital Stereo (HDMI 6)\nwpctl set-default 53" >>notas.txt
   elif [ $AUDIOD = PULSEAUDIO ]; then
     echo -en "$ESPEPACMAN"
-    install_software_xbps "alsa-utils pulseaudio" &>>$INSTLOG & show_progress $!
+    install_software_xbps "alsa-utils pulseaudio" #&>>$INSTLOG & show_progress $!
     # gst-plugins-{base,good,bad,ugly} \
     # gst-libav
     echo -e "$COK - $AUDIOD INSTALADO."
   fi
 
 } # audio <-
+
+# filemanager ->
+rangerfm() {
+  sleep 0.2
+
+  cat <<RANGER-DESENHO
+   ████ ██  ██
+  ░██░ ░░  ░██                                                     █████
+ ██████ ██ ░██  █████    ██████████   ██████   ███████   ██████   ██░░░██  █████  ██████
+░░░██░ ░██ ░██ ██░░░██  ░░██░░██░░██ ░░░░░░██ ░░██░░░██ ░░░░░░██ ░██  ░██ ██░░░██░░██░░█
+  ░██  ░██ ░██░███████   ░██ ░██ ░██  ███████  ░██  ░██  ███████ ░░██████░███████ ░██ ░
+  ░██  ░██ ░██░██░░░░    ░██ ░██ ░██ ██░░░░██  ░██  ░██ ██░░░░██  ░░░░░██░██░░░░  ░██
+  ░██  ░██ ███░░██████   ███ ░██ ░██░░████████ ███  ░██░░████████  █████ ░░██████░███
+  ░░   ░░ ░░░  ░░░░░░   ░░░  ░░  ░░  ░░░░░░░░ ░░░   ░░  ░░░░░░░░  ░░░░░   ░░░░░░ ░░░
+RANGER-DESENHO
+
+  echo ""
+  read -rep "$(echo -e $CAC) - Qual gerenciador de arquivos para terminal? $(echo -e $LETRA)R$(echo -e $RESETLETRA)ANGER, $(echo -e $LETRA)Y$(echo -e $RESETLETRA)AZI - (r,y,n) ... " RAG
+
+  case "$RAG" in
+  s | S)
+    FILEMANAGER='RANGER'
+    ;;
+  y | Y)
+    FILEMANAGER='YAZI'
+    ;;
+  n | N)
+    echo -e "$CNT - RANGER NAO SERÁ INSTALADO."
+    ;;
+  *)
+    rangerfm
+    ;;
+  esac
+
+  if [[ $FILEMANAGER = RANGER ]]; then
+
+    echo -en "$ESPEPACMAN"
+    install_software_xbps "ranger ueberzug ffmpegthumbnailer" #&>>$INSTLOG & show_progress $!
+
+    if [ ! -d ~/.config/ranger/ ]; then
+      mkdir --parents ~/.config/ranger/
+    fi
+    if [ -f ~/.config/ranger/rc.conf ]; then
+      echo -e "$COK - ARQUIVO RC.CONF."
+    else
+      echo -en "$CONFIGANDO - RC."
+      ranger --copy-config=rc #&>>$INSTLOG & show_progress $!
+      sleep 0.2
+      sed -i 's/set preview_images false/set preview_images true/g' $HOME/.config/ranger/rc.conf
+      sleep 0.2
+      sed -i 's/set draw_borders none/set draw_borders both/g' $HOME/.config/ranger/rc.conf
+      sleep 0.2
+      sed -i 's/set preview_images_method w3m/set preview_images_method ueberzug/g' $HOME/.config/ranger/rc.conf
+      sleep 0.2
+      sed -i 's/#set preview_script ~\/.config\/ranger\/scope.sh/set preview_script ~\/.config\/ranger\/scope.sh/g' $HOME/.config/ranger/rc.conf
+      # sed -i 's/set sort natural/set sort ctime/g' ~/.config/ranger/rc.conf
+    fi
+    if [ -f ~/.config/ranger/scope.sh ]; then
+      echo -e "$COK - ARQUIVO SCOPE.SH."
+    else
+      echo -en "$CONFIGANDO - SCOPE."
+      ranger --copy-config=scope #&>>$INSTLOG & show_progress $!
+      sleep 0.2
+      sed -i '113,116s/#//' $HOME/.config/ranger/scope.sh
+      sleep 0.2
+      sed -i '157,160s/#//' $HOME/.config/ranger/scope.sh
+    fi
+    if [ -f ~/.config/ranger/rifle.conf ]; then
+      echo -e "$COK - ARQUIVO RIFLE.CONF."
+    else
+      echo -en "$CONFIGANDO - RIFLE."
+      ranger --copy-config=rifle #&>>$INSTLOG & show_progress $!
+      sed -i 's/mime ^audio|ogg$, terminal, has mplayer  = mplayer -- "$@"/mime ^audio|ogg$, terminal, has moc      = ncmpcpp -- "$@"/g' $HOME/.config/ranger/rifle.conf
+      sleep 0.2
+      sed -i '/label wallpaper, number 15, mime ^image, has feh, X = wal -i "$1"/d' $HOME/.config/ranger/rifle.conf
+      sleep 0.2
+      sed -i 's/label wallpaper, number 14, mime ^image, has feh, X = feh --bg-fill "$1"/label wallpaper, number 14, mime ^image, has feh, X = feh --bg-fill "$1"\nlabel wallpaper, number 15, mime ^image, has feh, X = wal -i "$1"/g' $HOME/.config/ranger/rifle.conf
+    fi
+
+    # ranger --version
+    ranger_versao=$(ranger --version | grep ranger | cut -d: -f2 | sed s/^" "//g | tr a-z A-Z)
+    echo -e "$COK - $ranger_versao INSTALADO."
+
+  fi
+if [[ $FILEMANAGER = YAZI ]]; then
+  install_software_xbps "yazi ffmpeg 7zip jq poppler fd ripgrep zoxide imageMagick" #&>>$INSTLOG & show_progress $!
+  cp --recursive --force ./.config/yazi ~/.config/
+else
+  echo ""
+fi
+
+} # filemanager <-
+
+
+# ncmpcpp ->
+playermusica() {
+  sleep 0.2
+  cat <<PLAYMSC
+                              ██████          ██████  ██████
+ ███████   █████  ██████████ ░██░░░██  █████ ░██░░░██░██░░░██
+░░██░░░██ ██░░░██░░██░░██░░██░██  ░██ ██░░░██░██  ░██░██  ░██
+ ░██  ░██░██  ░░  ░██ ░██ ░██░██████ ░██  ░░ ░██████ ░██████
+ ░██  ░██░██   ██ ░██ ░██ ░██░██░░░  ░██   ██░██░░░  ░██░░░
+ ███  ░██░░█████  ███ ░██ ░██░██     ░░█████ ░██     ░██
+░░░   ░░  ░░░░░  ░░░  ░░  ░░ ░░       ░░░░░  ░░      ░░
+PLAYMSC
+  echo ""
+  read -rep "$(echo -e $CAC) - Quer instalar o player de música? - (s,n) ... " PLMC
+  case "$PLMC" in
+  s | S)
+    echo -en "$ESPEPACMAN"
+    install_software_xbps "ncmpcpp mpd mpc" #&>>$INSTLOG & show_progress $!
+    # sudo systemctl --user enable --now mpd.service &>>$INSTLOG
+
+    if [ ! -d ~/Músicas ]; then
+      mkdir -p ~/Músicas
+    fi
+
+    sudo rm -f /etc/mpd.conf
+
+    mkdir -p ~/.config/mpd
+    cp /usr/share/doc/mpd/mpdconf.example ~/.config/mpd/mpd.conf
+    #music_directory    "~/music"
+    sed -i '0,/#music_directory/s//music_directory/' ~/.config/mpd/mpd.conf
+    sed -i 's/~\/music/~\/Músicas/g' ~/.config/mpd/mpd.conf
+    #playlist_directory   "~/.mpd/playlists"
+    sed -i 's/#playlist_directory/playlist_directory/g' ~/.config/mpd/mpd.conf
+    sed -i 's/~\/.mpd\/playlists/~\/.config\/mpd\/playlists/g' ~/.config/mpd/mpd.conf
+    #db_file      "~/.mpd/database"
+    sed -i 's/#db_file/db_file/g' ~/.config/mpd/mpd.conf
+    sed -i 's/~\/.mpd\/database/~\/.config\/mpd\/database/g' ~/.config/mpd/mpd.conf
+    #log_file     "~/.mpd/log"
+    sed -i 's/#log_file/log_file/g' ~/.config/mpd/mpd.conf
+    sed -i 's/~\/.mpd\/log/~\/.config\/mpd\/log/g' ~/.config/mpd/mpd.conf
+    #pid_file     "~/.mpd/pid"
+    sed -i 's/#pid_file/pid_file/g' ~/.config/mpd/mpd.conf
+    sed -i 's/~\/.mpd\/pid/~\/.config\/mpd\/pid/g' ~/.config/mpd/mpd.conf
+    #state_file     "~/.mpd/state"
+    sed -i 's/#state_file/state_file/g' ~/.config/mpd/mpd.conf
+    sed -i 's/~\/.mpd\/state/~\/.config\/mpd\/state/g' ~/.config/mpd/mpd.conf
+    #sticker_file     "~/.mpd/sticker.sql"
+    sed -i 's/#sticker_file/sticker_file/g' ~/.config/mpd/mpd.conf
+    sed -i 's/~\/.mpd\/sticker/~\/.config\/mpd\/sticker/g' ~/.config/mpd/mpd.conf
+    #bind_to_address    "any"
+    sed -i 's/#bind_to_address/bind_to_address/g' ~/.config/mpd/mpd.conf
+    sed -i 's/"any"/"127.0.0.1"/g' ~/.config/mpd/mpd.conf
+    #port       "6600"
+    sed -i 's/#port/port/g' ~/.config/mpd/mpd.conf
+    #auto_update  "yes"
+    sed -i 's/#auto_update/auto_update/g' ~/.config/mpd/mpd.conf
+    #follow_inside_symlinks   "yes"
+    sed -i 's/#follow_inside_symlinks/follow_inside_symlinks/g' ~/.config/mpd/mpd.conf
+    # socket
+    sed -i 's/~\/.mpd\/socket/~\/.config\/mpd\/socket/g' ~/.config/mpd/mpd.conf
+    #filesystem_charset   "UTF-8"
+    sed -i 's/#filesystem_charset/filesystem_charset/g' ~/.config/mpd/mpd.conf
+
+    echo 'audio_output {
+          type  "pulse"
+          name  "pulseaudio"
+    }
+
+    audio_output {
+    type               "fifo"
+    name               "Visualizer"
+    path               "/tmp/mpd.fifo"
+    format             "44100:16:2"
+    }' >> ~/.config/mpd/mpd.conf
+
+
+    mkdir -p ~/.config/mpd/playlists
+
+    ln -s /etc/sv/mpd /var/service
+
+
+##############################################################################
+
+
+    # more info @ https://wiki.archlinux.org/index.php/ncmpcpp
+
+    sudo xbps-install ncmpcpp
+
+    mkdir -p ~/.config/ncmpcpp
+    cp /usr/share/doc/ncmpcpp/config ~/.config/ncmpcpp/config
+    sed -i 's/#ncmpcpp_directory/ncmpcpp_directory/g' ~/.config/ncmpcpp/config
+    sed -i 's/#lyrics_directory/lyrics_directory/g' ~/.config/ncmpcpp/config
+    sed -i 's/#mpd_host/mpd_host/g' ~/.config/ncmpcpp/config
+    sed -i 's/#mpd_port/mpd_port/g' ~/.config/ncmpcpp/config
+    sed -i 's/#mpd_connection_timeout/mpd_connection_timeout/g' ~/.config/ncmpcpp/config
+    sed -i 's/#mpd_music_dir = ~\/music/mpd_music_dir = ~\/Músicas/g' ~/.config/ncmpcpp/config
+    sed -i 's/#mpd_crossfade_time/mpd_crossfade_time/g' ~/.config/ncmpcpp/config
+    cp /usr/share/doc/ncmpcpp/bindings ~/.config/ncmpcpp/bindings
+    echo -en "$CONFIGANDO"
+    sudo rm -f /etc/mpd.conf
+    echo -e "$COK - MPD MPC NCMPCPP."
+    echo -e "$CAT - REINICIE O SYSTEMA PARA DAR INICIO AO MPD."
+
+    ;;
+  n | N)
+    echo -e "$CNT - NCMPCPP NAO SERÁ INSTALADO."
+    ;;
+  *)
+    playermusica
+    ;;
+  esac
+
+} # ncmpcpp <-
+
+
+# instalação ohmyzsh ->
+ohmyzsh() {
+  sleep 0.2
+
+  if [[ ! -d ~/.oh-my-zsh ]]; then
+    # sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+    sleep 0.2
+    chsh -s $(which zsh)
+    echo -e "$COK - OH-MY-ZSH."
+  else
+    echo -e "$CAT - JÁ EXISTE OH-MY-ZSH NO SISTEMA."
+  fi
+
+} # instalação ohmyzsh <-
+
+
+# configurações extras zsh ->
+alias_autopair() {
+  sleep 0.2
+
+  # zsh alias, autopair
+  if [[ ! -f ~/.config/zsh/alias.zsh ]]; then
+    mkdir --parents ~/.config/zsh/
+    cp ./.config/zsh/alias.zsh ~/.config/zsh/
+    echo -e "$COK - ZSH ALIAS."
+  fi
+
+  if [[ ! -f ~/.config/zsh/vim-mode.zsh ]]; then
+    mkdir --parents ~/.config/zsh/
+    cp ./.config/zsh/vim-mode.zsh ~/.config/zsh/
+    echo -e "$COK - PLUGIN ZSH VI-MODE."
+  fi
+
+  if [[ ! -f ~/.config/zsh/custom_extra_config.zsh ]]; then
+    mkdir --parents ~/.config/zsh/
+    cp ./.config/zsh/custom_extra_config.zsh ~/.config/zsh/
+    echo -e "$COK - PLUGIN ZSH EXTRAS."
+  fi
+
+  sleep 0.2
+
+  if [[ -f ~/.zshrc ]]; then
+    sed -i '/^\[\[ \!/d' $HOME/.zshrc
+    echo "[[ ! -f ~/.config/zsh/custom_extra_config.zsh ]] || source ~/.config/zsh/custom_extra_config.zsh" >>$HOME/.zshrc
+    sed -i '/(git)/s/git/git extract universalarchive systemd/' $HOME/.zshrc
+  fi
+
+  sleep 0.2
+  echo -e "$COK - ZSH COM CONFIGURACAO EXTRA."
+
+} # configurações extras zsh <-
+
+
+# distribuiçãp astronvim ->
+editordeTexto() {
+  sleep 0.2
+
+  cat <<ASTRONVIM-DESENHO
+                     ██                                       ██
+                    ░██                                      ░░
+  ██████    ██████ ██████ ██████  ██████    ███████  ██    ██ ██ ██████████
+ ░░░░░░██  ██░░░░ ░░░██░ ░░██░░█ ██░░░░██  ░░██░░░██░██   ░██░██░░██░░██░░██
+  ███████ ░░█████   ░██   ░██ ░ ░██   ░██   ░██  ░██░░██ ░██ ░██ ░██ ░██ ░██
+ ██░░░░██  ░░░░░██  ░██   ░██   ░██   ░██   ░██  ░██ ░░████  ░██ ░██ ░██ ░██
+░░████████ ██████   ░░██ ░███   ░░██████    ███  ░██  ░░██   ░██ ███ ░██ ░██
+ ░░░░░░░░ ░░░░░░     ░░  ░░░     ░░░░░░    ░░░   ░░    ░░    ░░ ░░░  ░░  ░░
+ASTRONVIM-DESENHO
+
+  echo ""
+  echo -en "$ESPEPACMAN"
+  install_software_xbps "neovim python3-neovim" #&>>$INSTLOG & show_progress $!
+
+  if [[ ! -d ~/.config/nvim ]]; then
+    echo -en "$CONFIGANDO - ESTADO ORIGINAL."
+    git clone --depth 1 https://github.com/AstroNvim/template ~/.config/nvim #&>>$INSTLOG & show_progress $!
+    rm -rf ~/.config/nvim/.git
+    #(nvim --headless -c 'quitall')
+  else
+    read -rep "$(echo -e $CAC) - Já existe um diretório nvim, você deseja reinstalar astronvim? - (s,n) ... " ASTRONV
+
+    case "$ASTRONV" in
+    s | S)
+      rm -rf ~/.config/nvim/
+      echo -en "$CONFIGANDO"
+      git clone --depth 1 https://github.com/AstroNvim/template ~/.config/nvim #&>>$INSTLOG & show_progress $!
+      rm -rf ~/.config/nvim/.git
+      #(nvim --headless -c 'quitall')
+      ;;
+    n | N)
+      echo -e "$CNT - ASTRONVIM NAO SERÁ REINSTALADO."
+      ;;
+    *)
+      editordeTexto
+      ;;
+    esac
+  fi
+    echo -en "$CONFIGANDO - PERSONALIZAÇAO."
+    sleep 1 # keybinds
+    curl https://raw.githubusercontent.com/quebravel/astronvim_config/refs/heads/main/mappings.lua -o ~/.config/nvim/lua/plugins/mappings.lua
+    sleep 1 # options
+    curl https://raw.githubusercontent.com/quebravel/astronvim_config/refs/heads/main/options.lua -o ~/.config/nvim/lua/plugins/options.lua
+
+  echo -e "$COK - ASTRONVIM INSTALADO."
+
+} # distribuiçãp astronvim <-
+
+
+# tema para grub ->
+dedsec() {
+  if ! git clone --depth 1 https://github.com/VandalByte/dedsec-grub2-theme.git ~/dedsec-grub2-theme ; then
+    (cd ~/dedsec-grub2-theme && sudo python3 dedsec-theme.py --uninstall)
+    (cd ~/dedsec-grub2-theme && sudo python3 dedsec-theme.py --install)
+  else
+    rm -rf ~/dedsec-grub2-theme/
+    git clone --depth 1 https://github.com/VandalByte/dedsec-grub2-theme.git ~/dedsec-grub2-theme
+    (cd ~/dedsec-grub2-theme && sudo python3 dedsec-theme.py --install)
+  fi
+
+} # tema para grub <-
+
+
+finalizado() {
+  cat <<TERMINADO
+   ████ ██                     ██ ██                       ██
+  ░██░ ░░                     ░██░░                       ░██
+ ██████ ██ ███████   ██████   ░██ ██ ██████  ██████       ░██  ██████
+░░░██░ ░██░░██░░░██ ░░░░░░██  ░██░██░░░░██  ░░░░░░██   ██████ ██░░░░██
+  ░██  ░██ ░██  ░██  ███████  ░██░██   ██    ███████  ██░░░██░██   ░██
+  ░██  ░██ ░██  ░██ ██░░░░██  ░██░██  ██    ██░░░░██ ░██  ░██░██   ░██
+  ░██  ░██ ███  ░██░░████████ ███░██ ██████░░████████░░██████░░██████
+  ░░   ░░ ░░░   ░░  ░░░░░░░░ ░░░ ░░ ░░░░░░  ░░░░░░░░  ░░░░░░  ░░░░░░
+TERMINADO
+}
+
 
 ### inicializadores de funcao
 inicio
@@ -532,3 +884,11 @@ fontes_doSistema
 navegador
 temas
 audio_config
+rangerfm
+playermusica
+ohmyzsh
+alias_autopair
+editordeTexto
+dedsec
+
+finalizado
