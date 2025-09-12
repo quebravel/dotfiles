@@ -279,8 +279,7 @@ arquivosdeConfiguracao() {
   sleep 0.2
 
   if [ -d ~/wallpapers ]; then
-      echo "Adicionando wallpaper para ~/wallpapers..."
-      cp ./wallpapers/* ~/wallpapers/;
+      echo "Já adicionando wallpaper para ~/wallpapers..."
   else
       echo "git clone wallpaper..."
       # mkdir ~/wallpapers && cp -r ./wallpapers/* ~/wallpapers/;
@@ -365,7 +364,7 @@ zshinstall() {
   sleep 0.2
 
   echo -en "$ESPEPACMAN - INSTALAÇAO DO ZSH."
-  install_software_xbps "zsh zsh-completions" #&>>$INSTLOG & show_progress $!
+  install_software_xbps "zsh zsh-completions eza" #&>>$INSTLOG & show_progress $!
 
   echo -e "$COK - ZSH INSTALADO."
 
@@ -423,7 +422,7 @@ NAVEGADOR-DESENHO
     echo -en "$ESPEPACMAN"
     install_software_xbps "qutebrowser python3-adblock" #&>>$INSTLOG & show_progress $!
     echo -en "$CONFIGANDO"
-    /usr/share/qutebrowser/scripts/dictcli.py install pt-BR #&>>$INSTLOG & show_progress $!
+    sudo /usr/share/qutebrowser/scripts/dictcli.py install pt-BR #&>>$INSTLOG & show_progress $!
 
     mkdir -p ~/.config/qutebrowser/
     cp -r ./.config/qutebrowser/* ~/.config/qutebrowser/
@@ -512,8 +511,8 @@ AUDIOCONF
     install_software_xbps "pipewire pipewire-devel alsa-pipewire wireplumber" #&>>$INSTLOG & show_progress $!
 
     sudo mkdir -p /etc/alsa/conf.d
-    sudo ln -s /usr/share/alsa/alsa.conf.d/50-pipewire.conf /etc/alsa/conf.d
-    sudo ln -s /usr/share/alsa/alsa.conf.d/99-pipewire-default.conf /etc/alsa/conf.d
+    sudo ln -sf /usr/share/alsa/alsa.conf.d/50-pipewire.conf /etc/alsa/conf.d
+    sudo ln -sf /usr/share/alsa/alsa.conf.d/99-pipewire-default.conf /etc/alsa/conf.d
 
     echo -e "$COK - $AUDIOD INSTALADO."
     echo -e "$CAT - Use <wpctl status> para detectar en Sinks: o númeor ID da saída de áudío\nexemplo:\nwpctl status\nSinks:\n33. Áudio interno Estéreo analógico  [vol: 1.20]\n53. Ellesmere HDMI Audio [Radeon RX 470/480 / 570/580/590] Digital Stereo (HDMI 6)\nwpctl set-default 53" >>notas.txt
