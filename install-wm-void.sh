@@ -698,7 +698,7 @@ PLAYMSC
 
     mkdir -p ~/.config/mpd/playlists
 
-    ln -s /etc/sv/mpd /var/service
+    sudo ln -s /etc/sv/mpd /var/service
 
 
 ##############################################################################
@@ -868,6 +868,8 @@ finalizado() {
   ░██  ░██ ███  ░██░░████████ ███░██ ██████░░████████░░██████░░██████
   ░░   ░░ ░░░   ░░  ░░░░░░░░ ░░░ ░░ ░░░░░░  ░░░░░░░░  ░░░░░░  ░░░░░░
 TERMINADO
+
+sudo ln -s /etc/sv/greetd /var/service/
 }
 
 
