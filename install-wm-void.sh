@@ -697,7 +697,7 @@ PLAYMSC
 
     mkdir -p ~/.config/mpd/playlists
 
-    ln -s /etc/sv/mpd /var/service
+    sudo ln -s /etc/sv/mpd /var/service
 
 
 ##############################################################################
@@ -705,7 +705,7 @@ PLAYMSC
 
     # more info @ https://wiki.archlinux.org/index.php/ncmpcpp
 
-    sudo xbps-install ncmpcpp
+    run_with_spinner "instalando ncmpcpp" bash -c "echo \"$ROOT_PASS\" | sudo -S xbps-install -y ncmpcpp"
 
     mkdir -p ~/.config/ncmpcpp
     cp /usr/share/doc/ncmpcpp/config ~/.config/ncmpcpp/config
@@ -874,8 +874,8 @@ unset ROOT_PASS
 
 
 ### inicializadores de funcao
-inicio
 setsenha
+inicio
 driveVideo
 windowManger
 services_runit
