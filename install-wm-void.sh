@@ -92,7 +92,7 @@ EOL
   # atualizar repositório e pacotes.
   echo -e "$CAC - FAZENDO UMA ATUALIZAÇÃO DO SISTEMA, PODE ACONTECER QUE AS COISAS QUEBREM SE NÃO FOR A VERSÃO MAIS RECENTE."
   echo -e $ESPEPACMAN
-  if ! sudo xbps-install -Syu; then
+  if ! run_with_spinner "Atualizando sistema" bash -c "echo \"$ROOT_PASS\" | sudo -S xbps-install -Syu"; then
     echo -e "$CER - ERRO NA ATUALIZAÇAO."
   fi
 
