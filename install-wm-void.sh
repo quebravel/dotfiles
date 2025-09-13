@@ -20,6 +20,34 @@ FIN_INST="&>> $INSTLOG & show_progress $!"
 ESPEPACMAN="[\e[1;37mEXECUTANDO\e[0m"
 CONFIGANDO="[\e[1;37mCONFIGURANDO\e[0m"
 
+
+# spinner progreso
+spinner() {
+    local pid=$1
+    local msg="$2"
+    local delay=0.1
+    local spinstr='|/-\'
+    tput civis  # esconde o cursor
+    while ps -p $pid > /dev/null 2>&1; do
+        for i in $(seq 0 3); do
+            printf "\r%s [%c] " "$msg" "${spinstr:$i:1}"
+            sleep $delay
+        done
+    done
+    printf "\r%s [Concluido] \n" "$msg"  # mostra que terminou
+    tput cnorm  # mostra o cursor de novo
+}
+
+run_with_spinner() {
+    local msg="$1"
+    shift
+    "$@" &
+    local cmd_pid=$!
+    spinner $cmd_pid "$msg"
+    wait $cmd_pid
+    return $?
+}
+
 # barra de progresso
 show_progress() {
   while ps | grep $1 &>/dev/null; do
@@ -29,13 +57,13 @@ show_progress() {
   echo -en "\e[1;32mPRONTO!\e[0m]\n"
   sleep 2
 }
-install_software_xbps() {
-  # instala pacotes com xbps-install
-  # echo -en "$ESPEPACMAN - ATUALIZAÇAO DO SISTEMA."
-  for PKGS in ${1}; do
-    sudo xbps-install -y "${PKGS}" #&>>$INSTLOG & show_progress $!
-  done
-}
+# run_with_spinner "" sudo xbps-install -y() {
+#   # instala pacotes com xbps-install
+#   # echo -en "$ESPEPACMAN - ATUALIZAÇAO DO SISTEMA."
+#   for PKGS in ${1}; do
+#    sudo xbps-install -y "${PKGS}" #&>>$INSTLOG & show_progress $!
+#   done
+# }
 
 # porte 1
 inicio() {
@@ -93,13 +121,14 @@ EOL
   # atualizar repositório e pacotes.
   echo -e "$CAC - FAZENDO UMA ATUALIZAÇÃO DO SISTEMA, PODE ACONTECER QUE AS COISAS QUEBREM SE NÃO FOR A VERSÃO MAIS RECENTE."
   echo -e $ESPEPACMAN
-  if ! sudo xbps-install -Syu; then
+      sudo xbps-install -Sy
+  if ! run_with_spinner "\r Atualizando sistema" sudo xbps-install -Syu; then
     echo -e "$CER - ERRO NA ATUALIZAÇAO."
   fi
 
   # instalar base-devel.
   echo -en "$ESPEPACMAN"
-  install_software_xbps "base-devel wget curl git void-repo-nonfree void-repo-multilib void-repo-multilib-nonfree" #&>>$INSTLOG & show_progress $!
+   run_with_spinner "\r Instalando base-devel" sudo xbps-install -y base-devel wget curl git void-repo-nonfree void-repo-multilib void-repo-multilib-nonfree #&>>$INSTLOG & show_progress $!
   # atualizar repositório nonfree, multilib e multilib-nonfree.
   sudo xbps-install -Syu
 } ### fim inicio
@@ -150,25 +179,25 @@ DRIVERDESENHO
   if [ $DRI == "xf86-video-amdgpu" ]; then
     echo -en "$ESPEPACMAN - AMDGPU."
     # drivers 64bits
-    install_software_xbps "linux-firmware-amd mesa-dri vulkan-loader amdvlk xf86-video-amdgpu mesa-vaapi mesa-vdpau libvdpau-va-gl" #&>>$INSTLOG & show_progress $! # para placas AMD mais antigas intalar xf86-video-radeon, mesa-vulkan-radeon
+    run_with_spinner "Instalando amd" sudo xbps-install -y linux-firmware-amd mesa-dri vulkan-loader amdvlk xf86-video-amdgpu mesa-vaapi mesa-vdpau libvdpau-va-gl #&>>$INSTLOG & show_progress $! # para placas AMD mais antigas intalar xf86-video-radeon, mesa-vulkan-radeon
 
     # drivers 32bits 
-    install_software_xbps "mesa-dri-32bit vulkan-loader-32bit amdvlk-32bit mesa-vaapi-32bit mesa-vdpau-32bit libvdpau-va-gl-32bit" #&>>$INSTLOG & show_progress $! # para placas AMD mais antigas intalar xf86-video-radeon-32bit, mesa-vulkan-radeon-32bit
+    run_with_spinner "Instalando amd 32bit" sudo xbps-install -y mesa-dri-32bit vulkan-loader-32bit amdvlk-32bit mesa-vaapi-32bit mesa-vdpau-32bit libvdpau-va-gl-32bit #&>>$INSTLOG & show_progress $! # para placas AMD mais antigas intalar xf86-video-radeon-32bit, mesa-vulkan-radeon-32bit
 
     # sudo cp ./xorg_conf/40-amdgpu.conf /usr/share/X11/xorg.conf.d/
   fi
   if [ $DRI == "xf86-video-intel" ]; then
     echo -en "$ESPEPACMAN - INTEL."
     # drivers 64bits
-    install_software_xbps "linux-firmware-intel mesa-dri vulkan-loader xf86-video-intel mesa-vulkan-intel intel-video-accel libvdpau-va-gl" #&>>$INSTLOG & show_progress $! # cpu mais antigas instalar mesa-libgallium
+    run_with_spinner "Instalando intel" sudo xbps-install -y linux-firmware-intel mesa-dri vulkan-loader xf86-video-intel mesa-vulkan-intel intel-video-accel libvdpau-va-gl #&>>$INSTLOG & show_progress $! # cpu mais antigas instalar mesa-libgallium
     # drivers 32bits 
-    install_software_xbps "mesa-dri-32bit vulkan-loader-32bit mesa-vulkan-intel-32bit libvdpau-va-gl-32bit" #&>>$INSTLOG & show_progress $!
+    run_with_spinner "Instalando intel-32bit" sudo xbps-install -y mesa-dri-32bit vulkan-loader-32bit mesa-vulkan-intel-32bit libvdpau-va-gl-32bit #&>>$INSTLOG & show_progress $!
     # sudo cp ./xorg_conf/20-intel.conf /usr/share/X11/xorg.conf.d/
     echo -en "$CWR - obs: VERIFIQUE SE SEU CPU É BROADWELL OU  COFFEE LAKE para outras configurações."
   fi
   if [ $DRI == "xf86-video-nvidia" ]; then
     echo -en "$ESPEPACMAN - NVIDIA."
-    install_software_xbps "nvidia" #&>>$INSTLOG & show_progress $! # tem que testa para ver ser funciona
+    run_with_spinner "Instalando nvidia" sudo xbps-install -y nvidia #&>>$INSTLOG & show_progress $! # tem que testa para ver ser funciona
     # nvidia-xconfig --add-argb-glx-visuals --allow-glx-with-composite --composite --render-accel -o /usr/share/X11/xorg.conf.d/20-nvidia.conf
   fi
 
@@ -216,7 +245,7 @@ WINDOWMANAGER
       done
       sleep 0.2
       # pacotes wayland
-      install_software_xbps "wayland xorg-server-xwayland qt6-wayland xdg-user-dirs"
+      run_with_spinner "Instalando wayland" sudo xbps-install -y wayland xorg-server-xwayland qt6-wayland xdg-user-dirs
       sleep 0.2
 
       if [[ -f /usr/bin/xdg-user-dirs-update ]]; then
@@ -229,7 +258,7 @@ WINDOWMANAGER
     # instalando window manger xmonad
     echo -en "$ESPEPACMAN - INSTALAÇAO DO $WM."
 
-    install_software_xbps "niri Waybar wl-clipboard elogind imv yazi alacritty fuzzel polkit" #&>>$INSTLOG & show_progress $!
+    run_with_spinner "Instalando niri" sudo xbps-install -y niri Waybar wl-clipboard elogind imv yazi alacritty fuzzel polkit #&>>$INSTLOG & show_progress $!
 
     echo -e "$COK - $WM INSTALADO."
   else
@@ -241,7 +270,7 @@ WINDOWMANAGER
     echo "NÃO É UM NOTEBOOK!"
   else
     echo "É UM NOTEBOOK!"
-    install_software_xbps "acpi tlp"
+    run_with_spinner "Instalando acpi" sudo xbps-install -y acpi tlp
     sudo ln -sfv /etc/sv/acpid /var/service
     sudo ln -sfv /etc/sv/tlp /var/service
   fi
@@ -326,14 +355,14 @@ LOGINLY
   case "$DMGR" in
   t | T)
     echo -en "$ESPEPACMAN - INSTALAÇAO DO TBSM."
-    install_software_xbps "tbsm" #&>>$INSTLOG & show_progress $!
+    run_with_spinner "Instalando tbsm" sudo xbps-install -y tbsm #&>>$INSTLOG & show_progress $!
     echo "[[ $XDG_VTNR -le 2 ]] && tbsm" >~/.zlogin
     cp -r ./.config/tbsm/ ~/.config/
     echo -e "$COK - TBSM INSTALADO."
     ;;
   g | G)
     echo -en "$ESPEPACMAN - INSTALAÇAO DO GREETD."
-    install_software_xbps "greetd tuigreet" #&>>$INSTLOG & show_progress $!
+    run_with_spinner "Instalando greetd" sudo xbps-install -y greetd tuigreet #&>>$INSTLOG & show_progress $!
 
     sudo sed -i '0,/command/s//\# command/' /etc/greetd/config.toml
 
@@ -364,7 +393,7 @@ zshinstall() {
   sleep 0.2
 
   echo -en "$ESPEPACMAN - INSTALAÇAO DO ZSH."
-  install_software_xbps "zsh zsh-completions eza" #&>>$INSTLOG & show_progress $!
+  run_with_spinner "Instalando zsh" sudo xbps-install -y zsh zsh-completions eza #&>>$INSTLOG & show_progress $!
 
   echo -e "$COK - ZSH INSTALADO."
 
@@ -377,7 +406,7 @@ fontes_doSistema() {
 
   # wqy-microhei (koreano), cjk (japones)
   echo -en "$ESPEPACMAN - INSTALAÇAO DAS FONTES DO SISTEMA."
-  install_software_xbps "dejavu-fonts-ttf noto-fonts-emoji noto-fonts-cjk wqy-microhei xorg-fonts encodings" #&>>$INSTLOG & show_progress $!
+  run_with_spinner "Instalando fontes" sudo xbps-install -y dejavu-fonts-ttf noto-fonts-emoji noto-fonts-cjk wqy-microhei xorg-fonts encodings #&>>$INSTLOG & show_progress $!
 
 } # fonts <-
 
@@ -420,7 +449,7 @@ NAVEGADOR-DESENHO
 
   if [[ $BROWq = "qutebrowser" ]]; then
     echo -en "$ESPEPACMAN"
-    install_software_xbps "qutebrowser python3-adblock" #&>>$INSTLOG & show_progress $!
+    run_with_spinner "Instalando qutebrowser" sudo xbps-install -y qutebrowser python3-adblock #&>>$INSTLOG & show_progress $!
     echo -en "$CONFIGANDO"
     sudo /usr/share/qutebrowser/scripts/dictcli.py install pt-BR #&>>$INSTLOG & show_progress $!
 
@@ -433,7 +462,7 @@ NAVEGADOR-DESENHO
 
   if [[ $BROWf = "firefox" ]]; then
     echo -en "$ESPEPACMAN - INSTALAÇAO DO FIREFOX."
-    install_software_xbps "firefox firefox-i18n-pt-BR" #&>>$INSTLOG & show_progress $!
+    run_with_spinner "Instalando firefox" sudo xbps-install -y firefox firefox-i18n-pt-BR #&>>$INSTLOG & show_progress $!
 
     echo -e "$COK - $BROWf INSTALADO."
   fi
@@ -508,7 +537,7 @@ AUDIOCONF
 
   if [ $AUDIOD = PIPEWIRE ]; then
     echo -en "$ESPEPACMAN"
-    install_software_xbps "pipewire pipewire-devel alsa-pipewire wireplumber" #&>>$INSTLOG & show_progress $!
+    run_with_spinner "Instalando pipewire" sudo xbps-install -y pipewire pipewire-devel alsa-pipewire wireplumber #&>>$INSTLOG & show_progress $!
 
     sudo mkdir -p /etc/alsa/conf.d
     sudo ln -sf /usr/share/alsa/alsa.conf.d/50-pipewire.conf /etc/alsa/conf.d
@@ -518,7 +547,7 @@ AUDIOCONF
     echo -e "$CAT - Use <wpctl status> para detectar en Sinks: o númeor ID da saída de áudío\nexemplo:\nwpctl status\nSinks:\n33. Áudio interno Estéreo analógico  [vol: 1.20]\n53. Ellesmere HDMI Audio [Radeon RX 470/480 / 570/580/590] Digital Stereo (HDMI 6)\nwpctl set-default 53" >>notas.txt
   elif [ $AUDIOD = PULSEAUDIO ]; then
     echo -en "$ESPEPACMAN"
-    install_software_xbps "alsa-utils pulseaudio" #&>>$INSTLOG & show_progress $!
+    run_with_spinner "Instalando pulseaudio" sudo xbps-install -y alsa-utils pulseaudio #&>>$INSTLOG & show_progress $!
     # gst-plugins-{base,good,bad,ugly} \
     # gst-libav
     echo -e "$COK - $AUDIOD INSTALADO."
@@ -562,7 +591,7 @@ RANGER-DESENHO
   if [[ $FILEMANAGER = RANGER ]]; then
 
     echo -en "$ESPEPACMAN"
-    install_software_xbps "ranger ueberzug ffmpegthumbnailer" #&>>$INSTLOG & show_progress $!
+    run_with_spinner "Instalando ranger" sudo xbps-install -y ranger ueberzug ffmpegthumbnailer #&>>$INSTLOG & show_progress $!
 
     if [ ! -d ~/.config/ranger/ ]; then
       mkdir --parents ~/.config/ranger/
@@ -610,7 +639,7 @@ RANGER-DESENHO
 
   fi
 if [[ $FILEMANAGER = YAZI ]]; then
-  install_software_xbps "yazi ffmpeg 7zip jq poppler fd ripgrep zoxide ImageMagick" #&>>$INSTLOG & show_progress $!
+  run_with_spinner "Instalando yazi" sudo xbps-install -y yazi ffmpeg 7zip jq poppler fd ripgrep zoxide ImageMagick #&>>$INSTLOG & show_progress $!
   cp --recursive --force ./.config/yazi ~/.config/
 else
   echo ""
@@ -636,7 +665,7 @@ PLAYMSC
   case "$PLMC" in
   s | S)
     echo -en "$ESPEPACMAN"
-    install_software_xbps "ncmpcpp mpd mpc" #&>>$INSTLOG & show_progress $!
+    run_with_spinner "Instalando ncmpcpp" sudo xbps-install -y ncmpcpp mpd mpc #&>>$INSTLOG & show_progress $!
     # sudo systemctl --user enable --now mpd.service &>>$INSTLOG
 
     if [ ! -d ~/Músicas ]; then
@@ -806,7 +835,7 @@ ASTRONVIM-DESENHO
 
   echo ""
   echo -en "$ESPEPACMAN"
-  install_software_xbps "neovim python3-neovim" #&>>$INSTLOG & show_progress $!
+  run_with_spinner "Instalando neovim" sudo xbps-install -y neovim python3-neovim #&>>$INSTLOG & show_progress $!
 
   if [[ ! -d ~/.config/nvim ]]; then
     echo -en "$CONFIGANDO - ESTADO ORIGINAL."
