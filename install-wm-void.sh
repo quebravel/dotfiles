@@ -20,20 +20,21 @@ FIN_INST="&>> $INSTLOG & show_progress $!"
 ESPEPACMAN="[\e[1;37mEXECUTANDO\e[0m"
 CONFIGANDO="[\e[1;37mCONFIGURANDO\e[0m"
 
-# carrega spinner de progresso.
-source ./lib/spinner_braille
-
+# barra de progresso
+show_progress() {
+  while ps | grep $1 &>/dev/null; do
+    echo -n "."
+    sleep 2
+  done
+  echo -en "\e[1;32mPRONTO!\e[0m]\n"
+  sleep 2
+}
 install_software_xbps() {
   # instala pacotes com xbps-install
   # echo -en "$ESPEPACMAN - ATUALIZAÇAO DO SISTEMA."
   for PKGS in ${1}; do
-    run_with_spinner "Instalando ${PKGS}" bash -c "echo \"$ROOT_PASS\" | sudo -S xbps-install -y "${PKGS}""
+    sudo xbps-install -y "${PKGS}" #&>>$INSTLOG & show_progress $!
   done
-}
-
-setsenha(){
-  echo "Senha"
-  read -s -p " : " ROOT_PASS
 }
 
 # porte 1
@@ -92,7 +93,7 @@ EOL
   # atualizar repositório e pacotes.
   echo -e "$CAC - FAZENDO UMA ATUALIZAÇÃO DO SISTEMA, PODE ACONTECER QUE AS COISAS QUEBREM SE NÃO FOR A VERSÃO MAIS RECENTE."
   echo -e $ESPEPACMAN
-  if ! run_with_spinner "Atualizando sistema" bash -c "echo \"$ROOT_PASS\" | sudo -S xbps-install -Syu"; then
+  if ! sudo xbps-install -Syu; then
     echo -e "$CER - ERRO NA ATUALIZAÇAO."
   fi
 
@@ -697,7 +698,7 @@ PLAYMSC
 
     mkdir -p ~/.config/mpd/playlists
 
-    sudo ln -s /etc/sv/mpd /var/service
+    ln -s /etc/sv/mpd /var/service
 
 
 ##############################################################################
@@ -705,7 +706,7 @@ PLAYMSC
 
     # more info @ https://wiki.archlinux.org/index.php/ncmpcpp
 
-    run_with_spinner "instalando ncmpcpp" bash -c "echo \"$ROOT_PASS\" | sudo -S xbps-install -y ncmpcpp"
+    sudo xbps-install ncmpcpp
 
     mkdir -p ~/.config/ncmpcpp
     cp /usr/share/doc/ncmpcpp/config ~/.config/ncmpcpp/config
@@ -867,14 +868,10 @@ finalizado() {
   ░██  ░██ ███  ░██░░████████ ███░██ ██████░░████████░░██████░░██████
   ░░   ░░ ░░░   ░░  ░░░░░░░░ ░░░ ░░ ░░░░░░  ░░░░░░░░  ░░░░░░  ░░░░░░
 TERMINADO
-
-# Apaga a variável da memória
-unset ROOT_PASS
 }
 
 
 ### inicializadores de funcao
-setsenha
 inicio
 driveVideo
 windowManger
