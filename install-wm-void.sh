@@ -20,21 +20,20 @@ FIN_INST="&>> $INSTLOG & show_progress $!"
 ESPEPACMAN="[\e[1;37mEXECUTANDO\e[0m"
 CONFIGANDO="[\e[1;37mCONFIGURANDO\e[0m"
 
-# barra de progresso
-show_progress() {
-  while ps | grep $1 &>/dev/null; do
-    echo -n "."
-    sleep 2
-  done
-  echo -en "\e[1;32mPRONTO!\e[0m]\n"
-  sleep 2
-}
+# carrega spinner de progresso.
+source ./lib/spinner_braille
+
 install_software_xbps() {
   # instala pacotes com xbps-install
   # echo -en "$ESPEPACMAN - ATUALIZAÇAO DO SISTEMA."
   for PKGS in ${1}; do
-    sudo xbps-install -y "${PKGS}" #&>>$INSTLOG & show_progress $!
+    run_with_spinner "Instalando ${PKGS}" bash -c "echo \"$ROOT_PASS\" | sudo -S xbps-install -y "${PKGS}""
   done
+}
+
+setsenha(){
+  echo "Senha"
+  read -s -p " : " ROOT_PASS
 }
 
 # porte 1
@@ -868,11 +867,15 @@ finalizado() {
   ░██  ░██ ███  ░██░░████████ ███░██ ██████░░████████░░██████░░██████
   ░░   ░░ ░░░   ░░  ░░░░░░░░ ░░░ ░░ ░░░░░░  ░░░░░░░░  ░░░░░░  ░░░░░░
 TERMINADO
+
+# Apaga a variável da memória
+unset ROOT_PASS
 }
 
 
 ### inicializadores de funcao
 inicio
+setsenha
 driveVideo
 windowManger
 services_runit
