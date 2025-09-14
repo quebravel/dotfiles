@@ -189,7 +189,7 @@ DRIVERDESENHO
   if [ $DRI == "xf86-video-intel" ]; then
     echo -en "$ESPEPACMAN - INTEL."
     # drivers 64bits
-    run_with_spinner "Instalando intel" sudo xbps-install -y linux-firmware-intel mesa-dri vulkan-loader xf86-video-intel mesa-vulkan-intel intel-video-accel libvdpau-va-gl #&>>$INSTLOG & show_progress $! # cpu mais antigas instalar mesa-libgallium
+    run_with_spinner "Instalando intel" sudo xbps-install -y linux-firmware-intel mesa-dri vulkan-loader xf86-video-intel mesa-vulkan-intel intel-video-accel libvdpau-va-gl intel-ucode #&>>$INSTLOG & show_progress $! # cpu mais antigas instalar mesa-libgallium
     # drivers 32bits 
     run_with_spinner "Instalando intel-32bit" sudo xbps-install -y mesa-dri-32bit vulkan-loader-32bit mesa-vulkan-intel-32bit libvdpau-va-gl-32bit #&>>$INSTLOG & show_progress $!
     # sudo cp ./xorg_conf/20-intel.conf /usr/share/X11/xorg.conf.d/
