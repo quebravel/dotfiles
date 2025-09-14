@@ -21,7 +21,7 @@ ESPEPACMAN="[\e[1;37mEXECUTANDO\e[0m"
 CONFIGANDO="[\e[1;37mCONFIGURANDO\e[0m"
 
 
-# spinner progreso
+# spinner.sh - Mostra um spinner com mensagem enquanto um comando roda
 spinner() {
     local pid=$1
     local msg="$2"
@@ -34,14 +34,21 @@ spinner() {
             sleep $delay
         done
     done
-    printf "\r%s [Concluido] \n" "$msg"  # mostra que terminou
-    tput cnorm  # mostra o cursor de novo
+    wait $pid
+    local exit_status=$?
+    if [ $exit_status -eq 0 ]; then
+        printf "\r%s [ok]\n" "$msg"
+    else
+        printf "\r%s [er]\n" "$msg"
+    fi
+    tput cnorm  # mostra o cursor
+    return $exit_status
 }
 
 run_with_spinner() {
     local msg="$1"
     shift
-    "$@" &
+    "$@" > /dev/null 2>&1 &
     local cmd_pid=$!
     spinner $cmd_pid "$msg"
     wait $cmd_pid
@@ -49,20 +56,13 @@ run_with_spinner() {
 }
 
 # barra de progresso
-show_progress() {
-  while ps | grep $1 &>/dev/null; do
-    echo -n "."
-    sleep 2
-  done
-  echo -en "\e[1;32mPRONTO!\e[0m]\n"
-  sleep 2
-}
-# run_with_spinner "" sudo xbps-install -y() {
-#   # instala pacotes com xbps-install
-#   # echo -en "$ESPEPACMAN - ATUALIZAÇAO DO SISTEMA."
-#   for PKGS in ${1}; do
-#    sudo xbps-install -y "${PKGS}" #&>>$INSTLOG & show_progress $!
+# show_progress() {
+#   while ps | grep $1 &>/dev/null; do
+#     echo -n "."
+#     sleep 2
 #   done
+#   echo -en "\e[1;32mPRONTO!\e[0m]\n"
+#   sleep 2
 # }
 
 # porte 1
@@ -122,13 +122,13 @@ EOL
   echo -e "$CAC - FAZENDO UMA ATUALIZAÇÃO DO SISTEMA, PODE ACONTECER QUE AS COISAS QUEBREM SE NÃO FOR A VERSÃO MAIS RECENTE."
   echo -e $ESPEPACMAN
       sudo xbps-install -Sy
-  if ! run_with_spinner "\r Atualizando sistema" sudo xbps-install -Syu; then
+  if ! run_with_spinner "Atualizando sistema" sudo xbps-install -Syu; then
     echo -e "$CER - ERRO NA ATUALIZAÇAO."
   fi
 
   # instalar base-devel.
   echo -en "$ESPEPACMAN"
-   run_with_spinner "\r Instalando base-devel" sudo xbps-install -y base-devel wget curl git void-repo-nonfree void-repo-multilib void-repo-multilib-nonfree #&>>$INSTLOG & show_progress $!
+   run_with_spinner "Instalando base-devel" sudo xbps-install -y base-devel wget curl git void-repo-nonfree void-repo-multilib void-repo-multilib-nonfree #&>>$INSTLOG & show_progress $!
   # atualizar repositório nonfree, multilib e multilib-nonfree.
   sudo xbps-install -Syu
 } ### fim inicio
