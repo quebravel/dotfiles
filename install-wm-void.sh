@@ -367,7 +367,10 @@ LOGINLY
     sudo sed -i '0,/command/s//\# command/' /etc/greetd/config.toml
 
     if [[ $WM == "niri" ]]; then
-      sudo sed -i '/# command/i\command \= \"tuigreet \-\-cmd niri\"' /etc/greetd/config.toml
+      sudo sed -i '/# command/i\command \= \"tuigreet \-\-cmd \/etc\/greetd\/niri\.sh\"' /etc/greetd/config.toml
+
+      echo -e "#/bin/env bash \ndbus-run-session niri --session" > /etc/greetd/niri.sh
+
     fi
 
 
