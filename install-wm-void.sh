@@ -245,7 +245,7 @@ WINDOWMANAGER
       done
       sleep 0.2
       # pacotes wayland
-      run_with_spinner "Instalando wayland" sudo xbps-install -y wayland xorg-server-xwayland qt6-wayland xdg-user-dirs
+      run_with_spinner "Instalando wayland" sudo xbps-install -y wayland xorg-server-xwayland qt6-wayland xdg-user-dirs xdg-desktop-portal xdg-desktop-portal-gnome
       sleep 0.2
 
       if [[ -f /usr/bin/xdg-user-dirs-update ]]; then
@@ -296,7 +296,7 @@ WINDOWMANAGER
 
   # adicionando serviços no runit
   services_runit(){
-  for SERVICE in dbus polkit; do
+  for SERVICE in dbus polkitd; do
     sudo ln -sfv /etc/sv/$SERVICE /var/service
   done
 }
@@ -369,7 +369,7 @@ LOGINLY
     if [[ $WM == "niri" ]]; then
       sudo sed -i '/# command/i\command \= \"tuigreet \-\-cmd \/etc\/greetd\/niri\.sh\"' /etc/greetd/config.toml
 
-      echo -e "#/bin/env bash \ndbus-run-session niri --session" > /etc/greetd/niri.sh
+      sudo echo -e "#/bin/env bash \ndbus-run-session niri --session" > /etc/greetd/niri.sh
 
     fi
 
@@ -545,6 +545,12 @@ AUDIOCONF
     sudo mkdir -p /etc/alsa/conf.d
     sudo ln -sf /usr/share/alsa/alsa.conf.d/50-pipewire.conf /etc/alsa/conf.d
     sudo ln -sf /usr/share/alsa/alsa.conf.d/99-pipewire-default.conf /etc/alsa/conf.d
+
+    sudo mkdir -p /etc/pipewire/pipewire.conf.d
+    sudo ln -s /usr/share/examples/pipewire/20-pipewire-pulse.conf /etc/pipewire/pipewire.conf.d/
+
+    sudo mkdir -p /etc/pipewire/pipewire.conf.d
+    sudo ln -s /usr/share/examples/wireplumber/10-wireplumber.conf /etc/pipewire/pipewire.conf.d/
 
     echo -e "$COK - $AUDIOD INSTALADO."
     echo -e "$CAT - Use <wpctl status> para detectar en Sinks: o númeor ID da saída de áudío\nexemplo:\nwpctl status\nSinks:\n33. Áudio interno Estéreo analógico  [vol: 1.20]\n53. Ellesmere HDMI Audio [Radeon RX 470/480 / 570/580/590] Digital Stereo (HDMI 6)\nwpctl set-default 53" >>notas.txt
