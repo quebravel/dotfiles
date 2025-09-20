@@ -177,9 +177,9 @@ DRIVERDESENHO
 
   # complemetos para os drivers
   if [ $DRI == "xf86-video-amdgpu" ]; then
-    echo -en "$ESPEPACMAN - AMDGPU."
+    # echo -en "$ESPEPACMAN - AMDGPU."
     # drivers 64bits
-    run_with_spinner "Instalando amd" sudo xbps-install -y linux-firmware-amd mesa-dri vulkan-loader amdvlk xf86-video-amdgpu mesa-vaapi mesa-vdpau libvdpau-va-gl #&>>$INSTLOG & show_progress $! # para placas AMD mais antigas intalar xf86-video-radeon, mesa-vulkan-radeon
+    run_with_spinner "Instalando AMD" sudo xbps-install -y linux-firmware-amd mesa-dri vulkan-loader amdvlk xf86-video-amdgpu mesa-vaapi mesa-vdpau libvdpau-va-gl #&>>$INSTLOG & show_progress $! # para placas AMD mais antigas intalar xf86-video-radeon, mesa-vulkan-radeon
 
     # drivers 32bits 
     run_with_spinner "Instalando amd 32bit" sudo xbps-install -y mesa-dri-32bit vulkan-loader-32bit amdvlk-32bit mesa-vaapi-32bit mesa-vdpau-32bit libvdpau-va-gl-32bit #&>>$INSTLOG & show_progress $! # para placas AMD mais antigas intalar xf86-video-radeon-32bit, mesa-vulkan-radeon-32bit
@@ -237,6 +237,8 @@ WINDOWMANAGER
     windowManger
     ;;
   esac
+
+  echo ""
 
   if [[ $WAYLAND_ONOFF == "on" ]]; then
       # variaveis wayland
@@ -369,7 +371,8 @@ LOGINLY
     if [[ $WM == "niri" ]]; then
       sudo sed -i '/# command/i\command \= \"tuigreet \-\-cmd \/etc\/greetd\/niri\.sh\"' /etc/greetd/config.toml
 
-      sudo echo -e "#/bin/bash \ndbus-run-session niri --session" > /etc/greetd/niri.sh
+      echo "#/bin/bash
+      dbus-run-session niri --session" | sudo tee /etc/greetd/niri.sh
 
       sudo chmod +x /etc/greetd/niri.sh
 
