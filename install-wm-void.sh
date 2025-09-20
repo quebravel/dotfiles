@@ -369,7 +369,9 @@ LOGINLY
     if [[ $WM == "niri" ]]; then
       sudo sed -i '/# command/i\command \= \"tuigreet \-\-cmd \/etc\/greetd\/niri\.sh\"' /etc/greetd/config.toml
 
-      sudo echo -e "#/bin/env bash \ndbus-run-session niri --session" > /etc/greetd/niri.sh
+      sudo echo -e "#/bin/bash \ndbus-run-session niri --session" > /etc/greetd/niri.sh
+
+      sudo chmod +x /etc/greetd/niri.sh
 
     fi
 
@@ -410,6 +412,7 @@ fontes_doSistema() {
   # wqy-microhei (koreano), cjk (japones)
   echo -en "$ESPEPACMAN - INSTALAÇAO DAS FONTES DO SISTEMA."
   run_with_spinner "Instalando fontes" sudo xbps-install -y dejavu-fonts-ttf noto-fonts-emoji noto-fonts-cjk wqy-microhei xorg-fonts encodings #&>>$INSTLOG & show_progress $!
+  sudo ln -s /usr/share/fontconfig/conf.avail/70-no-bitmaps.conf /etc/fonts/conf.d/
 
 } # fonts <-
 
