@@ -243,7 +243,7 @@ WINDOWMANAGER
   if [[ $WAYLAND_ONOFF == "on" ]]; then
       # variaveis wayland
       for VARIAVES_SISTEMA in "\n" QT_QPA_PLATFORM=\'wayland\' ELM_DISPLAY=\'wl\' SDL_VIDEODRIVER=\'wayland\' MOZ_ENABLE_WAYLAND=\'1\'; do
-        sudo echo -e $VARIAVES_SISTEMA | sudo tee /etc/environment
+        sudo echo -e $VARIAVES_SISTEMA | sudo tee -a /etc/environment
       done
       sleep 0.2
       # pacotes wayland
