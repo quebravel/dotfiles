@@ -179,25 +179,25 @@ DRIVERDESENHO
   if [ $DRI == "xf86-video-amdgpu" ]; then
     # echo -en "$ESPEPACMAN - AMDGPU."
     # drivers 64bits
-    run_with_spinner "Instalando AMD" sudo xbps-install -y linux-firmware-amd mesa-dri vulkan-loader amdvlk xf86-video-amdgpu mesa-vaapi mesa-vdpau libvdpau-va-gl #&>>$INSTLOG & show_progress $! # para placas AMD mais antigas intalar xf86-video-radeon, mesa-vulkan-radeon
+    run_with_spinner "Instalando AMD" sudo xbps-install -y linux-firmware-amd mesa-dri vulkan-loader amdvlk xf86-video-amdgpu mesa-vaapi mesa-vdpau libvdpau-va-gl gstreamer1 #&>>$INSTLOG & show_progress $! # para placas AMD mais antigas intalar xf86-video-radeon, mesa-vulkan-radeon
 
     # drivers 32bits 
-    run_with_spinner "Instalando amd 32bit" sudo xbps-install -y mesa-dri-32bit vulkan-loader-32bit amdvlk-32bit mesa-vaapi-32bit mesa-vdpau-32bit libvdpau-va-gl-32bit #&>>$INSTLOG & show_progress $! # para placas AMD mais antigas intalar xf86-video-radeon-32bit, mesa-vulkan-radeon-32bit
+    run_with_spinner "Instalando amd 32bit" sudo xbps-install -y libgcc-32bit libstdc++-32bit libdrm-32bit libglvnd-32bit mono mesa-dri-32bit mesa-32bit vulkan-loader-32bit amdvlk-32bit mesa-vaapi-32bit mesa-vdpau-32bit libvdpau-va-gl-32bit #&>>$INSTLOG & show_progress $! # para placas AMD mais antigas intalar xf86-video-radeon-32bit, mesa-vulkan-radeon-32bit
 
     # sudo cp ./xorg_conf/40-amdgpu.conf /usr/share/X11/xorg.conf.d/
   fi
   if [ $DRI == "xf86-video-intel" ]; then
     echo -en "$ESPEPACMAN - INTEL."
     # drivers 64bits
-    run_with_spinner "Instalando intel" sudo xbps-install -y linux-firmware-intel mesa-dri vulkan-loader xf86-video-intel mesa-vulkan-intel intel-video-accel libvdpau-va-gl intel-ucode #&>>$INSTLOG & show_progress $! # cpu mais antigas instalar mesa-libgallium
+    run_with_spinner "Instalando intel" sudo xbps-install -y linux-firmware-intel mesa-dri vulkan-loader xf86-video-intel mesa-vulkan-intel intel-video-accel libvdpau-va-gl intel-ucode gstreamer1 #&>>$INSTLOG & show_progress $! # cpu mais antigas instalar mesa-libgallium
     # drivers 32bits 
-    run_with_spinner "Instalando intel-32bit" sudo xbps-install -y mesa-dri-32bit vulkan-loader-32bit mesa-vulkan-intel-32bit libvdpau-va-gl-32bit #&>>$INSTLOG & show_progress $!
+    run_with_spinner "Instalando intel-32bit" sudo xbps-install -y libgcc-32bit libstdc++-32bit libdrm-32bit libglvnd-32bit mono mesa-dri-32bit mesa-32bit vulkan-loader-32bit mesa-vulkan-intel-32bit libvdpau-va-gl-32bit #&>>$INSTLOG & show_progress $!
     # sudo cp ./xorg_conf/20-intel.conf /usr/share/X11/xorg.conf.d/
     echo -en "$CWR - obs: VERIFIQUE SE SEU CPU É BROADWELL OU  COFFEE LAKE para outras configurações."
   fi
   if [ $DRI == "xf86-video-nvidia" ]; then
     echo -en "$ESPEPACMAN - NVIDIA."
-    run_with_spinner "Instalando nvidia" sudo xbps-install -y nvidia #&>>$INSTLOG & show_progress $! # tem que testa para ver ser funciona
+    run_with_spinner "Instalando nvidia" sudo xbps-install -y nvidia libgcc-32bit libstdc++-32bit libdrm-32bit libglvnd-32bit mono mesa-32bit vulkan-loader mesa-dri-32bit #&>>$INSTLOG & show_progress $! # tem que testa para ver ser funciona
     # nvidia-xconfig --add-argb-glx-visuals --allow-glx-with-composite --composite --render-accel -o /usr/share/X11/xorg.conf.d/20-nvidia.conf
   fi
 
@@ -247,7 +247,7 @@ WINDOWMANAGER
       done
       sleep 0.2
       # pacotes wayland
-      run_with_spinner "Instalando wayland" sudo xbps-install -y wayland xorg-server-xwayland qt6-wayland xdg-user-dirs xdg-desktop-portal xdg-desktop-portal-gnome
+      run_with_spinner "Instalando wayland" sudo xbps-install -y wayland xorg-server-xwayland qt6-wayland xdg-user-dirs xdg-desktop-portal xdg-desktop-portal-gnome xwayland-satellite
       sleep 0.2
 
       if [[ -f /usr/bin/xdg-user-dirs-update ]]; then
