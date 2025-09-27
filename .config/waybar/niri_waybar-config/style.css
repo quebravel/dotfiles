@@ -1,0 +1,424 @@
+@import "gruvbox.css";
+/* @import "mocha.css"; */
+
+* {
+    font-family: JetBrainsMono Nerd Font;
+    font-size: 13px;
+    min-height: 0;
+    margin:  0px 0px 0px 0px ;
+}
+
+
+#waybar {
+    /* background: alpha(@crust, 0.5); */
+    background: rgba(10, 10, 10, 0.95); 
+    /* border-radius: 0px 0px 0px 0px; */
+}
+
+window#waybar {
+    /* you can also GTK3 CSS functions! */
+}
+
+#window {
+    color: @peach;
+    font-style: normal;
+    padding: 0px 10px 0px 10px;
+}
+
+/* window#waybar.hidden { */
+/*     opacity: 0.3; */
+/* } */
+
+/*
+window#waybar.empty {
+background-color: transparent;
+}
+window#waybar.solo {
+background-color: #FFFFFF;
+}*/
+
+
+/* window#waybar.kitty { */
+/*     background-color: @surface0; */
+/* } */
+
+/* window#waybar.qutebrowser { */
+/*     background-color: #2; */
+/*     border: none; */
+/* } */
+#workspaces {
+    border-radius: 0px;
+    background-color: transparent;
+    font-weight: bold;
+}
+
+#workspaces button {
+    background-color: transparent;
+    color: @blue;
+    padding: 0px 10px; /*largura do modulo*/
+    margin: 0px 0px; /*crece largura alem do radio*/
+}
+
+#workspaces button.active {
+    background-color: transparent;
+    color: @peach;
+}
+
+button {
+    all: unset;
+    background: transparent;
+    border-radius: 0px;
+}
+
+button:hover {
+    all: unset;
+}
+
+/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+#workspaces button:hover {
+    color: @peach;
+    background-color: transparent;
+    border-color: transparent;
+}
+#workspaces button.persistent:hover {
+    color: @peach;
+}
+#workspaces button.persistent {
+    color: @overlay2;
+}
+#workspaces button.empty:hover {
+    color: @peach;
+}
+#workspaces button.empty {
+    color: @teal;
+}
+
+#workspaces button.visible {
+    background-color: transparent;
+    color: #fff;
+}
+
+#workspaces button.urgent {
+    background-color: @red;
+}
+#workspaces button.hidden {
+    background-color: @green;
+    color: transparent;
+}
+
+#submap {
+    background-color: @roxo;
+    color: white;
+    border-color: white;
+    border-radius: 5px 5px 5px 5px;
+    padding: 0px 10px 0px 10px;
+    font-weight: normal;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    min-width: 6px;
+}
+
+#custom-void-icon {
+    color: @neutral_aqua;
+    font-size: 18px;
+    margin-right: 10px;
+    margin-left: 0px;
+    /* background-image: url("assets/void20.png"); */
+    background-repeat: no-repeat;
+    background-position: center;
+    padding-right: 6px;
+    padding-left: 10px;
+    border-radius: 5px 5px 5px 5px;
+}
+
+#custom-void-icon:hover {
+    margin-right: 10px;
+    margin-left: 0px;
+    /* background-image: url("assets/hyprland-icon-20.png"); */
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: @base;
+    padding-right: 6px;
+    padding-left: 10px;
+    border-radius: 15px 15px 15px 15px;
+}
+
+#custom-separate {
+  color: @text;
+}
+
+#clock,
+/* #battery, */
+/* #custom-cava-internal, */
+/* #cpu, */
+#memory,
+#temperature,
+/* #backlight, */
+#network,
+#pulseaudio,
+#custom-media,
+#tray,
+#idle_inhibitor,
+/* #temp_bsd, */
+#weather,
+#disk,
+#onoffi,
+#keyboard-state,
+#temperature {
+    background-color: transparent;
+    color: @subtext0;
+    padding: 0px 10px 0px 10px;
+}
+
+#custom-kenel {
+    background-color: transparent;
+    color: @subtext0;
+    padding: 0px 10px 0px 10px;
+    font-style: normal;
+}
+#disk {
+    background-color: transparent;
+    color: @subtext0;
+    padding: 0px 10px 0px 10px;
+    font-style: normal;
+}
+
+#custom-weather {
+    background-color: transparent;
+    padding: 0px 2px;
+    color: @subtext0;
+}
+
+#clock {
+    background-color: transparent;
+    color: white;
+    margin-right: 0px;
+    font-weight: bold;
+    padding-left: 0px;
+    padding-right: 10px;
+    font-style: normal;
+}
+#clock:hover {
+    color: @peach;
+}
+
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+        color: @crust;
+    }
+}
+
+label:focus {
+    background-color: @crust;
+}
+
+#memory {
+    background-color: transparent;
+    color: @subtext0;
+    padding: 0px 10px 0px 10px;
+    font-style: normal;
+}
+
+#network {
+    background-color: transparent;
+    border-radius: 0px 0px 0px 0px;
+    padding: 0px 10px 0px 10px;
+    margin-left: 0px;
+    color: @subtext0;
+    font-style: normal;
+}
+
+#network:hover {
+    color: @peach;
+}
+
+#network.disconnected {
+    background-color: transparent;
+    border-radius: 4px;
+    font-style: normal;
+}
+
+#wireplumber {
+    background-color: @teal;
+    color: white;
+    border-radius: 5px 5px 5px 5px;
+    padding: 0px 10px 0px 10px;
+    font-weight: normal;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    min-width: 6px;
+
+}
+#wireplumber:hover {
+    background-color: @peach;
+}
+#wireplumber.muted {
+    background-color: @red;
+    color: @subtext0;
+    border-radius: 5px 5px 5px 5px;
+    padding: 0px 10px 0px 10px;
+    font-weight: normal;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    min-width: 6px;
+}
+#pulseaudio-slider {
+    padding: 0;
+    margin: 0;
+}
+#pulseaudio-slider slider {
+    min-height: 0px;
+    min-width: 0px;
+    opacity: 0;
+    background-image: none;
+    border: none;
+    box-shadow: none;
+}
+#pulseaudio-slider trough {
+    min-height: 4px;
+    min-width: 80px;
+    border-radius: 3px;
+    background-color: @orange;
+    border: none;
+}
+#pulseaudio-slider highlight {
+    min-width: 2px;
+    border-radius: 5px;
+    background-color: green;
+    background-image: linear-gradient(-45deg, @peach 0%, @teal 42%, @sapphire 90%);
+    border: none;
+}
+
+#custom-media {
+    background-color: #66cc99;
+    color: #2a5c45;
+    min-width: 100px;
+    border-radius: 4px;
+}
+
+#tray {
+    background-color: transparent;
+    padding: 0px 10px 0px 10px;
+}
+
+#mpd {
+    background-color: transparent;
+    border-radius: 0px 0px 10px 0px;
+    margin-left: 0px;
+    padding: 0px 10px 0px 10px;
+    color: @text;
+}
+
+#mpd.disconnected {
+    background-color: transparent;
+    border-radius: 0px 0px 10px 0px;
+    color: @red;
+    font-style: normal;
+}
+
+#mpd.stopped {
+    background-color: transparent;
+    border-radius: 0px 0px 10px 0px;
+    color: @overlay2;
+    font-style: normal;
+}
+
+#mpd.paused {
+    background-color: transparent;
+    border-radius: 0px 0px 10px 0px;
+    color: @blue;
+    font-style: normal;
+}
+
+#language {
+    color: @subtext0;
+    padding: 0px 10px 0px 10px;
+    min-width: 10px;
+    border-radius: 0px 0px 0px 0px; 
+    margin-right: 0px;
+}
+
+tooltip {
+  background: rgba(43, 48, 59, 0.5);
+  border: 1px solid rgba(100, 114, 125, 0.8);
+  border-radius: 4px;
+}
+tooltip label {
+  color: white;
+  font-size: 14px;
+}
+
+#keyboard-state {
+    color: @subtext0;
+    background-color: transparent;
+}
+#keyboard-state label {
+    color: @subtext0;
+    background-color: @mantle;
+    border-radius: 5px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+#keyboard-state label.locked {
+    color: #000;
+    background-color: #00ff00;
+    border-radius: 5px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+#custom-cava-internal {
+    color: @text;
+    background-color: transparent;
+}
+
+#custom-quit, 
+#custom-lock,
+#custom-reboot,
+#custom-power {
+	padding-left: 1px;
+	padding-right: 15px;
+	color: @teal;
+	border-radius: 1px;
+}
+
+#custom-quit:hover, 
+#custom-lock:hover, 
+#custom-reboot:hover, 
+#custom-power:hover {
+	color: @peach;
+	background: transparent;
+}
+
+#user {
+    color: white;
+}
+#custom-wl-gammarelay-temperature {
+    background-color: @orange;
+    color: @text;
+    border-radius: 5px 5px 5px 5px;
+    padding: 0px 10px 0px 10px;
+    font-weight: normal;
+    margin-top: 3px;
+    margin-left: 3px;
+    margin-right: 3px;
+    margin-bottom: 3px;
+    min-width: 6px;
+}
+#custom-wl-gammarelay-temperature:hover {
+    background: @peach
+}
+#custom-wl-gammarelay-brightness {
+    background-color: @text;
+    color: @crust;
+    border-radius: 5px 5px 5px 5px;
+    padding: 0px 10px 0px 10px;
+    font-weight: normal;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    min-width: 6px;
+}
+#custom-wl-gammarelay-brightness:hover {
+    background: @peach
+}
