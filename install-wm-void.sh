@@ -292,9 +292,15 @@ WINDOWMANAGER
   if [[ $WMB = "Waybar" ]]; then
     rm --recursive --force ~/.config/waybar
     mkdir -p ~/.config/waybar/
-    cp --recursive ./.config/waybar/* ~/.config/waybar/
+    cp --recursive ./.config/waybar/niri_waybar-config/* ~/.config/waybar/
     echo -e "$COK - CONFIGURAÇÃO DO WAYBAR CONCLUIDA."
   fi
+
+  # configurações do fuzzel
+    rm --recursive --force ~/.config/fuzzel
+    mkdir -p ~/.config/fuzzel/
+    cp --recursive ./.config/fuzzel/* ~/.config/fuzzel/
+
 
   # adicionando serviços no runit
   services_runit(){
