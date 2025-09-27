@@ -17,7 +17,7 @@ CWR="[\e[1;35mALERTA\e[0m]"  #roxo claro -cwr
 CAC="[\e[1;33mACAO\e[0m]"    #amarelo -cac
 INSTLOG="$HOME/install.log"
 FIN_INST="&>> $INSTLOG & show_progress $!"
-ESPEPACMAN="[\e[1;37mEXECUTANDO\e[0m"
+# ESPEPACMAN="[\e[1;37mEXECUTANDO\e[0m"
 CONFIGANDO="[\e[1;37mCONFIGURANDO\e[0m"
 
 
@@ -120,14 +120,14 @@ EOL
 
   # atualizar repositório e pacotes.
   echo -e "$CAC - FAZENDO UMA ATUALIZAÇÃO DO SISTEMA, PODE ACONTECER QUE AS COISAS QUEBREM SE NÃO FOR A VERSÃO MAIS RECENTE."
-  echo -e $ESPEPACMAN
+  # echo -e $ESPEPACMAN
       sudo xbps-install -Sy
   if ! run_with_spinner "Atualizando sistema" sudo xbps-install -Syu; then
     echo -e "$CER - ERRO NA ATUALIZAÇAO."
   fi
 
   # instalar base-devel.
-  echo -en "$ESPEPACMAN"
+  # echo -en "$ESPEPACMAN"
    run_with_spinner "Instalando base-devel" sudo xbps-install -y base-devel wget curl git void-repo-nonfree void-repo-multilib void-repo-multilib-nonfree #&>>$INSTLOG & show_progress $!
   # atualizar repositório nonfree, multilib e multilib-nonfree.
   sudo xbps-install -Syu
@@ -187,7 +187,7 @@ DRIVERDESENHO
     # sudo cp ./xorg_conf/40-amdgpu.conf /usr/share/X11/xorg.conf.d/
   fi
   if [ $DRI == "xf86-video-intel" ]; then
-    echo -en "$ESPEPACMAN - INTEL."
+    # echo -en "$ESPEPACMAN - INTEL."
     # drivers 64bits
     run_with_spinner "Instalando intel" sudo xbps-install -y linux-firmware-intel mesa-dri vulkan-loader xf86-video-intel mesa-vulkan-intel intel-video-accel libvdpau-va-gl intel-ucode gstreamer1 #&>>$INSTLOG & show_progress $! # cpu mais antigas instalar mesa-libgallium
     # drivers 32bits 
@@ -196,7 +196,7 @@ DRIVERDESENHO
     echo -en "$CWR - obs: VERIFIQUE SE SEU CPU É BROADWELL OU  COFFEE LAKE para outras configurações."
   fi
   if [ $DRI == "xf86-video-nvidia" ]; then
-    echo -en "$ESPEPACMAN - NVIDIA."
+    # echo -en "$ESPEPACMAN - NVIDIA."
     run_with_spinner "Instalando nvidia" sudo xbps-install -y nvidia libgcc-32bit libstdc++-32bit libdrm-32bit libglvnd-32bit mono mesa-32bit vulkan-loader mesa-dri-32bit #&>>$INSTLOG & show_progress $! # tem que testa para ver ser funciona
     # nvidia-xconfig --add-argb-glx-visuals --allow-glx-with-composite --composite --render-accel -o /usr/share/X11/xorg.conf.d/20-nvidia.conf
   fi
@@ -258,7 +258,7 @@ WINDOWMANAGER
   # niri
   if [[ $WM == "niri" ]]; then
     # instalando window manger xmonad
-    echo -en "$ESPEPACMAN - INSTALAÇAO DO $WM."
+    # echo -en "$ESPEPACMAN - INSTALAÇAO DO $WM."
 
     run_with_spinner "Instalando niri" sudo xbps-install -y niri Waybar wl-clipboard elogind imv yazi alacritty fuzzel polkit #&>>$INSTLOG & show_progress $!
 
@@ -362,14 +362,14 @@ LOGINLY
 
   case "$DMGR" in
   t | T)
-    echo -en "$ESPEPACMAN - INSTALAÇAO DO TBSM."
+    # echo -en "$ESPEPACMAN - INSTALAÇAO DO TBSM."
     run_with_spinner "Instalando tbsm" sudo xbps-install -y tbsm #&>>$INSTLOG & show_progress $!
     echo "[[ $XDG_VTNR -le 2 ]] && tbsm" >~/.zlogin
     cp -r ./.config/tbsm/ ~/.config/
     echo -e "$COK - TBSM INSTALADO."
     ;;
   g | G)
-    echo -en "$ESPEPACMAN - INSTALAÇAO DO GREETD."
+    # echo -en "$ESPEPACMAN - INSTALAÇAO DO GREETD."
     run_with_spinner "Instalando greetd" sudo xbps-install -y greetd tuigreet #&>>$INSTLOG & show_progress $!
 
     sudo sed -i '0,/command/s//\# command/' /etc/greetd/config.toml
@@ -406,7 +406,7 @@ LOGINLY
 zshinstall() {
   sleep 0.2
 
-  echo -en "$ESPEPACMAN - INSTALAÇAO DO ZSH."
+  # echo -en "$ESPEPACMAN - INSTALAÇAO DO ZSH."
   run_with_spinner "Instalando zsh" sudo xbps-install -y zsh zsh-completions eza #&>>$INSTLOG & show_progress $!
 
   echo -e "$COK - ZSH INSTALADO."
@@ -419,7 +419,7 @@ fontes_doSistema() {
   sleep 0.2
 
   # wqy-microhei (koreano), cjk (japones)
-  echo -en "$ESPEPACMAN - INSTALAÇAO DAS FONTES DO SISTEMA."
+  # echo -en "$ESPEPACMAN - INSTALAÇAO DAS FONTES DO SISTEMA."
   run_with_spinner "Instalando fontes" sudo xbps-install -y dejavu-fonts-ttf noto-fonts-emoji noto-fonts-cjk wqy-microhei xorg-fonts encodings #&>>$INSTLOG & show_progress $!
   sudo ln -s /usr/share/fontconfig/conf.avail/70-no-bitmaps.conf /etc/fonts/conf.d/
 
@@ -463,7 +463,7 @@ NAVEGADOR-DESENHO
   esac
 
   if [[ $BROWq = "qutebrowser" ]]; then
-    echo -en "$ESPEPACMAN"
+    # echo -en "$ESPEPACMAN"
     run_with_spinner "Instalando qutebrowser" sudo xbps-install -y qutebrowser python3-adblock #&>>$INSTLOG & show_progress $!
     echo -en "$CONFIGANDO"
     sudo /usr/share/qutebrowser/scripts/dictcli.py install pt-BR #&>>$INSTLOG & show_progress $!
@@ -476,7 +476,7 @@ NAVEGADOR-DESENHO
   fi
 
   if [[ $BROWf = "firefox" ]]; then
-    echo -en "$ESPEPACMAN - INSTALAÇAO DO FIREFOX."
+    # echo -en "$ESPEPACMAN - INSTALAÇAO DO FIREFOX."
     run_with_spinner "Instalando firefox" sudo xbps-install -y firefox firefox-i18n-pt-BR #&>>$INSTLOG & show_progress $!
 
     echo -e "$COK - $BROWf INSTALADO."
@@ -551,7 +551,7 @@ AUDIOCONF
   esac
 
   if [ $AUDIOD = PIPEWIRE ]; then
-    echo -en "$ESPEPACMAN"
+    # echo -en "$ESPEPACMAN"
     run_with_spinner "Instalando pipewire" sudo xbps-install -y pipewire pipewire-devel alsa-pipewire wireplumber #&>>$INSTLOG & show_progress $!
 
     sudo mkdir -p /etc/alsa/conf.d
@@ -567,7 +567,7 @@ AUDIOCONF
     echo -e "$COK - $AUDIOD INSTALADO."
     echo -e "$CAT - Use <wpctl status> para detectar en Sinks: o númeor ID da saída de áudío\nexemplo:\nwpctl status\nSinks:\n33. Áudio interno Estéreo analógico  [vol: 1.20]\n53. Ellesmere HDMI Audio [Radeon RX 470/480 / 570/580/590] Digital Stereo (HDMI 6)\nwpctl set-default 53" >>notas.txt
   elif [ $AUDIOD = PULSEAUDIO ]; then
-    echo -en "$ESPEPACMAN"
+    # echo -en "$ESPEPACMAN"
     run_with_spinner "Instalando pulseaudio" sudo xbps-install -y alsa-utils pulseaudio #&>>$INSTLOG & show_progress $!
     # gst-plugins-{base,good,bad,ugly} \
     # gst-libav
@@ -611,7 +611,7 @@ RANGER-DESENHO
 
   if [[ $FILEMANAGER = RANGER ]]; then
 
-    echo -en "$ESPEPACMAN"
+    # echo -en "$ESPEPACMAN"
     run_with_spinner "Instalando ranger" sudo xbps-install -y ranger ueberzug ffmpegthumbnailer #&>>$INSTLOG & show_progress $!
 
     if [ ! -d ~/.config/ranger/ ]; then
@@ -685,7 +685,7 @@ PLAYMSC
   read -rep "$(echo -e $CAC) - Quer instalar o player de música? - (s,n) ... " PLMC
   case "$PLMC" in
   s | S)
-    echo -en "$ESPEPACMAN"
+    # echo -en "$ESPEPACMAN"
     run_with_spinner "Instalando ncmpcpp" sudo xbps-install -y ncmpcpp mpd mpc #&>>$INSTLOG & show_progress $!
     # sudo systemctl --user enable --now mpd.service &>>$INSTLOG
 
@@ -855,7 +855,7 @@ editordeTexto() {
 ASTRONVIM-DESENHO
 
   echo ""
-  echo -en "$ESPEPACMAN"
+  # echo -en "$ESPEPACMAN"
   run_with_spinner "Instalando neovim" sudo xbps-install -y neovim python3-neovim #&>>$INSTLOG & show_progress $!
 
   if [[ ! -d ~/.config/nvim ]]; then
