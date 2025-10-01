@@ -255,12 +255,15 @@ WINDOWMANAGER
       fi
   fi
 
+  # desktop app basicos
+  run_with_spinner "Programas desktop" sudo xbps-install -y mpv yt-dlp ntfs-3g zathura zathura-pdf-poppler gammastep imv alacritty fuzzel
+
   # niri
   if [[ $WM == "niri" ]]; then
     # instalando window manger xmonad
     # echo -en "$ESPEPACMAN - INSTALAÇAO DO $WM."
 
-    run_with_spinner "Instalando niri" sudo xbps-install -y niri Waybar wl-clipboard elogind imv yazi alacritty fuzzel polkit #&>>$INSTLOG & show_progress $!
+    run_with_spinner "Instalando niri" sudo xbps-install -y niri Waybar wl-clipboard elogind polkit #&>>$INSTLOG & show_progress $!
 
     echo -e "$COK - $WM INSTALADO."
   else
@@ -301,6 +304,15 @@ WINDOWMANAGER
     mkdir -p ~/.config/fuzzel/
     cp --recursive ./.config/fuzzel/* ~/.config/fuzzel/
 
+  # configurações mpv
+    rm --recursive --force ~/.config/mpv
+    mkdir -p ~/.config/mpv/
+    cp --recursive ./.config/mpv/* ~/.config/mpv/
+
+  # configurações imv
+    rm --recursive --force ~/.config/imv
+    mkdir -p ~/.config/imv/
+    cp --recursive ./.config/imv/* ~/.config/imv/
 
   # adicionando serviços no runit
   services_runit(){
@@ -323,7 +335,7 @@ arquivosdeConfiguracao() {
       git clone https://github.com/quebravel/wallpapers ~/wallpapers
   fi
   
-  for CONF_FILES in alacritty mpv zathura gammastep git; do
+  for CONF_FILES in alacritty mpv zathura gammastep git ; do
     if [[ ! -d ~/.config/$CONF_FILES ]]; then
       mkdir --parents ~/.config/$CONF_FILES
       cp ./.config/$CONF_FILES/* ~/.config/$CONF_FILES/
@@ -661,6 +673,9 @@ RANGER-DESENHO
   fi
 if [[ $FILEMANAGER = YAZI ]]; then
   run_with_spinner "Instalando yazi" sudo xbps-install -y yazi ffmpeg 7zip jq poppler fd ripgrep zoxide ImageMagick #&>>$INSTLOG & show_progress $!
+
+  # configurações yazi
+  rm --recursive --force ~/.config/yazi
   cp --recursive --force ./.config/yazi ~/.config/
 else
   echo ""
