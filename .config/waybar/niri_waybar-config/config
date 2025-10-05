@@ -19,7 +19,8 @@
                         "tray",
                         "keyboard-state",
                         "niri/language",
-                        "pulseaudio/slider",
+                        "wireplumber",
+                        // "pulseaudio/slider",
                         "disk",
                         "memory",
                         "temperature",
@@ -123,8 +124,10 @@
             }
         },
         "memory": {
-            "format": "<span color='#f9f5d7'>\uefc5</span>  <span color='#fe8019'>{used:0.1f}G</span>/{total:0.1f}G"
+            "format": "\uefc5  {percentage}%",
+            "format-alt": "<span color='#f9f5d7'>\uefc5</span>  <span color='#fe8019'>{used:0.1f}G</span>/{total:0.1f}G"
         },
+
         "network": {
             // "interface": "enp3s0" // (Optional) To force the use of this interface
             "format-wifi": "<span color='#f9f5d7'>\udb80\udc02</span> {essid} ({signalStrength}%)",
@@ -184,7 +187,8 @@
 
         "disk": {
             "interval": 3000,
-            "format": "[ <span color='#f9f5d7'>\udb80\udeca</span> <span color='#fe8019'>{used}</span>/{total} ]",
+            "format": "[ \udb80\udeca {percentage_used}% ]",
+            "format-alt": "[ <span color='#f9f5d7'>\udb80\udeca</span> <span color='#fe8019'>{used}</span>/{total} ]",
             "path": "/"
         },
 
@@ -273,12 +277,12 @@
         "custom/reboot": {
             "format": "󰜉",
             "tooltip": false,
-            "on-click": "reboot"
+            "on-click": "loginctl reboot"
         },
         "custom/power": {
             "format": "",
             "tooltip": false,
-            "on-click": "shutdown now"
+            "on-click": "loginctl poweroff"
         },
 
 
