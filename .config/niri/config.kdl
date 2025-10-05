@@ -380,6 +380,7 @@ binds {
     // Mod+D { spawn "rofi" "-show"; }
     // Mod+T { spawn "kitty"; }
     Mod+P hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
+    Mod+Shift+D hotkey-overlay-title="Poweroff" { spawn "~/.config/niri/scripts_niri/fuzzel-power"; }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
 
     // You can also use a shell. Do this if you need pipes, multiple commands, etc.
