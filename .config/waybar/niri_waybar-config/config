@@ -17,6 +17,7 @@
                         "niri/window"],
                         "modules-right": [
                         "tray",
+                        "custom/xbps",
                         "keyboard-state",
                         "niri/language",
                         "wireplumber",
