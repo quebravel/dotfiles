@@ -422,3 +422,7 @@ tooltip label {
 #custom-wl-gammarelay-brightness:hover {
     background: @peach
 }
+
+#custom-xbps {
+    color: @surface0;
+}
