@@ -340,13 +340,13 @@ label:focus {
 }
 
 tooltip {
-  background: rgba(43, 48, 59, 0.5);
-  border: 1px solid rgba(100, 114, 125, 0.8);
+  background: rgba(00, 00,00, 0.9);
+  border: 2px solid rgba(99, 99, 255, 1.0);
   border-radius: 4px;
 }
 tooltip label {
   color: white;
-  font-size: 14px;
+  font-size: 15px;
 }
 
 #keyboard-state {
