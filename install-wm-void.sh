@@ -564,7 +564,7 @@ AUDIOCONF
 
   if [ $AUDIOD = PIPEWIRE ]; then
     # echo -en "$ESPEPACMAN"
-    run_with_spinner "Instalando pipewire" sudo xbps-install -y pipewire pipewire-devel alsa-pipewire wireplumber #&>>$INSTLOG & show_progress $!
+    run_with_spinner "Instalando pipewire" sudo xbps-install -y pipewire pipewire-devel alsa-pipewire wireplumber gst-plugins-bad1 gst-plugins-base1 gst-plugins-good1 gst-plugins-ugly1 gst-libav
 
     sudo mkdir -p /etc/alsa/conf.d
     sudo ln -sf /usr/share/alsa/alsa.conf.d/50-pipewire.conf /etc/alsa/conf.d
@@ -580,7 +580,7 @@ AUDIOCONF
     echo -e "$CAT - Use <wpctl status> para detectar en Sinks: o númeor ID da saída de áudío\nexemplo:\nwpctl status\nSinks:\n33. Áudio interno Estéreo analógico  [vol: 1.20]\n53. Ellesmere HDMI Audio [Radeon RX 470/480 / 570/580/590] Digital Stereo (HDMI 6)\nwpctl set-default 53" >>notas.txt
   elif [ $AUDIOD = PULSEAUDIO ]; then
     # echo -en "$ESPEPACMAN"
-    run_with_spinner "Instalando pulseaudio" sudo xbps-install -y alsa-utils pulseaudio #&>>$INSTLOG & show_progress $!
+    run_with_spinner "Instalando pulseaudio" sudo xbps-install -y alsa-utils pulseaudio gst-plugins-bad1 gst-plugins-base1 gst-plugins-good1 gst-plugins-ugly1 gst-libav
     # gst-plugins-{base,good,bad,ugly} \
     # gst-libav
     echo -e "$COK - $AUDIOD INSTALADO."
