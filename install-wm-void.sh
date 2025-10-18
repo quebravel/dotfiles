@@ -128,7 +128,7 @@ EOL
 
   # instalar base-devel.
   # echo -en "$ESPEPACMAN"
-   run_with_spinner "Instalando base-devel" sudo xbps-install -y base-devel wget curl git void-repo-nonfree void-repo-multilib void-repo-multilib-nonfree #&>>$INSTLOG & show_progress $!
+   run_with_spinner "Instalando base-devel" sudo xbps-install -y base-devel wget curl git void-repo-nonfree void-repo-multilib void-repo-multilib-nonfree
   # atualizar repositório nonfree, multilib e multilib-nonfree.
   sudo xbps-install -Syu
 } ### fim inicio
@@ -179,25 +179,25 @@ DRIVERDESENHO
   if [ $DRI == "xf86-video-amdgpu" ]; then
     # echo -en "$ESPEPACMAN - AMDGPU."
     # drivers 64bits
-    run_with_spinner "Instalando AMD" sudo xbps-install -y linux-firmware-amd mesa-dri vulkan-loader amdvlk xf86-video-amdgpu mesa-vaapi mesa-vdpau libvdpau-va-gl gstreamer1 #&>>$INSTLOG & show_progress $! # para placas AMD mais antigas intalar xf86-video-radeon, mesa-vulkan-radeon
+    run_with_spinner "Instalando AMD" sudo xbps-install -y linux-firmware-amd mesa-dri vulkan-loader amdvlk xf86-video-amdgpu mesa-vaapi mesa-vdpau libvdpau-va-gl gstreamer1 # para placas AMD mais antigas intalar xf86-video-radeon, mesa-vulkan-radeon
 
     # drivers 32bits 
-    run_with_spinner "Instalando amd 32bit" sudo xbps-install -y libgcc-32bit libstdc++-32bit libdrm-32bit libglvnd-32bit mono mesa-dri-32bit mesa-32bit vulkan-loader-32bit amdvlk-32bit mesa-vaapi-32bit mesa-vdpau-32bit libvdpau-va-gl-32bit #&>>$INSTLOG & show_progress $! # para placas AMD mais antigas intalar xf86-video-radeon-32bit, mesa-vulkan-radeon-32bit
+    run_with_spinner "Instalando amd 32bit" sudo xbps-install -y libgcc-32bit libstdc++-32bit libdrm-32bit libglvnd-32bit mono mesa-dri-32bit mesa-32bit vulkan-loader-32bit amdvlk-32bit mesa-vaapi-32bit mesa-vdpau-32bit libvdpau-va-gl-32bit # para placas AMD mais antigas intalar xf86-video-radeon-32bit, mesa-vulkan-radeon-32bit
 
     # sudo cp ./xorg_conf/40-amdgpu.conf /usr/share/X11/xorg.conf.d/
   fi
   if [ $DRI == "xf86-video-intel" ]; then
     # echo -en "$ESPEPACMAN - INTEL."
     # drivers 64bits
-    run_with_spinner "Instalando intel" sudo xbps-install -y linux-firmware-intel mesa-dri vulkan-loader xf86-video-intel mesa-vulkan-intel intel-video-accel libvdpau-va-gl intel-ucode gstreamer1 #&>>$INSTLOG & show_progress $! # cpu mais antigas instalar mesa-libgallium
+    run_with_spinner "Instalando intel" sudo xbps-install -y linux-firmware-intel mesa-dri vulkan-loader xf86-video-intel mesa-vulkan-intel intel-video-accel libvdpau-va-gl intel-ucode gstreamer1 # cpu mais antigas instalar mesa-libgallium
     # drivers 32bits 
-    run_with_spinner "Instalando intel-32bit" sudo xbps-install -y libgcc-32bit libstdc++-32bit libdrm-32bit libglvnd-32bit mono mesa-dri-32bit mesa-32bit vulkan-loader-32bit mesa-vulkan-intel-32bit libvdpau-va-gl-32bit #&>>$INSTLOG & show_progress $!
+    run_with_spinner "Instalando intel-32bit" sudo xbps-install -y libgcc-32bit libstdc++-32bit libdrm-32bit libglvnd-32bit mono mesa-dri-32bit mesa-32bit vulkan-loader-32bit mesa-vulkan-intel-32bit libvdpau-va-gl-32bit
     # sudo cp ./xorg_conf/20-intel.conf /usr/share/X11/xorg.conf.d/
     echo -en "$CWR - obs: VERIFIQUE SE SEU CPU É BROADWELL OU  COFFEE LAKE para outras configurações."
   fi
   if [ $DRI == "xf86-video-nvidia" ]; then
     # echo -en "$ESPEPACMAN - NVIDIA."
-    run_with_spinner "Instalando nvidia" sudo xbps-install -y nvidia libgcc-32bit libstdc++-32bit libdrm-32bit libglvnd-32bit mono mesa-32bit vulkan-loader mesa-dri-32bit #&>>$INSTLOG & show_progress $! # tem que testa para ver ser funciona
+    run_with_spinner "Instalando nvidia" sudo xbps-install -y nvidia libgcc-32bit libstdc++-32bit libdrm-32bit libglvnd-32bit mono mesa-32bit vulkan-loader mesa-dri-32bit # tem que testa para ver ser funciona
     # nvidia-xconfig --add-argb-glx-visuals --allow-glx-with-composite --composite --render-accel -o /usr/share/X11/xorg.conf.d/20-nvidia.conf
   fi
 
@@ -261,9 +261,8 @@ WINDOWMANAGER
   # niri
   if [[ $WM == "niri" ]]; then
     # instalando window manger xmonad
-    # echo -en "$ESPEPACMAN - INSTALAÇAO DO $WM."
 
-    run_with_spinner "Instalando niri" sudo xbps-install -y niri Waybar wl-clipboard elogind polkit #&>>$INSTLOG & show_progress $!
+    run_with_spinner "Instalando niri" sudo xbps-install -y niri Waybar wl-clipboard elogind polkit
 
     echo -e "$COK - $WM INSTALADO."
   else
@@ -375,14 +374,14 @@ LOGINLY
   case "$DMGR" in
   t | T)
     # echo -en "$ESPEPACMAN - INSTALAÇAO DO TBSM."
-    run_with_spinner "Instalando tbsm" sudo xbps-install -y tbsm #&>>$INSTLOG & show_progress $!
+    run_with_spinner "Instalando tbsm" sudo xbps-install -y tbsm
     echo "[[ $XDG_VTNR -le 2 ]] && tbsm" >~/.zlogin
     cp -r ./.config/tbsm/ ~/.config/
     echo -e "$COK - TBSM INSTALADO."
     ;;
   g | G)
     # echo -en "$ESPEPACMAN - INSTALAÇAO DO GREETD."
-    run_with_spinner "Instalando greetd" sudo xbps-install -y greetd tuigreet #&>>$INSTLOG & show_progress $!
+    run_with_spinner "Instalando greetd" sudo xbps-install -y greetd tuigreet
 
     sudo sed -i '0,/command/s//\# command/' /etc/greetd/config.toml
 
@@ -397,7 +396,7 @@ LOGINLY
     fi
 
 
-    # sudo ln -s /etc/sv/greetd /var/service/ #&>>$INSTLOG # na hora que adiciona ele se ativa
+    # sudo ln -s /etc/sv/greetd /var/service/ # não ativar aqui na hora que adiciona ele se ativa
 
     echo -e "$COK - GREETD INSTALADO."
     ;;
@@ -419,7 +418,7 @@ zshinstall() {
   sleep 0.2
 
   # echo -en "$ESPEPACMAN - INSTALAÇAO DO ZSH."
-  run_with_spinner "Instalando zsh" sudo xbps-install -y zsh zsh-completions eza #&>>$INSTLOG & show_progress $!
+  run_with_spinner "Instalando zsh" sudo xbps-install -y zsh zsh-completions eza
 
   echo -e "$COK - ZSH INSTALADO."
 
@@ -432,7 +431,7 @@ fontes_doSistema() {
 
   # wqy-microhei (koreano), cjk (japones)
   # echo -en "$ESPEPACMAN - INSTALAÇAO DAS FONTES DO SISTEMA."
-  run_with_spinner "Instalando fontes" sudo xbps-install -y dejavu-fonts-ttf noto-fonts-emoji noto-fonts-cjk wqy-microhei xorg-fonts encodings #&>>$INSTLOG & show_progress $!
+  run_with_spinner "Instalando fontes" sudo xbps-install -y dejavu-fonts-ttf noto-fonts-ttf noto-fonts-ttf-extra noto-fonts-emoji noto-fonts-cjk wqy-microhei xorg-fonts encodings font-liberation-ttf
   sudo ln -s /usr/share/fontconfig/conf.avail/70-no-bitmaps.conf /etc/fonts/conf.d/
 
 } # fonts <-
@@ -476,9 +475,9 @@ NAVEGADOR-DESENHO
 
   if [[ $BROWq = "qutebrowser" ]]; then
     # echo -en "$ESPEPACMAN"
-    run_with_spinner "Instalando qutebrowser" sudo xbps-install -y qutebrowser python3-adblock #&>>$INSTLOG & show_progress $!
+    run_with_spinner "Instalando qutebrowser" sudo xbps-install -y qutebrowser python3-adblock
     echo -en "$CONFIGANDO"
-    sudo /usr/share/qutebrowser/scripts/dictcli.py install pt-BR #&>>$INSTLOG & show_progress $!
+    sudo /usr/share/qutebrowser/scripts/dictcli.py install pt-BR
 
     mkdir -p ~/.config/qutebrowser/
     cp -r ./.config/qutebrowser/* ~/.config/qutebrowser/
@@ -488,8 +487,7 @@ NAVEGADOR-DESENHO
   fi
 
   if [[ $BROWf = "firefox" ]]; then
-    # echo -en "$ESPEPACMAN - INSTALAÇAO DO FIREFOX."
-    run_with_spinner "Instalando firefox" sudo xbps-install -y firefox firefox-i18n-pt-BR #&>>$INSTLOG & show_progress $!
+    run_with_spinner "Instalando firefox" sudo xbps-install -y firefox firefox-i18n-pt-BR
 
     echo -e "$COK - $BROWf INSTALADO."
   fi
@@ -503,8 +501,8 @@ temas() {
   # gruvbox tema
   if [ ! -d ~/.themes ]; then
     echo -en "$CONFIGANDO - TEMA GRUVBOX."
-    git clone https://github.com/jmattheis/gruvbox-dark-gtk ~/.themes/gruvbox-dark-gtk #&>>$INSTLOG & show_progress $!
-  # (git clone https://github.com/Fausto-Korpsvart/Gruvbox-GTK-Theme.git) && (./Gruvbox-GTK-Theme/themes/install.sh) &>> $INSTLOG & show_progress $!
+    git clone https://github.com/jmattheis/gruvbox-dark-gtk ~/.themes/gruvbox-dark-gtk
+  # (git clone https://github.com/Fausto-Korpsvart/Gruvbox-GTK-Theme.git) && (./Gruvbox-GTK-Theme/themes/install.sh)
   # (mkdir -p ~/.config/gtk-3.0/)
   # (cp -r ~/.themes/Gruvbox-Dark/gtk-3.0/* ~/.config/gtk-3.0/)
   else
@@ -513,7 +511,7 @@ temas() {
   sleep 0.2
   if [ ! -d ~/.icons ]; then
     echo -en "$CONFIGANDO - TEMA DOS ICONES EM GRUVBOX."
-    git clone https://github.com/jmattheis/gruvbox-dark-icons-gtk ~/.icons/gruvbox-dark-icons-gtk #&>>$INSTLOG & show_progress $!
+    git clone https://github.com/jmattheis/gruvbox-dark-icons-gtk ~/.icons/gruvbox-dark-icons-gtk
   else
     echo -e "$CWR - VOCÊ JÁ TEM O TEMA GRUVBOX-DARK-ICONS-GTK."
   fi
@@ -624,7 +622,7 @@ RANGER-DESENHO
   if [[ $FILEMANAGER = RANGER ]]; then
 
     # echo -en "$ESPEPACMAN"
-    run_with_spinner "Instalando ranger" sudo xbps-install -y ranger ueberzug ffmpegthumbnailer #&>>$INSTLOG & show_progress $!
+    run_with_spinner "Instalando ranger" sudo xbps-install -y ranger ueberzug ffmpegthumbnailer
 
     if [ ! -d ~/.config/ranger/ ]; then
       mkdir --parents ~/.config/ranger/
@@ -633,7 +631,7 @@ RANGER-DESENHO
       echo -e "$COK - ARQUIVO RC.CONF."
     else
       echo -en "$CONFIGANDO - RC."
-      ranger --copy-config=rc #&>>$INSTLOG & show_progress $!
+      ranger --copy-config=rc
       sleep 0.2
       sed -i 's/set preview_images false/set preview_images true/g' $HOME/.config/ranger/rc.conf
       sleep 0.2
@@ -648,7 +646,7 @@ RANGER-DESENHO
       echo -e "$COK - ARQUIVO SCOPE.SH."
     else
       echo -en "$CONFIGANDO - SCOPE."
-      ranger --copy-config=scope #&>>$INSTLOG & show_progress $!
+      ranger --copy-config=scope
       sleep 0.2
       sed -i '113,116s/#//' $HOME/.config/ranger/scope.sh
       sleep 0.2
@@ -658,7 +656,7 @@ RANGER-DESENHO
       echo -e "$COK - ARQUIVO RIFLE.CONF."
     else
       echo -en "$CONFIGANDO - RIFLE."
-      ranger --copy-config=rifle #&>>$INSTLOG & show_progress $!
+      ranger --copy-config=rifle
       sed -i 's/mime ^audio|ogg$, terminal, has mplayer  = mplayer -- "$@"/mime ^audio|ogg$, terminal, has moc      = ncmpcpp -- "$@"/g' $HOME/.config/ranger/rifle.conf
       sleep 0.2
       sed -i '/label wallpaper, number 15, mime ^image, has feh, X = wal -i "$1"/d' $HOME/.config/ranger/rifle.conf
@@ -672,7 +670,7 @@ RANGER-DESENHO
 
   fi
 if [[ $FILEMANAGER = YAZI ]]; then
-  run_with_spinner "Instalando yazi" sudo xbps-install -y yazi ffmpeg 7zip jq poppler fd ripgrep zoxide ImageMagick #&>>$INSTLOG & show_progress $!
+  run_with_spinner "Instalando yazi" sudo xbps-install -y yazi ffmpeg 7zip jq poppler fd ripgrep zoxide ImageMagick
 
   # configurações yazi
   rm --recursive --force ~/.config/yazi
@@ -701,8 +699,8 @@ PLAYMSC
   case "$PLMC" in
   s | S)
     # echo -en "$ESPEPACMAN"
-    run_with_spinner "Instalando ncmpcpp" sudo xbps-install -y ncmpcpp mpd mpc #&>>$INSTLOG & show_progress $!
-    # sudo systemctl --user enable --now mpd.service &>>$INSTLOG
+    run_with_spinner "Instalando ncmpcpp" sudo xbps-install -y ncmpcpp mpd mpc
+    # sudo systemctl --user enable --now mpd.service
 
     if [ ! -d ~/Músicas ]; then
       mkdir -p ~/Músicas
@@ -816,6 +814,23 @@ ohmyzsh() {
 
 } # instalação ohmyzsh <-
 
+denteazul() {
+  read -rep "$(echo -e $CAC) - Este computador tem bluetooth? - (s,n) ... " CONTINUAR
+  case "$CONTINUAR" in
+  s | S)
+    run_with_spinner "Instalando bluetooth" sudo xbps-install -y bluez bluez-obex libspa-bluetooth bluetuith
+    sudo ln -s /etc/sv/bluetoothd /var/service
+    sudo useradd -G bluetooth ${USER}
+    ;;
+  n | N)
+    echo ""
+    ;;
+  *)
+    inicio
+    ;;
+  esac
+
+}
 
 # configurações extras zsh ->
 alias_autopair() {
@@ -871,7 +886,7 @@ ASTRONVIM-DESENHO
 
   echo ""
   # echo -en "$ESPEPACMAN"
-  run_with_spinner "Instalando neovim" sudo xbps-install -y neovim python3-neovim #&>>$INSTLOG & show_progress $!
+  run_with_spinner "Instalando neovim" sudo xbps-install -y neovim python3-neovim
 
   if [[ ! -d ~/.config/nvim ]]; then
     echo -en "$CONFIGANDO - ESTADO ORIGINAL."
@@ -921,6 +936,18 @@ dedsec() {
 
 } # tema para grub <-
 
+# mudando dns -->
+extras() {
+
+  echo -e "$CNT - INSTALANDO CONFIGURAÇÕES EXTRAS."
+
+  sudo sh -c "chattr -i /etc/resolv.conf"
+  echo nameserver 8.8.8.8 | sudo tee /etc/resolv.conf
+  sudo sh -c "echo nameserver 8.8.4.4 >> /etc/resolv.conf"
+  sudo sh -c "chattr +i /etc/resolv.conf"
+
+  echo -e "$COK - DNS CONFIGURADO."
+} # mudando dns <--
 
 finalizado() {
   cat <<TERMINADO
@@ -952,9 +979,11 @@ temas
 audio_config
 rangerfm
 playermusica
+denteazul
 ohmyzsh
 alias_autopair
 editordeTexto
 dedsec
+extras
 
 finalizado
