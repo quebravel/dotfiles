@@ -820,7 +820,7 @@ denteazul() {
   s | S)
     run_with_spinner "Instalando bluetooth" sudo xbps-install -y bluez bluez-obex libspa-bluetooth bluetuith
     sudo ln -s /etc/sv/bluetoothd /var/service
-    sudo useradd -G bluetooth ${USER}
+    sudo usermod -aG bluetooth ${USER}
     ;;
   n | N)
     echo ""
