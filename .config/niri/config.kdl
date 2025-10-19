@@ -280,7 +280,7 @@ spawn-at-startup "waybar"
 spawn-at-startup "mako"
 spawn-at-startup "mpd"
 spawn-at-startup "pipewire"
-spawn-at-startup "gsettings" "set" "org.gnome.desktop.interface" "color-scheme prefer-dark"
+spawn-at-startup "gsettings" "set" "org.gnome.desktop.interface" "color-scheme" "prefer-dark"
 spawn-at-startup "swaybg" "-m" "fill" "-i" "/home/jonatas/wallpapers/anime-girl-dj-2k.jpg"
 
 // Uncomment this line to ask the clients to omit their client-side decorations if possible.
