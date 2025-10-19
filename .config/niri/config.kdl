@@ -277,6 +277,8 @@ layout {
 
 // This line starts waybar, a commonly used bar for Wayland compositors.
 spawn-at-startup "waybar"
+spawn-at-startup "mako"
+spawn-at-startup "mpd"
 spawn-at-startup "pipewire"
 spawn-at-startup "gsettings" "set" "org.gnome.desktop.interface" "color-scheme prefer-dark"
 spawn-at-startup "swaybg" "-m" "fill" "-i" "/home/jonatas/wallpapers/anime-girl-dj-2k.jpg"
@@ -370,7 +372,8 @@ window-rule {
 window-rule {
     match app-id="^foot$"
     default-column-width { proportion 0.35; }
-    default-window-height { fixed 500; }
+    // default-window-height { fixed 500; }
+    // default-window-height { proportion 0.90; }
 }
 
 // float mpv

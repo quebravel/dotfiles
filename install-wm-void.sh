@@ -247,7 +247,7 @@ WINDOWMANAGER
   fi
 
   # desktop app basicos
-  run_with_spinner "Programas desktop" sudo xbps-install -y mpv yt-dlp ntfs-3g zathura zathura-pdf-poppler gammastep imv alacritty fuzzel swaybg
+  run_with_spinner "Programas desktop" sudo xbps-install -y mpv yt-dlp ntfs-3g zathura zathura-pdf-poppler gammastep imv alacritty fuzzel swaybg mako libnotify
 
   # niri
   if [[ $WM == "niri" ]]; then
@@ -325,7 +325,7 @@ arquivosdeConfiguracao() {
       git clone https://github.com/quebravel/wallpapers ~/wallpapers
   fi
   
-  for CONF_FILES in alacritty mpv zathura gammastep git ; do
+  for CONF_FILES in alacritty mpv zathura gammastep git mako ; do
     if [[ ! -d ~/.config/$CONF_FILES ]]; then
       mkdir --parents ~/.config/$CONF_FILES
       cp ./.config/$CONF_FILES/* ~/.config/$CONF_FILES/
@@ -700,6 +700,8 @@ PLAYMSC
     sudo rm -f /etc/mpd.conf
 
     mkdir -p ~/.config/mpd
+    touch ~/.config/mpd/socket
+    touch ~/.config/mpd/pid
     # cp /usr/share/doc/mpd/mpdconf.example ~/.config/mpd/mpd.conf
     curl https://raw.githubusercontent.com/MusicPlayerDaemon/MPD/refs/heads/master/doc/mpdconf.example -o ~/.config/mpd/mpd.conf
     #music_directory    "~/music"
