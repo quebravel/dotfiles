@@ -575,7 +575,7 @@ AUDIOCONF
     sudo ln -s /usr/share/examples/wireplumber/10-wireplumber.conf /etc/pipewire/pipewire.conf.d/
 
     echo -e "$COK - $AUDIOD INSTALADO."
-    echo -e "$CAT - Use <wpctl status> para detectar en Sinks: o númeor ID da saída de áudío\nexemplo:\nwpctl status\nSinks:\n33. Áudio interno Estéreo analógico  [vol: 1.20]\n53. Ellesmere HDMI Audio [Radeon RX 470/480 / 570/580/590] Digital Stereo (HDMI 6)\nwpctl set-default 53" >>notas.txt
+    echo -e "$CAT - Use <wpctl status> para detectar en Sinks: o númeor ID da saída de áudío\nexemplo:\nwpctl status\nSinks:\n33. Áudio interno Estéreo analógico  [vol: 1.20]\n53. Ellesmere HDMI Audio [Radeon RX 470/480 / 570/580/590] Digital Stereo (HDMI 6)\nwpctl set-default 53"
   elif [ $AUDIOD = PULSEAUDIO ]; then
     # echo -en "$ESPEPACMAN"
     run_with_spinner "Instalando pulseaudio" sudo xbps-install -y alsa-utils pulseaudio gst-plugins-bad1 gst-plugins-base1 gst-plugins-good1 gst-plugins-ugly1 gst-libav
@@ -947,6 +947,12 @@ extras() {
   sudo sh -c "chattr +i /etc/resolv.conf"
 
   echo -e "$COK - DNS CONFIGURADO."
+
+  # sudo touch /etc/xbps.d/ignore_pkg.conf
+  # echo ignorepkg=iw | sudo tee /etc/xbps.d/ignore_pkg.conf
+  # echo ignorepkg=linux-firmware-nvidia | sudo tee -a /etc/xbps.d/ignore_pkg.conf
+  # run_with_spinner "Removendo iw" sudo xbps-remove -R iw linux-firmware-nvidia
+
 } # mudando dns <--
 
 finalizado() {
