@@ -2,7 +2,8 @@
 # fork script of https://github.com/Axarva/dotfiles-2.0/tree/main 
 # fork script of https://github.com/SolDoesTech/HyprV4/blob/2cf439c27475a32fd00e816a1fde82a5804efe2a/set-hypr 
 
-# #ADD setar variaveis do wayland 
+# #ADD 
+#TODO
 
 # cores letras de seleçao
 LETRA="\e[1;32m"
@@ -54,16 +55,6 @@ run_with_spinner() {
     wait $cmd_pid
     return $?
 }
-
-# barra de progresso
-# show_progress() {
-#   while ps | grep $1 &>/dev/null; do
-#     echo -n "."
-#     sleep 2
-#   done
-#   echo -en "\e[1;32mPRONTO!\e[0m]\n"
-#   sleep 2
-# }
 
 # porte 1
 inicio() {
@@ -256,7 +247,7 @@ WINDOWMANAGER
   fi
 
   # desktop app basicos
-  run_with_spinner "Programas desktop" sudo xbps-install -y mpv yt-dlp ntfs-3g zathura zathura-pdf-poppler gammastep imv alacritty fuzzel
+  run_with_spinner "Programas desktop" sudo xbps-install -y mpv yt-dlp ntfs-3g zathura zathura-pdf-poppler gammastep imv alacritty fuzzel swaybg
 
   # niri
   if [[ $WM == "niri" ]]; then

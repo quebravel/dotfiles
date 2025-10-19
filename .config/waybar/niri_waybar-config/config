@@ -17,7 +17,7 @@
                         "niri/window"],
                         "modules-right": [
                         "tray",
-                        "custom/xbps",
+                        // "custom/xbps",
                         "keyboard-state",
                         "niri/language",
                         "wireplumber",
@@ -251,13 +251,13 @@
                 "icon": true
         },
 
-        "custom/xbps": {
-            "format": "[   <span color='#fe8019'>{}</span>pkgs ]",
-            "return-type": "json",
-            "tooltip": true,
-            "interval": "3600",
-            "exec": "~/.config/waybar/scripts/xbps-updates.sh"
-        },
+        // "custom/xbps": {
+        //     "format": "[   <span color='#fe8019'>{}</span>pkgs ]",
+        //     "return-type": "json",
+        //     "tooltip": true,
+        //     "interval": "3600",
+        //     "exec": "~/.config/waybar/scripts/xbps-updates.sh"
+        // },
 
         "group/group-power": {
             "orientation": "horizontal",

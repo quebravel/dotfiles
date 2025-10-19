@@ -31,8 +31,8 @@ alias nawesome="nvim ~/.config/awesome/{rc.lua,mytheme.lua}"
 alias nniri="nvim ~/.config/niri/config.kdl"
 
 # xbps
-# alias xi="sudo xbps-install -S"
-# alias xiu="sudo xbps-install -Su"
+# alias xi="sudo xbps-install -Sy"
+# alias xiu="sudo xbps-install -Syu"
 # alias xr="sudo xbps-remove -R"
 # alias xq="xbps-query -Rs"
 # alias xo="sudo xbps-remove -Oo"
