@@ -18,7 +18,7 @@ italic.family = "JetBrainsMono Nerd Font"
 bold_italic.family = "JetBrainsMono Nerd Font"
 
 [window]
-opacity = 0.5
+opacity = 0.9
 padding.x = 0
 padding.y = 0
 decorations = "Full"
