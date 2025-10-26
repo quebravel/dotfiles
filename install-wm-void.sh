@@ -170,10 +170,10 @@ DRIVERDESENHO
   if [ $DRI == "xf86-video-amdgpu" ]; then
     # echo -en "$ESPEPACMAN - AMDGPU."
     # drivers 64bits
-    run_with_spinner "Instalando AMD" sudo xbps-install -y linux-firmware-amd mesa-dri vulkan-loader amdvlk xf86-video-amdgpu mesa-vaapi mesa-vdpau libvdpau-va-gl gstreamer1 # para placas AMD mais antigas intalar xf86-video-radeon, mesa-vulkan-radeon
+    run_with_spinner "Instalando AMD" sudo xbps-install -y linux-firmware-amd mesa-dri vulkan-loader amdvlk xf86-video-amdgpu mesa-vaapi mesa-vdpau libvdpau-va-gl gstreamer1 mesa-vulkan-radeon # para placas AMD mais antigas intalar xf86-video-radeon, mesa-vulkan-radeon
 
     # drivers 32bits 
-    run_with_spinner "Instalando amd 32bit" sudo xbps-install -y libgcc-32bit libstdc++-32bit libdrm-32bit libglvnd-32bit mono mesa-dri-32bit mesa-32bit vulkan-loader-32bit amdvlk-32bit mesa-vaapi-32bit mesa-vdpau-32bit libvdpau-va-gl-32bit # para placas AMD mais antigas intalar xf86-video-radeon-32bit, mesa-vulkan-radeon-32bit
+    run_with_spinner "Instalando amd 32bit" sudo xbps-install -y libgcc-32bit libstdc++-32bit libdrm-32bit libglvnd-32bit mono mesa-dri-32bit mesa-32bit vulkan-loader-32bit amdvlk-32bit mesa-vaapi-32bit mesa-vdpau-32bit libvdpau-va-gl-32bit mesa-vulkan-radeon-32bit # para placas AMD mais antigas intalar xf86-video-radeon-32bit, mesa-vulkan-radeon-32bit
 
     # sudo cp ./xorg_conf/40-amdgpu.conf /usr/share/X11/xorg.conf.d/
   fi
