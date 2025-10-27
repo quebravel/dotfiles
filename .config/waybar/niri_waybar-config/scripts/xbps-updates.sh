@@ -1,5 +1,7 @@
 #!/bin/bash
 
+sleep 10
+
 pkgs=$(xbps-install -nuM | awk '{print $1}')
 pkg_count=$(echo $pkgs | wc -w)
 pkg_list=$(echo $pkgs | sed 's/ /\\r/g')
