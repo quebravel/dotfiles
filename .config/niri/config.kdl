@@ -182,7 +182,7 @@ layout {
         // - CSS-like notation: "rgb(255, 127, 0)", rgba(), hsl() and a few others.
 
         // Color of the ring on the active monitor.
-        active-color "#ff79c6"
+        active-color "#9900ff"
 
         // Color of the ring on inactive monitors.
         inactive-color "#505050"

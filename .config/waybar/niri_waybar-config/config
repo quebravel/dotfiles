@@ -251,13 +251,14 @@
                 "icon": true
         },
 
-        // "custom/xbps": {
-        //     "format": "[   <span color='#fe8019'>{}</span>pkgs ]",
-        //     "return-type": "json",
-        //     "tooltip": true,
-        //     "interval": "3600",
-        //     "exec": "~/.config/waybar/scripts/xbps-updates.sh"
-        // },
+        "custom/xbps": {
+            "format": "  <span color='#ff5555'>{}</span>pkgs",
+            "return-type": "json",
+            "tooltip": true,
+            "interval": "3600",
+            "on-click": "~/.config/waybar/scripts/xbps-updates.sh",
+            "exec": "~/.config/waybar/scripts/xbps-updates.sh"
+        },
 
         "group/group-power": {
             "orientation": "horizontal",
