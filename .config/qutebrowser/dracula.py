@@ -3,39 +3,22 @@
 # Solarized Dark scheme by Ethan Schoonover (modified by aramisgithub)
 
 # Gruvbox
-# base00 = "#282828"
-# base01 = "#3c3836"
-# base02 = "#504945"
-# base03 = "#665c54"
-# base04 = "#bdae93"
-# base05 = "#d5c4a1"
-# base06 = "#ebdbb2"
-# base07 = "#fbf1c7"
-# base08 = "#fb4934"
-# base09 = "#fe8019"
-# base0A = "#fabd2f"
-# base0B = "#b8bb26"
-# base0C = "#8ec07c"
-# base0D = "#83a598"
-# base0E = "#d3869b"
-# base0F = "#d65d0e"
-
 base00 = "#282a36"
-base01 = "#181920"
-base02 = "#282a36"
-base03 = "#44475a"
-base04 = "#44475a"
-base05 = "#f8f8f2"
-base06 = "#e0e0e0"
-base07 = "#ffffff"
-base08 = "#6272a4"
-base09 = "#8be9fd"
-base0A = "#50fa7b"
-base0B = "#ffb86c"
-base0C = "#ff79c6"
-base0D = "#bd93f9"
-base0E = "#ff5555"
-base0F = "#f1fa8c"
+base01 = "#44475a"
+base02 = "#585c74"
+base03 = "#6e7291"
+base04 = "#c1c18b"
+base05 = "#d2d2ac"
+base06 = "#e4e4cd"
+base07 = "#f8f8f2"
+base08 = "#ff5555"
+base09 = "#bd93f9"
+base0A = "#f1fa8c"
+base0B = "#50fa7b"
+base0C = "#ffb86c"
+base0D = "#8be9fd"
+base0E = "#ff79c6"
+base0F = "#9900ff"
 
 # set qutebrowser colors
 # Background color of the tab bar.
@@ -51,16 +34,16 @@ c.colors.tabs.indicator.stop = base0C
 c.colors.tabs.indicator.error = base08
 
 # Foreground color of unselected odd tabs.
-c.colors.tabs.odd.fg = base01
+c.colors.tabs.odd.fg = base05
 
 # Background color of unselected odd tabs.
-c.colors.tabs.odd.bg = base0D
+c.colors.tabs.odd.bg = base03
 
 # Foreground color of unselected even tabs.
-c.colors.tabs.even.fg = base01
+c.colors.tabs.even.fg = base03
 
 # Background color of unselected even tabs.
-c.colors.tabs.even.bg = base08
+c.colors.tabs.even.bg = base04
 
 # Background color of pinned unselected even tabs.
 c.colors.tabs.pinned.even.bg = base0C
@@ -101,32 +84,32 @@ c.colors.tabs.selected.even.bg = base00
 # End tabs colors
 
 # cor fg | sites no "o" open.
-c.colors.completion.fg = base0A
+c.colors.completion.fg = base07
 
 # Background color of the completion widget for odd rows.
 c.colors.completion.odd.bg = base00
-c.colors.completion.even.bg = base03
+c.colors.completion.even.bg = base01
 
 # Foreground color of completion widget category headers.
 c.colors.completion.category.fg = base06
 c.colors.completion.category.bg = base03
 
 # Top border color of the completion widget category headers.
-c.colors.completion.category.border.top = base08
+c.colors.completion.category.border.top = base04
 
 # Bottom border color of the completion widget category headers.
-c.colors.completion.category.border.bottom = base02
+c.colors.completion.category.border.bottom = base00
 
 # Foreground color of the selected completion item.
 c.colors.completion.item.selected.fg = base01
-c.colors.completion.item.selected.bg = base0C
-c.colors.completion.item.selected.border.top = base0D
-c.colors.completion.item.selected.border.bottom = base0E
+c.colors.completion.item.selected.bg = base09
+c.colors.completion.item.selected.border.top = base0A
+c.colors.completion.item.selected.border.bottom = base0F
 
-# Foreground color of the matched text in the selected completion item. SMARTH
-c.colors.completion.item.selected.match.fg = base09
+# Foreground color of the matched text in the selected completion item.
+c.colors.completion.item.selected.match.fg = base07
 # Foreground color of the matched text in the completion.
-c.colors.completion.match.fg = base0D
+c.colors.completion.match.fg = base0B
 
 # Color of the scrollbar handle in the completion view.
 c.colors.completion.scrollbar.fg = base05
@@ -178,9 +161,9 @@ c.colors.messages.info.bg = base00
 c.colors.messages.info.border = base00
 
 # Background color for prompts.
-c.colors.prompts.bg = base08
-c.colors.prompts.fg = base06
-c.colors.prompts.border = '0.5px solid #50fa7b'
+c.colors.prompts.bg = base00
+c.colors.prompts.fg = base04
+c.colors.prompts.border = '0.5px solid #fe8019'
 c.colors.prompts.selected.bg = base0A
 
 # Foreground color of the statusbar.
@@ -224,27 +207,29 @@ c.colors.statusbar.caret.selection.fg = base00
 c.colors.statusbar.caret.selection.bg = base0D
 
 # Background color of the progress bar.
-c.colors.statusbar.progress.bg = base0D
+c.colors.statusbar.progress.bg = base09
 
 # Default color of the URL in the statusbar.
-c.colors.statusbar.url.fg = base0D
+c.colors.statusbar.url.fg = base05
 c.colors.statusbar.url.error.fg = base08
 c.colors.statusbar.url.hover.fg = base05
 c.colors.statusbar.url.warn.fg = base0E
-c.colors.statusbar.url.success.http.fg = base0D
-c.colors.statusbar.url.success.https.fg = base0D
+c.colors.statusbar.url.success.http.fg = base0C
+c.colors.statusbar.url.success.https.fg = base06
 
-c.colors.keyhint.fg = base09
-c.colors.keyhint.suffix.fg = base0C
+c.colors.keyhint.fg = base07
+c.colors.keyhint.suffix.fg = base0A
 c.colors.keyhint.bg = 'rgba(40, 40, 40, 97%)'
 
 # Font color for hints.
-c.colors.hints.fg = base00
-c.colors.hints.bg = base09
-c.colors.hints.match.fg = base0C
+# c.colors.hints.fg = base00
+c.colors.hints.fg = 'black'
+# c.colors.hints.bg = base09
+c.colors.hints.bg = 'qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 rgba(250, 199, 0, 0.9), stop:1 rgba(255, 109, 0, 0.9))'
+c.colors.hints.match.fg = base07
 c.hints.border = "0px"
 
 c.colors.statusbar.insert.fg = base00
 c.colors.statusbar.insert.bg = base09
 
-c.colors.webpage.bg = base08
+# c.colors.webpage.bg = base05
