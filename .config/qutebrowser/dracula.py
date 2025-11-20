@@ -4,9 +4,9 @@
 
 # Gruvbox
 base00 = "#282a36"
-base01 = "#44475a"
+base01 = "#44475a" #letras de selecao + contra cor
 base02 = "#585c74"
-base03 = "#6e7291"
+base03 = "#6e7291" #barra titulo
 base04 = "#c1c18b"
 base05 = "#d2d2ac"
 base06 = "#e4e4cd"
@@ -34,13 +34,13 @@ c.colors.tabs.indicator.stop = base0C
 c.colors.tabs.indicator.error = base08
 
 # Foreground color of unselected odd tabs.
-c.colors.tabs.odd.fg = base05
+c.colors.tabs.odd.fg = base07
 
 # Background color of unselected odd tabs.
 c.colors.tabs.odd.bg = base03
 
 # Foreground color of unselected even tabs.
-c.colors.tabs.even.fg = base03
+c.colors.tabs.even.fg = base00
 
 # Background color of unselected even tabs.
 c.colors.tabs.even.bg = base04
@@ -84,9 +84,9 @@ c.colors.tabs.selected.even.bg = base00
 # End tabs colors
 
 # cor fg | sites no "o" open.
-c.colors.completion.fg = base07
+c.colors.completion.fg = "#d3b7fb"
 
-# Background color of the completion widget for odd rows.
+# Background color of the completion widget for odd rows. cor sim cor nao
 c.colors.completion.odd.bg = base00
 c.colors.completion.even.bg = base01
 
@@ -102,17 +102,17 @@ c.colors.completion.category.border.bottom = base00
 
 # Foreground color of the selected completion item.
 c.colors.completion.item.selected.fg = base01
-c.colors.completion.item.selected.bg = base09
-c.colors.completion.item.selected.border.top = base0A
-c.colors.completion.item.selected.border.bottom = base0F
+c.colors.completion.item.selected.bg = base0B #"#20f856"
+c.colors.completion.item.selected.border.top = "#b5fdc7"
+c.colors.completion.item.selected.border.bottom = "#07df3d"
 
 # Foreground color of the matched text in the selected completion item.
-c.colors.completion.item.selected.match.fg = base07
+c.colors.completion.item.selected.match.fg = base0F #"#ff4da6"
 # Foreground color of the matched text in the completion.
 c.colors.completion.match.fg = base0B
 
 # Color of the scrollbar handle in the completion view.
-c.colors.completion.scrollbar.fg = base05
+c.colors.completion.scrollbar.fg = base0E
 
 # Color of the scrollbar in the completion view.
 c.colors.completion.scrollbar.bg = base00
@@ -183,7 +183,7 @@ c.colors.statusbar.private.fg = base00
 c.colors.statusbar.private.bg = base03
 
 # Foreground color of the statusbar in command mode onde digita a URL.
-c.colors.statusbar.command.fg = base06
+c.colors.statusbar.command.fg = "#08f744"
 
 # Background color of the statusbar in command mode.
 c.colors.statusbar.command.bg = base01
@@ -225,7 +225,7 @@ c.colors.keyhint.bg = 'rgba(40, 40, 40, 97%)'
 # c.colors.hints.fg = base00
 c.colors.hints.fg = 'black'
 # c.colors.hints.bg = base09
-c.colors.hints.bg = 'qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 rgba(250, 199, 0, 0.9), stop:1 rgba(255, 109, 0, 0.9))'
+c.colors.hints.bg = 'qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 rgba(139, 233, 253, 0.9), stop:1 rgba(80, 250, 123, 0.9))'
 c.colors.hints.match.fg = base07
 c.hints.border = "0px"
 
@@ -233,3 +233,4 @@ c.colors.statusbar.insert.fg = base00
 c.colors.statusbar.insert.bg = base09
 
 # c.colors.webpage.bg = base05
+
