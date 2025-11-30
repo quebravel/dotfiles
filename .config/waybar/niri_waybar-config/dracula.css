@@ -1,0 +1,42 @@
+/*
+*
+* gruvbox
+*
+*/
+
+@define-color base   #21222c;
+@define-color mantle #282a36;
+@define-color crust  #44475a;
+
+@define-color text     #ffffff;
+@define-color subtext0 #f8f8f2;
+@define-color subtext1 #6272a4;
+
+@define-color surface0 #f8f8f2;
+@define-color surface1 #f8f8f2;
+@define-color surface2 #f8f8f2;
+
+@define-color overlay0 #3e4452;
+@define-color overlay1 #4b5263;
+@define-color overlay2 #3b4048;
+
+@define-color blue      #a4ffff;
+@define-color lavender  #ff79c6;
+@define-color sapphire  #69ff94;
+@define-color sky       #bfffff;
+@define-color teal      #bd93f9;
+@define-color green     #69ff90;
+@define-color yellow    #f1fa8c;
+@define-color maroon    #ff6e6e;
+@define-color red       #ff5555;
+@define-color mauve     #ff92df;
+@define-color peach             #50fa7b;
+@define-color neutral_orange    #ffb86c;
+@define-color orange            #ffa86c;
+@define-color neutral_aqua      #50fa7b;
+@define-color faded_aqua        #42fbfd;
+@define-color bright_green      #55ff55;
+
+@define-color azul              #3333ff;
+@define-color roxo              #9900ff;
+@define-color green_black       #05ad2f;

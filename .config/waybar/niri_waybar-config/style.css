@@ -1,4 +1,4 @@
-@import "gruvbox.css";
+@import "dracula.css";
 /* @import "mocha.css"; */
 
 * {
@@ -172,7 +172,7 @@ button:hover {
 
 #custom-kenel {
     background-color: transparent;
-    color: @subtext0;
+    color: @green_black;
     padding: 0px 10px 0px 10px;
     font-style: normal;
 }
@@ -190,16 +190,19 @@ button:hover {
 }
 
 #clock {
-    background-color: transparent;
-    color: white;
+    background-color: @overlay0;
+    color: @bright_green;
     margin-right: 0px;
     font-weight: bold;
     padding-left: 0px;
-    padding-right: 10px;
+    padding-right: 5px;
     font-style: normal;
+    border-radius: 5px 5px 5px 5px;
+    margin-top: 3px;
+    margin-bottom: 3px;
 }
 #clock:hover {
-    color: @peach;
+    color: @orange;
 }
 
 @keyframes blink {
@@ -307,7 +310,7 @@ label:focus {
     border-radius: 0px 0px 10px 0px;
     margin-left: 0px;
     padding: 0px 10px 0px 10px;
-    color: @text;
+    color: @mauve;
 }
 
 #mpd.disconnected {
@@ -355,7 +358,7 @@ tooltip label {
 }
 #keyboard-state label {
     color: @subtext0;
-    background-color: @mantle;
+    background-color: @overlay0;
     border-radius: 5px;
     margin-top: 3px;
     margin-bottom: 3px;
@@ -377,7 +380,7 @@ tooltip label {
 #custom-lock,
 #custom-reboot,
 #custom-power {
-	padding-left: 1px;
+	padding-left: 10px;
 	padding-right: 15px;
 	color: @teal;
 	border-radius: 1px;
