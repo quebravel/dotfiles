@@ -11,7 +11,7 @@
 
 #waybar {
     /* background: alpha(@crust, 0.5); */
-    background: rgba(40, 42, 54, 0.80); 
+    background: rgba(40, 42, 54, 1.0); 
     /* border-radius: 0px 0px 0px 0px; */
 }
 
@@ -166,7 +166,7 @@ button:hover {
 #keyboard-state,
 #temperature {
     background-color: transparent;
-    color: @subtext0;
+    color: @teal;
     padding: 0px 10px 0px 10px;
 }
 
@@ -178,7 +178,7 @@ button:hover {
 }
 #disk {
     background-color: transparent;
-    color: @subtext0;
+    color: @teal;
     padding: 0px 10px 0px 10px;
     font-style: normal;
 }
@@ -218,7 +218,7 @@ label:focus {
 
 #memory {
     background-color: transparent;
-    color: @subtext0;
+    color: @teal;
     padding: 0px 10px 0px 10px;
     font-style: normal;
 }
@@ -228,7 +228,7 @@ label:focus {
     border-radius: 0px 0px 0px 0px;
     padding: 0px 10px 0px 10px;
     margin-left: 0px;
-    color: @subtext0;
+    color: @teal;
     font-style: normal;
 }
 
@@ -243,7 +243,7 @@ label:focus {
 }
 
 #wireplumber {
-    background-color: @teal;
+    background-color: @roxo;
     color: white;
     border-radius: 5px 5px 5px 5px;
     padding: 0px 10px 0px 10px;
@@ -255,6 +255,7 @@ label:focus {
 }
 #wireplumber:hover {
     background-color: @peach;
+    color: black;
 }
 #wireplumber.muted {
     background-color: @red;
@@ -335,7 +336,7 @@ label:focus {
 }
 
 #language {
-    color: @subtext0;
+    color: @teal;
     padding: 0px 10px 0px 10px;
     min-width: 10px;
     border-radius: 0px 0px 0px 0px; 
