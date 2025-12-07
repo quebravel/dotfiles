@@ -428,7 +428,7 @@ binds {
     // The allow-when-locked=true property makes them work even when the session is locked.
     // Mod+BackSpace allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%+"; }
     // Mod+BackSlash allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%-"; }
-    Mod+BackSpace        allow-when-locked=true hotkey-overlay-title="Trocar saida de audio" { spawn "~/.config/niri/scripts_niri/fuzzel-wpctl"; }
+    Mod+BackSpace        allow-when-locked=true hotkey-overlay-title="Trocar saida de audio" { spawn "~/.config/niri/scripts_niri/audio_changer.py"; }
 
     XF86AudioMute        allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
     XF86AudioMicMute     allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
