@@ -283,6 +283,17 @@ layout {
         // top 64
         // bottom 64
     }
+
+    // Set transparent workspace background color.
+    background-color "transparent"
+
+}
+
+// Optionally, disable the workspace shadows in the overview.
+overview {
+    workspace-shadow {
+        off
+    }
 }
 
 // Add lines like this to spawn processes at startup.
@@ -395,6 +406,13 @@ window-rule {
 window-rule {
     match app-id="mpv"
     open-floating true
+}
+
+layer-rule {
+    // This is for swaybg; change for other wallpaper tools.
+    // Find the right namespace by running niri msg layers.
+    match namespace="^wallpaper$"
+    place-within-backdrop true
 }
 
 binds {
