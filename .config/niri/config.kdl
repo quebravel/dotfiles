@@ -197,7 +197,8 @@ layout {
         // - CSS-like notation: "rgb(255, 127, 0)", rgba(), hsl() and a few others.
 
         // Color of the ring on the active monitor.
-        active-color "#9900ff"
+        // active-color "#9900ff"
+        active-gradient from="#ff79c6" to="#00ff00" angle=90
 
         // Color of the ring on inactive monitors.
         inactive-color "#505050"
@@ -412,7 +413,7 @@ layer-rule {
     // This is for swaybg; change for other wallpaper tools.
     // Find the right namespace by running niri msg layers.
     match namespace="^wallpaper$"
-    place-within-backdrop true
+    // place-within-backdrop true
 }
 
 binds {
