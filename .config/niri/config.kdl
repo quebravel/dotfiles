@@ -464,6 +464,7 @@ binds {
     Mod+Shift+D     hotkey-overlay-title="Poweroff"                         { spawn "~/.config/niri/scripts_niri/fuzzel-power"; }
     Super+Alt+L     hotkey-overlay-title="Lock the Screen: swaylock"        { spawn "swaylock"; }
     Mod+B           hotkey-overlay-title="oculta waybar"                    { spawn "killall" "-SIGUSR1" "waybar"; }
+    Mod+Shift+B     hotkey-overlay-title="reiniciar waybar"                 { spawn-sh "pkill waybar; waybar"; }
 
     // You can also use a shell. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument in the end.
