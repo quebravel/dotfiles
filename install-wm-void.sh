@@ -238,7 +238,7 @@ WINDOWMANAGER
       done
       sleep 0.2
       # pacotes wayland
-      run_with_spinner "Instalando wayland" sudo xbps-install -y wayland xorg-server-xwayland qt6-wayland xdg-user-dirs xdg-desktop-portal xdg-desktop-portal-gnome xwayland-satellite
+      run_with_spinner "Instalando wayland" sudo xbps-install -y wayland xorg-server-xwayland qt6-wayland xdg-utils xdg-user-dirs xdg-desktop-portal xdg-desktop-portal-gnome xwayland-satellite
       sleep 0.2
 
       if [[ -f /usr/bin/xdg-user-dirs-update ]]; then
@@ -248,6 +248,9 @@ WINDOWMANAGER
 
   # desktop app basicos
   run_with_spinner "Programas desktop" sudo xbps-install -y mpv yt-dlp ntfs-3g zathura zathura-pdf-poppler gammastep imv alacritty fuzzel swaybg mako libnotify
+
+  xdg-mime default imv.desktop image/jpeg
+  xdg-mime default imv.desktop image/png
 
   # niri
   if [[ $WM == "niri" ]]; then
