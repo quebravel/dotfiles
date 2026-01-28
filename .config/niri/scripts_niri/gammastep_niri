@@ -1,0 +1,19 @@
+#!/bin/sh
+
+pid=$(pgrep -c gammastep)
+
+if [ $pid > 1 ]; then
+	if pgrep -x "gammastep" > /dev/null; then
+		kill -9 $(pgrep -x "gammastep");
+	else
+		gammastep #-O ${GAMMASTEP_NIGHT:-3500} &
+	fi
+fi
+
+if pgrep -x "gammastep" > /dev/null; then
+	# echo ""
+	echo "Nightlight is on"
+else
+	# echo ""
+	echo "Nightlight is off"
+fi

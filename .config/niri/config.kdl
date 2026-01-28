@@ -461,6 +461,7 @@ binds {
     // Mod+P           hotkey-overlay-title="Run an Application: rofi"         { spawn "rofi" "-show"; }
     // Mod+T           hotkey-overlay-title="Open a Terminal: kitty"           { spawn "kitty"; }
     Mod+P           hotkey-overlay-title="Run an Application: fuzzel"       { spawn "fuzzel"; }
+    Mod+G           hotkey-overlay-title="Gamma"                            { spawn-sh "~/.config/niri/scripts_niri/gammastep_niri"; }
     Mod+Shift+D     hotkey-overlay-title="Poweroff"                         { spawn "~/.config/niri/scripts_niri/fuzzel-power"; }
     Super+Alt+L     hotkey-overlay-title="Lock the Screen: swaylock"        { spawn "swaylock"; }
     Mod+B           hotkey-overlay-title="oculta waybar"                    { spawn "killall" "-SIGUSR1" "waybar"; }
