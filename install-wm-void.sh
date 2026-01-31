@@ -669,6 +669,7 @@ if [[ $FILEMANAGER = YAZI ]]; then
   # configurações yazi
   rm --recursive --force ~/.config/yazi
   cp --recursive --force ./.config/yazi ~/.config/
+  ya pkg add yazi-rs/plugins:mount
 else
   echo ""
 fi
