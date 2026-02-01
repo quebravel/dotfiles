@@ -13,6 +13,7 @@ alias mkfs.ntfs='mkfs.ntfs --fast'
 alias lynx='lynx -cfg=~/lynx.cfg'
 alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 alias limpar='sudo pacman -Rs $(pacman -Qdtq)'
+alias limpar-xbps='sudo xbps-remove -oO && sudo xbps-remove -OO && sudo sudo vkpurge rm all'
 alias i='imv -r .'
 alias m="man -P less"
 alias atualizar-data-hora='sudo date -s "$(wget --method=HEAD -qSO- --max-redirect=0 google.com 2>&1 | sed -n "s/^ *Date: *//p")"'
