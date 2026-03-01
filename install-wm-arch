@@ -1055,6 +1055,7 @@ RANGER-DESENHO
     run_with_spinner "instalando yazi" pacman_pkg_install "yazi ffmpeg 7zip jq poppler fd ripgrep zoxide imagemagick ueberzugpp" 
     
     cp --recursive --force ./.config/yazi ~/.config/
+    run_with_spinner "plugin yazi mont" ya pkg add yazi-rs/plugins:mount
   else
     echo ""
   fi
