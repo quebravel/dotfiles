@@ -351,7 +351,7 @@ WINDOWMANAGER
 
   if [[ $WM_WAYLAND = "niri" ]]; then
     # echo -en "$ESPEPACMAN - INSTALAÇAO DE NIRI."
-    run_with_spinner "instalando niri" pacman_pkg_install "$WM_WAYLAND wl-clipboard seatd swaybg ttf-font-awesome waybar xwayland-satellite"
+    run_with_spinner "instalando niri" pacman_pkg_install "$WM_WAYLAND wl-clipboard seatd swaybg ttf-font-awesome waybar xwayland-satellite fuzzel foot"
     sleep 0.2
     echo -en "$CONFIGANDO"
     sudo systemctl enable seatd.service &>>$INSTLOG
