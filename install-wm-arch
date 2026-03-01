@@ -372,12 +372,13 @@ WINDOWMANAGER
   fi
 
   if [[ $WM_WAYLAND = "niri" ]]; then
-    rm --recursive --force ~/.config/{hypr,waybar,rofi,imv}
-    cp -r ./.config/hypr ~/.config/
+    rm --recursive --force ~/.config/{hypr,waybar,imv,niri,foot,fuzzel}
     mkdir -p ~/.config/waybar
     cp -r ./.config/waybar/niri_waybar-config/* ~/.config/waybar/
-    cp -r ./.config/rofi ~/.config/
     cp -r ./.config/imv ~/.config/
+    cp -r ./.config/niri ~/.config/
+    cp -r ./.config/foot ~/.config/
+    cp -r ./.config/fuzzel ~/.config/
     echo -e "$COK - CONFIGURACAO DO $WM_WAYLAND."
   fi
 
