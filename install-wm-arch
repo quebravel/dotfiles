@@ -181,7 +181,7 @@ DRIVERDESENHO
   # complemetos para os drivers
   if [ $DRI == "xf86-video-amdgpu" ]; then
     # echo -en "$ESPEPACMAN - AMDGPU."
-    run_with_spinner "instalando amdgpu" pacman_pkg_install "xf86-video-amdgpu mesa-libgl mesa-vdpau libvdpau-va-gl vulkan-radeon" # driver open-source (melhor)
+    run_with_spinner "instalando amdgpu" pacman_pkg_install "xf86-video-amdgpu mesa-libgl libvdpau-va-gl vulkan-radeon" # driver open-source (melhor)
     sudo cp ./xorg_conf/40-amdgpu.conf /usr/share/X11/xorg.conf.d/
   fi
   if [ $DRI == "xf86-video-intel" ]; then
@@ -350,7 +350,7 @@ WINDOWMANAGER
   fi
 
   if [[ $WM_WAYLAND = "niri" ]]; then
-    echo -en "$ESPEPACMAN - INSTALAÇAO DE NIRI."
+    # echo -en "$ESPEPACMAN - INSTALAÇAO DE NIRI."
     run_with_spinner "instalando niri" pacman_pkg_install "$WM_WAYLAND wl-clipboard seatd swaybg ttf-font-awesome waybar xwayland-satellite"
     sleep 0.2
     echo -en "$CONFIGANDO"
@@ -1112,7 +1112,7 @@ AUDIOCONF
 zshinstall() {
   sleep 0.2
 
-  echo -en "$ESPEPACMAN - INSTALAÇAO DO ZSH."
+  # echo -en "$ESPEPACMAN - INSTALAÇAO DO ZSH."
   run_with_spinner "instalando zsh" pacman_pkg_install "zsh zsh-completions" 
   
 
@@ -1124,7 +1124,7 @@ fontes_doSistema() {
   sleep 0.2
 
   # wqy-microhei (koreano), cjk (japones)
-  echo -en "$ESPEPACMAN - INSTALAÇAO DAS FONTES DO SISTEMA."
+  # echo -en "$ESPEPACMAN - INSTALAÇAO DAS FONTES DO SISTEMA."
   run_with_spinner "instalando fontes do sistema" pacman_pkg_install "ttf-dejavu noto-fonts-emoji gnu-free-fonts wqy-microhei noto-fonts-cjk xorg-fonts-75dpi xorg-fonts-100dpi xorg-fonts-encodings ttf-jetbrains-mono-nerd" 
   
 
@@ -1177,7 +1177,7 @@ NAVEGADOR-DESENHO
     run_with_spinner "instalando qutebrowser" pacman_pkg_install "qutebrowser python-adblock" 
     
     echo -en "$CONFIGANDO"
-    /usr/share/qutebrowser/scripts/dictcli.py install pt-BR 
+    # /usr/share/qutebrowser/scripts/dictcli.py install pt-BR 
     
 
     mkdir -p ~/.config/qutebrowser/
