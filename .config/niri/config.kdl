@@ -417,6 +417,15 @@ window-rule {
 }
 
 window-rule {
+    match app-id="pavucontrol"
+    min-width 900
+    min-height 500
+    opacity 0.94
+    default-floating-position x=1600 y=650 relative-to="bottom-left"
+    open-floating true
+}
+
+window-rule {
     match app-id="^Alacritty$"
     default-column-width { proportion 0.35; }
 }
