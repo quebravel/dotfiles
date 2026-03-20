@@ -815,7 +815,7 @@ denteazul() {
   read -rep "$(echo -e $CAC) - Este computador tem bluetooth? - (s,n) ... " CONTINUAR
   case "$CONTINUAR" in
   s | S)
-    run_with_spinner "Instalando bluetooth" sudo xbps-install -y bluez bluez-obex libspa-bluetooth bluetuith
+    run_with_spinner "Instalando bluetooth" sudo xbps-install -y bluez bluez-obex bluez-alsa libspa-bluetooth bluetuith
     sudo ln -s /etc/sv/bluetoothd /var/service
     sudo usermod -aG bluetooth ${USER}
     ;;
