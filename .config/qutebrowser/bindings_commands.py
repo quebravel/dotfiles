@@ -18,5 +18,6 @@ c.bindings.commands = {
             , '<Ctrl+Shift+T>': 'spawn --userscript translate.sh --text'
             , ',r': 'hint links userscript transmission.sh' 
             , ',d': 'config-cycle colors.webpage.darkmode.enabled False True' 
+            , ',u': 'spawn --userscript update_easylist.sh'
             }
         }
