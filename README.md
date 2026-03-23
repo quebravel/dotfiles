@@ -171,3 +171,5 @@
    -------|--------
       **`super`** + **`u`**| Escolhe dispositivo.
       **`super`** + **`shift`** + **`u`**| Remove pendrive montado.
+
+      - todo niri
