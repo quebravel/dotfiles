@@ -1,4 +1,5 @@
 local wezterm = require 'wezterm'
+local act = wezterm.action
 local config = {}
 
 config.color_scheme = 'Dracula'
@@ -27,6 +28,8 @@ window_decorations = "TITLE | RESIZE"
 
 config.keys = {
   { key = 'Escape', mods = 'ALT', action = wezterm.action.ActivateCopyMode },
+  { key = 'K', mods = 'CTRL|SHIFT', action = act.ScrollByLine(-1) },
+  { key = 'J', mods = 'CTRL|SHIFT', action = act.ScrollByLine(1) },
 }
 
 return config
