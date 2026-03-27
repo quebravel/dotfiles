@@ -47,6 +47,9 @@ function y() {
 	rm -f -- "$tmp"
 }
 
+# resetar cores LS_COLORS
+eval "$(dircolors -b)"
+
 # if [ -z "${WAYLAND_DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
 #     dbus-run-session Hyprland
 # fi
