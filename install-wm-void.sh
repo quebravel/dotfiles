@@ -301,11 +301,17 @@ WINDOWMANAGER
     rm --recursive --force ~/.config/mpv
     mkdir -p ~/.config/mpv/
     cp --recursive ./.config/mpv/* ~/.config/mpv/
-    # mkdir -p ~/.config/mpv/scripts/
+    # mpv/scripts/
+    # Baixa legendas do youtube
     wget "https://raw.githubusercontent.com/Idlusen/mpv-ytsub/refs/heads/main/ytsub.lua" -P ~/.config/mpv/scripts/
+    # Interface moderna
     wget "https://raw.githubusercontent.com/zydezu/ModernX/refs/heads/main/modernx.lua" -P ~/.config/mpv/scripts/
+    # Navegador de arquivos - ctrl + f
     wget "https://raw.githubusercontent.com/jonniek/mpv-filenavigator/refs/heads/master/navigator.lua" -P ~/.config/mpv/scripts/
+    # Realça barro de progresso com miniatura do video no tempo correspondente.
     wget "https://raw.githubusercontent.com/po5/thumbfast/refs/heads/master/thumbfast.lua" -P ~/.config/mpv/scripts/
+    # Volta onde você estava depois que clicou em algum ponto da barra de progresso. (Ctrl + z)
+    wget "https://raw.githubusercontent.com/Eisa01/mpv-scripts/refs/heads/master/scripts/UndoRedo.lua" -P ~/.config/mpv/scripts/
 
   # configurações imv
     rm --recursive --force ~/.config/imv
