@@ -301,6 +301,8 @@ WINDOWMANAGER
     rm --recursive --force ~/.config/mpv
     mkdir -p ~/.config/mpv/
     cp --recursive ./.config/mpv/* ~/.config/mpv/
+    mkdir -p ~/.config/mpv/scripts/
+    wget "https://raw.githubusercontent.com/Idlusen/mpv-ytsub/refs/heads/main/ytsub.lua" -P ~/.config/mpv/scripts/
 
   # configurações imv
     rm --recursive --force ~/.config/imv
