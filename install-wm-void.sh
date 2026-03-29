@@ -247,7 +247,7 @@ WINDOWMANAGER
   fi
 
   # desktop app basicos
-  run_with_spinner "Programas desktop" sudo xbps-install -y mpv yt-dlp ntfs-3g zathura zathura-pdf-poppler gammastep imv alacritty fuzzel swaybg mako libnotify
+  run_with_spinner "Programas desktop" sudo xbps-install -y mpv yt-dlp ntfs-3g zathura zathura-pdf-poppler gammastep imv alacritty fuzzel swaybg mako libnotify python3-pipx
 
   xdg-mime default imv.desktop image/jpeg
   xdg-mime default imv.desktop image/png
@@ -312,6 +312,9 @@ WINDOWMANAGER
     wget "https://raw.githubusercontent.com/po5/thumbfast/refs/heads/master/thumbfast.lua" -P ~/.config/mpv/scripts/
     # Volta onde você estava depois que clicou em algum ponto da barra de progresso. (Ctrl + z)
     wget "https://raw.githubusercontent.com/Eisa01/mpv-scripts/refs/heads/master/scripts/UndoRedo.lua" -P ~/.config/mpv/scripts/
+    # instalar subliminal com pip
+    pipx install subliminal
+    run_with_spinner "Removendo python3-pipx" sudo xbps-remove --recursive --yes python3-pipx
 
   # configurações imv
     rm --recursive --force ~/.config/imv
