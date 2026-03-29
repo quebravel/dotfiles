@@ -304,6 +304,8 @@ WINDOWMANAGER
     # mkdir -p ~/.config/mpv/scripts/
     wget "https://raw.githubusercontent.com/Idlusen/mpv-ytsub/refs/heads/main/ytsub.lua" -P ~/.config/mpv/scripts/
     wget "https://raw.githubusercontent.com/zydezu/ModernX/refs/heads/main/modernx.lua" -P ~/.config/mpv/scripts/
+    wget "https://raw.githubusercontent.com/jonniek/mpv-filenavigator/refs/heads/master/navigator.lua" -P ~/.config/mpv/scripts/
+    wget "https://raw.githubusercontent.com/po5/thumbfast/refs/heads/master/thumbfast.lua" -P ~/.config/mpv/scripts/
 
   # configurações imv
     rm --recursive --force ~/.config/imv
