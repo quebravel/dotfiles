@@ -18,7 +18,9 @@ base0B = "#b8bb26"
 base0C = "#8ec07c"
 base0D = "#83a598"
 base0E = "#d3869b"
-base0F = "#d65d0e"
+base0F = "#af3a03"
+base0G = "#458588"
+base0H = "#d79921"
 
 # set qutebrowser colors
 # Background color of the tab bar.
@@ -180,7 +182,7 @@ c.colors.statusbar.passthrough.bg = base0C
 c.colors.statusbar.private.fg = base00
 
 # Background color of the statusbar in private browsing mode.
-c.colors.statusbar.private.bg = base03
+c.colors.statusbar.private.bg = base0H
 
 # Foreground color of the statusbar in command mode onde digita a URL.
 c.colors.statusbar.command.fg = base06
@@ -189,10 +191,10 @@ c.colors.statusbar.command.fg = base06
 c.colors.statusbar.command.bg = base01
 
 # Foreground color of the statusbar in private browsing + command mode.
-c.colors.statusbar.command.private.fg = base05
+c.colors.statusbar.command.private.fg = base00
 
 # Background color of the statusbar in private browsing + command mode.
-c.colors.statusbar.command.private.bg = base00
+c.colors.statusbar.command.private.bg = base0A
 
 # Foreground color of the statusbar in caret mode.
 c.colors.statusbar.caret.fg = base00
@@ -212,10 +214,10 @@ c.colors.statusbar.progress.bg = base09
 # Default color of the URL in the statusbar.
 c.colors.statusbar.url.fg = base05
 c.colors.statusbar.url.error.fg = base08
-c.colors.statusbar.url.hover.fg = base05
+c.colors.statusbar.url.hover.fg = base0G
 c.colors.statusbar.url.warn.fg = base0E
 c.colors.statusbar.url.success.http.fg = base0C
-c.colors.statusbar.url.success.https.fg = base06
+c.colors.statusbar.url.success.https.fg = base05
 
 c.colors.keyhint.fg = base07
 c.colors.keyhint.suffix.fg = base0A
@@ -229,7 +231,7 @@ c.colors.hints.bg = 'qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 rgba(250, 19
 c.colors.hints.match.fg = base07
 c.hints.border = "0px"
 
-c.colors.statusbar.insert.fg = base00
-c.colors.statusbar.insert.bg = base09
+c.colors.statusbar.insert.fg = base05
+c.colors.statusbar.insert.bg = base0F
 
 # c.colors.webpage.bg = base05
