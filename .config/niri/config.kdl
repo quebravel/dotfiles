@@ -309,6 +309,7 @@ spawn-at-startup "waybar"
 spawn-at-startup "mako"
 spawn-at-startup "mpd"
 spawn-at-startup "pipewire"
+spawn-at-startup "plasma-apply-colorscheme" "BreezeDark"
 spawn-at-startup "gsettings" "set" "org.gnome.desktop.interface" "color-scheme" "prefer-dark"
 spawn-at-startup "swaybg" "-m" "fill" "-i" "/home/jonatas/wallpapers/anime-girl-dj-2k.jpg"
 
