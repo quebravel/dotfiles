@@ -9,24 +9,26 @@
         "margin-bottom": 0,
         "spacing": 0,
         // Choose the order of the modules
-        "modules-left": ["custom/void-icon",
-		                "user",
-                        "custom/kenel",
-                        "mpd",
-                        "network",
-                        "niri/window"],
-                        "modules-right": [
-                        "tray",
-                        // "custom/xbps",
-                        "keyboard-state",
-                        "niri/language",
-                        "wireplumber",
-                        // "pulseaudio/slider",
-                        "disk",
-                        "memory",
-                        "temperature",
-                        "clock",
-                        "group/group-power"],
+        "modules-left": [
+          "custom/void-icon",
+		      "user",
+          "custom/kenel",
+          "mpd",
+          "network",
+          "niri/window"],
+        "modules-right": [
+          "tray",
+          "bluetooth",
+          // "custom/xbps",
+          "keyboard-state",
+          "niri/language",
+          "wireplumber",
+          // "pulseaudio/slider",
+          "disk",
+          "memory",
+          "temperature",
+          "clock",
+          "group/group-power"],
         // Modules configuration
         // "niri/workspaces": {
         //     "on-click": "activate",
@@ -133,17 +135,22 @@
         },
 
         "network": {
-            // "interface": "enp3s0" // (Optional) To force the use of this interface
-            "format-wifi": "<span color='#f9f5d7'>\udb80\udc02</span> {essid} ({signalStrength}%)",
-            "format-ethernet": "<span color='#f9f5d7'>\udb83\udc9d</span> {ifname}: {ipaddr}/{cidr} ",
+            "format-wifi": "{icon} {essid} {signalStrength}%",
+            "format-ethernet": "<span color='#f9f5d7'>󰈀</span> {ifname}: {ipaddr}/{cidr} ",
             "format-linked": "{ifname} (No IP) \udb84\udf94</span>",
-            "format-disconnected": "Disconnected \udb86\uddd2</span>",
+            "format-disconnected": "<span color='#f9f5d7'>󰤯</span>",
+            "format-disabled": "<span color='#f9f5d7'>󰤮</span>",
+            "format-icons": [
+              "<span color='#f9f5d7'>󰤟</span>",
+              "<span color='#f9f5d7'>󰤢</span>",
+              "<span color='#f9f5d7'>󰤥</span>",
+              "<span color='#f9f5d7'>󰤨</span>"
+            ],
+            "on-click": "foot -e ~/.config/waybar/scripts/network",
+            "on-click-right": "~/.config/waybar/scripts/network off",
             "format-alt": "<span color='#f9f5d7'>\udb86\udd82</span> {ipaddr}",
             "interval": 1,
-            "tooltip-format": "{ifname} via {gwaddr} <span color='#f9f5d7'>\udb84\udf94</span>",
-            "tooltip-format-wifi": "{essid} ({signalStrength}%) <span color='#f9f5d7'>\udb82\udd28</span>",
-            "tooltip-format-ethernet": "<span color='#f9f5d7'>{ifname}</span>",
-            "tooltip-format-disconnected": "Disconnected <span color='#f9f5d7'>\udb80\udf19</span>"
+            "tooltip": false,
                 // , "max-length": 14
         },
 
@@ -158,6 +165,27 @@
             "min": 0,
             "max": 100,
             "orientation": "horizontal"
+        },
+
+        "bluetooth": {
+          "format": "󰂯",
+          "format-disabled": "󰂲",
+          "format-off": "󰂲",
+          "format-on": "󰂰",
+          "format-connected": "<span color='#000'>󰂱</span> {device_alias}",
+          // "min-length": 2,
+          // "max-length": 2,
+          "on-click": "foot -e ~/.config/waybar/scripts/bluetooth",
+          "on-click-right": "~/.config/waybar/scripts/bluetooth off",
+          // "tooltip":
+          "tooltip-format": "Device Addr: {device_address}",
+          "tooltip-format-disabled": "Bluetooth Disabled",
+          "tooltip-format-off": "Bluetooth Off",
+          "tooltip-format-on": "Bluetooth Disconnected",
+          "tooltip-format-connected": "Device: {device_alias}",
+          "tooltip-format-enumerate-connected": "Device: {device_alias}",
+          "tooltip-format-connected-battery": "Device: {device_alias}\nBattery: {device_battery_percentage}%",
+          "tooltip-format-enumerate-connected-battery": "Device: {device_alias}\nBattery: {device_battery_percentage}%"
         },
 
         "custom/void-icon": {
@@ -301,4 +329,3 @@
 
 }
 
-# vim:ft=java

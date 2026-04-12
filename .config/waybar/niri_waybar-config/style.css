@@ -183,6 +183,21 @@ button:hover {
     font-style: normal;
 }
 
+#bluetooth {
+    background-color: rgba(189, 147, 249, 1.0);
+    color: black;
+    border-radius: 5px 5px 5px 5px;
+    padding: 0px 10px 0px 10px;
+    font-weight: normal;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    min-width: 6px;
+}
+#bluetooth:hover {
+    background-color: @peach;
+    color: black;
+}
+
 #custom-weather {
     background-color: transparent;
     padding: 0px 2px;
