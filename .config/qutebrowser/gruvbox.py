@@ -20,7 +20,7 @@ base0D = "#83a598"
 base0E = "#d3869b"
 base0F = "#af3a03"
 base0G = "#458588"
-base0H = "#d79921"
+base0H = "#bd93f9"
 
 # set qutebrowser colors
 # Background color of the tab bar.
