@@ -234,9 +234,12 @@
         "niri/language": {
             // "format": "{}"
             "format": "<span color='#f9f5d7'>\udb80\udf0c</span> {short}/{variant}",
-            "format-us": "US",
-            "format-br": "BR",
+            "format-pt": "BR",
+            "format-en": "US",
             "keyboard-name": "at-translated-set-2-keyboard"
+            "on-click": "niri msg action switch-layout next",
+            "tooltip": false,
+            "class": "language",
         },
 
         "keyboard-state": {
