@@ -1,8 +1,8 @@
 #!/bin/env bash
-# fork script of https://github.com/Axarva/dotfiles-2.0/tree/main 
-# fork script of https://github.com/SolDoesTech/HyprV4/blob/2cf439c27475a32fd00e816a1fde82a5804efe2a/set-hypr 
+# fork script of https://github.com/Axarva/dotfiles-2.0/tree/main
+# fork script of https://github.com/SolDoesTech/HyprV4/blob/2cf439c27475a32fd00e816a1fde82a5804efe2a/set-hypr
 
-# #ADD 
+# #ADD
 #TODO
 
 # cores letras de seleçao
@@ -21,39 +21,38 @@ FIN_INST="&>> $INSTLOG & show_progress $!"
 # ESPEPACMAN="[\e[1;37mEXECUTANDO\e[0m"
 CONFIGANDO="[\e[1;37mCONFIGURANDO\e[0m"
 
-
 # spinner.sh - Mostra um spinner com mensagem enquanto um comando roda
 spinner() {
-    local pid=$1
-    local msg="$2"
-    local delay=0.1
-    local spinstr='|/-\'
-    tput civis  # esconde o cursor
-    while ps -p $pid > /dev/null 2>&1; do
-        for i in $(seq 0 3); do
-            printf "\r%s [%c] " "$msg" "${spinstr:$i:1}"
-            sleep $delay
-        done
+  local pid=$1
+  local msg="$2"
+  local delay=0.1
+  local spinstr='|/-\'
+  tput civis # esconde o cursor
+  while ps -p $pid >/dev/null 2>&1; do
+    for i in $(seq 0 3); do
+      printf "\r%s [%c] " "$msg" "${spinstr:$i:1}"
+      sleep $delay
     done
-    wait $pid
-    local exit_status=$?
-    if [ $exit_status -eq 0 ]; then
-        printf "\r%s [ok]\n" "$msg"
-    else
-        printf "\r%s [er]\n" "$msg"
-    fi
-    tput cnorm  # mostra o cursor
-    return $exit_status
+  done
+  wait $pid
+  local exit_status=$?
+  if [ $exit_status -eq 0 ]; then
+    printf "\r%s [ok]\n" "$msg"
+  else
+    printf "\r%s [er]\n" "$msg"
+  fi
+  tput cnorm # mostra o cursor
+  return $exit_status
 }
 
 run_with_spinner() {
-    local msg="$1"
-    shift
-    "$@" > /dev/null 2>&1 &
-    local cmd_pid=$!
-    spinner $cmd_pid "$msg"
-    wait $cmd_pid
-    return $?
+  local msg="$1"
+  shift
+  "$@" >/dev/null 2>&1 &
+  local cmd_pid=$!
+  spinner $cmd_pid "$msg"
+  wait $cmd_pid
+  return $?
 }
 
 # porte 1
@@ -64,7 +63,7 @@ inicio() {
 
   #toilet -f ./3d -t "install-on-void" | lolcat -g 00cc00:00cc00
 
- cat <<EOL
+  cat <<EOL
 
       ██                    ██              ██  ██                                         ██      ██
      ░░                    ░██             ░██ ░██                                        ░░      ░██
@@ -112,14 +111,14 @@ EOL
   # atualizar repositório e pacotes.
   echo -e "$CAC - FAZENDO UMA ATUALIZAÇÃO DO SISTEMA, PODE ACONTECER QUE AS COISAS QUEBREM SE NÃO FOR A VERSÃO MAIS RECENTE."
   # echo -e $ESPEPACMAN
-      sudo xbps-install -Sy
+  sudo xbps-install -Sy
   if ! run_with_spinner "Atualizando sistema" sudo xbps-install -Syu; then
     echo -e "$CER - ERRO NA ATUALIZAÇAO."
   fi
 
   # instalar base-devel.
   # echo -en "$ESPEPACMAN"
-   run_with_spinner "Instalando base-devel" sudo xbps-install -y base-devel wget curl git void-repo-nonfree void-repo-multilib void-repo-multilib-nonfree
+  run_with_spinner "Instalando base-devel" sudo xbps-install -y base-devel wget curl git void-repo-nonfree void-repo-multilib void-repo-multilib-nonfree
   # atualizar repositório nonfree, multilib e multilib-nonfree.
   sudo xbps-install -Syu
 } ### fim inicio
@@ -165,14 +164,13 @@ DRIVERDESENHO
     ;;
   esac
 
-
   # complemetos para os drivers
   if [ $DRI == "xf86-video-amdgpu" ]; then
     # echo -en "$ESPEPACMAN - AMDGPU."
     # drivers 64bits
     run_with_spinner "Instalando AMD" sudo xbps-install -y linux-firmware-amd mesa-dri vulkan-loader amdvlk xf86-video-amdgpu mesa-vaapi mesa-vdpau libvdpau-va-gl gstreamer1 mesa-vulkan-radeon # para placas AMD mais antigas intalar xf86-video-radeon, mesa-vulkan-radeon
 
-    # drivers 32bits 
+    # drivers 32bits
     run_with_spinner "Instalando amd 32bit" sudo xbps-install -y libgcc-32bit libstdc++-32bit libdrm-32bit libglvnd-32bit mono mesa-dri-32bit mesa-32bit vulkan-loader-32bit amdvlk-32bit mesa-vaapi-32bit mesa-vdpau-32bit libvdpau-va-gl-32bit mesa-vulkan-radeon-32bit # para placas AMD mais antigas intalar xf86-video-radeon-32bit, mesa-vulkan-radeon-32bit
 
     # sudo cp ./xorg_conf/40-amdgpu.conf /usr/share/X11/xorg.conf.d/
@@ -181,7 +179,7 @@ DRIVERDESENHO
     # echo -en "$ESPEPACMAN - INTEL."
     # drivers 64bits
     run_with_spinner "Instalando intel" sudo xbps-install -y linux-firmware-intel mesa-dri vulkan-loader xf86-video-intel mesa-vulkan-intel intel-video-accel libvdpau-va-gl intel-ucode gstreamer1 # cpu mais antigas instalar mesa-libgallium
-    # drivers 32bits 
+    # drivers 32bits
     run_with_spinner "Instalando intel-32bit" sudo xbps-install -y libgcc-32bit libstdc++-32bit libdrm-32bit libglvnd-32bit mono mesa-dri-32bit mesa-32bit vulkan-loader-32bit mesa-vulkan-intel-32bit libvdpau-va-gl-32bit
     # sudo cp ./xorg_conf/20-intel.conf /usr/share/X11/xorg.conf.d/
     echo -en "$CWR - obs: VERIFIQUE SE SEU CPU É BROADWELL OU  COFFEE LAKE para outras configurações."
@@ -191,7 +189,6 @@ DRIVERDESENHO
     run_with_spinner "Instalando nvidia" sudo xbps-install -y nvidia libgcc-32bit libstdc++-32bit libdrm-32bit libglvnd-32bit mono mesa-32bit vulkan-loader mesa-dri-32bit # tem que testa para ver ser funciona
     # nvidia-xconfig --add-argb-glx-visuals --allow-glx-with-composite --composite --render-accel -o /usr/share/X11/xorg.conf.d/20-nvidia.conf
   fi
-
 
 } ### fim driveVideo
 
@@ -232,18 +229,18 @@ WINDOWMANAGER
   echo ""
 
   if [[ $WAYLAND_ONOFF == "on" ]]; then
-      # variaveis wayland
-      for VARIAVES_SISTEMA in "\n" QT_QPA_PLATFORM=\'wayland\' ELM_DISPLAY=\'wl\' SDL_VIDEODRIVER=\'wayland\' MOZ_ENABLE_WAYLAND=\'1\'; do
-        sudo echo -e $VARIAVES_SISTEMA | sudo tee -a /etc/environment
-      done
-      sleep 0.2
-      # pacotes wayland
-      run_with_spinner "Instalando wayland" sudo xbps-install -y wayland xorg-server-xwayland qt6-wayland xdg-utils xdg-user-dirs xdg-desktop-portal xdg-desktop-portal-gnome xwayland-satellite
-      sleep 0.2
+    # variaveis wayland
+    for VARIAVES_SISTEMA in "\n" QT_QPA_PLATFORM=\'wayland\' ELM_DISPLAY=\'wl\' SDL_VIDEODRIVER=\'wayland\' MOZ_ENABLE_WAYLAND=\'1\'; do
+      sudo echo -e $VARIAVES_SISTEMA | sudo tee -a /etc/environment
+    done
+    sleep 0.2
+    # pacotes wayland
+    run_with_spinner "Instalando wayland" sudo xbps-install -y wayland xorg-server-xwayland qt6-wayland xdg-utils xdg-user-dirs xdg-desktop-portal xdg-desktop-portal-gnome xwayland-satellite
+    sleep 0.2
 
-      if [[ -f /usr/bin/xdg-user-dirs-update ]]; then
-        xdg-user-dirs-update
-      fi
+    if [[ -f /usr/bin/xdg-user-dirs-update ]]; then
+      xdg-user-dirs-update
+    fi
   fi
 
   # desktop app basicos
@@ -251,6 +248,7 @@ WINDOWMANAGER
 
   xdg-mime default imv.desktop image/jpeg
   xdg-mime default imv.desktop image/png
+  xdg-mime default imv.desktop image/heic
 
   # niri
   if [[ $WM == "niri" ]]; then
@@ -264,7 +262,7 @@ WINDOWMANAGER
   fi
 
   # para notebook
-  if ! cat /sys/class/power_supply/BAT0/capacity &>> /dev/null ; then
+  if ! cat /sys/class/power_supply/BAT0/capacity &>>/dev/null; then
     echo "NÃO É UM NOTEBOOK!"
   else
     echo "É UM NOTEBOOK!"
@@ -293,40 +291,40 @@ WINDOWMANAGER
   fi
 
   # configurações do fuzzel
-    rm --recursive --force ~/.config/fuzzel
-    mkdir -p ~/.config/fuzzel/
-    cp --recursive ./.config/fuzzel/* ~/.config/fuzzel/
+  rm --recursive --force ~/.config/fuzzel
+  mkdir -p ~/.config/fuzzel/
+  cp --recursive ./.config/fuzzel/* ~/.config/fuzzel/
 
   # configurações mpv
-    rm --recursive --force ~/.config/mpv
-    mkdir -p ~/.config/mpv/
-    cp --recursive ./.config/mpv/* ~/.config/mpv/
-    # mpv/scripts/
-    # Baixa legendas do youtube
-    wget "https://raw.githubusercontent.com/Idlusen/mpv-ytsub/refs/heads/main/ytsub.lua" -P ~/.config/mpv/scripts/
-    # Interface moderna
-    wget "https://raw.githubusercontent.com/zydezu/ModernX/refs/heads/main/modernx.lua" -P ~/.config/mpv/scripts/
-    # Navegador de arquivos - ctrl + f
-    wget "https://raw.githubusercontent.com/jonniek/mpv-filenavigator/refs/heads/master/navigator.lua" -P ~/.config/mpv/scripts/
-    # Realça barro de progresso com miniatura do video no tempo correspondente.
-    wget "https://raw.githubusercontent.com/po5/thumbfast/refs/heads/master/thumbfast.lua" -P ~/.config/mpv/scripts/
-    # Volta onde você estava depois que clicou em algum ponto da barra de progresso. (Ctrl + z)
-    wget "https://raw.githubusercontent.com/Eisa01/mpv-scripts/refs/heads/master/scripts/UndoRedo.lua" -P ~/.config/mpv/scripts/
-    # instalar subliminal com pip
-    pipx install subliminal
-    run_with_spinner "Removendo python3-pipx" sudo xbps-remove --recursive --yes python3-pipx
+  rm --recursive --force ~/.config/mpv
+  mkdir -p ~/.config/mpv/
+  cp --recursive ./.config/mpv/* ~/.config/mpv/
+  # mpv/scripts/
+  # Baixa legendas do youtube
+  wget "https://raw.githubusercontent.com/Idlusen/mpv-ytsub/refs/heads/main/ytsub.lua" -P ~/.config/mpv/scripts/
+  # Interface moderna
+  wget "https://raw.githubusercontent.com/zydezu/ModernX/refs/heads/main/modernx.lua" -P ~/.config/mpv/scripts/
+  # Navegador de arquivos - ctrl + f
+  wget "https://raw.githubusercontent.com/jonniek/mpv-filenavigator/refs/heads/master/navigator.lua" -P ~/.config/mpv/scripts/
+  # Realça barro de progresso com miniatura do video no tempo correspondente.
+  wget "https://raw.githubusercontent.com/po5/thumbfast/refs/heads/master/thumbfast.lua" -P ~/.config/mpv/scripts/
+  # Volta onde você estava depois que clicou em algum ponto da barra de progresso. (Ctrl + z)
+  wget "https://raw.githubusercontent.com/Eisa01/mpv-scripts/refs/heads/master/scripts/UndoRedo.lua" -P ~/.config/mpv/scripts/
+  # instalar subliminal com pip
+  pipx install subliminal
+  run_with_spinner "Removendo python3-pipx" sudo xbps-remove --recursive --yes python3-pipx
 
   # configurações imv
-    rm --recursive --force ~/.config/imv
-    mkdir -p ~/.config/imv/
-    cp --recursive ./.config/imv/* ~/.config/imv/
+  rm --recursive --force ~/.config/imv
+  mkdir -p ~/.config/imv/
+  cp --recursive ./.config/imv/* ~/.config/imv/
 
   # adicionando serviços no runit
-  services_runit(){
-  for SERVICE in dbus polkitd; do
-    sudo ln -sfv /etc/sv/$SERVICE /var/service
-  done
-}
+  services_runit() {
+    for SERVICE in dbus polkitd; do
+      sudo ln -sfv /etc/sv/$SERVICE /var/service
+    done
+  }
 
 } ### windowManger
 
@@ -335,14 +333,14 @@ arquivosdeConfiguracao() {
   sleep 0.2
 
   if [ -d ~/wallpapers ]; then
-      echo "Já adicionando wallpaper para ~/wallpapers..."
+    echo "Já adicionando wallpaper para ~/wallpapers..."
   else
-      echo "git clone wallpaper..."
-      # mkdir ~/wallpapers && cp -r ./wallpapers/* ~/wallpapers/;
-      git clone https://github.com/quebravel/wallpapers ~/wallpapers
+    echo "git clone wallpaper..."
+    # mkdir ~/wallpapers && cp -r ./wallpapers/* ~/wallpapers/;
+    git clone https://github.com/quebravel/wallpapers ~/wallpapers
   fi
-  
-  for CONF_FILES in alacritty mpv zathura gammastep git mako ; do
+
+  for CONF_FILES in alacritty mpv zathura gammastep git mako; do
     if [[ ! -d ~/.config/$CONF_FILES ]]; then
       mkdir --parents ~/.config/$CONF_FILES
       cp ./.config/$CONF_FILES/* ~/.config/$CONF_FILES/
@@ -363,7 +361,7 @@ arquivosdeConfiguracao() {
 } ### arquivosdeConfiguracao <-
 
 # gerenciador de login ->
-displayManager(){
+displayManager() {
 
   sleep 0.2
   cat <<LOGINLY
@@ -403,7 +401,6 @@ LOGINLY
 
     fi
 
-
     # sudo ln -s /etc/sv/greetd /var/service/ # não ativar aqui na hora que adiciona ele se ativa
 
     echo -e "$COK - GREETD INSTALADO."
@@ -431,7 +428,6 @@ zshinstall() {
   echo -e "$COK - ZSH INSTALADO."
 
 } # zsh <-
-
 
 # fonts ->
 fontes_doSistema() {
@@ -677,19 +673,18 @@ RANGER-DESENHO
     echo -e "$COK - $ranger_versao INSTALADO."
 
   fi
-if [[ $FILEMANAGER = YAZI ]]; then
-  run_with_spinner "Instalando yazi" sudo xbps-install -y yazi ffmpeg 7zip jq poppler fd ripgrep zoxide ImageMagick
+  if [[ $FILEMANAGER = YAZI ]]; then
+    run_with_spinner "Instalando yazi" sudo xbps-install -y yazi ffmpeg 7zip jq poppler fd ripgrep zoxide ImageMagick
 
-  # configurações yazi
-  rm --recursive --force ~/.config/yazi
-  cp --recursive --force ./.config/yazi ~/.config/
-  ya pkg add yazi-rs/plugins:mount
-else
-  echo ""
-fi
+    # configurações yazi
+    rm --recursive --force ~/.config/yazi
+    cp --recursive --force ./.config/yazi ~/.config/
+    ya pkg add yazi-rs/plugins:mount
+  else
+    echo ""
+  fi
 
 } # filemanager <-
-
 
 # ncmpcpp ->
 playermusica() {
@@ -767,16 +762,13 @@ PLAYMSC
     name               "Visualizer"
     path               "/tmp/mpd.fifo"
     format             "44100:16:2"
-    }' >> ~/.config/mpd/mpd.conf
-
+    }' >>~/.config/mpd/mpd.conf
 
     mkdir -p ~/.config/mpd/playlists
 
     sudo ln -s /etc/sv/mpd /var/service
 
-
-##############################################################################
-
+    ##############################################################################
 
     # more info @ https://wiki.archlinux.org/index.php/ncmpcpp
 
@@ -807,7 +799,6 @@ PLAYMSC
   esac
 
 } # ncmpcpp <-
-
 
 # instalação ohmyzsh ->
 ohmyzsh() {
@@ -879,7 +870,6 @@ alias_autopair() {
 
 } # configurações extras zsh <-
 
-
 # distribuiçãp astronvim ->
 editordeTexto() {
   sleep 0.2
@@ -923,20 +913,19 @@ ASTRONVIM-DESENHO
       ;;
     esac
   fi
-    echo -en "$CONFIGANDO - PERSONALIZAÇAO."
-    sleep 1 # keybinds
-    curl https://raw.githubusercontent.com/quebravel/astronvim_config/refs/heads/main/mappings.lua -o ~/.config/nvim/lua/plugins/mappings.lua
-    sleep 1 # options
-    curl https://raw.githubusercontent.com/quebravel/astronvim_config/refs/heads/main/options.lua -o ~/.config/nvim/lua/plugins/options.lua
+  echo -en "$CONFIGANDO - PERSONALIZAÇAO."
+  sleep 1 # keybinds
+  curl https://raw.githubusercontent.com/quebravel/astronvim_config/refs/heads/main/mappings.lua -o ~/.config/nvim/lua/plugins/mappings.lua
+  sleep 1 # options
+  curl https://raw.githubusercontent.com/quebravel/astronvim_config/refs/heads/main/options.lua -o ~/.config/nvim/lua/plugins/options.lua
 
   echo -e "$COK - ASTRONVIM INSTALADO."
 
 } # distribuiçãp astronvim <-
 
-
 # tema para grub ->
 dedsec() {
-  if ! git clone --depth 1 https://github.com/VandalByte/dedsec-grub2-theme.git ~/dedsec-grub2-theme ; then
+  if ! git clone --depth 1 https://github.com/VandalByte/dedsec-grub2-theme.git ~/dedsec-grub2-theme; then
     (cd ~/dedsec-grub2-theme && sudo python3 dedsec-theme.py --uninstall)
     (cd ~/dedsec-grub2-theme && sudo python3 dedsec-theme.py --install)
   else
@@ -978,9 +967,8 @@ finalizado() {
   ░░   ░░ ░░░   ░░  ░░░░░░░░ ░░░ ░░ ░░░░░░  ░░░░░░░░  ░░░░░░  ░░░░░░
 TERMINADO
 
-sudo ln -s /etc/sv/greetd /var/service/
+  sudo ln -s /etc/sv/greetd /var/service/
 }
-
 
 ### inicializadores de funcao
 inicio
