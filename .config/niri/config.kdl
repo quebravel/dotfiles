@@ -386,6 +386,12 @@ window-rule {
     match app-id=r#"^Firefox$"# title="^Picture-in-Picture$"
     open-floating true
 }
+// float bitwarden
+window-rule {
+    match title="Extensão: (Bitwarden Gerenciador de Senhas) - Bitwarden — Mozilla Firefox"
+    match app-id="Firefox"
+    open-floating true
+}
 
 // Example: block out two password managers from screen capture.
 // (This example rule is commented out with a "/-" in front.)
