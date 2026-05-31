@@ -1,4 +1,4 @@
-#!/bin/env bash
+#!/usr/bin/env bash
 
 # fork script of https://github.com/Axarva/dotfiles-2.0/tree/main
 # fork script of https://github.com/SolDoesTech/HyprV4/blob/2cf439c27475a32fd00e816a1fde82a5804efe2a/set-hypr
@@ -16,44 +16,43 @@ CAT="[\e[1;37mATENCAO\e[0m]" #branco
 CWR="[\e[1;35mALERTA\e[0m]"  #roxo claro
 CAC="[\e[1;33mACAO\e[0m]"    #amarelo
 INSTLOG="$HOME/install.log"
-FIN_INST="&>> $INSTLOG & "
-ESPEPACMAN="[\e[1;37mEXECUTANDO\e[0m"
-CONFIGANDO="[\e[1;37mCONFIGURANDO\e[0m"
+# FIN_INST="&>> $INSTLOG & "
+ESPEPACMAN="[\e[1;37mEXECUTANDO\e[0m]"
+CONFIGANDO="[\e[1;37mCONFIGURANDO\e[0m]"
 
 # spinner.sh - Mostra um spinner com mensagem enquanto um comando roda
 spinner() {
-    local pid=$1
-    local msg="$2"
-    local delay=0.1
-    local spinstr='|/-\'
-    tput civis  # esconde o cursor
-    while ps -p $pid > /dev/null 2>&1; do
-        for i in $(seq 0 3); do
-            printf "\r%s [%c] " "$msg" "${spinstr:$i:1}"
-            sleep $delay
-        done
+  local pid=$1
+  local msg="$2"
+  local delay=0.1
+  local spinstr='|/-\'
+  tput civis # esconde o cursor
+  while ps -p $pid >/dev/null 2>&1; do
+    for i in $(seq 0 3); do
+      printf "\r%s [%c] " "$msg" "${spinstr:$i:1}"
+      sleep $delay
     done
-    wait $pid
-    local exit_status=$?
-    if [ $exit_status -eq 0 ]; then
-        printf "\r%s [ok]\n" "$msg"
-    else
-        printf "\r%s [er]\n" "$msg"
-    fi
-    tput cnorm  # mostra o cursor
-    return $exit_status
+  done
+  wait $pid
+  local exit_status=$?
+  if [ $exit_status -eq 0 ]; then
+    printf "\r%s [ok]\n" "$msg"
+  else
+    printf "\r%s [er]\n" "$msg"
+  fi
+  tput cnorm # mostra o cursor
+  return $exit_status
 }
 
 run_with_spinner() {
-    local msg="$1"
-    shift
-    "$@" > /dev/null 2>&1 &
-    local cmd_pid=$!
-    spinner $cmd_pid "$msg"
-    wait $cmd_pid
-    return $?
+  local msg="$1"
+  shift
+  "$@" >/dev/null 2>&1 &
+  local cmd_pid=$!
+  spinner $cmd_pid "$msg"
+  wait $cmd_pid
+  return $?
 }
-
 
 install_software() {
   # First lets see if the package is there
@@ -62,8 +61,8 @@ install_software() {
   else
     # no package found so installing
     echo -en "$CNT - INSTALANDO AGORA $1 ."
-    $HELPER -S --noconfirm $1 
-    
+    $HELPER -S --noconfirm $1
+
     # test to make sure package installed
     if $HELPER -Q $1 &>>/dev/null; then
       echo -e "\e[1A\e[K$COK - $1 FOI INSTALADO."
@@ -75,14 +74,13 @@ install_software() {
   fi
 }
 
-pacman_pkg_install(){
-    sudo pacman -S --noconfirm --needed $1
+pacman_pkg_install() {
+  sudo pacman -S --noconfirm --needed $1
 }
-
 
 # porte 1
 inicio() {
-  set -e
+  # set -e
 
   clear
 
@@ -111,7 +109,7 @@ EOL
 
   read -rep "$(echo -e $CAC) - Esta pronto para continuar? - (s,n) ... " CONTINUAR
   case "$CONTINUAR" in
-  s | j)
+  s | S)
     echo ""
     ;;
   n | N)
@@ -191,7 +189,7 @@ DRIVERDESENHO
   fi
   if [ $DRI == "xf86-video-nvidia" ]; then
     echo -en "$ESPEPACMAN - NVIDIA."
-    run_with_spinner "instalando nvidia" pacman_pkg_install "nvidia-utils libglvnd nvidia-settings lib32-nvidia-utils nvidia-dkmsa" # tem que testa para ver ser funciona
+    run_with_spinner "instalando nvidia" pacman_pkg_install "nvidia-utils libglvnd nvidia-settings lib32-nvidia-utils nvidia-dkms" # tem que testa para ver ser funciona
     nvidia-xconfig --add-argb-glx-visuals --allow-glx-with-composite --composite --render-accel -o /usr/share/X11/xorg.conf.d/20-nvidia.conf
   fi
 
@@ -274,14 +272,14 @@ WINDOWMANAGER
     echo -en "$ESPEPACMAN - INSTALAÇAO DO $WMawesome."
     run_with_spinner "instalando awesomewm" pacman_pkg_install "$WMawesome"
     echo -en "$ESPEPACMAN - INSTALAÇAO DO XORG."
-    run_with_spinner "instalando xorg" pacman_pkg_install "picom pasystray alsa-utils xclip xdo mtools xdotool xsel feh xorg-xsetroot xorg-xset xorg-xrdb xorg-server xorg-xinit xorg-xinput libxinerama libxft nsxiv unclutter maim" 
+    run_with_spinner "instalando xorg" pacman_pkg_install "picom pasystray alsa-utils xclip xdo mtools xdotool xsel feh xorg-xsetroot xorg-xset xorg-xrdb xorg-server xorg-xinit xorg-xinput libxinerama libxft nsxiv unclutter maim"
 
     # if ! pacman -Q picom pasystray alsa-utils xclip xdo mtools xdotool xsel feh xorg-xsetroot xorg-xset xorg-xrdb xorg-server xorg-xinit xorg-xinput libxinerama libxft nsxiv unclutter maim; then
     #   sudo pacman -S --needed --noconfirm --noprogressbar picom pasystray alsa-utils xclip xdo mtools xdotool xsel feh xorg-xsetroot xorg-xset xorg-xrdb xorg-server xorg-xinit xorg-xinput libxinerama libxft nsxiv unclutter maim
     # fi
 
-    # &>> $INSTLOG & 
-    echo -e "$COK - $WMs INSTALADO."
+    # &>> $INSTLOG &
+    echo -e "$COK - $WMawesome INSTALADO."
   fi
 
   # teste para saber se a variavel esta vazia
@@ -290,13 +288,12 @@ WINDOWMANAGER
   else
     # instalando window manger
     echo -en "$ESPEPACMAN - INSTALAÇAO DO $WMs."
-    run_with_spinner "$WMs" pacman_pkg_install "$WMs $WMx $WMb" 
-    
-    echo -en "$ESPEPACMAN - INSTALAÇAO DO XORG."
-    run_with_spinner "xorg" pacman_pkg_install "alsa-utils xclip xdo mtools xdotool xsel feh xorg-xsetroot xorg-xset xorg-xrdb xorg-server xorg-xinit xorg-xinput libxinerama libxft nsxiv unclutter maim" 
-    
+    run_with_spinner "$WMs" pacman_pkg_install "$WMs $WMx $WMb"
 
-    # &>> $INSTLOG & 
+    echo -en "$ESPEPACMAN - INSTALAÇAO DO XORG."
+    run_with_spinner "xorg" pacman_pkg_install "alsa-utils xclip xdo mtools xdotool xsel feh xorg-xsetroot xorg-xset xorg-xrdb xorg-server xorg-xinit xorg-xinput libxinerama libxft nsxiv unclutter maim"
+
+    # &>> $INSTLOG &
     echo -e "$COK - $WMs INSTALADO."
   fi
 
@@ -314,7 +311,7 @@ WINDOWMANAGER
   # AUR para hyprland
   if [[ $WM_WAYLAND = "hyprland" ]]; then
     echo -en "$ESPEPACMAN - INSTALAÇAO DE PROGRAMAS EXTRAS PARA WAYLAND."
-    install_software "grimblast-git rofi crow-translate rofi-calc imv"  
+    install_software "grimblast-git rofi crow-translate rofi-calc imv"
   # notify-send.sh
   # polkit-kde-agent
   fi
@@ -332,7 +329,7 @@ WINDOWMANAGER
     echo -e "$COK - GNOME INSTALADO."
   fi
 
-  if [[ $ENVIRONMENTK = "plama" ]]; then
+  if [[ $ENVIRONMENTK = "plasma" ]]; then
     # echo -en "$ESPEPACMAN - INSTALAÇAO DO pl."
     run_with_spinner "instalando plasma" pacman_pkg_install "plasma-meta sddm wl-clipboard seatd ttf-font-awesome" #&>> $INSTLOG
     sleep 0.2
@@ -346,7 +343,7 @@ WINDOWMANAGER
   fi
 
   if [[ $DRI == "xf86-video-amdgpu" ]]; then
-    install_software "amd-vulkan-prefixes" 
+    install_software "amd-vulkan-prefixes"
   fi
 
   if [[ $WM_WAYLAND = "niri" ]]; then
@@ -464,7 +461,7 @@ GERENCIADORAUR
   yay_install() {
     if [[ -e "/sbin/$HELPER" ]]; then
       echo -e "$COK - AJUDANTE AUR JÁ ESTA INSTALADO."
-    elif [[ -d "~/.srcs/yay-bin" ]]; then
+    elif [[ -d ~/.srcs/yay-bin ]]; then
       echo -e "$CNT - VOU INSTALAR O $HELPER AGORA PARA VOCÊ ANTES DE CONTINUAR."
       (cd ~/.srcs/yay-bin/ && makepkg -si)
       echo -e "$COK - $HELPER INSTALADO."
@@ -500,8 +497,8 @@ GERENCIADORAUR
   fi
 
   echo -en "$ESPEPACMAN - $HELPER."
-  run_with_spinner "instalando utilitarios" pacman_pkg_install "alacritty exa mpv python-pynvim yt-dlp ntfs-3g xf86-input-evdev xf86-input-libinput zathura-pdf-poppler adwaita-icon-theme xcursor-vanilla-dmz-aa cmake xdg-user-dirs ffmpeg polkit man-pages man-db less" 
-  
+  run_with_spinner "instalando utilitarios" pacman_pkg_install "alacritty exa mpv python-pynvim yt-dlp ntfs-3g xf86-input-evdev xf86-input-libinput zathura-pdf-poppler adwaita-icon-theme xcursor-vanilla-dmz-aa cmake xdg-user-dirs ffmpeg polkit man-pages man-db less"
+
   # redshift \
   # nodejs \
   # herbe-git \
@@ -530,11 +527,11 @@ LAPTOP
   case $NOTEBOOK in
   s | S)
     echo -en "$ESPEPACMAN"
-    run_with_spinner "instalando utilitarios notebook" pacman_pkg_install "acpi acpid xf86-input-synaptics" 
-    
+    run_with_spinner "instalando utilitarios notebook" pacman_pkg_install "acpi acpid xf86-input-synaptics"
+
     echo -en "$CONFIGANDO"
-    sudo systemctl enable acpid.service 
-    
+    sudo systemctl enable acpid.service
+
     sudo cp ./xorg_conf/70-synaptics.conf /usr/share/X11/xorg.conf.d/
     if [[ $WMb = "polybar" ]]; then
       sed -i 's/FILE-6/#FILE-6/' $HOME/.config/bspwm/bspwmrc
@@ -544,7 +541,7 @@ LAPTOP
       sed -i 's/ws-icon-8 \= MAIL-9\;1001-9/\;ws-icon-8 \= MAIL-9\;1001-9/' $HOME/.config/polybar/{config.ini,center.config.ini}
       sed -i 's/ws-icon-9 \= MPD-10\;0000-0/\;ws-icon-9 \= MPD-10\;0000-0/' $HOME/.config/polybar/{config.ini,center.config.ini}
     else
-      echo -e "$COK - CONFIGURACAO DO POLYBAR PARA NOTEBOOK."
+      echo -e "$COK - CONFIGURADO."
     fi
     echo -e "$COK - CONFIGURACAO PAR NOTEBOOK."
     ;;
@@ -661,10 +658,10 @@ arquivosdeConfiguracao() {
 
   if [[ ! -d ~/.config/sxiv ]]; then
     mkdir --parents ~/.config/sxiv/
-    cp --recursive --force ./.config/sxiv/* ~/.config/sxiv/
+    cp --recursive --force ./.config/sxiv/ ~/.config/sxiv/
   else
     rm --recursive --force ~/.config/sxiv/
-    cp --recursive --force ./.config/sxiv/* ~/.config/
+    cp --recursive --force ./.config/sxiv/ ~/.config/
   fi
 
   # if [ ! -d ~/.config/redshift ]; then
@@ -713,17 +710,17 @@ LOGINLY
   case "$DMGR" in
   t | T)
     echo -en "$ESPEPACMAN - INSTALAÇAO DO TBSM."
-    install_software "tbsm" 
-    
-    echo "[[ $XDG_VTNR -le 2 ]] && tbsm" >~/.zlogin
+    install_software "tbsm"
+
+    echo '[[ $XDG_VTNR -le 2 ]] && tbsm' >~/.zlogin
     cp -r ./.config/tbsm/ ~/.config/
     echo -e "$COK - TBSM INSTALADO."
     ;;
   l | L)
 
     echo -en "$ESPEPACMAN - INSTALAÇAO DO LY."
-    install_software "ly-git cmatrix" 
-    
+    install_software "ly-git cmatrix"
+
     # cominho do arquivo de configuração
     arquivo="/etc/ly/config.ini"
 
@@ -742,8 +739,8 @@ LOGINLY
     ;;
   g | G)
     echo -en "$ESPEPACMAN - INSTALAÇAO DO GREETD."
-    run_with_spinner "instalando greetd" pacman_pkg_install "greetd greetd-tuigreet" 
-    
+    run_with_spinner "instalando greetd" pacman_pkg_install "greetd greetd-tuigreet"
+
     sudo sed -i '0,/command/s//\# command/' /etc/greetd/config.toml
 
     if [[ $WMawesome == "awesome" ]]; then
@@ -798,8 +795,8 @@ PLAYMSC
   case "$PLMC" in
   s | S)
     echo -en "$ESPEPACMAN"
-    run_with_spinner "instalando ncmpcpp" pacman_pkg_install "ncmpcpp mpd mpc" 
-    
+    run_with_spinner "instalando ncmpcpp" pacman_pkg_install "ncmpcpp mpd mpc"
+
     # sudo systemctl --user enable --now mpd.service &>>$INSTLOG
 
     if [ ! -d ~/Músicas ]; then
@@ -893,7 +890,7 @@ PLAYMSC
 
     # more info @ https://wiki.archlinux.org/index.php/ncmpcpp
 
-    sudo pacman -S ncmpcpp --noconfirm --needed
+    # sudo pacman -S ncmpcpp --noconfirm --needed
 
     mkdir -p ~/.config/ncmpcpp
     cp /usr/share/doc/ncmpcpp/config ~/.config/ncmpcpp/config
@@ -931,10 +928,10 @@ PLAYMSC
     cp /usr/share/doc/ncmpcpp/bindings ~/.config/ncmpcpp/bindings
 
     echo -en "$CONFIGANDO"
-    #sudo systemctl enable mpd # 
+    #sudo systemctl enable mpd #
 
     #echo -en "$CONFIGANDO"
-    #sudo systemctl start mpd #&>> $INSTLOG & 
+    #sudo systemctl start mpd #&>> $INSTLOG &
 
     # touch ~/.config/mpd/socket
 
@@ -984,7 +981,7 @@ RANGER-DESENHO
   read -rep "$(echo -e $CAC) - Qual gerenciador de arquivos para terminal? $(echo -e $LETRA)R$(echo -e $RESETLETRA)ANGER, $(echo -e $LETRA)Y$(echo -e $RESETLETRA)AZI - (r,y,n) ... " RAG
 
   case "$RAG" in
-  s | S)
+  r | R)
     FILEMANAGER='RANGER'
     ;;
   y | Y)
@@ -1001,8 +998,7 @@ RANGER-DESENHO
   if [[ $FILEMANAGER = RANGER ]]; then
 
     echo -en "$ESPEPACMAN"
-    run_with_spinner "instalando ranger" pacman_pkg_install "ranger ueberzugpp ffmpegthumbnailer" 
-    
+    run_with_spinner "instalando ranger" pacman_pkg_install "ranger ueberzugpp ffmpegthumbnailer"
 
     if [ ! -d ~/.config/ranger/ ]; then
       mkdir --parents ~/.config/ranger/
@@ -1011,8 +1007,8 @@ RANGER-DESENHO
       echo -e "$COK - ARQUIVO RC.CONF."
     else
       echo -en "$CONFIGANDO - RC."
-      ranger --copy-config=rc 
-      
+      ranger --copy-config=rc
+
       sleep 0.2
       sed -i 's/set preview_images false/set preview_images true/g' $HOME/.config/ranger/rc.conf
       sleep 0.2
@@ -1027,8 +1023,8 @@ RANGER-DESENHO
       echo -e "$COK - ARQUIVO SCOPE.SH."
     else
       echo -en "$CONFIGANDO - SCOPE."
-      ranger --copy-config=scope 
-      
+      ranger --copy-config=scope
+
       sleep 0.2
       sed -i '113,116s/#//' $HOME/.config/ranger/scope.sh
       sleep 0.2
@@ -1038,8 +1034,8 @@ RANGER-DESENHO
       echo -e "$COK - ARQUIVO RIFLE.CONF."
     else
       echo -en "$CONFIGANDO - RIFLE."
-      ranger --copy-config=rifle 
-      
+      ranger --copy-config=rifle
+
       sed -i 's/mime ^audio|ogg$, terminal, has mplayer  = mplayer -- "$@"/mime ^audio|ogg$, terminal, has moc      = ncmpcpp -- "$@"/g' $HOME/.config/ranger/rifle.conf
       sleep 0.2
       sed -i '/label wallpaper, number 15, mime ^image, has feh, X = wal -i "$1"/d' $HOME/.config/ranger/rifle.conf
@@ -1053,12 +1049,10 @@ RANGER-DESENHO
 
   fi
   if [[ $FILEMANAGER = YAZI ]]; then
-    run_with_spinner "instalando yazi" pacman_pkg_install "yazi ffmpeg 7zip jq poppler fd ripgrep zoxide imagemagick ueberzugpp" 
-    
+    run_with_spinner "instalando yazi" pacman_pkg_install "yazi ffmpeg 7zip jq poppler fd ripgrep zoxide imagemagick ueberzugpp"
+
     cp --recursive --force ./.config/yazi ~/.config/
     run_with_spinner "plugin yazi mont" ya pkg add yazi-rs/plugins:mount
-  else
-    echo ""
   fi
 
 }
@@ -1093,16 +1087,16 @@ AUDIOCONF
 
   if [ $AUDIOD = PIPEWIRE ]; then
     echo -en "$ESPEPACMAN"
-    run_with_spinner "instalando pipewire" pacman_pkg_install "pipewire pipewire-alsa pipewire-audio pipewire-pulse wireplumber" 
-    
+    run_with_spinner "instalando pipewire" pacman_pkg_install "pipewire pipewire-alsa pipewire-audio pipewire-pulse wireplumber"
+
     # gst-plugin-pipewire
     # helvum \
     echo -e "$COK - $AUDIOD INSTALADO."
     echo -e "$CAT - Use <wpctl status> para detectar en Sinks: o númeor ID da saída de áudío\nexemplo:\nwpctl status\nSinks:\n33. Áudio interno Estéreo analógico  [vol: 1.20]\n53. Ellesmere HDMI Audio [Radeon RX 470/480 / 570/580/590] Digital Stereo (HDMI 6)\nwpctl set-default 53" >>notas.txt
   elif [ $AUDIOD = PULSEAUDIO ]; then
     echo -en "$ESPEPACMAN"
-    run_with_spinner "instalando pulseaudio" pacman_pkg_install "alsa-utils pulseaudio" 
-    
+    run_with_spinner "instalando pulseaudio" pacman_pkg_install "alsa-utils pulseaudio"
+
     # gst-plugins-{base,good,bad,ugly} \
     # gst-libav
     echo -e "$COK - $AUDIOD INSTALADO."
@@ -1114,8 +1108,7 @@ zshinstall() {
   sleep 0.2
 
   # echo -en "$ESPEPACMAN - INSTALAÇAO DO ZSH."
-  run_with_spinner "instalando zsh" pacman_pkg_install "zsh zsh-completions" 
-  
+  run_with_spinner "instalando zsh" pacman_pkg_install "zsh zsh-completions"
 
   echo -e "$COK - ZSH INSTALADO."
 
@@ -1126,13 +1119,12 @@ fontes_doSistema() {
 
   # wqy-microhei (koreano), cjk (japones)
   # echo -en "$ESPEPACMAN - INSTALAÇAO DAS FONTES DO SISTEMA."
-  run_with_spinner "instalando fontes do sistema" pacman_pkg_install "ttf-dejavu noto-fonts-emoji gnu-free-fonts wqy-microhei noto-fonts-cjk xorg-fonts-75dpi xorg-fonts-100dpi xorg-fonts-encodings ttf-jetbrains-mono-nerd" 
-  
+  run_with_spinner "instalando fontes do sistema" pacman_pkg_install "ttf-dejavu noto-fonts-emoji gnu-free-fonts wqy-microhei noto-fonts-cjk xorg-fonts-75dpi xorg-fonts-100dpi xorg-fonts-encodings ttf-jetbrains-mono-nerd"
 
   if [ ! -f /usr/share/fonts/misc/siji.bdf ]; then
     echo -en "$ESPEPACMAN - INSTALAÇAO DA FONTE SIJI."
-    install_software "siji-git" 
-    
+    install_software "siji-git"
+
   fi
 
 }
@@ -1175,11 +1167,10 @@ NAVEGADOR-DESENHO
 
   if [[ $BROWq = "qutebrowser" ]]; then
     echo -en "$ESPEPACMAN"
-    run_with_spinner "instalando qutebrowser" pacman_pkg_install "qutebrowser python-adblock" 
-    
+    run_with_spinner "instalando qutebrowser" pacman_pkg_install "qutebrowser python-adblock"
+
     echo -en "$CONFIGANDO"
-    # /usr/share/qutebrowser/scripts/dictcli.py install pt-BR 
-    
+    # /usr/share/qutebrowser/scripts/dictcli.py install pt-BR
 
     mkdir -p ~/.config/qutebrowser/
     cp -r ./.config/qutebrowser/* ~/.config/qutebrowser/
@@ -1190,8 +1181,7 @@ NAVEGADOR-DESENHO
 
   if [[ $BROWf = "firefox" ]]; then
     echo -en "$ESPEPACMAN - INSTALAÇAO DO FIREFOX."
-    run_with_spinner "instalando firefox" pacman_pkg_install "firefox firefox-i18n-pt-br" 
-    
+    run_with_spinner "instalando firefox" pacman_pkg_install "firefox firefox-i18n-pt-br"
 
     echo -e "$COK - $BROWf INSTALADO."
   fi
@@ -1225,9 +1215,9 @@ temas() {
   # gruvbox tema
   if [ ! -d ~/.themes ]; then
     echo -en "$CONFIGANDO - TEMA GRUVBOX."
-    git clone https://github.com/jmattheis/gruvbox-dark-gtk ~/.themes/gruvbox-dark-gtk 
-    
-  # (git clone https://github.com/Fausto-Korpsvart/Gruvbox-GTK-Theme.git) && (./Gruvbox-GTK-Theme/themes/install.sh) &>> $INSTLOG & 
+    git clone https://github.com/jmattheis/gruvbox-dark-gtk ~/.themes/gruvbox-dark-gtk
+
+  # (git clone https://github.com/Fausto-Korpsvart/Gruvbox-GTK-Theme.git) && (./Gruvbox-GTK-Theme/themes/install.sh) &>> $INSTLOG &
   # (mkdir -p ~/.config/gtk-3.0/)
   # (cp -r ~/.themes/Gruvbox-Dark/gtk-3.0/* ~/.config/gtk-3.0/)
   else
@@ -1236,8 +1226,8 @@ temas() {
   sleep 0.2
   if [ ! -d ~/.icons ]; then
     echo -en "$CONFIGANDO - TEMA DOS ICONES EM GRUVBOX."
-    git clone https://github.com/jmattheis/gruvbox-dark-icons-gtk ~/.icons/gruvbox-dark-icons-gtk 
-    
+    git clone https://github.com/jmattheis/gruvbox-dark-icons-gtk ~/.icons/gruvbox-dark-icons-gtk
+
   else
     echo -e "$CWR - VOCÊ JÁ TEM O TEMA GRUVBOX-DARK-ICONS-GTK."
   fi
@@ -1248,9 +1238,10 @@ temas() {
     cp ./.config/gtk-3.0/* ~/.config/gtk-3.0/
   fi
   if [[ ! -d ~/.local/share/icons/Grubox-Plus-Dark ]]; then
-    rm -rf ~/.local/share/icons/Grubox-Plus-Dark
     git clone https://github.com/SylEleuth/gruvbox-plus-icon-pack.git ~/.local/share/icons/Grubox-Plus-Dark
   else
+    rm -rf ~/.local/share/icons/Grubox-Plus-Dark
+    git clone https://github.com/SylEleuth/gruvbox-plus-icon-pack.git ~/.local/share/icons/Grubox-Plus-Dark
     echo "" &>>/dev/null
   fi
   echo -e "$COK - TEMAS GRUVBOX GTK."
@@ -1323,13 +1314,12 @@ ASTRONVIM-DESENHO
 
   echo ""
   echo -en "$ESPEPACMAN"
-  run_with_spinner "instalando neovim" pacman_pkg_install "neovim python-pynvim" 
-  
+  run_with_spinner "instalando neovim" pacman_pkg_install "neovim python-pynvim"
 
   if [[ ! -d ~/.config/nvim ]]; then
     echo -en "$CONFIGANDO - ESTADO ORIGINAL."
-    git clone --depth 1 https://github.com/AstroNvim/template ~/.config/nvim 
-    
+    git clone --depth 1 https://github.com/AstroNvim/template ~/.config/nvim
+
     rm -rf ~/.config/nvim/.git
     #(nvim --headless -c 'quitall')
   else
@@ -1339,8 +1329,8 @@ ASTRONVIM-DESENHO
     s | S)
       rm -rf ~/.config/nvim/
       echo -en "$CONFIGANDO"
-      git clone --depth 1 https://github.com/AstroNvim/template ~/.config/nvim 
-      
+      git clone --depth 1 https://github.com/AstroNvim/template ~/.config/nvim
+
       rm -rf ~/.config/nvim/.git
       #(nvim --headless -c 'quitall')
       ;;
@@ -1398,15 +1388,12 @@ TECLADO-DESENHO
 }
 
 dedsec() {
-  if ! git clone --depth 1 https://github.com/VandalByte/dedsec-grub2-theme.git ~/dedsec-grub2-theme; then
+  if [ -d ~/dedsec-grub2-theme ]; then
     (cd ~/dedsec-grub2-theme && sudo python3 dedsec-theme.py --uninstall)
-    (cd ~/dedsec-grub2-theme && sudo python3 dedsec-theme.py --install)
-  else
-    rm -rf ~/dedsec-grub2-theme/
-    git clone --depth 1 https://github.com/VandalByte/dedsec-grub2-theme.git ~/dedsec-grub2-theme
-    (cd ~/dedsec-grub2-theme && sudo python3 dedsec-theme.py --install)
+    rm -rf ~/dedsec-grub2-theme
   fi
-
+  git clone --depth 1 https://github.com/VandalByte/dedsec-grub2-theme.git ~/dedsec-grub2-theme
+  (cd ~/dedsec-grub2-theme && sudo python3 dedsec-theme.py --install)
 }
 
 extras() {
