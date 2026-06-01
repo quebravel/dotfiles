@@ -1089,6 +1089,10 @@ AUDIOCONF
     echo -en "$ESPEPACMAN"
     run_with_spinner "instalando pipewire" pacman_pkg_install "pipewire pipewire-alsa pipewire-audio pipewire-pulse wireplumber"
 
+    systemctl --user enable pipewire.service
+    systemctl --user enable pipewire-pulse.service
+    systemctl --user enable wireplumber.service
+
     # gst-plugin-pipewire
     # helvum \
     echo -e "$COK - $AUDIOD INSTALADO."
