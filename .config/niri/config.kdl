@@ -313,6 +313,9 @@ spawn-at-startup "plasma-apply-colorscheme" "BreezeDark"
 spawn-at-startup "gsettings" "set" "org.gnome.desktop.interface" "color-scheme" "prefer-dark"
 spawn-at-startup "swaybg" "-m" "fill" "-i" "/home/jonatas/wallpapers/anime-girl-dj-2k.jpg"
 
+// para arch linux systemd portal
+// spawn-at-startup "systemctl" "--user" "import-environment" "WAYLAND_DISPLAY" "XDG_RUNTIME_DIR"
+
 // Uncomment this line to ask the clients to omit their client-side decorations if possible.
 // If the client will specifically ask for CSD, the request will be honored.
 // Additionally, clients will be informed that they are tiled, removing some client-side rounded corners.
