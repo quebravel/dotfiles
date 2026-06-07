@@ -469,7 +469,7 @@
         "custom/power": {
             "format": "",
             "tooltip": false,
-            "on-click": "swaylock"
+            "on-click": "loginctl poweroff"
         },
         "custom/reboot": {
             "format": "",
