@@ -235,7 +235,7 @@ WINDOWMANAGER
     done
     sleep 0.2
     # pacotes wayland
-    run_with_spinner "Instalando wayland" sudo xbps-install -y wayland xorg-server-xwayland qt6-wayland xdg-utils xdg-user-dirs xdg-desktop-portal xdg-desktop-portal-gnome xwayland-satellite
+    run_with_spinner "Instalando wayland" sudo xbps-install -y wayland xorg-server-xwayland qt6-wayland xdg-utils xdg-user-dirs xdg-desktop-portal xdg-desktop-portal-gnome xdg-desktop-portal-wlr xdg-desktop-portal-gtk xwayland-satellite
     sleep 0.2
 
     if [[ -f /usr/bin/xdg-user-dirs-update ]]; then
